@@ -234,6 +234,7 @@
               <h2>我的收藏</h2>
             </div>
             <div class="page-header-actions">
+              <button id="collection-train-btn" class="tool-btn collection-train-btn is-hidden" type="button">专项训练</button>
               <button id="collection-back-btn" class="icon-btn" type="button" aria-label="返回主页">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
@@ -273,7 +274,10 @@
               <p id="settings-username" class="settings-username">-</p>
 
               <p class="settings-label settings-section-label">个人 API Key</p>
-              <p class="settings-help">只保存在当前设备浏览器中，可直接覆盖编辑。</p>
+              <p class="settings-help">
+                只保存在当前设备浏览器中，可直接覆盖编辑。<br />
+                当前默认按 DeepSeek 接口校验与调用，可前往 <a class="settings-help-link" href="https://platform.deepseek.com/" target="_blank" rel="noreferrer noopener">DeepSeek 获取 API Key</a>。
+              </p>
               <input
                 id="settings-api-key-input"
                 type="password"

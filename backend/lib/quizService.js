@@ -338,9 +338,17 @@ async function buildFallbackFlashQuestions(items) {
   });
 }
 
-async function createFlashQuizBatch(count = 5, user) {
-  const batchSize = Math.min(8, Math.max(3, Number(count) || 5));
-  const wordPool = await getQuizWordPool(user);
+async function createFlashQuizBatch(count = 5, user, customWords = null) {
+  const requestedBatchSize = Math.max(3, Number(count) || 5);
+  const customWordPool = Array.isArray(customWords)
+    ? [...new Set(
+        customWords
+          .map((word) => String(word || "").trim().toLowerCase())
+          .filter(Boolean)
+      )]
+    : [];
+  const wordPool = customWordPool.length ? customWordPool : await getQuizWordPool(user);
+  const batchSize = Math.min(8, requestedBatchSize, wordPool.length || requestedBatchSize);
   const pickedWords = wordPool.length >= batchSize
     ? pickRandomWords(wordPool, batchSize)
     : pickMockSynonymItems(batchSize).map((item) => item.word);

@@ -316,7 +316,7 @@ function normalizeFlashQuestions(rawItems, targetWords = []) {
       const distractors = Array.isArray(item?.distractors)
         ? item.distractors
             .map(normalizeFlashOption)
-            .filter((option) => option.text)
+            .filter((option) => option.text && option.word && option.word !== word)
         : [];
       const mergedOptions = [correctOption, ...distractors]
         .filter((option) => option.text)

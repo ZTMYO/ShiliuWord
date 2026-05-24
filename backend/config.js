@@ -158,6 +158,8 @@ Hard constraints:
 8. correctOptionWord must equal the given target word.
 9. Each distractor must include both "word" and "text".
 10. Distractor words should be common standalone English words, not phrases, and should match their own gloss naturally.
+11. Every distractor "word" must be non-empty and must NOT equal the target word.
+12. Do NOT use another meaning, part of speech, or paraphrase of the target word as a distractor.
 
 Return pure JSON array only:
 [{"word":"","correctOption":"","correctOptionWord":"","distractors":[{"word":"","text":""},{"word":"","text":""},{"word":"","text":""}]}]

@@ -1,4 +1,4 @@
-﻿﻿﻿import "./style.css";
+﻿﻿﻿﻿﻿﻿﻿import "./style.css";
 
 const MODE_LABELS = {
   random: "随机词",
@@ -95,9 +95,11 @@ const state = {
   flashLoadingPercent: 0,
   flashLoadingTimer: null,
   theme: "light",
+  flashPreset: "default",
   flashPreload: {
     data: null,
-    promise: null
+    promise: null,
+    token: 0
   },
   apiKeyValidationStatus: "idle",
   apiKeyValidationKey: "",
@@ -168,6 +170,7 @@ const elements = {
   settingsEntryBtn: document.querySelector("#settings-entry-btn"),
   flashCollectBtn: document.querySelector("#flash-collect-btn"),
   collectionView: document.querySelector("#collection-view"),
+  collectionTrainBtn: document.querySelector("#collection-train-btn"),
   collectionBackBtn: document.querySelector("#collection-back-btn"),
   collectionList: document.querySelector("#collection-list"),
   settingsView: document.querySelector("#settings-view"),
@@ -1512,6 +1515,8 @@ async function toggleCollect() {
 }
 
 function renderCollection() {
+  const showTrainButton = state.collection.length > 5;
+  elements.collectionTrainBtn.classList.toggle("is-hidden", !showTrainButton);
   elements.collectionList.innerHTML = "";
   disconnectCollectionLoadObserver();
   if (!state.collection.length) {
@@ -1564,6 +1569,15 @@ function renderCollection() {
     onVisible: loadMoreCollectionItems,
     observerType: "collection"
   });
+}
+
+function startCollectionFlashTraining() {
+  if (state.collection.length <= 5) {
+    showToast("收藏夹单词需超过 5 个后才能开始专项训练", "error");
+    return;
+  }
+  setFlashPreset("collection");
+  loadFlashQuestion({ forceNew: true });
 }
 
 function renderAccountFeatures() {
@@ -1834,6 +1848,22 @@ function resetFlashState() {
   state.flashFuture = [];
 }
 
+function resetFlashPreload() {
+  state.flashPreload.token += 1;
+  state.flashPreload.data = null;
+  state.flashPreload.promise = null;
+}
+
+function setFlashPreset(preset = "default") {
+  const normalizedPreset = String(preset || "default").trim().toLowerCase() || "default";
+  if (state.flashPreset === normalizedPreset) {
+    return;
+  }
+  state.flashPreset = normalizedPreset;
+  resetFlashPreload();
+  resetFlashState();
+}
+
 function createFlashSnapshot() {
   return {
     question: state.flashCurrent,
@@ -2000,7 +2030,13 @@ function renderFlashQuestion() {
 }
 
 function requestFlashBatch(count = FLASH_BATCH_SIZE) {
-  return requestJson(`/api/flash?count=${count}`);
+  const searchParams = new URLSearchParams({
+    count: String(count)
+  });
+  if (state.flashPreset !== "default") {
+    searchParams.set("preset", state.flashPreset);
+  }
+  return requestJson(`/api/flash?${searchParams.toString()}`);
 }
 
 function warmFlashBatchWhenNeeded() {
@@ -2017,9 +2053,12 @@ function warmFlashBatch() {
     return;
   }
 
+  const preloadToken = state.flashPreload.token;
   const preloadPromise = requestFlashBatch()
     .then((data) => {
-      state.flashPreload.data = data;
+      if (state.flashPreload.token === preloadToken) {
+        state.flashPreload.data = data;
+      }
       return data;
     })
     .catch(() => null)
@@ -2198,6 +2237,7 @@ function renderHomeModes() {
         return;
       }
       if (mode === "flash") {
+        setFlashPreset("default");
         loadFlashQuestion();
         return;
       }
@@ -2703,6 +2743,9 @@ function bindEvents() {
     resetCollectionVisibleCount();
     renderCollection();
     setView("collection");
+  });
+  elements.collectionTrainBtn.addEventListener("click", () => {
+    startCollectionFlashTraining();
   });
   elements.collectionBackBtn.addEventListener("click", () => {
     setView("home");

@@ -435,6 +435,11 @@ summary {
   white-space: nowrap;
 }
 
+.collection-train-btn {
+  font-size: 14px;
+  font-weight: 700;
+}
+
 .page-kicker {
   margin: 0 0 10px;
   color: var(--muted);
@@ -1679,6 +1684,17 @@ summary {
   font-size: 14px;
 }
 
+.settings-help-link {
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.settings-help-link:hover {
+  color: var(--accent-hover);
+  text-decoration: none;
+}
+
 .settings-section-label {
   margin-top: 20px;
 }
@@ -1891,7 +1907,15 @@ summary {
   .auth-card {
     width: min(420px, 100%);
     margin: 0 auto;
-    padding: 8px 0 4px;
+    padding: 8px 8px 4px;
+  }
+
+  .auth-dialog {
+    width: min(460px, calc(100vw - 32px));
+  }
+
+  .auth-modal-card {
+    padding: 22px 20px 18px;
   }
 
   .page-auth {
