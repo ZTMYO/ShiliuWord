@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>石榴刷词</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+      }
+
+      html {
+        background: #ffffff;
+      }
+
+      html[data-theme="dark"] {
+        background: #1a1b1d;
+      }
+
+      body {
+        background: inherit;
+      }
+
+      body:not(.app-ready) .app-shell,
+      body:not(.app-ready) #toast,
+      body:not(.app-ready) dialog {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+    </style>
+    <script>
+      try {
+        const savedTheme =
+          window.localStorage.getItem("shiliu-word-theme") ||
+          window.localStorage.getItem("english-ai-theme");
+        if (savedTheme === "dark") {
+          document.documentElement.dataset.theme = "dark";
+        }
+      } catch {}
+    </script>
+    <script type="module" src="/src/main.js"></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <section id="home-view" class="page page-home">
+        <header class="page-header home-header">
+          <div class="page-header-inner">
+            <div class="page-header-main">
+              <h1>石榴刷词</h1>
+            </div>
+            <div class="page-header-actions">
+              <a
+                href="https://github.com/ZTMYO/ShiliuWord"
+                class="icon-btn github-link-btn"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="GitHub 仓库"
+                title="GitHub 仓库"
+              >
+                <svg class="github-icon" viewBox="0 0 1024 1024" aria-hidden="true">
+                  <path d="M1023.560892 524.587752c0 114.331752-32.549236 217.148443-97.647709 308.450075-65.047295 91.301632-149.132822 154.455339-252.205404 189.512299-11.975662 2.303012-20.778286 0.716493-26.305515-4.759558a27.584966 27.584966 0 0 1-8.342021-20.471218V853.150798c0-44.166653-11.566238-76.511177-34.647536-96.982394a446.272549 446.272549 0 0 0 68.32269-12.282731c20.16415-5.476051 41.044792-14.329852 62.590748-26.612583a187.311643 187.311643 0 0 0 53.992837-45.446104c14.432209-18.014672 26.203159-41.914819 35.312851-71.751618 9.109692-29.8368 13.664538-64.074912 13.664538-102.765514 0-55.118754-17.554069-102.049021-52.61103-140.739623 16.376974-41.454216 14.636921-87.872703-5.373695-139.357815-12.436265-4.094244-30.399759-1.535341-53.941659 7.523172a355.17563 355.17563 0 0 0-61.311297 30.041513l-25.333132 16.376974a462.137743 462.137743 0 0 0-127.945112-17.707604 462.137743 462.137743 0 0 0-127.945111 17.758782 589.571074 589.571074 0 0 0-28.301459-18.424096c-11.77095-7.31846-30.34858-16.069906-55.681713-26.305515-25.281954-10.235609-44.422543-13.306292-57.31941-9.212048-19.498835 51.433935-21.085354 97.852421-4.606024 139.306637-35.108139 38.690602-52.713386 85.620869-52.713386 140.739623 0 38.690602 4.606024 72.826357 13.715716 102.458445 9.109692 29.58091 20.778286 53.481057 34.954605 71.700441a180.658498 180.658498 0 0 0 53.634591 45.753172c21.545957 12.282731 42.477777 21.18771 62.641926 26.612583 20.215328 5.527229 42.989557 9.621472 68.32269 12.333909-17.758781 16.376974-28.659705 39.867697-32.651593 70.369811a129.941055 129.941055 0 0 1-29.990334 10.235609 184.087426 184.087426 0 0 1-37.974109 3.428929c-14.688099 0-29.171485-4.913092-43.654872-14.688099-14.432209-9.826185-26.766117-24.053681-37.001726-42.682489a109.162769 109.162769 0 0 0-32.293346-35.517563c-13.101579-9.109692-24.104859-14.585743-33.009839-16.376974l-13.306292-2.047122c-9.314404 0-15.762838 1.023561-19.345301 3.070683-3.582463 2.047122-4.606024 4.606024-3.326572 7.83024a37.769397 37.769397 0 0 0 5.987831 9.570295 49.182101 49.182101 0 0 0 8.700267 8.188487l4.606024 3.377751c9.826185 4.606024 19.447657 13.255114 29.017952 25.998447 9.570294 12.743333 16.581686 24.360749 20.982998 34.80107l6.653146 15.71166c5.783119 17.298179 15.558126 31.320963 29.376197 42.017174 13.766894 10.747389 28.659705 17.554069 44.627255 20.471218 15.96755 2.968327 31.423319 4.606024 46.316131 4.810736 14.841633 0.204712 27.22672-0.562958 37.001726-2.405368l15.302235-2.712436c0 17.298179 0.102356 37.564685 0.358247 60.799517l0.307068 36.848192c0 8.188487-2.86597 15.046345-8.700268 20.471218-5.731941 5.527229-14.636921 7.113748-26.612583 4.810736-103.072582-35.056961-187.158109-98.261846-252.205404-189.512299C32.549236 741.736195 0 638.919504 0 524.587752c0-95.191163 22.876586-182.910331 68.629758-263.31104a516.028224 516.028224 0 0 1 186.288082-190.894106A491.309228 491.309228 0 0 1 511.780446 0.012795a491.309228 491.309228 0 0 1 256.913784 70.369811 516.028224 516.028224 0 0 1 186.236905 190.894106C1000.684306 341.626242 1023.560892 429.447767 1023.560892 524.587752z"></path>
+                </svg>
+              </a>
+              <button id="home-theme-toggle-btn" class="icon-btn theme-toggle-btn" type="button" aria-label="切换暗色模式"></button>
+              <button id="settings-entry-btn" class="icon-btn account-entry-btn" type="button" aria-label="账号设置" title="账号设置">
+                <svg viewBox="0 0 1024 1024" aria-hidden="true">
+                  <path d="M512 590.75c-142.5 0-258.75-116.25-258.75-258.75s116.25-262.5 258.75-262.5 258.75 116.25 258.75 258.75-116.25 262.5-258.75 262.5zM512 144.5c-101.25 0-183.75 82.5-183.75 183.75s82.5 183.75 183.75 183.75 183.75-82.5 183.75-183.75-82.5-183.75-183.75-183.75z"></path>
+                  <path d="M170.75 950.75c-18.75 0-37.5-15-37.5-37.5 0-7.5 0-11.25 0-15 0-210 172.5-382.5 382.5-382.5 22.5 0 37.5 15 37.5 37.5s-15 37.5-37.5 37.5c-168.75 0-307.5 138.75-307.5 307.5v11.25c0 22.5-18.75 41.25-37.5 41.25v0z"></path>
+                  <path d="M853.25 947v0c-22.5 0-37.5-15-37.5-37.5v-11.25c0-168.75-138.75-307.5-307.5-307.5-22.5 0-37.5-15-37.5-37.5s15-37.5 37.5-37.5c210 0 382.5 172.5 382.5 382.5 0 3.75 0 7.5 0 11.25 0 22.5-15 37.5-37.5 37.5z"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </header>
+        <div class="page-content home-content">
+          <div class="home-card">
+          <div id="home-mode-list" class="home-mode-list"></div>
+          <div class="home-divider" aria-hidden="true"></div>
+          <div class="home-extra">
+            <button id="history-entry-btn" class="home-secondary-btn">刷题记录</button>
+            <button id="collection-entry-btn" class="home-secondary-btn collection-entry-btn">我的收藏</button>
+          </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="quiz-view" class="page page-quiz is-hidden">
+        <header class="page-header quiz-header">
+          <div class="page-header-inner">
+            <div class="page-header-main">
+              <h2 id="quiz-title">匹配刷词</h2>
+            </div>
+            <div class="page-header-actions">
+              <button id="back-home-btn" class="icon-btn" type="button" aria-label="返回主页">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
+                </svg>
+              </button>
+              <button id="quiz-theme-toggle-btn" class="icon-btn theme-toggle-btn" type="button" aria-label="切换暗色模式"></button>
+            </div>
+          </div>
+        </header>
+        <div class="page-content quiz-content">
+          <div id="loading-view" class="loading-view is-hidden">
+            <div class="loading-panel">
+              <div class="loading-head">
+                <p class="loading-text">AI 正在生成题目</p>
+                <span id="loading-percent" class="loading-percent">0%</span>
+              </div>
+              <div class="loading-track">
+                <div id="loading-bar" class="loading-bar"></div>
+              </div>
+            </div>
+          </div>
+
+          <main id="quiz-board" class="quiz-board">
+          <section class="quiz-panel">
+            <div id="question-list" class="question-list"></div>
+          </section>
+
+          <section class="option-panel">
+            <div id="option-list" class="option-list"></div>
+          </section>
+
+          <div class="submit-wrap">
+            <button id="prev-btn" class="tool-btn prev-btn">上一题</button>
+            <button id="submit-btn" class="primary-btn submit-btn">提交</button>
+            <button id="next-btn" class="tool-btn next-btn">下一题</button>
+          </div>
+          </main>
+        </div>
+      </section>
+
+      <section id="flash-view" class="page page-flash is-hidden">
+        <header class="page-header flash-header">
+          <div class="page-header-inner">
+            <div class="page-header-main">
+              <h2>百词斩</h2>
+            </div>
+            <div class="page-header-actions">
+              <button id="flash-back-home-btn" class="icon-btn" type="button" aria-label="返回主页">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
+                </svg>
+              </button>
+              <button id="flash-collect-btn" class="icon-btn collect-btn is-hidden" type="button" aria-label="收藏" title="收藏">
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+              </button>
+              <button id="flash-theme-toggle-btn" class="icon-btn theme-toggle-btn" type="button" aria-label="切换暗色模式"></button>
+            </div>
+          </div>
+        </header>
+        <div class="page-content flash-content">
+          <div id="flash-loading-view" class="loading-view is-hidden">
+            <div class="loading-panel">
+              <div class="loading-head">
+                <p class="loading-text">AI 正在生成百词斩题目</p>
+                <span id="flash-loading-percent" class="loading-percent">0%</span>
+              </div>
+              <div class="loading-track">
+                <div id="flash-loading-bar" class="loading-bar"></div>
+              </div>
+            </div>
+          </div>
+
+          <main id="flash-board" class="flash-board">
+          <section class="flash-panel flash-word-panel">
+            <div class="flash-word-anchor">
+              <h2 id="flash-word" class="flash-word">word</h2>
+              <div class="flash-reveal-wrap">
+                <button id="flash-reveal-btn" class="tool-btn flash-reveal-btn is-hidden">查看释义</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="flash-panel flash-bottom-panel">
+            <div id="flash-detail" class="flash-detail is-hidden"></div>
+            
+            <div class="flash-option-section">
+              <div id="flash-option-list" class="flash-option-list"></div>
+            </div>
+          </section>
+
+          <div class="flash-bottom-dock">
+            <div class="submit-wrap">
+              <button id="flash-prev-btn" class="tool-btn prev-btn flash-prev-btn">上一题</button>
+              <button id="flash-pronounce-btn" class="tool-btn flash-pronounce-btn" type="button">朗读</button>
+              <button id="flash-next-btn" class="tool-btn next-btn">下一题</button>
+            </div>
+          </div>
+          </main>
+        </div>
+      </section>
+
+      <section id="history-view" class="page page-history is-hidden">
+        <header class="page-header history-header">
+          <div class="page-header-inner">
+            <div class="page-header-main">
+              <h2>刷题记录</h2>
+            </div>
+            <div class="page-header-actions history-actions">
+              <button id="history-back-btn" class="icon-btn" type="button" aria-label="返回主页">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
+                </svg>
+              </button>
+              <button id="history-filter-btn" class="icon-btn history-filter-btn" type="button" aria-label="只看错题" title="只看错题">
+              </button>
+              <button id="history-theme-toggle-btn" class="icon-btn theme-toggle-btn" type="button" aria-label="切换暗色模式"></button>
+              <button id="flash-history-btn" class="icon-btn history-switch-btn" type="button" aria-label="切换百词斩历史" title="切换百词斩历史">
+                <svg class="history-switch-icon" viewBox="0 0 1024 1024" aria-hidden="true">
+                  <path d="M155.04 448v-64h567.392l-186.464-194.24 43.616-45.44 291.2 303.68zM149.504 576H865.28v64H297.6l186.432 194.24-43.296 45.44z"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </header>
+        <div class="page-content history-content">
+          <main class="history-board">
+            <div id="history-list" class="history-list"></div>
+          </main>
+        </div>
+      </section>
+
+      <section id="collection-view" class="page page-collection is-hidden">
+        <header class="page-header collection-header">
+          <div class="page-header-inner">
+            <div class="page-header-main">
+              <h2>我的收藏</h2>
+            </div>
+            <div class="page-header-actions">
+              <button id="collection-back-btn" class="icon-btn" type="button" aria-label="返回主页">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
+                </svg>
+              </button>
+              <button id="collection-theme-toggle-btn" class="icon-btn theme-toggle-btn" type="button" aria-label="切换暗色模式"></button>
+            </div>
+          </div>
+        </header>
+        <div class="page-content collection-content">
+          <main class="history-board">
+            <div id="collection-list" class="history-list"></div>
+          </main>
+        </div>
+      </section>
+
+      <section id="settings-view" class="page page-settings is-hidden">
+        <header class="page-header settings-header">
+          <div class="page-header-inner">
+            <div class="page-header-main">
+              <h2>个人信息</h2>
+            </div>
+            <div class="page-header-actions">
+              <button id="settings-back-btn" class="icon-btn" type="button" aria-label="返回主页">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
+                </svg>
+              </button>
+              <button id="settings-theme-toggle-btn" class="icon-btn theme-toggle-btn" type="button" aria-label="切换暗色模式"></button>
+            </div>
+          </div>
+        </header>
+        <div class="page-content collection-content">
+          <main class="history-board settings-board">
+            <section class="settings-panel">
+              <p class="settings-label">当前账号</p>
+              <p id="settings-username" class="settings-username">-</p>
+
+              <p class="settings-label settings-section-label">个人 API Key</p>
+              <p class="settings-help">只保存在当前设备浏览器中，可直接覆盖编辑。</p>
+              <input
+                id="settings-api-key-input"
+                type="password"
+                class="password-input settings-input"
+                autocomplete="off"
+                placeholder="输入个人 DeepSeek API Key"
+              />
+              <div class="settings-actions">
+                <button id="save-api-key-btn" type="button" class="primary-btn settings-save-btn">保存 API Key</button>
+                <button id="clear-api-key-btn" type="button" class="tool-btn settings-clear-btn">清空</button>
+              </div>
+              <p id="settings-api-key-status" class="settings-status"></p>
+
+              <div class="settings-actions">
+                <button id="clear-history-btn" type="button" class="tool-btn settings-clear-history-btn">清空刷题记录</button>
+              </div>
+
+            </section>
+            <button id="settings-logout-btn" type="button" class="tool-btn settings-logout-btn">退出登录</button>
+          </main>
+        </div>
+      </section>
+
+    </div>
+
+    <div id="toast" class="toast" aria-live="polite"></div>
+
+    <dialog id="auth-dialog" class="auth-dialog">
+      <div class="auth-card auth-entry-card auth-modal-card">
+        <div class="auth-modal-head">
+          <h2>欢迎</h2>
+        </div>
+        <p class="auth-subtitle">登录后即可同步历史、错题与收藏，支持多设备使用。</p>
+        <div class="auth-switch" role="tablist" aria-label="登录注册切换">
+          <button id="auth-login-tab-btn" type="button" class="auth-switch-btn is-active" aria-pressed="true">登录</button>
+          <button id="auth-register-tab-btn" type="button" class="auth-switch-btn" aria-pressed="false">注册</button>
+        </div>
+        <form id="auth-form" class="auth-form">
+          <input id="auth-username-input" class="password-input" autocomplete="username" placeholder="用户名（3-24 位）" />
+          <input id="auth-password-input" type="password" class="password-input" autocomplete="current-password" placeholder="密码（至少 6 位）" />
+          <input
+            id="auth-confirm-input"
+            type="password"
+            class="password-input is-hidden"
+            autocomplete="new-password"
+            placeholder="再次输入密码"
+          />
+          <button id="auth-submit-btn" type="submit" class="primary-btn password-submit-btn">登录</button>
+        </form>
+      </div>
+    </dialog>
+
+    <dialog id="result-dialog" class="result-dialog">
+      <div class="dialog-header">
+        <h3>答案解析</h3>
+        <button id="close-dialog-btn" class="icon-btn" aria-label="关闭">
+          <svg viewBox="0 0 20 20" aria-hidden="true">
+            <path d="M5 5l10 10M15 5 5 15"></path>
+          </svg>
+        </button>
+      </div>
+      <div id="result-list" class="result-list"></div>
+    </dialog>
+  </body>
+</html>

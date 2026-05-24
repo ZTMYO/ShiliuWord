@@ -1,0 +1,20 @@
+{
+  "name": "shiliu-word-backend",
+  "version": "1.0.0",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "extract:book": "node scripts/extract-source-words.js",
+    "extract:examples": "node scripts/extract-examples.js",
+    "dev": "node server.js",
+    "start": "node server.js",
+    "user-delete": "node tools/user-delete-server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "sql.js": "^1.14.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

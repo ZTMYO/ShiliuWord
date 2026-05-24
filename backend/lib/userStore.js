@@ -1,0 +1,308 @@
+const { all, get, run, withTransaction } = require("./db");
+const { hashPassword, verifyPassword } = require("./security");
+
+const HISTORY_RECORD_LIMIT = 50;
+
+function normalizeUsername(value) {
+  return String(value || "").trim();
+}
+
+function normalizeText(value) {
+  return String(value || "").trim();
+}
+
+function safeJsonParse(value, fallback) {
+  try {
+    return JSON.parse(String(value || ""));
+  } catch {
+    return fallback;
+  }
+}
+
+function formatUser(row) {
+  if (!row) {
+    return null;
+  }
+
+  return {
+    id: Number(row.id),
+    username: String(row.username || ""),
+    passwordHash: String(row.password_hash || ""),
+    createdAt: String(row.created_at || ""),
+    updatedAt: String(row.updated_at || "")
+  };
+}
+
+function formatSafeUser(user) {
+  if (!user) {
+    return null;
+  }
+
+  return {
+    id: user.id,
+    username: user.username
+  };
+}
+
+async function findUserById(userId) {
+  const row = await get("SELECT * FROM users WHERE id = ? LIMIT 1", [Number(userId)]);
+  return formatUser(row);
+}
+
+async function findUserByUsername(username) {
+  const row = await get("SELECT * FROM users WHERE username = ? LIMIT 1", [normalizeUsername(username)]);
+  return formatUser(row);
+}
+
+async function createUser(username, password) {
+  const normalizedUsername = normalizeUsername(username);
+  const normalizedPassword = String(password || "");
+
+  if (!/^\S{3,24}$/.test(normalizedUsername)) {
+    throw new Error("用户名需为 3 到 24 位，且不能包含空格");
+  }
+
+  if (normalizedPassword.length < 6) {
+    throw new Error("密码至少 6 位");
+  }
+
+  const existingUser = await findUserByUsername(normalizedUsername);
+  if (existingUser) {
+    throw new Error("用户名已存在");
+  }
+
+  const now = new Date().toISOString();
+  await run(
+    `
+      INSERT INTO users (username, password_hash, created_at, updated_at)
+      VALUES (?, ?, ?, ?)
+    `,
+    [normalizedUsername, hashPassword(normalizedPassword), now, now]
+  );
+
+  const createdUser = await findUserByUsername(normalizedUsername);
+  return createdUser;
+}
+
+async function verifyUserCredentials(username, password) {
+  const user = await findUserByUsername(username);
+  if (!user || !verifyPassword(password, user.passwordHash)) {
+    return null;
+  }
+  return user;
+}
+
+async function listCollection(userId) {
+  const rows = await all(
+    `
+      SELECT word, word_cn, collected_at
+      FROM collections
+      WHERE user_id = ?
+      ORDER BY datetime(collected_at) DESC, word ASC
+    `,
+    [Number(userId)]
+  );
+
+  return rows.map((row) => ({
+    word: normalizeText(row.word),
+    wordCn: normalizeText(row.word_cn),
+    collectedAt: normalizeText(row.collected_at)
+  }));
+}
+
+async function addCollectionItem(userId, word, wordCn) {
+  const normalizedWord = normalizeText(word);
+  if (!normalizedWord) {
+    throw new Error("单词不能为空");
+  }
+
+  const existing = await get(
+    "SELECT word, word_cn, collected_at FROM collections WHERE user_id = ? AND word = ? LIMIT 1",
+    [Number(userId), normalizedWord]
+  );
+  if (existing) {
+    return {
+      exists: true,
+      item: {
+        word: normalizeText(existing.word),
+        wordCn: normalizeText(existing.word_cn),
+        collectedAt: normalizeText(existing.collected_at)
+      }
+    };
+  }
+
+  const collectedAt = new Date().toISOString();
+  await run(
+    "INSERT INTO collections (user_id, word, word_cn, collected_at) VALUES (?, ?, ?, ?)",
+    [Number(userId), normalizedWord, normalizeText(wordCn), collectedAt]
+  );
+
+  return {
+    exists: false,
+    item: {
+      word: normalizedWord,
+      wordCn: normalizeText(wordCn),
+      collectedAt
+    }
+  };
+}
+
+async function removeCollectionItem(userId, word) {
+  const normalizedWord = normalizeText(word);
+  if (!normalizedWord) {
+    throw new Error("缺少删除参数");
+  }
+
+  await run("DELETE FROM collections WHERE user_id = ? AND word = ?", [Number(userId), normalizedWord]);
+}
+
+async function listQuizHistory(userId) {
+  const rows = await all(
+    `
+      SELECT id, mode, created_at, completed, placements_json, result_json, items_json
+      FROM quiz_history
+      WHERE user_id = ?
+      ORDER BY datetime(created_at) DESC, id DESC
+      LIMIT ?
+    `,
+    [Number(userId), HISTORY_RECORD_LIMIT]
+  );
+
+  return rows.map((row) => ({
+    id: normalizeText(row.id),
+    mode: normalizeText(row.mode),
+    createdAt: normalizeText(row.created_at),
+    completed: Boolean(Number(row.completed)),
+    placements: safeJsonParse(row.placements_json, []),
+    result: safeJsonParse(row.result_json, []),
+    items: safeJsonParse(row.items_json, [])
+  }));
+}
+
+async function upsertQuizHistory(userId, record) {
+  if (!record?.id) {
+    throw new Error("刷题记录缺少 id");
+  }
+
+  const normalizedRecord = {
+    id: normalizeText(record.id),
+    mode: normalizeText(record.mode) || "random",
+    createdAt: normalizeText(record.createdAt) || new Date().toISOString(),
+    completed: record.completed === false ? 0 : 1,
+    placements: JSON.stringify(Array.isArray(record.placements) ? record.placements : []),
+    result: JSON.stringify(Array.isArray(record.result) ? record.result : []),
+    items: JSON.stringify(Array.isArray(record.items) ? record.items : []),
+    updatedAt: new Date().toISOString()
+  };
+
+  await withTransaction(async (db) => {
+    const existing = db.get(
+      "SELECT id FROM quiz_history WHERE user_id = ? AND id = ? LIMIT 1",
+      [Number(userId), normalizedRecord.id]
+    );
+    if (existing) {
+      db.run(
+        `
+          UPDATE quiz_history
+          SET mode = ?, created_at = ?, completed = ?, placements_json = ?, result_json = ?, items_json = ?, updated_at = ?
+          WHERE id = ? AND user_id = ?
+        `,
+        [
+          normalizedRecord.mode,
+          normalizedRecord.createdAt,
+          normalizedRecord.completed,
+          normalizedRecord.placements,
+          normalizedRecord.result,
+          normalizedRecord.items,
+          normalizedRecord.updatedAt,
+          normalizedRecord.id,
+          Number(userId)
+        ]
+      );
+      return;
+    }
+
+    db.run(
+      `
+        INSERT INTO quiz_history (id, user_id, mode, created_at, completed, placements_json, result_json, items_json, updated_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `,
+      [
+        normalizedRecord.id,
+        Number(userId),
+        normalizedRecord.mode,
+        normalizedRecord.createdAt,
+        normalizedRecord.completed,
+        normalizedRecord.placements,
+        normalizedRecord.result,
+        normalizedRecord.items,
+        normalizedRecord.updatedAt
+      ]
+    );
+  });
+}
+
+async function listFlashHistory(userId) {
+  const rows = await all(
+    `
+      SELECT id, word, word_cn, is_correct, created_at
+      FROM flash_history
+      WHERE user_id = ?
+      ORDER BY datetime(created_at) DESC, id DESC
+      LIMIT ?
+    `,
+    [Number(userId), HISTORY_RECORD_LIMIT]
+  );
+
+  return rows.map((row) => ({
+    id: normalizeText(row.id),
+    word: normalizeText(row.word),
+    wordCn: normalizeText(row.word_cn),
+    isCorrect: Boolean(Number(row.is_correct)),
+    createdAt: normalizeText(row.created_at)
+  }));
+}
+
+async function addFlashHistory(userId, record) {
+  if (!record?.id) {
+    throw new Error("百词斩历史缺少 id");
+  }
+
+  await run(
+    `
+      INSERT OR REPLACE INTO flash_history (id, user_id, word, word_cn, is_correct, created_at)
+      VALUES (?, ?, ?, ?, ?, ?)
+    `,
+    [
+      normalizeText(record.id),
+      Number(userId),
+      normalizeText(record.word),
+      normalizeText(record.wordCn),
+      record.isCorrect ? 1 : 0,
+      normalizeText(record.createdAt) || new Date().toISOString()
+    ]
+  );
+}
+
+async function clearHistory(userId) {
+  await withTransaction(async (db) => {
+    db.run("DELETE FROM quiz_history WHERE user_id = ?", [Number(userId)]);
+    db.run("DELETE FROM flash_history WHERE user_id = ?", [Number(userId)]);
+  });
+}
+
+module.exports = {
+  createUser,
+  verifyUserCredentials,
+  findUserById,
+  findUserByUsername,
+  formatSafeUser,
+  listCollection,
+  addCollectionItem,
+  removeCollectionItem,
+  listQuizHistory,
+  upsertQuizHistory,
+  listFlashHistory,
+  addFlashHistory,
+  clearHistory
+};

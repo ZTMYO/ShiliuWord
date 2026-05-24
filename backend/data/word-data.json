@@ -1,0 +1,152 @@
+{
+  "cool": {
+    "wordCn": "adj. 凉爽的，冷静的，酷的；v. 冷却，变凉",
+    "defEn": "moderately cold; not warm",
+    "defCn": "温度适中偏低，既不热也不冷的状态"
+  },
+  "dependence": {
+    "wordCn": "n. 依赖，依靠，信任",
+    "defEn": "state of relying on someone or something for support",
+    "defCn": "需要他人或事物提供帮助或维持正常运作的状态"
+  },
+  "zebra": {
+    "wordCn": "n. 斑马",
+    "defEn": "an African wild horse with black and white stripes",
+    "defCn": "一种生活在非洲、身上有黑白相间条纹的野生马科动物"
+  },
+  "flash": {
+    "wordCn": "v. 闪光，闪现；n. 闪光，一瞬间",
+    "defEn": "to shine brightly and suddenly for a short time",
+    "defCn": "在极短时间内发出强烈而短暂的光亮"
+  },
+  "recall": {
+    "wordCn": "v. 召回，回忆；n. 召回，记忆力",
+    "defEn": "to bring back a memory or information into the mind",
+    "defCn": "从记忆中重新提取出过去经历过的事情或学过的知识"
+  },
+  "cognitive": {
+    "wordCn": "adj. 认知的，认识的",
+    "defEn": "related to mental processes of understanding and thinking",
+    "defCn": "与理解、思考等心理活动有关的"
+  },
+  "sensitive": {
+    "wordCn": "adj. 敏感的，灵敏的；n. 敏感的人",
+    "defEn": "quick to detect or respond to slight changes or feelings",
+    "defCn": "容易察觉细微变化或受他人情绪影响的"
+  },
+  "sensation": {
+    "wordCn": "n. 感觉，知觉，轰动",
+    "defEn": "a physical feeling or a widespread excited reaction",
+    "defCn": "身体上的感知或引起大众强烈关注的事件"
+  },
+  "selective": {
+    "wordCn": "adj. 选择性的，挑剔的",
+    "defEn": "choosing only the most suitable or high-quality items",
+    "defCn": "只挑选最合适或最优质对象的"
+  },
+  "tentative": {
+    "wordCn": "adj. 试验性的，暂定的，犹豫的",
+    "defEn": "not final or certain; done as a trial",
+    "defCn": "尚未确定、只是尝试性的"
+  },
+  "suffocate": {
+    "wordCn": "v. 使窒息，扼杀",
+    "defEn": "to cause someone to die or feel extreme discomfort by preventing breathing, or to suppress something completely.",
+    "defCn": "通过阻止呼吸导致死亡或极度不适，或彻底压制某事物。"
+  },
+  "stifle": {
+    "wordCn": "v. 抑制，使窒息",
+    "defEn": "to restrain or suppress a natural impulse, sound, or process, often causing a feeling of being choked or held back.",
+    "defCn": "抑制或压制自然的冲动、声音或过程，常导致一种被窒息或受阻的感觉。"
+  },
+  "smother": {
+    "wordCn": "v. 使窒息，覆盖",
+    "defEn": "to kill or cause discomfort by covering the face or preventing access to air, or to overwhelm with excessive care or attention.",
+    "defCn": "通过覆盖面部或阻止空气流通导致死亡或不适，或过度关心而使人窒息。"
+  },
+  "asphyxiate": {
+    "wordCn": "v. 使窒息",
+    "defEn": "to cause unconsciousness or death by depriving the body of oxygen, typically through lack of air or poisoning.",
+    "defCn": "通过缺氧（通常因缺乏空气或中毒）导致昏迷或死亡。"
+  },
+  "choke": {
+    "wordCn": "v. 窒息，阻塞",
+    "defEn": "to have difficulty breathing because something is blocking the throat or airway, or to block a passage or flow.",
+    "defCn": "因喉咙或气道被堵而呼吸困难，或阻塞通道或流动。"
+  },
+  "doctoral": {
+    "wordCn": "adj. 博士的，博士学位的",
+    "defEn": "relating to the highest academic degree from a university",
+    "defCn": "与大学最高学位相关的"
+  },
+  "doubtful": {
+    "wordCn": "adj. 可疑的，不确定的，怀疑的",
+    "defEn": "feeling uncertain or not convinced about something",
+    "defCn": "对某事缺乏信心或持怀疑态度的"
+  },
+  "disposal": {
+    "wordCn": "n. 处理，处置，清理",
+    "defEn": "the act of getting rid of something or dealing with it",
+    "defCn": "将某物扔掉或解决掉的行为"
+  },
+  "cultural": {
+    "wordCn": "adj. 文化的，与文化有关的",
+    "defEn": "relating to the ideas, customs, and art of a society",
+    "defCn": "与特定社会的思想、习俗和艺术相关的"
+  },
+  "doctrine": {
+    "wordCn": "n. 教义，学说，信条",
+    "defEn": "a set of beliefs or principles held by a group",
+    "defCn": "某个群体所信奉的一套信仰或原则"
+  },
+  "motivation": {
+    "wordCn": "n. 动机，动力",
+    "defEn": "The internal or external drive that prompts a person to act or persist in an effort.",
+    "defCn": "促使一个人采取行动或坚持努力的内在或外在推动力。"
+  },
+  "impulse": {
+    "wordCn": "n. 冲动，推动力",
+    "defEn": "A sudden, strong urge to act, often driven by an internal ache or desire.",
+    "defCn": "一种突然而强烈的行动欲望，常由内心的渴望或痛感驱动。"
+  },
+  "stimulus": {
+    "wordCn": "n. 刺激，激励因素",
+    "defEn": "Something that rouses activity or energy, often in response to a need or ache.",
+    "defCn": "激发活动或能量的东西，常作为对需求或痛感的回应。"
+  },
+  "incentive": {
+    "wordCn": "n. 激励，诱因",
+    "defEn": "A specific reward or benefit designed to encourage a desired action.",
+    "defCn": "为鼓励某种期望行为而设计的特定奖励或好处。"
+  },
+  "drive": {
+    "wordCn": "n. 驱动力，干劲",
+    "defEn": "An innate, persistent inner force that pushes one toward a goal, often fueled by ache.",
+    "defCn": "一种天生的、持久的内在力量，推动人朝向目标，常由痛感激发。"
+  },
+  "confirmation": {
+    "wordCn": "n. 确认，证实，批准",
+    "defEn": "a statement or proof that something is true or certain",
+    "defCn": "表明某事物真实或确定的陈述或证据"
+  },
+  "gorgeous": {
+    "wordCn": "adj. 华丽的，极好的，令人愉快的",
+    "defEn": "extremely beautiful or attractive",
+    "defCn": "极其美丽或吸引人的"
+  },
+  "absolute": {
+    "wordCn": "adj. 绝对的，完全的，专制的；n. 绝对事物",
+    "defEn": "total and complete, without any limits or conditions",
+    "defCn": "完全且彻底的，没有任何限制或条件的"
+  },
+  "occupy": {
+    "wordCn": "v. 占据，占领，使忙碌",
+    "defEn": "to take up space, time, or attention; to live or work in a place",
+    "defCn": "占用空间、时间或注意力；在某地居住或工作"
+  },
+  "enjoyment": {
+    "wordCn": "n. 享受，乐趣，愉快",
+    "defEn": "the feeling of pleasure or satisfaction from something",
+    "defCn": "从某事物中获得的愉悦或满足感"
+  }
+}

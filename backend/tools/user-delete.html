@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>用户删除工具</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f5f7fb;
+        --panel: #ffffff;
+        --text: #243042;
+        --muted: #6f7d90;
+        --line: #d8dee8;
+        --danger: #d94141;
+        --danger-hover: #be3030;
+        --button: #eef2f8;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      .page {
+        width: min(920px, calc(100vw - 32px));
+        margin: 24px auto 40px;
+      }
+
+      .panel {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 20px;
+      }
+
+      h1 {
+        margin: 0 0 10px;
+        font-size: 28px;
+      }
+
+      .intro {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .toolbar {
+        margin-top: 16px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      button {
+        border: 0;
+        border-radius: 10px;
+        min-height: 40px;
+        padding: 0 14px;
+        font-size: 14px;
+        cursor: pointer;
+      }
+
+      .ghost-btn {
+        background: var(--button);
+        color: var(--text);
+      }
+
+      .danger-btn {
+        background: var(--danger);
+        color: #fff;
+      }
+
+      .danger-btn:hover {
+        background: var(--danger-hover);
+      }
+
+      .status {
+        margin-left: auto;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .user-list {
+        margin-top: 16px;
+        display: grid;
+        gap: 12px;
+      }
+
+      .user-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fcfdff;
+      }
+
+      .user-main {
+        min-width: 0;
+      }
+
+      .user-name {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 700;
+      }
+
+      .user-meta,
+      .user-counts {
+        margin: 6px 0 0;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      .empty {
+        margin-top: 16px;
+        padding: 24px 16px;
+        text-align: center;
+        color: var(--muted);
+        border: 1px dashed var(--line);
+        border-radius: 14px;
+        background: #fcfdff;
+      }
+
+      @media (max-width: 720px) {
+        .user-item {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .status {
+          margin-left: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <section class="panel">
+        <h1>用户删除工具</h1>
+        <p class="intro">这个页面只做一件事：查看用户并删除某个用户。删除 `users` 表记录后，关联的收藏、匹配历史、百词斩历史会一起级联删除。</p>
+        <div class="toolbar">
+          <button id="refresh-btn" class="ghost-btn" type="button">刷新列表</button>
+          <span id="status" class="status">加载中...</span>
+        </div>
+        <div id="user-list" class="user-list"></div>
+        <div id="empty" class="empty" hidden>当前没有用户数据。</div>
+      </section>
+    </main>
+
+    <script>
+      const elements = {
+        refreshBtn: document.querySelector("#refresh-btn"),
+        status: document.querySelector("#status"),
+        userList: document.querySelector("#user-list"),
+        empty: document.querySelector("#empty")
+      };
+
+      function setStatus(message) {
+        elements.status.textContent = message;
+      }
+
+      function formatTime(value) {
+        if (!value) {
+          return "-";
+        }
+        try {
+          return new Intl.DateTimeFormat("zh-CN", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit"
+          }).format(new Date(value));
+        } catch {
+          return value;
+        }
+      }
+
+      function renderUsers(users) {
+        elements.userList.innerHTML = "";
+        elements.empty.hidden = users.length > 0;
+
+        users.forEach((user) => {
+          const item = document.createElement("article");
+          item.className = "user-item";
+          item.innerHTML = `
+            <div class="user-main">
+              <p class="user-name">${user.username}</p>
+              <p class="user-meta">ID: ${user.id} · 注册时间: ${formatTime(user.createdAt)}</p>
+              <p class="user-counts">
+                收藏 ${user.collectionCount} 条 · 匹配历史 ${user.quizHistoryCount} 条 · 百词斩历史 ${user.flashHistoryCount} 条
+              </p>
+            </div>
+            <button class="danger-btn" type="button" data-user-id="${user.id}" data-username="${user.username}">
+              删除用户
+            </button>
+          `;
+          elements.userList.appendChild(item);
+        });
+      }
+
+      async function loadUsers() {
+        setStatus("正在加载...");
+        try {
+          const response = await fetch("/api/users");
+          const data = await response.json();
+          if (!response.ok || !data.ok) {
+            throw new Error(data.message || "加载失败");
+          }
+          renderUsers(Array.isArray(data.users) ? data.users : []);
+          setStatus(`共 ${Array.isArray(data.users) ? data.users.length : 0} 个用户`);
+        } catch (error) {
+          elements.userList.innerHTML = "";
+          elements.empty.hidden = false;
+          elements.empty.textContent = error.message || "加载失败";
+          setStatus("加载失败");
+        }
+      }
+
+      async function deleteUser(userId, username) {
+        const confirmed = window.confirm(`确定删除用户 ${username} 吗？这会连同该用户的收藏和刷题记录一起删除。`);
+        if (!confirmed) {
+          return;
+        }
+
+        setStatus(`正在删除 ${username}...`);
+        try {
+          const response = await fetch(`/api/users/${userId}`, {
+            method: "DELETE"
+          });
+          const data = await response.json();
+          if (!response.ok || !data.ok) {
+            throw new Error(data.message || "删除失败");
+          }
+          await loadUsers();
+        } catch (error) {
+          setStatus(error.message || "删除失败");
+        }
+      }
+
+      elements.refreshBtn.addEventListener("click", () => {
+        loadUsers();
+      });
+
+      elements.userList.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-user-id]");
+        if (!button) {
+          return;
+        }
+        deleteUser(button.dataset.userId, button.dataset.username || "");
+      });
+
+      loadUsers();
+    </script>
+  </body>
+</html>
