@@ -171,7 +171,7 @@
           <main id="flash-board" class="flash-board">
           <section class="flash-panel flash-word-panel">
             <div class="flash-word-anchor">
-              <h2 id="flash-word" class="flash-word">word</h2>
+              <h2 id="flash-word" class="flash-word"></h2>
               <div class="flash-reveal-wrap">
                 <button id="flash-reveal-btn" class="tool-btn flash-reveal-btn is-hidden">查看释义</button>
               </div>
@@ -193,6 +193,51 @@
               <button id="flash-next-btn" class="tool-btn next-btn">下一题</button>
             </div>
           </div>
+          </main>
+        </div>
+      </section>
+
+      <section id="reading-view" class="page page-reading is-hidden">
+        <header class="page-header reading-header">
+          <div class="page-header-inner">
+            <div class="page-header-main">
+              <h2>阅读训练</h2>
+            </div>
+            <div class="page-header-actions">
+              <button id="reading-word-list-btn" class="tool-btn reading-word-list-btn" type="button">单词列表</button>
+              <button id="reading-back-home-btn" class="icon-btn" type="button" aria-label="返回主页">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
+                </svg>
+              </button>
+              <button id="reading-theme-toggle-btn" class="icon-btn theme-toggle-btn" type="button" aria-label="切换暗色模式"></button>
+            </div>
+          </div>
+        </header>
+        <div class="page-content reading-content">
+          <div id="reading-loading-view" class="loading-view is-hidden">
+            <div class="loading-panel">
+              <div class="loading-head">
+                <p class="loading-text">AI 正在生成阅读训练</p>
+                <span id="reading-loading-percent" class="loading-percent">0%</span>
+              </div>
+              <div class="loading-track">
+                <div id="reading-loading-bar" class="loading-bar"></div>
+              </div>
+            </div>
+          </div>
+
+          <main id="reading-board" class="reading-board is-hidden">
+            <details id="reading-title-card" class="reading-panel reading-head-panel reading-title-card">
+              <summary class="reading-title-summary">
+                <h3 id="reading-title" class="reading-title">Reading Practice</h3>
+              </summary>
+              <div id="reading-title-body" class="reading-title-body is-hidden">
+                <p id="reading-title-cn" class="reading-title-cn"></p>
+              </div>
+            </details>
+
+            <section id="reading-sentence-list" class="reading-sentence-list"></section>
           </main>
         </div>
       </section>
@@ -234,7 +279,8 @@
               <h2>我的收藏</h2>
             </div>
             <div class="page-header-actions">
-              <button id="collection-train-btn" class="tool-btn collection-train-btn is-hidden" type="button">专项训练</button>
+              <button id="collection-flash-btn" class="tool-btn collection-train-btn is-hidden" type="button">百词斩</button>
+              <button id="collection-reading-btn" class="tool-btn collection-train-btn is-hidden" type="button">阅读</button>
               <button id="collection-back-btn" class="icon-btn" type="button" aria-label="返回主页">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
@@ -283,6 +329,9 @@
                 type="password"
                 class="password-input settings-input"
                 autocomplete="off"
+                autocapitalize="none"
+                autocorrect="off"
+                spellcheck="false"
                 placeholder="输入个人 DeepSeek API Key"
               />
               <div class="settings-actions">
@@ -315,14 +364,17 @@
           <button id="auth-login-tab-btn" type="button" class="auth-switch-btn is-active" aria-pressed="true">登录</button>
           <button id="auth-register-tab-btn" type="button" class="auth-switch-btn" aria-pressed="false">注册</button>
         </div>
-        <form id="auth-form" class="auth-form">
-          <input id="auth-username-input" class="password-input" autocomplete="username" placeholder="用户名（3-24 位）" />
-          <input id="auth-password-input" type="password" class="password-input" autocomplete="current-password" placeholder="密码（至少 6 位）" />
+        <form id="auth-form" class="auth-form" autocomplete="off">
+          <input id="auth-username-input" class="password-input" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="用户名（3-24 位）" />
+          <input id="auth-password-input" type="password" class="password-input" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="密码（至少 6 位）" />
           <input
             id="auth-confirm-input"
             type="password"
             class="password-input is-hidden"
-            autocomplete="new-password"
+            autocomplete="off"
+            autocapitalize="none"
+            autocorrect="off"
+            spellcheck="false"
             placeholder="再次输入密码"
           />
           <button id="auth-submit-btn" type="submit" class="primary-btn password-submit-btn">登录</button>
@@ -332,7 +384,7 @@
 
     <dialog id="result-dialog" class="result-dialog">
       <div class="dialog-header">
-        <h3>答案解析</h3>
+        <h3 id="result-dialog-title">答案解析</h3>
         <button id="close-dialog-btn" class="icon-btn" aria-label="关闭">
           <svg viewBox="0 0 20 20" aria-hidden="true">
             <path d="M5 5l10 10M15 5 5 15"></path>

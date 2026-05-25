@@ -148,5 +148,670 @@
     "wordCn": "n. 享受，乐趣，愉快",
     "defEn": "the feeling of pleasure or satisfaction from something",
     "defCn": "从某事物中获得的愉悦或满足感"
+  },
+  "guess": {
+    "wordCn": "v. 猜测，推测；n. 猜测",
+    "defEn": "to form an opinion or estimate without sufficient evidence",
+    "defCn": "在没有充分证据的情况下形成看法或估计"
+  },
+  "survival": {
+    "wordCn": "n. 生存，幸存，残存物",
+    "defEn": "the state of continuing to live or exist despite danger or difficulty",
+    "defCn": "在危险或困难中继续活着或存在的状态"
+  },
+  "confess": {
+    "wordCn": "v. 承认，坦白，忏悔",
+    "defEn": "to admit that one has done something wrong or illegal",
+    "defCn": "承认自己做了错误或违法的事情"
+  },
+  "style": {
+    "wordCn": "n. 风格，样式，方式；v. 设计，称呼",
+    "defEn": "a particular way of doing, presenting, or arranging things",
+    "defCn": "做事情、呈现或安排事物的特定方式"
+  },
+  "narrowly": {
+    "wordCn": "adv. 狭窄地，勉强地，仔细地",
+    "defEn": "by a very small margin or with little difference",
+    "defCn": "以非常小的差距或几乎不明显的差异"
+  },
+  "rebel": {
+    "wordCn": "v. 反叛，反抗；n. 反叛者，叛逆者",
+    "defEn": "to oppose or fight against authority or control",
+    "defCn": "公开抵抗或试图推翻权威、政府或既定规则"
+  },
+  "congratulation": {
+    "wordCn": "n. 祝贺，贺词",
+    "defEn": "an expression of joy or praise for someone's success or good fortune",
+    "defCn": "对他人取得的成就或好运表示高兴和赞美的言语"
+  },
+  "wooden": {
+    "wordCn": "adj. 木制的，僵硬的，呆板的",
+    "defEn": "made of wood; lacking liveliness or natural expression",
+    "defCn": "由木材制成的；或形容动作、表情不自然、缺乏生气"
+  },
+  "abandon": {
+    "wordCn": "v. 放弃，遗弃，抛弃",
+    "defEn": "to leave behind or give up completely, often with no intention of returning",
+    "defCn": "彻底离开或停止支持某人、某物，通常不再回来或继续"
+  },
+  "toward": {
+    "wordCn": "prep. 向，朝，对于，接近",
+    "defEn": "in the direction of; in relation to someone or something",
+    "defCn": "表示移动的方向或对待某人、某物的态度"
+  },
+  "talent": {
+    "wordCn": "n. 天赋，才能，人才",
+    "defEn": "natural aptitude or skill",
+    "defCn": "与生俱来的、未经训练就能展现的出色能力"
+  },
+  "recollect": {
+    "wordCn": "v. 回忆，想起",
+    "defEn": "to bring back to mind from memory",
+    "defCn": "主动努力从记忆中重新找回过去的事情或信息"
+  },
+  "turkey": {
+    "wordCn": "n. 火鸡，失败之作",
+    "defEn": "a large bird native to North America, often eaten on special occasions",
+    "defCn": "原产于北美的大型禽类，常在感恩节或圣诞节被烤制食用"
+  },
+  "tame": {
+    "wordCn": "adj. 驯服的，温顺的；v. 驯化，制服",
+    "defEn": "to make an animal gentle and obedient through training",
+    "defCn": "通过反复训练使野生动物变得温顺并听从人类指令"
+  },
+  "existence": {
+    "wordCn": "n. 存在，生存，生活",
+    "defEn": "the state or fact of being real or living",
+    "defCn": "指某事物实际发生或生命持续活动的客观状态"
+  },
+  "recent": {
+    "wordCn": "adj. 最近的，近来的",
+    "defEn": "having happened or appeared a short time ago",
+    "defCn": "指发生或出现不久，与现在相隔时间很短"
+  },
+  "treaty": {
+    "wordCn": "n. 条约，协议，协定",
+    "defEn": "a formal written agreement between countries or groups",
+    "defCn": "国家或组织之间正式签署的书面契约，具有法律约束力"
+  },
+  "bean": {
+    "wordCn": "n. 豆，豆科植物；v. 击打头部",
+    "defEn": "an edible seed that grows in long pods on certain plants",
+    "defCn": "某些植物长在豆荚中的可食用种子，常作蔬菜或粮食"
+  },
+  "menace": {
+    "wordCn": "n. 威胁，危险的人或物；v. 威胁，恐吓",
+    "defEn": "a person or thing that is likely to cause harm or danger",
+    "defCn": "可能造成伤害或危险的个体或事物，带有潜在威胁性"
+  },
+  "locate": {
+    "wordCn": "v. 找到，确定位置，设置，位于",
+    "defEn": "to discover the exact position or place of something",
+    "defCn": "通过搜索或调查找出某物所处的精确地点"
+  },
+  "postpone": {
+    "wordCn": "v. 推迟，延期",
+    "defEn": "to delay an event or arrangement to a later time",
+    "defCn": "将某事安排到比原定更晚的时间进行"
+  },
+  "garage": {
+    "wordCn": "n. 车库，修车厂",
+    "defEn": "a building or space for storing vehicles or for vehicle repairs",
+    "defCn": "用于停放汽车或进行汽车维修的建筑物或区域"
+  },
+  "recipient": {
+    "wordCn": "n. 接受者，收件人",
+    "defEn": "a person who receives something",
+    "defCn": "收到某物（如礼物、信件或奖项）的人"
+  },
+  "optimism": {
+    "wordCn": "n. 乐观，乐观主义",
+    "defEn": "a tendency to expect the best possible outcome",
+    "defCn": "倾向于认为事情会向好的方向发展的心态"
+  },
+  "incorporate": {
+    "wordCn": "v. 包含，吸收，合并",
+    "defEn": "to include something as part of a larger whole",
+    "defCn": "将某物作为组成部分加入到一个更大的整体中"
+  },
+  "alarm": {
+    "wordCn": "n. 警报，闹钟；v. 使惊恐，使担心",
+    "defEn": "a sudden feeling of fear or worry caused by possible danger",
+    "defCn": "因潜在危险而产生的突然恐惧或担忧"
+  },
+  "them": {
+    "wordCn": "pron. 他们，她们，它们（宾格）",
+    "defEn": "used to refer to a group of people or things previously mentioned",
+    "defCn": "指代之前提到过的一群人或者事物"
+  },
+  "mineral": {
+    "wordCn": "n. 矿物，矿物质；adj. 矿物的，含矿物的",
+    "defEn": "a naturally occurring solid substance found in rocks and earth",
+    "defCn": "天然存在于岩石和土壤中的固态无机物质"
+  },
+  "statement": {
+    "wordCn": "n. 陈述，声明，报表",
+    "defEn": "a formal or official expression of facts or opinions",
+    "defCn": "对事实或观点的正式或官方表达"
+  },
+  "reproduce": {
+    "wordCn": "v. 繁殖，复制，再生",
+    "defEn": "to produce a copy or offspring of something",
+    "defCn": "制造出某物的副本或产生后代"
+  },
+  "up": {
+    "wordCn": "adv. 向上，在上面；adj. 向上的；v. 提高，增加",
+    "defEn": "toward a higher position or level",
+    "defCn": "指向更高处或更高程度的方向"
+  },
+  "home": {
+    "wordCn": "n. 家，住宅；adv. 在家，回家；adj. 家庭的，国内的",
+    "defEn": "the place where one lives permanently",
+    "defCn": "一个人长期居住的固定场所"
+  },
+  "replaceable": {
+    "wordCn": "adj. 可替换的，可代替的",
+    "defEn": "able to be exchanged for something else",
+    "defCn": "能够被其他事物所替代的"
+  },
+  "alliance": {
+    "wordCn": "n. 联盟，结盟，联姻",
+    "defEn": "a formal agreement between groups to work together",
+    "defCn": "两个或多个团体为共同目标而达成的正式合作约定"
+  },
+  "aim": {
+    "wordCn": "v. 瞄准，旨在；n. 目标，目的",
+    "defEn": "a desired result or purpose",
+    "defCn": "希望达成的结果或意图实现的目标"
+  },
+  "visa": {
+    "wordCn": "n. 签证",
+    "defEn": "official authorization stamped in a passport allowing entry or stay in a country",
+    "defCn": "护照上由外国政府加盖的许可印章，证明持有人可以进入或在该国停留"
+  },
+  "shrewd": {
+    "wordCn": "adj. 精明的，敏锐的",
+    "defEn": "having sharp judgment and practical intelligence, especially in business or politics",
+    "defCn": "在商业或政治等实际事务中表现出敏锐判断力和聪明才智的"
+  },
+  "wade": {
+    "wordCn": "v. 涉水，跋涉",
+    "defEn": "to walk through water or other liquid with effort",
+    "defCn": "在液体（如水、泥浆）中费力地行走，通常水会没过脚踝或更高"
+  },
+  "this": {
+    "wordCn": "pron. 这个；adj. 这",
+    "defEn": "used to refer to a specific thing or person nearby or just mentioned",
+    "defCn": "用来指代距离近或刚刚提到过的特定事物或人"
+  },
+  "genetic": {
+    "wordCn": "adj. 基因的，遗传的",
+    "defEn": "relating to genes or heredity",
+    "defCn": "与生物体内的基因或代际遗传特征相关的"
+  },
+  "invasion": {
+    "wordCn": "n. 入侵，侵略，侵犯",
+    "defEn": "an unwelcome entry into a place or situation",
+    "defCn": "不受欢迎地进入某个地方或领域的行为"
+  },
+  "sweater": {
+    "wordCn": "n. 毛衣，运动衫",
+    "defEn": "a knitted garment worn on the upper body for warmth",
+    "defCn": "一种针织的上衣，用于保暖"
+  },
+  "delight": {
+    "wordCn": "n. 高兴，愉快；v. 使高兴，使愉快",
+    "defEn": "a feeling of great pleasure or satisfaction",
+    "defCn": "非常愉悦或满足的情绪"
+  },
+  "border": {
+    "wordCn": "n. 边界，边缘，国界；v. 接壤，接近",
+    "defEn": "the line that separates two areas or countries",
+    "defCn": "区分两个区域或国家的界线"
+  },
+  "dealer": {
+    "wordCn": "n. 经销商，商人，发牌人",
+    "defEn": "a person or business that buys and sells goods",
+    "defCn": "从事商品买卖的个人或公司"
+  },
+  "distinctly": {
+    "wordCn": "adv. 清楚地，明显地，确实地",
+    "defEn": "in a way that is clearly different or noticeable",
+    "defCn": "以一种明显不同或引人注意的方式"
+  },
+  "barn": {
+    "wordCn": "n. 谷仓，牲口棚，车库",
+    "defEn": "a large farm building for storing crops or housing animals",
+    "defCn": "用于储存农作物或饲养家畜的大型农场建筑"
+  },
+  "grim": {
+    "wordCn": "adj. 严厉的，冷酷的，阴森的，糟糕的",
+    "defEn": "serious and unpleasant, without hope or cheer",
+    "defCn": "严肃且令人不快的，缺乏希望或欢乐的"
+  },
+  "glamorous": {
+    "wordCn": "adj. 迷人的，富有魅力的，奢华的",
+    "defEn": "attractive in an exciting and special way",
+    "defCn": "以令人兴奋和特别的方式显得有吸引力"
+  },
+  "kitten": {
+    "wordCn": "n. 小猫，小动物（如小兔等）",
+    "defEn": "a young cat",
+    "defCn": "一种幼小的猫科动物"
+  },
+  "chamber": {
+    "wordCn": "n. 房间，室，腔；v. 把…关在室内",
+    "defEn": "a private or enclosed space, often for a specific purpose",
+    "defCn": "用于特定功能的封闭空间，如会议室或枪膛"
+  },
+  "shimmer": {
+    "wordCn": "v. 闪烁，微微发光；n. 微光",
+    "defEn": "to shine with a soft, wavering light",
+    "defCn": "发出柔和且不稳定的光亮，像水面反射的波光"
+  },
+  "enable": {
+    "wordCn": "v. 使能够，使可能，启用",
+    "defEn": "to give someone the means or authority to do something",
+    "defCn": "提供条件或权力，让某事得以发生或某人得以行动"
+  },
+  "trap": {
+    "wordCn": "n. 陷阱，圈套；v. 设陷阱捕捉，困住",
+    "defEn": "a device or situation designed to catch or deceive",
+    "defCn": "用于捕捉或欺骗的装置或计谋，使人难以逃脱"
+  },
+  "amiable": {
+    "wordCn": "adj. 和蔼可亲的，友好的",
+    "defEn": "having a pleasant and friendly disposition",
+    "defCn": "性格温和、容易相处，让人感到愉快"
+  },
+  "bread": {
+    "wordCn": "n. 面包，生计",
+    "defEn": "a staple food made from flour, water, and yeast",
+    "defCn": "由面粉、水和酵母制成的常见主食"
+  },
+  "allege": {
+    "wordCn": "v. 断言，宣称，指控",
+    "defEn": "to state something as true without providing proof",
+    "defCn": "在没有证据的情况下声称某事属实"
+  },
+  "pencil": {
+    "wordCn": "n. 铅笔，笔状物；v. 用铅笔写",
+    "defEn": "a thin stick of graphite encased in wood used for writing or drawing",
+    "defCn": "一种细长的石墨芯外裹木材的书写或绘画工具"
+  },
+  "quit": {
+    "wordCn": "v. 停止，放弃，辞职",
+    "defEn": "to voluntarily leave a job or stop an activity",
+    "defCn": "主动离开工作岗位或终止某项活动"
+  },
+  "compliment": {
+    "wordCn": "n. 赞美，恭维；v. 赞美，恭维",
+    "defEn": "a polite expression of praise or admiration",
+    "defCn": "一种礼貌地表达称赞或欣赏的话语或行为"
+  },
+  "painting": {
+    "wordCn": "n. 绘画，油画，涂漆",
+    "defEn": "the art or process of applying paint to a surface",
+    "defCn": "将颜料涂抹在表面上的艺术或技法"
+  },
+  "selection": {
+    "wordCn": "n. 选择，挑选，选集",
+    "defEn": "the act of choosing from a group",
+    "defCn": "从一组事物中做出挑选的行为"
+  },
+  "honour": {
+    "wordCn": "n. 荣誉，尊敬，荣幸；v. 尊敬，兑现",
+    "defEn": "high respect or esteem given to someone",
+    "defCn": "对某人表现出的高度敬重或敬仰"
+  },
+  "valley": {
+    "wordCn": "n. 山谷，流域",
+    "defEn": "a low area of land between hills or mountains",
+    "defCn": "位于山丘或山脉之间的低洼地带"
+  },
+  "along": {
+    "wordCn": "prep. 沿着，顺着；adv. 向前，一起",
+    "defEn": "moving forward in a line or path",
+    "defCn": "在某个方向或路线上持续移动"
+  },
+  "fabulous": {
+    "wordCn": "adj. 极好的，绝妙的，传说中的",
+    "defEn": "extremely good or impressive",
+    "defCn": "非常出色或令人惊叹的"
+  },
+  "random": {
+    "wordCn": "adj. 随机的，任意的；n. 随意",
+    "defEn": "happening without a definite plan or pattern",
+    "defCn": "没有明确计划或规律地发生"
+  },
+  "mute": {
+    "wordCn": "adj. 沉默的，哑的；vt. 使无声，减弱声音",
+    "defEn": "not able or willing to speak",
+    "defCn": "无法或不愿发出声音"
+  },
+  "interesting": {
+    "wordCn": "adj. 有趣的，引人入胜的",
+    "defEn": "holding attention or arousing curiosity",
+    "defCn": "能够吸引注意力或激发好奇心的"
+  },
+  "characterize": {
+    "wordCn": "v. 描述…的特征，成为…的特征",
+    "defEn": "to describe the distinctive qualities or features of someone or something",
+    "defCn": "指出或描绘某人或某物特有的性质或特点"
+  },
+  "click": {
+    "wordCn": "v. 发出咔嗒声，点击；n. 咔嗒声",
+    "defEn": "to press and release a button on a computer mouse or other device",
+    "defCn": "用手指按下并松开鼠标或其他设备上的按钮以执行操作"
+  },
+  "fissure": {
+    "wordCn": "n. 裂缝，裂隙；v. 裂开",
+    "defEn": "a long, narrow crack or opening in a surface or rock",
+    "defCn": "表面或岩石上细长而深的缝隙或裂口"
+  },
+  "rebellion": {
+    "wordCn": "n. 叛乱，反抗，叛逆",
+    "defEn": "an organized attempt to overthrow a government or authority by force",
+    "defCn": "有组织地使用武力试图推翻政府或权威的行为"
+  },
+  "tax": {
+    "wordCn": "n. 税，税款；v. 对…征税，使负重担",
+    "defEn": "a compulsory contribution to state revenue levied by the government",
+    "defCn": "政府依法强制向个人或企业征收的财政收入"
+  },
+  "cling": {
+    "wordCn": "v. 紧紧抓住，黏着，依恋",
+    "defEn": "to hold onto something or someone tightly",
+    "defCn": "用力抓住某物或某人，不放松"
+  },
+  "apologise": {
+    "wordCn": "v. 道歉，认错",
+    "defEn": "to express regret for a fault or offense",
+    "defCn": "因自己的错误或冒犯行为向他人表示歉意"
+  },
+  "maximum": {
+    "wordCn": "adj. 最大的，最高的；n. 最大值，最大限度",
+    "defEn": "the greatest amount or level possible",
+    "defCn": "可能达到的最高数量或程度"
+  },
+  "prove": {
+    "wordCn": "v. 证明，证实，表明是",
+    "defEn": "to show that something is true or certain",
+    "defCn": "通过证据或推理使某事物被确认为真实"
+  },
+  "infrastructure": {
+    "wordCn": "n. 基础设施，基础结构",
+    "defEn": "the basic systems and services that a country or organization needs",
+    "defCn": "支撑国家或组织运行的基本设施和服务体系"
+  },
+  "curse": {
+    "wordCn": "v. 诅咒，咒骂；n. 咒语，祸根",
+    "defEn": "a cause of harm or misfortune",
+    "defCn": "导致不幸或灾难的根源"
+  },
+  "parenthood": {
+    "wordCn": "n. 父母身份，亲子关系",
+    "defEn": "the state of being a mother or father",
+    "defCn": "成为母亲或父亲的状态或角色"
+  },
+  "we": {
+    "wordCn": "pron. 我们",
+    "defEn": "used to refer to the speaker and one or more others",
+    "defCn": "指说话者本人及其所提及的其他人"
+  },
+  "loaf": {
+    "wordCn": "n. 一条面包，块；v. 闲逛，游荡",
+    "defEn": "a shaped mass of baked bread",
+    "defCn": "经过整形后烘烤而成的面包块"
+  },
+  "neatly": {
+    "wordCn": "adv. 整洁地，干净利落地，巧妙地",
+    "defEn": "in a tidy and orderly manner",
+    "defCn": "以整洁有序的方式完成"
+  },
+  "economics": {
+    "wordCn": "n. 经济学，经济",
+    "defEn": "the study of how society manages its scarce resources",
+    "defCn": "研究社会如何分配有限资源的学科"
+  },
+  "bomb": {
+    "wordCn": "n. 炸弹；v. 轰炸，惨败",
+    "defEn": "a device designed to explode and cause destruction",
+    "defCn": "一种用于爆炸并造成破坏的装置"
+  },
+  "teamster": {
+    "wordCn": "n. 卡车司机，车队驾驶员",
+    "defEn": "a person who drives a truck for a living",
+    "defCn": "以驾驶卡车为职业的人"
+  },
+  "wicked": {
+    "wordCn": "adj. 邪恶的，恶劣的，极好的",
+    "defEn": "morally bad or evil in nature",
+    "defCn": "在道德上恶劣或具有邪恶本质的"
+  },
+  "diet": {
+    "wordCn": "n. 日常饮食，节食；v. 节食",
+    "defEn": "the kinds of food a person or animal regularly eats",
+    "defCn": "一个人或动物通常食用的食物种类"
+  },
+  "historical": {
+    "wordCn": "adj. 历史的，史实的，基于史实的",
+    "defEn": "relating to or based on past events or records",
+    "defCn": "与过去发生的事情或记载有关的，强调真实性和时间上的过去性"
+  },
+  "company": {
+    "wordCn": "n. 公司，陪伴，连队",
+    "defEn": "a group of people gathered together or a business organization",
+    "defCn": "指聚集在一起的一群人，或指从事商业活动的组织实体"
+  },
+  "endeavor": {
+    "wordCn": "n. 努力，尝试；v. 努力，尽力",
+    "defEn": "a serious attempt or effort to achieve something",
+    "defCn": "为达成某个目标而进行的认真尝试或持续付出"
+  },
+  "bulb": {
+    "wordCn": "n. 灯泡，球茎，球状物",
+    "defEn": "a rounded glass container that produces light when electricity passes through it",
+    "defCn": "一种圆形的玻璃器具，通电后能发光，常用于照明设备"
+  },
+  "moment": {
+    "wordCn": "n. 片刻，瞬间，重要时刻",
+    "defEn": "a very brief period of time or a particular point in time",
+    "defCn": "极短的时间段，或指某个特定的时间点，常带有重要性"
+  },
+  "guy": {
+    "wordCn": "n. 家伙，男人；v. 用绳索固定",
+    "defEn": "a man or person, often used informally",
+    "defCn": "对男性或任何人的非正式称呼"
+  },
+  "shield": {
+    "wordCn": "n. 盾牌，防护物；v. 保护，遮蔽",
+    "defEn": "to protect or defend from harm or danger",
+    "defCn": "提供保护以防止伤害或威胁"
+  },
+  "afterward": {
+    "wordCn": "adv. 之后，后来",
+    "defEn": "at a later time; subsequently",
+    "defCn": "在某个事件或时间点之后发生"
+  },
+  "considerable": {
+    "wordCn": "adj. 相当大的，重要的，可观的",
+    "defEn": "large in amount, size, or degree",
+    "defCn": "在数量、规模或程度上显著地大"
+  },
+  "somebody": {
+    "wordCn": "pron. 某人，有人；n. 重要人物",
+    "defEn": "an unspecified or unknown person",
+    "defCn": "指代一个身份未明确或未知的人"
+  },
+  "clumsy": {
+    "wordCn": "adj. 笨拙的，不灵巧的，不得体的",
+    "defEn": "lacking skill or grace in movement or action",
+    "defCn": "动作或行为缺乏技巧和优雅，显得笨手笨脚"
+  },
+  "tomorrow": {
+    "wordCn": "n. 明天；adv. 在明天",
+    "defEn": "the day after today",
+    "defCn": "今天之后的那一天"
+  },
+  "brandy": {
+    "wordCn": "n. 白兰地酒",
+    "defEn": "a strong alcoholic drink made from distilled wine",
+    "defCn": "一种通过蒸馏葡萄酒制成的烈性酒精饮料"
+  },
+  "refute": {
+    "wordCn": "v. 反驳，驳斥，驳倒",
+    "defEn": "to prove a statement or person to be wrong",
+    "defCn": "通过证据或论证表明某个说法或某人错误"
+  },
+  "fresh": {
+    "wordCn": "adj. 新鲜的，清新的，新近的；adv. 刚刚，新近",
+    "defEn": "recently made, obtained, or arrived; not stale or spoiled",
+    "defCn": "刚制作、获得或到达的，未变质或未过时的"
+  },
+  "resistant": {
+    "wordCn": "adj. 抵抗的，耐...的，有抵抗力的",
+    "defEn": "opposing or not affected by something",
+    "defCn": "对某种作用或影响具有抵制或不受其影响的能力"
+  },
+  "cloud": {
+    "wordCn": "n. 云，云状物，阴影；v. 使模糊，使阴沉",
+    "defEn": "a visible mass of tiny water droplets in the sky",
+    "defCn": "天空中由微小水滴聚集而成的可见团状物"
+  },
+  "documentary": {
+    "wordCn": "adj. 文献的，纪实的；n. 纪录片",
+    "defEn": "a film or program presenting factual information",
+    "defCn": "以真实事件或事实为基础制作的影视作品"
+  },
+  "prudent": {
+    "wordCn": "adj. 谨慎的，精明的，节俭的",
+    "defEn": "showing careful and sensible judgment",
+    "defCn": "在行动或决策中表现出深思熟虑和明智的态度"
+  },
+  "outset": {
+    "wordCn": "n. 开始，开端",
+    "defEn": "the initial stage or beginning of something",
+    "defCn": "某件事情或过程最初开始的阶段或时间点"
+  },
+  "threat": {
+    "wordCn": "n. 威胁，恐吓，凶兆",
+    "defEn": "an indication of something undesirable or dangerous about to happen",
+    "defCn": "预示即将发生的不利或危险情况的迹象"
+  },
+  "plate": {
+    "wordCn": "n. 盘子，平板；v. 电镀，覆盖",
+    "defEn": "a thin, flat sheet of material, often metal, used for covering or coating",
+    "defCn": "用于覆盖或涂层的薄而平的片状材料，常为金属"
+  },
+  "delicate": {
+    "wordCn": "adj. 精致的，微妙的，脆弱的",
+    "defEn": "easily broken or damaged; requiring careful handling",
+    "defCn": "容易破碎或受损，需要小心处理的"
+  },
+  "flee": {
+    "wordCn": "v. 逃跑，逃离，逃避",
+    "defEn": "to run away from a place or situation of danger",
+    "defCn": "迅速离开一个危险的地方或处境"
+  },
+  "dew": {
+    "wordCn": "n. 露水，露珠",
+    "defEn": "tiny drops of water that form on cool surfaces at night",
+    "defCn": "夜晚在凉爽表面上凝结的微小水滴"
+  },
+  "reward": {
+    "wordCn": "n. 报酬，奖赏；v. 酬谢，奖赏",
+    "defEn": "something given in return for a service or achievement",
+    "defCn": "因服务或成就而给予的回报或奖赏"
+  },
+  "piano": {
+    "wordCn": "n. 钢琴；adj. 轻柔的",
+    "defEn": "a large musical instrument with black and white keys",
+    "defCn": "一种通过按键带动琴槌敲击琴弦发声的大型乐器"
+  },
+  "welfare": {
+    "wordCn": "n. 福利，幸福；adj. 福利的",
+    "defEn": "government aid for people in need",
+    "defCn": "政府为有需要的人提供的经济或生活援助"
+  },
+  "sore": {
+    "wordCn": "adj. 疼痛的，酸痛的；n. 痛处，疮",
+    "defEn": "painful or tender to the touch",
+    "defCn": "触碰时感到疼痛或敏感的"
+  },
+  "jazz": {
+    "wordCn": "n. 爵士乐；v. 使活泼",
+    "defEn": "a style of music with strong rhythm and improvisation",
+    "defCn": "一种节奏强烈、注重即兴演奏的音乐风格"
+  },
+  "bother": {
+    "wordCn": "v. 打扰，使烦恼；n. 麻烦，烦恼",
+    "defEn": "to cause trouble or annoyance to someone",
+    "defCn": "给某人带来不便或使其感到烦躁"
+  },
+  "healthy": {
+    "wordCn": "adj. 健康的，有益健康的",
+    "defEn": "showing or promoting good physical or mental condition",
+    "defCn": "表现出或有助于维持良好的身体或心理状态"
+  },
+  "revenge": {
+    "wordCn": "n. 报复，复仇；v. 替…报仇",
+    "defEn": "the act of inflicting harm in return for a wrong suffered",
+    "defCn": "因遭受伤害而采取伤害对方的行动"
+  },
+  "anticipate": {
+    "wordCn": "v. 预期，期望，先于…行动",
+    "defEn": "to expect or predict something before it happens",
+    "defCn": "在事情发生前就预料或预见到"
+  },
+  "pepper": {
+    "wordCn": "n. 胡椒，辣椒；v. 撒胡椒粉于，使布满",
+    "defEn": "a pungent spice or vegetable used to add heat to food",
+    "defCn": "一种用于给食物增加辣味的辛辣调料或蔬菜"
+  },
+  "tennis": {
+    "wordCn": "n. 网球",
+    "defEn": "a sport played with rackets and a ball on a court divided by a net",
+    "defCn": "一种在球场上用球拍击球、中间有网隔开的体育运动"
+  },
+  "sacred": {
+    "wordCn": "adj. 神圣的，宗教的，不可侵犯的",
+    "defEn": "regarded with great respect and reverence, often due to religious association",
+    "defCn": "因与宗教相关而被视为极其崇高、值得敬畏的"
+  },
+  "nerve": {
+    "wordCn": "n. 神经，勇气，胆量",
+    "defEn": "a bundle of fibers in the body that transmits signals between the brain and other parts",
+    "defCn": "身体中负责在大脑与其他部位之间传递信号的纤维束"
+  },
+  "endurance": {
+    "wordCn": "n. 忍耐力，持久力，耐久性",
+    "defEn": "the ability to withstand hardship, stress, or prolonged effort",
+    "defCn": "承受困难、压力或长时间努力而不放弃的能力"
+  },
+  "pace": {
+    "wordCn": "n. 步速，速度，一步；v. 踱步，为…定步速",
+    "defEn": "the speed at which something happens or is done",
+    "defCn": "事件发生或进行的速度或节奏"
+  },
+  "ridiculous": {
+    "wordCn": "adj. 荒谬的，可笑的",
+    "defEn": "very silly or unreasonable, deserving to be laughed at",
+    "defCn": "极其愚蠢或不合逻辑，令人觉得好笑"
+  },
+  "science": {
+    "wordCn": "n. 科学，自然科学，理科",
+    "defEn": "the systematic study of the structure and behavior of the physical and natural world",
+    "defCn": "对物质世界和自然界的结构及规律进行系统研究的知识体系"
+  },
+  "preclude": {
+    "wordCn": "v. 阻止，排除，妨碍",
+    "defEn": "to prevent something from happening or make it impossible",
+    "defCn": "阻止某事发生或使其成为不可能"
+  },
+  "what": {
+    "wordCn": "pron. 什么；adj. 多么，什么；adv. 在哪方面",
+    "defEn": "used to ask for information about something or to express surprise",
+    "defCn": "用于询问关于某事物的信息或表达惊讶"
   }
 }

@@ -29,6 +29,7 @@ const randomRouter = require("./router/wordRandom");
 const shapeRouter = require("./router/wordShape");
 const synonymRouter = require("./router/wordSynonym");
 const flashRouter = require("./router/wordFlash");
+const readingRouter = require("./router/wordReading");
 const { validatePersonalApiKey } = require("./lib/aiService");
 
 const app = express();
@@ -409,6 +410,7 @@ app.use("/api/random", requireAuth, randomRouter);
 app.use("/api/shape", requireAuth, shapeRouter);
 app.use("/api/synonym", requireAuth, synonymRouter);
 app.use("/api/flash", requireAuth, flashRouter);
+app.use("/api/reading", requireAuth, readingRouter);
 
 app.use(express.static(DIST_DIR));
 

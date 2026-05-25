@@ -177,6 +177,38 @@ Return pure JSON object in this format:
 {"word":[{"en":"","cn":""}]}
 
 Words: {{words}}`,
+  READING_TITLE_TRANSLATE_PROMPT: `Translate the following English reading title into natural, concise Chinese.
+
+Hard constraints:
+1. Keep the tone formal and suitable for a postgraduate English reading exercise.
+2. Do not explain, annotate, or add quotation marks.
+3. Return plain Chinese text only.
+
+Title: {{title}}`,
+  READING_PROMPT: `You are generating a short bilingual English reading exercise for Chinese learners.
+Use these target words naturally in one coherent, exam-friendly short passage:
+{{items}}
+
+Hard constraints:
+1. Write a short English passage with exactly 5 to 8 sentences.
+2. The passage should resemble Chinese postgraduate English reading materials: abstract topic, strong logic, formal tone, and moderate academic density.
+3. Prefer longer and more difficult sentences with clauses, modifiers, contrast, concession, cause-effect, and other structures typical of postgraduate English exams.
+4. At least 2 sentences should be clear long/complex sentences, but the passage must still remain grammatical and readable.
+5. Use the target words naturally and meaningfully; do not force awkward wording or simple word lists in disguise.
+6. Every English sentence must have one matching fluent Chinese translation.
+7. The Chinese should be a natural translation, not word-for-word gloss.
+8. In each Chinese sentence, wrap the Chinese phrase corresponding to any target word meaning with 【】 so it can be highlighted later.
+9. If one sentence contains multiple target words, mark each corresponding Chinese phrase with its own 【】.
+10. Do NOT wrap any English word or phrase with [], 【】, (), or any other marker in the English sentence.
+11. Do not add markdown, numbering, explanations, or extra commentary.
+12. Return pure JSON only.
+
+Return this exact JSON shape:
+{"title":"","titleCn":"","sentences":[{"en":"","cn":""}]}
+
+The title should be a short English title with a formal reading-comprehension style.
+titleCn should be the natural Chinese translation of the title.
+Each sentence object must include non-empty "en" and "cn".`,
   DEMO_ITEMS: [
     {
       word: "abandon",

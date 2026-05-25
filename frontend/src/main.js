@@ -1,10 +1,18 @@
-﻿﻿﻿﻿﻿﻿﻿import "./style.css";
+﻿﻿﻿import "./style.css";
 
 const MODE_LABELS = {
   random: "随机词",
   shape: "形近词",
   synonym: "近义词"
 };
+
+const HOME_ENTRY_ITEMS = [
+  { key: "random", label: "随机词", type: "quiz" },
+  { key: "shape", label: "形近词", type: "quiz", requiresAi: true },
+  { key: "synonym", label: "近义词", type: "quiz", requiresAi: true },
+  { key: "flash", label: "百词斩", type: "flash" },
+  { key: "reading", label: "阅读训练", type: "reading", requiresAi: true }
+];
 
 const TONE_KEYS = [
   "blue",
@@ -96,6 +104,11 @@ const state = {
   flashLoadingTimer: null,
   theme: "light",
   flashPreset: "default",
+  readingExercise: null,
+  readingLoading: false,
+  readingLoadingPercent: 0,
+  readingLoadingTimer: null,
+  resultDialogPayload: null,
   flashPreload: {
     data: null,
     promise: null,
@@ -131,6 +144,7 @@ const elements = {
   authSubmitBtn: document.querySelector("#auth-submit-btn"),
   homeView: document.querySelector("#home-view"),
   flashView: document.querySelector("#flash-view"),
+  readingView: document.querySelector("#reading-view"),
   quizView: document.querySelector("#quiz-view"),
   historyView: document.querySelector("#history-view"),
   homeModeList: document.querySelector("#home-mode-list"),
@@ -151,6 +165,17 @@ const elements = {
   flashWord: document.querySelector("#flash-word"),
   flashDetail: document.querySelector("#flash-detail"),
   flashOptionList: document.querySelector("#flash-option-list"),
+  readingBackHomeBtn: document.querySelector("#reading-back-home-btn"),
+  readingWordListBtn: document.querySelector("#reading-word-list-btn"),
+  readingLoadingView: document.querySelector("#reading-loading-view"),
+  readingLoadingBar: document.querySelector("#reading-loading-bar"),
+  readingLoadingPercent: document.querySelector("#reading-loading-percent"),
+  readingBoard: document.querySelector("#reading-board"),
+  readingTitleCard: document.querySelector("#reading-title-card"),
+  readingTitle: document.querySelector("#reading-title"),
+  readingTitleBody: document.querySelector("#reading-title-body"),
+  readingTitleCn: document.querySelector("#reading-title-cn"),
+  readingSentenceList: document.querySelector("#reading-sentence-list"),
   backHomeBtn: document.querySelector("#back-home-btn"),
   submitBtn: document.querySelector("#submit-btn"),
   nextBtn: document.querySelector("#next-btn"),
@@ -164,13 +189,15 @@ const elements = {
   questionList: document.querySelector("#question-list"),
   optionList: document.querySelector("#option-list"),
   dialog: document.querySelector("#result-dialog"),
+  resultDialogTitle: document.querySelector("#result-dialog-title"),
   resultList: document.querySelector("#result-list"),
   closeDialogBtn: document.querySelector("#close-dialog-btn"),
   collectionEntryBtn: document.querySelector("#collection-entry-btn"),
   settingsEntryBtn: document.querySelector("#settings-entry-btn"),
   flashCollectBtn: document.querySelector("#flash-collect-btn"),
   collectionView: document.querySelector("#collection-view"),
-  collectionTrainBtn: document.querySelector("#collection-train-btn"),
+  collectionFlashBtn: document.querySelector("#collection-flash-btn"),
+  collectionReadingBtn: document.querySelector("#collection-reading-btn"),
   collectionBackBtn: document.querySelector("#collection-back-btn"),
   collectionList: document.querySelector("#collection-list"),
   settingsView: document.querySelector("#settings-view"),
@@ -246,6 +273,7 @@ function setView(view) {
   state.view = view;
   elements.homeView.classList.toggle("is-hidden", view !== "home");
   elements.flashView.classList.toggle("is-hidden", view !== "flash");
+  elements.readingView.classList.toggle("is-hidden", view !== "reading");
   elements.quizView.classList.toggle("is-hidden", view !== "quiz");
   elements.historyView.classList.toggle("is-hidden", view !== "history");
   elements.collectionView.classList.toggle("is-hidden", view !== "collection");
@@ -1013,6 +1041,67 @@ function highlightExampleWord(text, word) {
   return result;
 }
 
+function highlightReadingWords(text, words = []) {
+  const source = sanitizeReadingEnglishText(text);
+  const normalizedWords = [...new Set(
+    (Array.isArray(words) ? words : [words])
+      .map((item) => String(item || "").trim())
+      .filter(Boolean)
+      .sort((left, right) => right.length - left.length)
+  )];
+
+  if (!source || !normalizedWords.length) {
+    return escapeHtml(source);
+  }
+
+  const pattern = new RegExp(`(^|[^A-Za-z])(${normalizedWords.map(escapeRegExp).join("|")})(?=[^A-Za-z]|$)`, "gi");
+  let result = "";
+  let lastIndex = 0;
+  let match = pattern.exec(source);
+
+  while (match) {
+    const prefix = match[1] || "";
+    const matchedWord = match[2] || "";
+    const matchStart = match.index + prefix.length;
+    const matchEnd = matchStart + matchedWord.length;
+
+    result += escapeHtml(source.slice(lastIndex, match.index));
+    result += escapeHtml(prefix);
+    result += `<strong class="reading-hit">${escapeHtml(matchedWord)}</strong>`;
+
+    lastIndex = matchEnd;
+    match = pattern.exec(source);
+  }
+
+  if (!result) {
+    return escapeHtml(source);
+  }
+
+  result += escapeHtml(source.slice(lastIndex));
+  return result;
+}
+
+function sanitizeReadingEnglishText(text) {
+  return String(text || "")
+    .replace(/[【\[]\s*([A-Za-z][A-Za-z\s'-]*)\s*[】\]]/g, "$1")
+    .trim();
+}
+
+function sanitizeReadingChineseText(text) {
+  return String(text || "")
+    .replace(/\[([^\[\]]+)\]/g, "【$1】")
+    .trim();
+}
+
+function highlightReadingChinese(text) {
+  const source = sanitizeReadingChineseText(text);
+  if (!source) {
+    return "";
+  }
+
+  return escapeHtml(source).replace(/【([^【】]+)】/g, '<strong class="reading-hit-cn">$1</strong>');
+}
+
 function renderHistory() {
   elements.historyList.innerHTML = "";
   disconnectHistoryLoadObserver();
@@ -1516,7 +1605,8 @@ async function toggleCollect() {
 
 function renderCollection() {
   const showTrainButton = state.collection.length > 5;
-  elements.collectionTrainBtn.classList.toggle("is-hidden", !showTrainButton);
+  elements.collectionFlashBtn.classList.toggle("is-hidden", !showTrainButton);
+  elements.collectionReadingBtn.classList.toggle("is-hidden", !showTrainButton);
   elements.collectionList.innerHTML = "";
   disconnectCollectionLoadObserver();
   if (!state.collection.length) {
@@ -1573,11 +1663,19 @@ function renderCollection() {
 
 function startCollectionFlashTraining() {
   if (state.collection.length <= 5) {
-    showToast("收藏夹单词需超过 5 个后才能开始专项训练", "error");
+    showToast("收藏夹单词需超过 5 个后才能开始百词斩", "error");
     return;
   }
   setFlashPreset("collection");
   loadFlashQuestion({ forceNew: true });
+}
+
+function startCollectionReadingTraining() {
+  if (state.collection.length <= 5) {
+    showToast("收藏夹单词需超过 5 个后才能开始阅读训练", "error");
+    return;
+  }
+  loadReadingExercise({ forceNew: true, preset: "collection" });
 }
 
 function renderAccountFeatures() {
@@ -2020,13 +2118,177 @@ function renderFlashOptions() {
 }
 
 function renderFlashQuestion() {
-  elements.flashWord.textContent = state.flashCurrent ? state.flashCurrent.word : "word";
+  elements.flashWord.textContent = state.flashCurrent ? state.flashCurrent.word : "";
   renderFlashLayoutState();
   renderFlashRevealButton();
   renderFlashDetail();
   renderFlashOptions();
   renderFlashNavButtons();
   renderCollectButton();
+}
+
+function requestReadingExercise(preset = "default") {
+  const searchParams = new URLSearchParams();
+  if (preset && preset !== "default") {
+    searchParams.set("preset", preset);
+  }
+  const query = searchParams.toString();
+  return requestJson(query ? `/api/reading?${query}` : "/api/reading");
+}
+
+function renderReadingLoadingProgress() {
+  elements.readingLoadingBar.style.width = `${state.readingLoadingPercent}%`;
+  elements.readingLoadingPercent.textContent = `${state.readingLoadingPercent}%`;
+}
+
+function renderReadingLoadingState() {
+  elements.readingLoadingView.classList.toggle("is-hidden", !state.readingLoading || state.view !== "reading");
+  elements.readingBoard.classList.toggle("is-hidden", state.readingLoading || state.view !== "reading" || !state.readingExercise);
+  renderReadingLoadingProgress();
+}
+
+function startReadingLoadingProgress() {
+  if (state.readingLoadingTimer) {
+    window.clearInterval(state.readingLoadingTimer);
+  }
+
+  state.readingLoadingPercent = 0;
+  renderReadingLoadingProgress();
+  state.readingLoadingTimer = window.setInterval(() => {
+    if (state.readingLoadingPercent >= 92) {
+      window.clearInterval(state.readingLoadingTimer);
+      state.readingLoadingTimer = null;
+      return;
+    }
+    state.readingLoadingPercent += state.readingLoadingPercent < 60 ? 8 : 4;
+    if (state.readingLoadingPercent > 92) {
+      state.readingLoadingPercent = 92;
+    }
+    renderReadingLoadingProgress();
+  }, 120);
+}
+
+function finishReadingLoadingProgress() {
+  if (state.readingLoadingTimer) {
+    window.clearInterval(state.readingLoadingTimer);
+    state.readingLoadingTimer = null;
+  }
+
+  return new Promise((resolve) => {
+    const stepToComplete = () => {
+      if (state.readingLoadingPercent >= 100) {
+        state.readingLoadingPercent = 100;
+        renderReadingLoadingProgress();
+        window.setTimeout(resolve, 100);
+        return;
+      }
+
+      const remaining = 100 - state.readingLoadingPercent;
+      state.readingLoadingPercent += Math.max(3, Math.ceil(remaining / 3));
+      if (state.readingLoadingPercent > 100) {
+        state.readingLoadingPercent = 100;
+      }
+      renderReadingLoadingProgress();
+      window.setTimeout(stepToComplete, 35);
+    };
+
+    stepToComplete();
+  });
+}
+
+function renderReadingExercise() {
+  if (!state.readingExercise) {
+    elements.readingTitleCard.open = false;
+    elements.readingTitle.textContent = "Reading Practice";
+    elements.readingTitleCn.textContent = "";
+    elements.readingTitleBody.classList.add("is-hidden");
+    elements.readingSentenceList.innerHTML = `
+      <div class="history-empty">
+        <p>还没有阅读训练内容。</p>
+        <p>返回首页开始生成一篇新的双语短文吧。</p>
+      </div>
+    `;
+    renderReadingLoadingState();
+    return;
+  }
+
+  const words = Array.isArray(state.readingExercise.words) ? state.readingExercise.words : [];
+  elements.readingTitle.textContent = state.readingExercise.title || "Reading Practice";
+  elements.readingTitleCn.textContent = state.readingExercise.titleCn || "";
+  elements.readingTitleBody.classList.toggle("is-hidden", !state.readingExercise.titleCn);
+  elements.readingTitleCard.open = false;
+
+  elements.readingSentenceList.innerHTML = "";
+  const highlightWords = words.map((item) => item.word);
+  (Array.isArray(state.readingExercise.sentences) ? state.readingExercise.sentences : []).forEach((sentence, index) => {
+    const details = document.createElement("details");
+    details.className = "reading-card";
+    details.innerHTML = `
+      <summary class="reading-card-summary">
+        <p class="reading-card-en">${highlightReadingWords(sentence.en, highlightWords)}</p>
+      </summary>
+      <div class="reading-card-body">
+        <p class="reading-card-cn">${highlightReadingChinese(sentence.cn)}</p>
+      </div>
+    `;
+    elements.readingSentenceList.appendChild(details);
+  });
+
+  renderReadingLoadingState();
+}
+
+function openReadingWordListDialog() {
+  const items = Array.isArray(state.readingExercise?.words) ? state.readingExercise.words : [];
+  if (!items.length) {
+    showToast("当前还没有可查看的单词列表", "error");
+    return;
+  }
+
+  openResultDialog({
+    title: "单词列表",
+    items,
+    showIndex: false
+  });
+}
+
+async function loadReadingExercise(options = {}) {
+  const { forceNew = false, preset = "default" } = options;
+  if (!hasAvailableAiCapability()) {
+    showToast("未配置 API Key，阅读训练暂不可用", "error");
+    return;
+  }
+
+  if (!forceNew && state.readingExercise) {
+    setView("reading");
+    renderReadingLoadingState();
+    renderReadingExercise();
+    return;
+  }
+
+  state.readingLoading = true;
+  state.readingExercise = null;
+  startReadingLoadingProgress();
+  setView("reading");
+  renderReadingLoadingState();
+  renderReadingExercise();
+
+  try {
+    const data = await requestReadingExercise(preset);
+    state.readingExercise = data;
+    await finishReadingLoadingProgress();
+    state.readingLoading = false;
+    renderReadingLoadingState();
+    renderReadingExercise();
+  } catch (error) {
+    if (state.readingLoadingTimer) {
+      window.clearInterval(state.readingLoadingTimer);
+      state.readingLoadingTimer = null;
+    }
+    state.readingLoadingPercent = 0;
+    state.readingLoading = false;
+    renderReadingLoadingState();
+    showToast(error.message || "阅读训练生成失败", "error", 2600);
+  }
 }
 
 function requestFlashBatch(count = FLASH_BATCH_SIZE) {
@@ -2217,14 +2479,11 @@ function goToNextQuizQuestion() {
 
 function renderHomeModes() {
   elements.homeModeList.innerHTML = "";
-  [
-    ...Object.entries(MODE_LABELS),
-    ["flash", "百词斩"]
-  ].forEach(([mode, label]) => {
+  HOME_ENTRY_ITEMS.forEach(({ key, label, type, requiresAi = false }) => {
     const button = document.createElement("button");
     button.className = "home-mode-btn";
     button.textContent = label;
-    if ((mode === "synonym" || mode === "shape") && state.isAuthenticated && !hasAvailableAiCapability()) {
+    if (requiresAi && state.isAuthenticated && !hasAvailableAiCapability()) {
       button.setAttribute("title", `未配置 API Key 时，${label}模式暂不可用`);
       button.setAttribute("aria-disabled", "true");
     }
@@ -2232,16 +2491,20 @@ function renderHomeModes() {
       if (!requireAuthFromHomeEntry()) {
         return;
       }
-      if ((mode === "synonym" || mode === "shape") && !hasAvailableAiCapability()) {
+      if (requiresAi && !hasAvailableAiCapability()) {
         showToast(`未配置 API Key，${label}模式暂不可用`, "error");
         return;
       }
-      if (mode === "flash") {
+      if (type === "flash") {
         setFlashPreset("default");
         loadFlashQuestion();
         return;
       }
-      state.mode = mode;
+      if (type === "reading") {
+        loadReadingExercise({ forceNew: true });
+        return;
+      }
+      state.mode = key;
       renderHomeModes();
       loadQuiz();
     });
@@ -2386,8 +2649,17 @@ function renderOptions() {
 }
 
 function renderResults() {
+  const dialogTitle = state.resultDialogPayload?.title || "答案解析";
+  const items = Array.isArray(state.resultDialogPayload?.items)
+    ? state.resultDialogPayload.items
+    : Array.isArray(state.quiz?.items)
+      ? state.quiz.items
+      : [];
+  const showIndex = state.resultDialogPayload?.showIndex !== false;
+
+  elements.resultDialogTitle.textContent = dialogTitle;
   elements.resultList.innerHTML = "";
-  state.quiz.items.forEach((item, index) => {
+  items.forEach((item, index) => {
     const examplesHtml = Array.isArray(item.examples) && item.examples.length
       ? item.examples
           .map(
@@ -2405,7 +2677,7 @@ function renderResults() {
     section.className = "result-item";
     section.innerHTML = `
       <div class="result-item-header">
-        <h4>${index + 1}. ${item.word}</h4>
+        <h4>${showIndex ? `${index + 1}. ` : ""}${item.word}</h4>
         <span class="result-item-actions">
           ${createInlinePronounceButton(item.word, "result-pronounce-btn")}
           ${createInlineCollectButton(item.word, item.wordCn, "result-collect-btn")}
@@ -2418,6 +2690,12 @@ function renderResults() {
     `;
     elements.resultList.appendChild(section);
   });
+}
+
+function openResultDialog(payload = null) {
+  state.resultDialogPayload = payload;
+  renderResults();
+  elements.dialog.showModal();
 }
 
 function onSlotClick(index) {
@@ -2534,8 +2812,7 @@ function submitQuiz() {
   }
 
   if (state.evaluationResult) {
-    renderResults();
-    elements.dialog.showModal();
+    openResultDialog();
     return;
   }
 
@@ -2624,6 +2901,19 @@ function bindEvents() {
     state.flashLoadingPercent = 0;
     renderFlashLoadingState();
     setView("home");
+  });
+  elements.readingBackHomeBtn.addEventListener("click", () => {
+    if (state.readingLoadingTimer) {
+      window.clearInterval(state.readingLoadingTimer);
+      state.readingLoadingTimer = null;
+    }
+    state.readingLoading = false;
+    state.readingLoadingPercent = 0;
+    renderReadingLoadingState();
+    setView("home");
+  });
+  elements.readingWordListBtn.addEventListener("click", () => {
+    openReadingWordListDialog();
   });
   elements.flashRevealBtn.addEventListener("click", () => {
     if (!state.flashCurrent || !state.flashEvaluation) {
@@ -2744,8 +3034,11 @@ function bindEvents() {
     renderCollection();
     setView("collection");
   });
-  elements.collectionTrainBtn.addEventListener("click", () => {
+  elements.collectionFlashBtn.addEventListener("click", () => {
     startCollectionFlashTraining();
+  });
+  elements.collectionReadingBtn.addEventListener("click", () => {
+    startCollectionReadingTraining();
   });
   elements.collectionBackBtn.addEventListener("click", () => {
     setView("home");

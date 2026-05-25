@@ -23,7 +23,7 @@
         "cn": "因为担心破产，该计划的投资者决定放弃这个项目。"
       }
     ],
-    "paraphrase": "vt.放弃，抛弃，离弃，丢弃，使屈从，停止进行，终止；n.放任，放纵，完全屈从于压制"
+    "paraphrase": "v. 放弃，遗弃，抛弃"
   },
   "abase": {
     "examples": [
@@ -1730,7 +1730,7 @@
         "cn": "不久之后，她一天内就接到了5个电话。"
       }
     ],
-    "paraphrase": "adv.<美>以后，过后"
+    "paraphrase": "adv. 之后，后来"
   },
   "afterwards": {
     "examples": [
@@ -1977,7 +1977,7 @@
         "cn": "在海战中目标就是击沉敌船。"
       }
     ],
-    "paraphrase": "vt.瞄准，对准，踢向，挥向；vi.旨在，以…为目标，致力于，决定；n.目的，目标，瞄准"
+    "paraphrase": "v. 瞄准，旨在；n. 目标，目的"
   },
   "air": {
     "examples": [
@@ -2094,7 +2094,7 @@
         "cn": "一旦发现有泄漏，警报就会响起来。"
       }
     ],
-    "paraphrase": "n.惊恐，警报，闹铃，动员令；vt.使惊恐，警告，给（门等）安装警报器"
+    "paraphrase": "n. 警报，闹钟；v. 使惊恐，使担心"
   },
   "album": {
     "examples": [
@@ -2224,7 +2224,7 @@
         "cn": "立证是在辩护中引例证明."
       }
     ],
-    "paraphrase": "vt.断言，宣称，辩解，提出…作为理由"
+    "paraphrase": "v. 断言，宣称，指控"
   },
   "allegiance": {
     "examples": [
@@ -2276,7 +2276,7 @@
         "cn": "若IBM公司和苹果公司联合将会有什么效果呢？"
       }
     ],
-    "paraphrase": "n.（国家、政党等的）结盟，同盟，联盟，联合，联姻，同盟条约，同盟者"
+    "paraphrase": "n. 联盟，结盟，联姻"
   },
   "allocate": {
     "examples": [
@@ -2393,7 +2393,7 @@
         "cn": "好运就是当机会来临时，你早已做好了准备。"
       }
     ],
-    "paraphrase": "adv.一起，向前，进展，到某处；prep.沿着，顺着，靠着…边"
+    "paraphrase": "prep. 沿着，顺着；adv. 向前，一起"
   },
   "alongside": {
     "examples": [
@@ -2718,7 +2718,7 @@
         "cn": "亲切的声调"
       }
     ],
-    "paraphrase": "adj.和蔼可亲的，温和的"
+    "paraphrase": "adj. 和蔼可亲的，友好的"
   },
   "amid": {
     "examples": [
@@ -3297,7 +3297,7 @@
         "cn": "你是否期望你的伴侣不等你提出就主动满足你的需要？"
       }
     ],
-    "paraphrase": "vt.预感，预见，预料，先于…行动；vi.过早地提出，过早地考虑（或说、做）一件事，（在口头或用文字）预言，预测"
+    "paraphrase": "v. 预期，期望，先于…行动"
   },
   "antique": {
     "examples": [
@@ -3470,7 +3470,7 @@
         "cn": "那个广告宣传人员急于道歉。"
       }
     ],
-    "paraphrase": "vt.& vi.道歉"
+    "paraphrase": "v. 道歉，认错"
   },
   "apologize": {
     "examples": [
@@ -6132,7 +6132,7 @@
         "cn": "公鸡追着我跑过谷仓的泥土地面。"
       }
     ],
-    "paraphrase": "n.谷仓，粮仓，牲口棚，（公共汽车、卡车等的）车库，一种特别大且空荡的房屋"
+    "paraphrase": "n. 谷仓，牲口棚，车库"
   },
   "barrel": {
     "examples": [
@@ -6431,7 +6431,7 @@
         "cn": "也有罐装豆芽出售。"
       }
     ],
-    "paraphrase": "n.豆，豆形种子，毫无价值的东西；vt.将（球）击中击球员头部；int.胡说！呸！不可能！"
+    "paraphrase": "n. 豆，豆科植物；v. 击打头部"
   },
   "bear": {
     "examples": [],
@@ -7942,7 +7942,7 @@
         "cn": "今天早些时候，安放在垃圾箱里的一枚炸弹爆炸了。"
       }
     ],
-    "paraphrase": "n.炸弹，彻底的失败，[橄榄球] 长传，高压贮罐；vt.轰炸，投弹于；vi.投弹，[俚语] 惨败，[俚语] 涂鸦"
+    "paraphrase": "n. 炸弹；v. 轰炸，惨败"
   },
   "bond": {
     "examples": [
@@ -8059,7 +8059,7 @@
         "cn": "他从未能够通过边防哨兵的检查。"
       }
     ],
-    "paraphrase": "n.边，镶边，包边，边界；vt.& vi.与…接界，在…的边上；vt.沿…的边，环绕…，给…镶边；vi.近似，毗邻"
+    "paraphrase": "n. 边界，边缘，国界；v. 接壤，接近"
   },
   "bore": {
     "examples": [
@@ -8163,7 +8163,7 @@
         "cn": "我一会儿会开车把你送回宾馆，举手之劳。"
       }
     ],
-    "paraphrase": "vt.烦扰，打扰，使…不安，使…恼怒，使迷惑，烦恼；vi.操心，麻烦，烦恼；n.麻烦，操心，累赘，烦扰，吵闹，讨厌的人"
+    "paraphrase": "v. 打扰，使烦恼；n. 麻烦，烦恼"
   },
   "bottle": {
     "examples": [
@@ -8410,7 +8410,7 @@
         "cn": "和葡萄酒不同的是，白兰地只能在木制容器而非玻璃容器里酿制。"
       }
     ],
-    "paraphrase": "n.白兰地酒；v.把…在白兰地酒中浸泡"
+    "paraphrase": "n. 白兰地酒"
   },
   "brass": {
     "examples": [
@@ -8475,7 +8475,7 @@
         "cn": "每天尽量至少吃4片面包。"
       }
     ],
-    "paraphrase": "n.面包，食物，营养，营养物，生计；vt.在…上撒面包屑"
+    "paraphrase": "n. 面包，生计"
   },
   "breadth": {
     "examples": [
@@ -9112,7 +9112,7 @@
         "cn": "一个节能灯泡也许就能减轻发电站的负荷。"
       }
     ],
-    "paraphrase": "n.球茎，块茎植物，电灯泡，[解剖学]肿块"
+    "paraphrase": "n. 灯泡，球茎，球状物"
   },
   "bulk": {
     "examples": [
@@ -11105,7 +11105,7 @@
         "cn": "他觉得自己看见有人在演讲时潜藏在会议厅顶上。"
       }
     ],
-    "paraphrase": "n.室，卧室，会客室，内庭，[多用于英国]律师的办公室，议事厅；vt.限制，幽禁，封闭或限制，使备有房间"
+    "paraphrase": "n. 房间，室，腔；v. 把…关在室内"
   },
   "champagne": {
     "examples": [
@@ -11274,7 +11274,7 @@
         "cn": "如果行为是有意的,我们一般将其特征归为应负责任的."
       }
     ],
-    "paraphrase": "vt.描述（人或物）的特性，具有…的特征；vi.塑造人物"
+    "paraphrase": "v. 描述…的特征，成为…的特征"
   },
   "charge": {
     "examples": [
@@ -12504,7 +12504,7 @@
         "cn": "双击图标打开文件。"
       }
     ],
-    "paraphrase": "n.喀哒声，爪，掣子，[计]（鼠标）点击，[语言学]吸气音；vt.使发出喀哒声；vi.发出喀哒声，极成功，合得来，一见如，[计]鼠击"
+    "paraphrase": "v. 发出咔嗒声，点击；n. 咔嗒声"
   },
   "client": {
     "examples": [
@@ -12595,7 +12595,7 @@
         "cn": "她不得不抓紧门把手，直到那阵疼痛过去。"
       }
     ],
-    "paraphrase": "vi.附着于，紧贴，抓紧或抱住，坚持，沿（岸）前进，贴着（墙）走；vt.依恋，依附于"
+    "paraphrase": "v. 紧紧抓住，黏着，依恋"
   },
   "clinic": {
     "examples": [
@@ -12790,7 +12790,7 @@
         "cn": "天气的突然放晴帮助救援人员找到了迈克尔·本森。"
       }
     ],
-    "paraphrase": "n.云，云状物，一团，阴影；vi.布满云，显得阴沉，看起来忧愁）；vt.使难以理解，使…朦胧不清，使减少乐趣，混淆"
+    "paraphrase": "n. 云，云状物，阴影；v. 使模糊，使阴沉"
   },
   "cloudy": {
     "examples": [
@@ -12842,7 +12842,7 @@
         "cn": "他还在为别人批评他尽管最终胜出但表现笨拙感到闷闷不乐。"
       }
     ],
-    "paraphrase": "adj.笨拙的，复杂难懂的，得罪人的，（文体等）臃肿的"
+    "paraphrase": "adj. 笨拙的，不灵巧的，不得体的"
   },
   "cluster": {
     "examples": [
@@ -13777,7 +13777,7 @@
         "cn": "日新月异的世界使这家公司感到了压力。"
       }
     ],
-    "paraphrase": "n.公司，商号，作伴，伴侣，客人，连队，中队，（社交）集会，聚会"
+    "paraphrase": "n. 公司，陪伴，连队"
   },
   "comparable": {
     "examples": [
@@ -14184,7 +14184,7 @@
         "cn": "他嘴边礼节性地挤出一个微笑，以示对称赞致谢。"
       }
     ],
-    "paraphrase": "n.恭维，敬意，道贺，贺词，致意；vt.向…道贺，称赞，向…致意"
+    "paraphrase": "n. 赞美，恭维；v. 赞美，恭维"
   },
   "comply": {
     "examples": [
@@ -14717,7 +14717,7 @@
         "cn": "现在让我们向上帝忏悔我们的罪恶。"
       }
     ],
-    "paraphrase": "v.供认，坦白，承认，悔过"
+    "paraphrase": "v. 承认，坦白，忏悔"
   },
   "confidence": {
     "examples": [
@@ -14925,7 +14925,7 @@
         "cn": "我收到了大学毕业的贺信."
       }
     ],
-    "paraphrase": "n.祝贺，恭喜，贺词"
+    "paraphrase": "n. 祝贺，贺词"
   },
   "congress": {
     "examples": [
@@ -15189,7 +15189,7 @@
         "cn": "股票和债券能给人带来不菲的额外收入。"
       }
     ],
-    "paraphrase": "adj.相当大（或多）的，该注意的，应考虑的"
+    "paraphrase": "adj. 相当大的，重要的，可观的"
   },
   "considerate": {
     "examples": [
@@ -17616,7 +17616,7 @@
         "cn": "冷漠是英国地方民主制度长期以来难以推广的祸根。"
       }
     ],
-    "paraphrase": "vt.& vi.诅咒，咒骂，使苦恼，使困苦，把（某人）逐出教门；n.诅咒，咒语，祸害，祸因，咒逐，逐出教门"
+    "paraphrase": "v. 诅咒，咒骂；n. 咒语，祸根"
   },
   "curtain": {
     "examples": [
@@ -18139,7 +18139,7 @@
         "cn": "他的继承人把这幅画卖给了伦敦艺术品经销商阿格纽斯。"
       }
     ],
-    "paraphrase": "n.商人，发牌人，庄家，以某种方式待人的人，经销商"
+    "paraphrase": "n. 经销商，商人，发牌人"
   },
   "dean": {
     "examples": [
@@ -18827,7 +18827,7 @@
         "cn": "它的大叶子往往带点紫色。"
       }
     ],
-    "paraphrase": "adj.微妙的，熟练的，纤弱的，易损的"
+    "paraphrase": "adj. 精致的，微妙的，脆弱的"
   },
   "delicious": {
     "examples": [
@@ -18853,7 +18853,7 @@
         "cn": "你好，伯纳德！见到你真高兴。"
       }
     ],
-    "paraphrase": "n.快乐，高兴，使人高兴的东西或人；vt.使高兴，使欣喜；vi.感到高兴[快乐]"
+    "paraphrase": "n. 高兴，愉快；v. 使高兴，使愉快"
   },
   "delinquency": {
     "examples": [
@@ -19848,7 +19848,7 @@
         "cn": "清晨的露水使得青草湿漉漉的。"
       }
     ],
-    "paraphrase": "n.水珠，露水；vt.弄湿"
+    "paraphrase": "n. 露水，露珠"
   },
   "diabetes": {
     "examples": [
@@ -20043,7 +20043,7 @@
         "cn": "他从广播里听到的都是千篇一律的流行歌曲。"
       }
     ],
-    "paraphrase": "n.日常饮食，规定饮食；vt.& vi.（使）节制饮食；vi.节食，进规定饮食"
+    "paraphrase": "n. 日常饮食，节食；v. 节食"
   },
   "differ": {
     "examples": [
@@ -21190,7 +21190,7 @@
         "cn": "我清楚地记得希望自己没有被牵扯进去。"
       }
     ],
-    "paraphrase": "adv.明显地，无疑地，确实地，逼真"
+    "paraphrase": "adv. 清楚地，明显地，确实地"
   },
   "distinguish": {
     "examples": [
@@ -21571,7 +21571,7 @@
         "cn": "她还为一部关于基洛夫芭蕾舞学院的纪录片作过解说。"
       }
     ],
-    "paraphrase": "n.纪录片；adj.记录的，文书的，纪实的"
+    "paraphrase": "adj. 文献的，纪实的；n. 纪录片"
   },
   "dog": {
     "examples": [
@@ -22896,7 +22896,7 @@
         "cn": "谢纳托罗娃女士对市场经济学有一种天生的敏感。"
       }
     ],
-    "paraphrase": "n.经济学，经济，国家的经济状况"
+    "paraphrase": "n. 经济学，经济"
   },
   "economy": {
     "examples": [
@@ -23803,7 +23803,7 @@
         "cn": "这些环节让你和其他哮喘病患者一起讨论问题."
       }
     ],
-    "paraphrase": "vt.使能够，提供做…的权利[措施]，使可能，授予权利或方法"
+    "paraphrase": "v. 使能够，使可能，启用"
   },
   "enact": {
     "examples": [
@@ -23937,7 +23937,7 @@
         "cn": "我们力图使顾客都满意。"
       }
     ],
-    "paraphrase": "vt.& vi.尝试，试图，尽力，竭力；n.努力，尽力"
+    "paraphrase": "n. 努力，尝试；v. 努力，尽力"
   },
   "endeavour": {
     "examples": [],
@@ -23984,7 +23984,7 @@
         "cn": "她被气得忍无可忍，于是转身向他猛击。"
       }
     ],
-    "paraphrase": "n.耐久（力），持久（力），忍耐，忍耐力"
+    "paraphrase": "n. 忍耐力，持久力，耐久性"
   },
   "endure": {
     "examples": [
@@ -25867,7 +25867,7 @@
         "cn": "这一时期的文学作品中都没有提及他们的存在。"
       }
     ],
-    "paraphrase": "n.存在，实在，生活，生活方式，实体，存在物"
+    "paraphrase": "n. 存在，生存，生活"
   },
   "exit": {
     "examples": [
@@ -26586,7 +26586,7 @@
         "cn": "每场表演期间，我们将以抽彩方法送出大奖。"
       }
     ],
-    "paraphrase": "adj.极好的，极妙的，（美貌）惊人的，寓言般的，难以置信的"
+    "paraphrase": "adj. 极好的，绝妙的，传说中的"
   },
   "face": {
     "examples": [
@@ -28178,7 +28178,7 @@
         "cn": "我们纷纷下车察看那个大裂缝, 他却呆在车上."
       }
     ],
-    "paraphrase": "n.狭长裂缝或裂隙，裂伤，分歧， 分裂；vt.& vi.裂开"
+    "paraphrase": "n. 裂缝，裂隙；v. 裂开"
   },
   "fist": {
     "examples": [
@@ -28425,7 +28425,7 @@
         "cn": "有那么一会儿，凯瑟琳很想逃跑。"
       }
     ],
-    "paraphrase": "vi.逃走，逃掉，消失；vt.逃离，逃避"
+    "paraphrase": "v. 逃跑，逃离，逃避"
   },
   "fleet": {
     "examples": [
@@ -29673,7 +29673,7 @@
         "cn": "我一直坚持用新鲜水果做甜点。"
       }
     ],
-    "paraphrase": "adj.新鲜的，淡水的，新的，无经验的；adv.刚，最新的；n.开始，新生，泛滥，淡水流"
+    "paraphrase": "adj. 新鲜的，清新的，新近的；adv. 刚刚，新近"
   },
   "friction": {
     "examples": [
@@ -30448,7 +30448,7 @@
         "cn": "“车在车库里吗？”——“不，还在外面。”"
       }
     ],
-    "paraphrase": "n.车库，汽车修理站，飞机库；vt.把…送入车库，把（汽车）开进车库"
+    "paraphrase": "n. 车库，修车厂"
   },
   "garbage": {
     "examples": [
@@ -30773,7 +30773,7 @@
         "cn": "这些化合物在肝脏中与遗传物质实现结合。"
       }
     ],
-    "paraphrase": "adj.遗传的，基因的，起源的，起因的，演变的"
+    "paraphrase": "adj. 基因的，遗传的"
   },
   "genetics": {
     "examples": [
@@ -31102,7 +31102,7 @@
         "cn": "我以为那会是个美差，结果我成了一个打杂的。"
       }
     ],
-    "paraphrase": "adj.富有魅力的，迷人的，富于刺激的，独特的"
+    "paraphrase": "adj. 迷人的，富有魅力的，奢华的"
   },
   "glamour": {
     "examples": [
@@ -32090,7 +32090,7 @@
         "cn": "她是个沉默寡言、令人畏惧的女人。"
       }
     ],
-    "paraphrase": "adj.冷酷的，残忍的，严厉的，阴冷的，可怕的，讨厌的"
+    "paraphrase": "adj. 严厉的，冷酷的，阴森的，糟糕的"
   },
   "grin": {
     "examples": [
@@ -32311,7 +32311,7 @@
         "cn": "编辑们和撰稿者们在试图预测未来。"
       }
     ],
-    "paraphrase": "vt.推测，猜测，臆测，猜中，假定，认为；vi.猜，猜测，猜对；n.猜测，推断"
+    "paraphrase": "v. 猜测，推测；n. 猜测"
   },
   "guest": {
     "examples": [
@@ -32493,7 +32493,7 @@
         "cn": "盖伊·鲍威尔在进行辩护时对地方法官说道：“这是一件非常不幸、令人不安的案子。”"
       }
     ],
-    "paraphrase": "n.家伙，伙计，（架设天线、支撑帐篷等用的）牵索，[复数]各位，一群男人（或女人）；vt.（用牵索等）牵拉，（用拉索等）固定，开…的玩笑，取笑；vi.[俚语]逃亡，逃走，乱演某角色"
+    "paraphrase": "n. 家伙，男人；v. 用绳索固定"
   },
   "gym": {
     "examples": [
@@ -33351,7 +33351,7 @@
         "cn": "这部影片的票房收入开始的时候持续上涨，但是后来急剧下降。"
       }
     ],
-    "paraphrase": "adj.健康的，健全的，大量的，有益于健康的"
+    "paraphrase": "adj. 健康的，有益健康的"
   },
   "heap": {
     "examples": [
@@ -34144,7 +34144,7 @@
         "cn": "我们首先应大致看一下该理论在历史上的前身。"
       }
     ],
-    "paraphrase": "adj.历史的，历史上的，有关历史研究的，有根据的，基于史实的"
+    "paraphrase": "adj. 历史的，史实的，基于史实的"
   },
   "history": {
     "examples": [
@@ -34326,7 +34326,7 @@
         "cn": "他的目的地是乔伯姆公地，那里和他在科茨沃尔德的家离得很远。"
       }
     ],
-    "paraphrase": "n.家，家庭，家庭生活，终点；adj.家庭的，家用的，本地的，本部的；adv.在家，在家乡，深深地，深入地；vi.回家，有家，朝向，自动导航；vt.把…送回家，送…回家，给…提供住处，使有安身之处"
+    "paraphrase": "n. 家，住宅；adv. 在家，回家；adj. 家庭的，国内的"
   },
   "homeless": {
     "examples": [
@@ -34456,7 +34456,7 @@
         "cn": "我让他铭记他当时被授予了多么大的荣誉。"
       }
     ],
-    "paraphrase": "n.尊敬，荣幸，正义感，荣誉；v.尊敬，给予表扬，信守"
+    "paraphrase": "n. 荣誉，尊敬，荣幸；v. 尊敬，兑现"
   },
   "honourable": {
     "examples": [
@@ -36458,7 +36458,7 @@
         "cn": "颜料与油混合在一起."
       }
     ],
-    "paraphrase": "vt.组成公司，包含，使混合，使具体化；vi.包含，吸收，合并，混合"
+    "paraphrase": "v. 包含，吸收，合并"
   },
   "incorrect": {
     "examples": [
@@ -37121,7 +37121,7 @@
         "cn": "从宾馆到交通，所有的基础设施都已陈旧失修。"
       }
     ],
-    "paraphrase": "n.基础设施，基础建设"
+    "paraphrase": "n. 基础设施，基础结构"
   },
   "ingenious": {
     "examples": [
@@ -38161,7 +38161,7 @@
         "cn": "你花不多的钱就可以吃一顿很特别的饭。"
       }
     ],
-    "paraphrase": "adj.令人感兴趣的，有趣的，引起兴趣的，有趣的，令人关注的"
+    "paraphrase": "adj. 有趣的，引人入胜的"
   },
   "interface": {
     "examples": [
@@ -38629,7 +38629,7 @@
         "cn": "米兰队攻入第八粒进球后，观众有序地涌进球场。"
       }
     ],
-    "paraphrase": "n.入侵，侵略，侵害，侵犯，侵袭，[医]发病"
+    "paraphrase": "n. 入侵，侵略，侵犯"
   },
   "invent": {
     "examples": [
@@ -39175,7 +39175,7 @@
         "cn": "佩奇精通多种风格的爵士乐。"
       }
     ],
-    "paraphrase": "n.爵士乐，爵士舞（曲）"
+    "paraphrase": "n. 爵士乐；v. 使活泼"
   },
   "jealous": {
     "examples": [
@@ -40046,7 +40046,7 @@
         "cn": "那只小猫在沙发垫子上蜷缩成了一团。"
       }
     ],
-    "paraphrase": "n.小猫，小动物；vi.产小猫"
+    "paraphrase": "n. 小猫，小动物（如小兔等）"
   },
   "knee": {
     "examples": [
@@ -42165,7 +42165,7 @@
         "cn": "拿1夸脱牛奶或一条面包。"
       }
     ],
-    "paraphrase": "n.一条（块）面包；v.游荡，游手好闲"
+    "paraphrase": "n. 一条面包，块；v. 闲逛，游荡"
   },
   "loan": {
     "examples": [
@@ -42243,7 +42243,7 @@
         "cn": "找找看气味具体是从什么地方散入房间的。"
       }
     ],
-    "paraphrase": "vt.位于，说出来源，查找…的地点，确定…的位置；vi.定位，定居"
+    "paraphrase": "v. 找到，确定位置，设置，位于"
   },
   "location": {
     "examples": [
@@ -43959,7 +43959,7 @@
         "cn": "事情事半功倍地完成了。"
       }
     ],
-    "paraphrase": "adj.最大值的，最大量的；n.最大的量、体积、强度等"
+    "paraphrase": "adj. 最大的，最高的；n. 最大值，最大限度"
   },
   "may": {
     "examples": [
@@ -44505,7 +44505,7 @@
         "cn": "有一种危机四伏的感觉。"
       }
     ],
-    "paraphrase": "n.威胁，恐吓；vt.&vi.威胁，恐吓"
+    "paraphrase": "n. 威胁，危险的人或物；v. 威胁，恐吓"
   },
   "mend": {
     "examples": [
@@ -45103,7 +45103,7 @@
         "cn": "该岩石中富含矿盐。"
       }
     ],
-    "paraphrase": "n.矿物，矿石，矿物质，汽水；adj.矿物的，似矿物的"
+    "paraphrase": "n. 矿物，矿物质；adj. 矿物的，含矿物的"
   },
   "mingle": {
     "examples": [
@@ -45818,7 +45818,7 @@
         "cn": "我一找到他就马上汇报。"
       }
     ],
-    "paraphrase": "n.瞬间，片刻，时刻，重要，紧要，[物]力矩"
+    "paraphrase": "n. 片刻，瞬间，重要时刻"
   },
   "momentum": {
     "examples": [
@@ -46702,7 +46702,7 @@
         "cn": "我默默地向葆拉投去恳求的目光。"
       }
     ],
-    "paraphrase": "adj.缄默的，哑的，无声的，（字母）不发音的；n.哑巴，（乐器上的）弱音器；vt.减轻（声音），使…柔和"
+    "paraphrase": "adj. 沉默的，哑的；vt. 使无声，减弱声音"
   },
   "mutter": {
     "examples": [
@@ -46936,7 +46936,7 @@
         "cn": "他们的判断是基于一种狭隘的世界观。"
       }
     ],
-    "paraphrase": "adv.狭窄地，勉强地，严密地，仔细地"
+    "paraphrase": "adv. 狭窄地，勉强地，仔细地"
   },
   "nasty": {
     "examples": [
@@ -47183,7 +47183,7 @@
         "cn": "门口站着一位穿戴整齐、仪态庄重的男子。"
       }
     ],
-    "paraphrase": "adv.整洁地，干净地，灵巧地，恰好地"
+    "paraphrase": "adv. 整洁地，干净利落地，巧妙地"
   },
   "necessarily": {
     "examples": [
@@ -47456,7 +47456,7 @@
         "cn": "提到约翰就真的让人心痛。"
       }
     ],
-    "paraphrase": "n.神经，勇气，胆量，[植] 叶脉，中枢；vt.鼓励，激励，鼓起勇气"
+    "paraphrase": "n. 神经，勇气，胆量"
   },
   "nervous": {
     "examples": [
@@ -49679,7 +49679,7 @@
         "cn": "面对遭征服的悲惨命运，他们保持了乐观的态度。"
       }
     ],
-    "paraphrase": "n.乐观，乐观主义"
+    "paraphrase": "n. 乐观，乐观主义"
   },
   "optimistic": {
     "examples": [
@@ -50407,7 +50407,7 @@
         "cn": "这部小说一开头就把读者迷住了."
       }
     ],
-    "paraphrase": "n.开始，开端"
+    "paraphrase": "n. 开始，开端"
   },
   "outside": {
     "examples": [
@@ -50927,7 +50927,7 @@
         "cn": "随着复苏的加速，利率会降下来。"
       }
     ],
-    "paraphrase": "n.一步，长度单位，步幅，步调，快步；vt.踱步，走来走去，步测，调整步调，训练马溜蹄；vi.踱，溜蹄；prep.蒙…恩准，怀着对…的敬意"
+    "paraphrase": "n. 步速，速度，一步；v. 踱步，为…定步速"
   },
   "pack": {
     "examples": [
@@ -51122,7 +51122,7 @@
         "cn": "我把油画平放以防止未干的颜料流动。"
       }
     ],
-    "paraphrase": "n.绘画，油画，上色，着色，颜料，油漆；v.绘画（ paint的现在分词），涂色于"
+    "paraphrase": "n. 绘画，油画，涂漆"
   },
   "pair": {
     "examples": [
@@ -51499,7 +51499,7 @@
         "cn": "一幅理想化的为人父母的情景"
       }
     ],
-    "paraphrase": "n.亲子关系，父母身分"
+    "paraphrase": "n. 父母身份，亲子关系"
   },
   "park": {
     "examples": [
@@ -52305,7 +52305,7 @@
         "cn": "用“户外女孩”品牌的棕色眉笔更加清晰地勾勒出眉形。"
       }
     ],
-    "paraphrase": "n.铅笔，彩色铅笔，笔状物，画风，画法，[物]光线锥；vt.用铅笔写，用画笔画"
+    "paraphrase": "n. 铅笔，笔状物；v. 用铅笔写"
   },
   "pendulum": {
     "examples": [
@@ -52422,7 +52422,7 @@
         "cn": "她在我的食物上撒了点胡椒粉，看着我吃。"
       }
     ],
-    "paraphrase": "n.胡椒，辣椒，胡椒粉；vt.在…上撒胡椒粉，使布满"
+    "paraphrase": "n. 胡椒，辣椒；v. 撒胡椒粉于，使布满"
   },
   "per": {
     "examples": [
@@ -53215,7 +53215,7 @@
         "cn": "他在利兹国际钢琴比赛中荣获一等奖。"
       }
     ],
-    "paraphrase": "n.钢琴，<美俚>囚犯工作席，轻奏乐段"
+    "paraphrase": "n. 钢琴；adj. 轻柔的"
   },
   "pick": {
     "examples": [
@@ -53761,7 +53761,7 @@
         "cn": "用玫瑰花形的掼奶油和新鲜的水果作配菜点缀盘子。"
       }
     ],
-    "paraphrase": "n.盘子，盆子，金属板，均匀厚度的片状硬物体，[摄]底片，感光版；vt.镀，在…上覆盖金属板，覆盖，电镀，[印]给…制铅板"
+    "paraphrase": "n. 盘子，平板；v. 电镀，覆盖"
   },
   "plateau": {
     "examples": [
@@ -54775,7 +54775,7 @@
         "cn": "部长们再次使用拖延战术来推后报告的时间。"
       }
     ],
-    "paraphrase": "vt.使延期，延缓，把…放在次要地位，把…放在后面；vi.延缓，延缓发作"
+    "paraphrase": "v. 推迟，延期"
   },
   "posture": {
     "examples": [
@@ -55165,7 +55165,7 @@
         "cn": "他会断然拒绝询问，使得无法进行进一步的讨论。"
       }
     ],
-    "paraphrase": "vt.阻止，排除，妨碍"
+    "paraphrase": "v. 阻止，排除，妨碍"
   },
   "predecessor": {
     "examples": [
@@ -56972,7 +56972,7 @@
         "cn": "如果事实证明他们已无力胜任，应该将他们降级或让他们退休。"
       }
     ],
-    "paraphrase": "vt.证明，证实，[法]验证，检定，显示；vi.显示出，证明是"
+    "paraphrase": "v. 证明，证实，表明是"
   },
   "provide": {
     "examples": [
@@ -57063,7 +57063,7 @@
         "cn": "别那么玩命，冒险时要谨慎些。"
       }
     ],
-    "paraphrase": "adj.小心的，慎重的，精明的，节俭的，顾虑周到的，稳健的，世故的，精明的"
+    "paraphrase": "adj. 谨慎的，精明的，节俭的"
   },
   "psychedelic": {
     "examples": [
@@ -57772,7 +57772,7 @@
         "cn": "他辞去了在雅典当办公室勤杂工的工作。"
       }
     ],
-    "paraphrase": "vt.离开，放弃，抛弃，停止，中断，偿清；vi.停止，放弃斗争，辞职；adj.自由的，摆脱了责任或义务的"
+    "paraphrase": "v. 停止，放弃，辞职"
   },
   "quite": {
     "examples": [
@@ -58126,7 +58126,7 @@
         "cn": "我们收到了一些答复，并从中随机挑选了一个。"
       }
     ],
-    "paraphrase": "adj.任意的，随机的，胡乱的；n.随意，偶然的行动"
+    "paraphrase": "adj. 随机的，任意的；n. 随意"
   },
   "randomly": {
     "examples": [
@@ -58653,7 +58653,7 @@
         "cn": "这位发言人证实该地区现已落入叛乱分子手中。"
       }
     ],
-    "paraphrase": "n.反政府的人，反叛者，造反者，叛逆者；adj.反抗的，造反的"
+    "paraphrase": "v. 反叛，反抗；n. 反叛者，叛逆者"
   },
   "rebellion": {
     "examples": [
@@ -58666,7 +58666,7 @@
         "cn": "预计叛乱将会进一步破坏这个国家的形象。"
       }
     ],
-    "paraphrase": "n.造反，叛乱，反抗"
+    "paraphrase": "n. 叛乱，反抗，叛逆"
   },
   "recall": {
     "examples": [
@@ -58731,7 +58731,7 @@
         "cn": "在纪录片《与恐龙同行》中可以看到最新的、更加生动的电脑特效技术。"
       }
     ],
-    "paraphrase": "adj.最近的，新近的，近代的，[地]全新世的"
+    "paraphrase": "adj. 最近的，近来的"
   },
   "recently": {
     "examples": [
@@ -58796,7 +58796,7 @@
         "cn": "邮递员几乎花了整整一天时间寻找该信的收信人。"
       }
     ],
-    "paraphrase": "n.接受者，容器，容纳者；adj.容易接受的，感受性强的"
+    "paraphrase": "n. 接受者，收件人"
   },
   "reciprocal": {
     "examples": [
@@ -58904,7 +58904,7 @@
         "cn": "她想不起那封信的细节了。"
       }
     ],
-    "paraphrase": "vt.记起，想起；v.想起，回想，追忆，回忆，记忆，使（自己）想起一时忘掉的事，想到"
+    "paraphrase": "v. 回忆，想起"
   },
   "recommend": {
     "examples": [
@@ -59397,7 +59397,7 @@
         "cn": "伊莎贝尔对于任何关于她恃才傲物的暗示都迅速予以否认。"
       }
     ],
-    "paraphrase": "vt.驳斥，驳倒，否认真实性"
+    "paraphrase": "v. 反驳，驳斥，驳倒"
   },
   "regain": {
     "examples": [
@@ -60226,7 +60226,7 @@
         "cn": "大多数粉碎机都是基于一个装有可替换刀片的旋转圆盘来实现作业的。"
       }
     ],
-    "paraphrase": "adj.可代替的"
+    "paraphrase": "adj. 可替换的，可代替的"
   },
   "replacement": {
     "examples": [
@@ -60343,7 +60343,7 @@
         "cn": "他不想刻意重复那种讲话的语调。"
       }
     ],
-    "paraphrase": "vt.& vi.复制，重现，再版，生殖，繁殖；vt.使再次发生，再现"
+    "paraphrase": "v. 繁殖，复制，再生"
   },
   "reptile": {
     "examples": [],
@@ -60619,7 +60619,7 @@
         "cn": "这种结实的高强度塑料盒子在水下100英尺以内是防水的。"
       }
     ],
-    "paraphrase": "adj.有抵抗力的，抵抗的，顽固的；n.抵抗者，有抵抗力的东西，防染剂，防腐剂"
+    "paraphrase": "adj. 抵抗的，耐...的，有抵抗力的"
   },
   "resolute": {
     "examples": [
@@ -61056,7 +61056,7 @@
         "cn": "她利用媒体帮助自己进行可怕的复仇。"
       }
     ],
-    "paraphrase": "n.报仇，报复；vt.为…报仇，报…之仇"
+    "paraphrase": "n. 报复，复仇；v. 替…报仇"
   },
   "revenue": {
     "examples": [
@@ -61216,7 +61216,7 @@
         "cn": "无论投资人何时投资，詹金斯都会让他们得到回报。"
       }
     ],
-    "paraphrase": "n.报酬，报答，赏金，酬金；vt.酬谢，奖赏，报答，惩罚"
+    "paraphrase": "n. 报酬，奖赏；v. 酬谢，奖赏"
   },
   "rhythm": {
     "examples": [
@@ -61359,7 +61359,7 @@
         "cn": "这笔交易看上去太诱人了，要是拒绝它简直是笑话。"
       }
     ],
-    "paraphrase": "adj.可笑的，荒谬的，荒唐的，愚蠢的，胡枝扯叶"
+    "paraphrase": "adj. 荒谬的，可笑的"
   },
   "rifle": {
     "examples": [
@@ -62202,8 +62202,17 @@
     "paraphrase": "n.麻袋，洗劫，<英俚>解雇；vt.解雇，把…装进袋里，掠夺"
   },
   "sacred": {
-    "examples": [],
-    "paraphrase": "adj.宗教的，神圣的，受崇敬的，值得崇敬的，有宗教性质的"
+    "examples": [
+      {
+        "en": "The temple is considered a sacred place by the local people.",
+        "cn": "这座寺庙被当地人视为神圣的地方。"
+      },
+      {
+        "en": "For many, family traditions are sacred and must be respected.",
+        "cn": "对许多人来说，家庭传统是神圣的，必须受到尊重。"
+      }
+    ],
+    "paraphrase": "adj. 神圣的，宗教的，不可侵犯的"
   },
   "sacrifice": {
     "examples": [
@@ -62934,8 +62943,17 @@
     "paraphrase": "n.学校，上学，学院，群；vt.训练，锻炼，教育，教导，约束，给…上学"
   },
   "science": {
-    "examples": [],
-    "paraphrase": "n.科学，技术，知识，学科，理科"
+    "examples": [
+      {
+        "en": "She decided to study science in college.",
+        "cn": "她决定在大学学习科学。"
+      },
+      {
+        "en": "Science helps us understand the natural world.",
+        "cn": "科学帮助我们理解自然世界。"
+      }
+    ],
+    "paraphrase": "n. 科学，自然科学，理科"
   },
   "scientific": {
     "examples": [
@@ -63399,7 +63417,7 @@
         "cn": "句子在语义上是否有意义是受被称为选择限制的规则支配的."
       }
     ],
-    "paraphrase": "n.选择，被选中者，可供选择的事物"
+    "paraphrase": "n. 选择，挑选，选集"
   },
   "selective": {
     "examples": [
@@ -64060,7 +64078,7 @@
         "cn": "上夜班的矿工应该早就安全地到达井下了。"
       }
     ],
-    "paraphrase": "n.盾，护罩，盾形奖牌，保护人；vt.保护，掩护，庇护，给…加防护罩"
+    "paraphrase": "n. 盾牌，防护物；v. 保护，遮蔽"
   },
   "shift": {
     "examples": [],
@@ -64081,7 +64099,7 @@
         "cn": "又见你如水的眼睛."
       }
     ],
-    "paraphrase": "vi.闪烁，发微光；n.微光，闪光"
+    "paraphrase": "v. 闪烁，微微发光；n. 微光"
   },
   "shine": {
     "examples": [
@@ -64316,7 +64334,7 @@
         "cn": "她目光敏锐地看着他。"
       }
     ],
-    "paraphrase": "adj.精明的，敏锐的，奸诈的，狡猾的，有眼光的，精于盘算的"
+    "paraphrase": "adj. 精明的，敏锐的"
   },
   "shrink": {
     "examples": [
@@ -65670,7 +65688,7 @@
         "cn": "这么说，你是想有一天自己当上老板喽？"
       }
     ],
-    "paraphrase": "pron.某人，有人；n.大人物，重要的人物"
+    "paraphrase": "pron. 某人，有人；n. 重要人物"
   },
   "somehow": {
     "examples": [
@@ -65816,8 +65834,17 @@
     "paraphrase": "n.（中等、专科学校或大学的）二年级学生"
   },
   "sore": {
-    "examples": [],
-    "paraphrase": "adj.疼痛的，使人伤心的，恼火的，发怒的；n.（肌肤的）痛处，伤处；adv.〈古，诗〉同sorely"
+    "examples": [
+      {
+        "en": "My throat is sore from shouting at the game.",
+        "cn": "我的嗓子因为比赛时喊叫而疼痛。"
+      },
+      {
+        "en": "He has a sore knee after running too far.",
+        "cn": "他跑得太远后膝盖酸痛。"
+      }
+    ],
+    "paraphrase": "adj. 疼痛的，酸痛的；n. 痛处，疮"
   },
   "sorrow": {
     "examples": [
@@ -66879,7 +66906,7 @@
         "cn": "论述船用组合启动盘小型化的发展特点,分析了启动盘组成部件的改造和国外产品的技术进展."
       }
     ],
-    "paraphrase": "n.声明，（思想、观点、文章主题等的）表现，（文字）陈述，结算单；vi.（英国）对儿童进行特殊教育评估认定；vt.申请（小孩）有特殊教育需要"
+    "paraphrase": "n. 陈述，声明，报表"
   },
   "statesman": {
     "examples": [],
@@ -67854,7 +67881,7 @@
         "cn": "它提供了写好英文新闻的要诀,及写作手册."
       }
     ],
-    "paraphrase": "n.方式，样式，时髦，仪表，品位；vt.设计，称呼，为…造型；vi.使符合流行式样，用刻刀作装饰画"
+    "paraphrase": "n. 风格，样式，方式；v. 设计，称呼"
   },
   "subconscious": {
     "examples": [],
@@ -68668,8 +68695,17 @@
     "paraphrase": "vi.测量土地；vt.调查，勘测，俯瞰；n.调查（表），调查所，测量，测量部，测量图，概观，检查，鉴定书，环顾"
   },
   "survival": {
-    "examples": [],
-    "paraphrase": "n.幸存，生存，幸存者，遗物，遗风"
+    "examples": [
+      {
+        "en": "The survival of the species depends on the environment.",
+        "cn": "这个物种的生存依赖于环境。"
+      },
+      {
+        "en": "Learning basic survival skills is important for campers.",
+        "cn": "学习基本的生存技能对露营者来说很重要。"
+      }
+    ],
+    "paraphrase": "n. 生存，幸存，残存物"
   },
   "survive": {
     "examples": [
@@ -68847,7 +68883,7 @@
         "cn": "一连串汗流浃背的训练磨练出实力强大的足球队."
       }
     ],
-    "paraphrase": "n.毛衣，运动衫，出汗（过多）的人，发汗剂，榨取别人血汗的人（或工厂、公司等）；adj.运动衫的，运动衫式的"
+    "paraphrase": "n. 毛衣，运动衫"
   },
   "sweep": {
     "examples": [
@@ -69150,7 +69186,7 @@
         "cn": "他不仅才华横溢，而且深受同事的喜爱。"
       }
     ],
-    "paraphrase": "n.天资，才能，天才，人才，塔兰特，古代的一种计量单位，可用来记重量或作为货币单位，<旧，非正式>性感的人"
+    "paraphrase": "n. 天赋，才能，人才"
   },
   "talk": {
     "examples": [],
@@ -69161,8 +69197,17 @@
     "paraphrase": "adj.身材高的，高大的，（数量）大的，（俚）过分的，夸张的；adv.夸大地，趾高气扬地"
   },
   "tame": {
-    "examples": [],
-    "paraphrase": "adj.驯服的，平淡的，无精打采的；v.驯服，抑制"
+    "examples": [
+      {
+        "en": "The zoo has a tame deer that children can pet.",
+        "cn": "动物园里有一只温顺的鹿，孩子们可以抚摸它。"
+      },
+      {
+        "en": "It takes patience to tame a wild horse.",
+        "cn": "驯服一匹野马需要耐心。"
+      }
+    ],
+    "paraphrase": "adj. 驯服的，温顺的；v. 驯化，制服"
   },
   "tan": {
     "examples": [
@@ -69280,8 +69325,17 @@
     "paraphrase": "n.味道，滋味，味觉，风味；vt.& vi.尝，品尝；vt.吃，喝，浅尝；vi.尝味，略进（饮食），（少量地）吃，有某种味道"
   },
   "tax": {
-    "examples": [],
-    "paraphrase": "vt.使负重担，消耗精力，向…征税，责备，谴责；n.税，税额，负担"
+    "examples": [
+      {
+        "en": "The government increased the tax on imported cars.",
+        "cn": "政府提高了进口汽车的税收。"
+      },
+      {
+        "en": "You must pay income tax every year.",
+        "cn": "你必须每年缴纳所得税。"
+      }
+    ],
+    "paraphrase": "n. 税，税款；v. 对…征税，使负重担"
   },
   "taxi": {
     "examples": [
@@ -69332,7 +69386,7 @@
         "cn": "如今的建筑结构复杂，需要建筑师和施工人员密切协作。"
       }
     ],
-    "paraphrase": "n.赶一群牲畜者，卡车驾驶员"
+    "paraphrase": "n. 卡车司机，车队驾驶员"
   },
   "tear": {
     "examples": [
@@ -69591,8 +69645,17 @@
     "paraphrase": "adj.纤弱的，嫩的，温柔的，疼痛的；n.（正式）提出，投标，供应船，联络船，照看者；vt.正式提出，使变脆弱，<古>温柔地对待"
   },
   "tennis": {
-    "examples": [],
-    "paraphrase": "n.网球（运动）"
+    "examples": [
+      {
+        "en": "She plays tennis every Saturday morning.",
+        "cn": "她每周六早上打网球。"
+      },
+      {
+        "en": "Tennis requires a lot of practice and good hand-eye coordination.",
+        "cn": "网球需要大量练习和良好的手眼协调能力。"
+      }
+    ],
+    "paraphrase": "n. 网球"
   },
   "tense": {
     "examples": [
@@ -69889,7 +69952,7 @@
         "cn": "他在自然科学方面是个专家."
       }
     ],
-    "paraphrase": "pron.他们，她们，它们"
+    "paraphrase": "pron. 他们，她们，它们（宾格）"
   },
   "theme": {
     "examples": [
@@ -70169,7 +70232,7 @@
         "cn": "提斯柏偷偷溜了出来,先到达了约会地点."
       }
     ],
-    "paraphrase": "pron.这，这个，这事，这人，这时，下面所说的事；adj.这，这个，刚过去的，即将到来的，今…，本…；adv.这样地，就是这样，这么地"
+    "paraphrase": "pron. 这个；adj. 这"
   },
   "thorn": {
     "examples": [],
@@ -70263,7 +70326,7 @@
         "cn": "我们的军事关系,不威胁任何第三方."
       }
     ],
-    "paraphrase": "n.威胁，恐吓，凶兆"
+    "paraphrase": "n. 威胁，恐吓，凶兆"
   },
   "threaten": {
     "examples": [
@@ -70740,8 +70803,17 @@
     "paraphrase": "n.坟墓，墓穴，墓碑，死亡；v.埋葬"
   },
   "tomorrow": {
-    "examples": [],
-    "paraphrase": "adv.在明天，在明日；n.明天，最近，不远的将来"
+    "examples": [
+      {
+        "en": "I have an important exam tomorrow.",
+        "cn": "我明天有一场重要的考试。"
+      },
+      {
+        "en": "Tomorrow will be a sunny day.",
+        "cn": "明天将会是一个晴天。"
+      }
+    ],
+    "paraphrase": "n. 明天；adv. 在明天"
   },
   "ton": {
     "examples": [
@@ -70999,7 +71071,7 @@
         "cn": "她极温顺."
       }
     ],
-    "paraphrase": "prep.对于，向，为了，接近；adj.即将来到的，进行中的"
+    "paraphrase": "prep. 向，朝，对于，接近"
   },
   "towards": {
     "examples": [],
@@ -71339,8 +71411,17 @@
     "paraphrase": "vt.运送，运输，流放，使欣喜若狂；n.运输，运输船（机），运输系统，狂喜，流放犯"
   },
   "trap": {
-    "examples": [],
-    "paraphrase": "vt.诱骗，使受限制，困住，使（水与气体等）分离；n.圈套，（对付人的）计谋，（练习射击用的）抛靶器，（捕捉动物的）夹子；vi.设陷阱，装捕捉机，设圈套"
+    "examples": [
+      {
+        "en": "The mouse got caught in the trap under the sink.",
+        "cn": "老鼠被水槽下的捕鼠器夹住了。"
+      },
+      {
+        "en": "Be careful not to fall into the same trap again.",
+        "cn": "小心别再掉进同一个陷阱里了。"
+      }
+    ],
+    "paraphrase": "n. 陷阱，圈套；v. 设陷阱捕捉，困住"
   },
   "trash": {
     "examples": [],
@@ -71404,7 +71485,7 @@
         "cn": "有700多万股换手，是通常日平均成交量的3倍。"
       }
     ],
-    "paraphrase": "n.条约，协议，协商，谈判"
+    "paraphrase": "n. 条约，协议，协定"
   },
   "tree": {
     "examples": [],
@@ -71850,8 +71931,17 @@
     "paraphrase": "adj.骚乱的，混乱的，激流的，湍流的，吵闹的，强横的"
   },
   "turkey": {
-    "examples": [],
-    "paraphrase": "n.火鸡，蠢货，失败之作"
+    "examples": [
+      {
+        "en": "We had a large turkey for Thanksgiving dinner.",
+        "cn": "我们感恩节晚餐吃了一只大火鸡。"
+      },
+      {
+        "en": "The farmer raised turkeys on his farm.",
+        "cn": "那个农民在他的农场里饲养火鸡。"
+      }
+    ],
+    "paraphrase": "n. 火鸡，失败之作"
   },
   "turmoil": {
     "examples": [
@@ -72585,7 +72675,7 @@
         "cn": "相当长的察汗多雅奥义书发展了灵魂轮回的观念."
       }
     ],
-    "paraphrase": "adv.在上面，在高处，起床，起来，向上，由低到高；adj.向上的，上升的，竖立的，垂直的，举起的；vt.& vi.增加，加速，提高，举起，拿起；prep.在…的上端，向高处，沿…而去，向…上游；n.上升，升高，兴旺，繁荣，上坡，（价格等）上涨"
+    "paraphrase": "adv. 向上，在上面；adj. 向上的；v. 提高，增加"
   },
   "upbringing": {
     "examples": [
@@ -72994,8 +73084,17 @@
     "paraphrase": "adj.有效的，有法律效力的，正当的，健全的"
   },
   "valley": {
-    "examples": [],
-    "paraphrase": "n.山谷，溪谷，峡谷，谷地，深谷，流域，[建筑]屋顶排水沟，屋面斜沟"
+    "examples": [
+      {
+        "en": "The river flows through a wide valley between two mountains.",
+        "cn": "这条河流经两座山之间的宽阔山谷。"
+      },
+      {
+        "en": "They built a small village in the valley near the forest.",
+        "cn": "他们在森林附近的山谷里建了一个小村庄。"
+      }
+    ],
+    "paraphrase": "n. 山谷，流域"
   },
   "valuable": {
     "examples": [
@@ -73697,7 +73796,7 @@
         "cn": "这个镇子呈现出一片荒凉."
       }
     ],
-    "paraphrase": "n.签证；vt.签发签证"
+    "paraphrase": "n. 签证"
   },
   "visible": {
     "examples": [
@@ -73926,8 +74025,17 @@
     "paraphrase": "adj.（地方）易受攻击的，易受伤的，易受批评的，[桥牌]已成局的"
   },
   "wade": {
-    "examples": [],
-    "paraphrase": "vt.& vi.（从水、泥等）蹚，走过，跋涉；n.跋涉"
+    "examples": [
+      {
+        "en": "We had to wade through the shallow water to reach the island.",
+        "cn": "我们不得不蹚过浅水到达小岛。"
+      },
+      {
+        "en": "She waded into the river to cool off on a hot day.",
+        "cn": "她在炎热的日子里蹚进河里凉快一下。"
+      }
+    ],
+    "paraphrase": "v. 涉水，跋涉"
   },
   "wage": {
     "examples": [
@@ -74310,7 +74418,7 @@
         "cn": "马特软弱无能且依赖性强，但我们照样爱他。"
       }
     ],
-    "paraphrase": "pron.我们，咱们，笔者，本人，朕，人们"
+    "paraphrase": "pron. 我们"
   },
   "weak": {
     "examples": [
@@ -74548,7 +74656,7 @@
         "cn": "实际上, 这不是社会主义, 而是长期的公司福利主义的延伸."
       }
     ],
-    "paraphrase": "n.福利，幸福，繁荣，安宁"
+    "paraphrase": "n. 福利，幸福；adj. 福利的"
   },
   "well": {
     "examples": [],
@@ -74594,7 +74702,7 @@
         "cn": "不管你想聊些什么，我们今晚聊个够。"
       }
     ],
-    "paraphrase": "pron.（用以询问某人或某事物的词）什么，多少，…的事物；adj.…的（事物或人）；adv.（用于感叹句中）；int.（用以表示不相信或惊奇），（用以表示未听清楚对方说的话）"
+    "paraphrase": "pron. 什么；adj. 多么，什么；adv. 在哪方面"
   },
   "whatever": {
     "examples": [],
@@ -74868,7 +74976,7 @@
         "cn": "这本书信集感情真挚，语言坦率，还透着一种顽皮的滑稽。"
       }
     ],
-    "paraphrase": "adj.邪恶的，缺德的，淘气的，顽皮的，恶劣的"
+    "paraphrase": "adj. 邪恶的，恶劣的，极好的"
   },
   "wide": {
     "examples": [
@@ -75259,8 +75367,17 @@
     "paraphrase": "n.木材，树林，木制品；vi.收集木材；vt.在…植树造林，给…添加木柴；adj.木制的，失去理智的"
   },
   "wooden": {
-    "examples": [],
-    "paraphrase": "adj.木制的，木头的，僵硬的，呆板的"
+    "examples": [
+      {
+        "en": "The old bridge was made of wooden planks.",
+        "cn": "这座老桥是用木板建造的。"
+      },
+      {
+        "en": "She placed the wooden bowl on the table.",
+        "cn": "她把木碗放在了桌子上。"
+      }
+    ],
+    "paraphrase": "adj. 木制的，僵硬的，呆板的"
   },
   "wool": {
     "examples": [],

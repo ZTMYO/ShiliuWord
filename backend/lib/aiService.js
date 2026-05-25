@@ -8,7 +8,9 @@ const {
   SYNONYM_PROMPT,
   SYNONYM_SUPPLEMENT_PROMPT,
   FLASHCARD_PROMPT,
-  EXAMPLE_PROMPT
+  EXAMPLE_PROMPT,
+  READING_PROMPT,
+  READING_TITLE_TRANSLATE_PROMPT
 } = require("../config");
 const { normalizeItems, normalizeExamples } = require("./wordService");
 
@@ -22,7 +24,7 @@ function resolveApiKey(personalApiKey = "") {
     return DEEPSEEK_API_KEY;
   }
 
-  throw new Error("当前未配置公共 AI 模型，请先在账号设置中填写个人 API Key");
+  throw new Error("请先在账号设置中填写个人 API Key");
 }
 
 async function requestDeepSeekRaw(prompt, personalApiKey) {
@@ -274,6 +276,80 @@ async function generateExamples(words, personalApiKey) {
   return normalizeExampleMap(parseJsonObject(content));
 }
 
+function normalizeReadingPayload(payload) {
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+    return null;
+  }
+
+  const title = String(payload.title || "").trim();
+  const titleCn = sanitizeReadingChineseText(payload.titleCn || payload.title_cn || "");
+  const sentences = Array.isArray(payload.sentences)
+    ? payload.sentences
+        .map((item) => ({
+          en: sanitizeReadingEnglishText(item?.en),
+          cn: sanitizeReadingChineseText(item?.cn)
+        }))
+        .filter((item) => item.en && item.cn)
+    : [];
+
+  if (!sentences.length) {
+    return null;
+  }
+
+  return {
+    title,
+    titleCn,
+    sentences
+  };
+}
+
+function sanitizeReadingEnglishText(text) {
+  return String(text || "")
+    .replace(/[【\[]\s*([A-Za-z][A-Za-z\s'-]*)\s*[】\]]/g, "$1")
+    .trim();
+}
+
+function sanitizeReadingChineseText(text) {
+  return String(text || "")
+    .replace(/\[([^\[\]]+)\]/g, "【$1】")
+    .trim();
+}
+
+async function translateReadingTitle(title, personalApiKey) {
+  const source = String(title || "").trim();
+  if (!source) {
+    return "";
+  }
+
+  const prompt = READING_TITLE_TRANSLATE_PROMPT.replace("{{title}}", source);
+  return sanitizeReadingChineseText(await requestDeepSeekRaw(prompt, personalApiKey));
+}
+
+async function generateReadingPassage(items, personalApiKey) {
+  const prompt = READING_PROMPT.replace(
+    "{{items}}",
+    JSON.stringify(
+      (Array.isArray(items) ? items : []).map((item) => ({
+        word: item.word,
+        wordCn: item.wordCn,
+        defEn: item.defEn,
+        defCn: item.defCn
+      })),
+      null,
+      2
+    )
+  );
+  const content = await requestDeepSeekRaw(prompt, personalApiKey);
+  const payload = normalizeReadingPayload(parseJsonObject(content));
+  if (!payload) {
+    return null;
+  }
+  if (!payload.titleCn && payload.title) {
+    payload.titleCn = await translateReadingTitle(payload.title, personalApiKey);
+  }
+  return payload;
+}
+
 function normalizeFlashOptionText(value) {
   return String(value || "").trim();
 }
@@ -369,6 +445,7 @@ module.exports = {
   generateSynonyms,
   supplementSynonyms,
   generateExamples,
+  generateReadingPassage,
   generateFlashcardOptions,
   validatePersonalApiKey
 };
