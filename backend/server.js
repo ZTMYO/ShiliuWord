@@ -381,7 +381,7 @@ app.post("/api/history/flash", requireAuth, async (request, response, next) => {
       ok: true
     });
   } catch (error) {
-    if (/百词斩历史缺少 id/.test(error.message || "")) {
+    if (/闪卡刷词历史缺少 id/.test(error.message || "")) {
       response.status(400).json({
         ok: false,
         message: error.message

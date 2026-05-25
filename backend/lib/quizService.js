@@ -20,6 +20,7 @@ const {
   getCachedItems,
   getWordExamples,
   getWordParaphrase,
+  getWordAccent,
   normalizeItems,
   shuffle
 } = require("./wordService");
@@ -70,7 +71,8 @@ async function attachExamples(items, user) {
 
   return items.map((item) => ({
     ...item,
-    examples: getWordExamples(exampleMap[item.word]).slice(0, 2)
+    examples: getWordExamples(exampleMap[item.word]).slice(0, 2),
+    accent: getWordAccent(exampleMap[item.word])
   }));
 }
 
@@ -398,6 +400,7 @@ async function buildFallbackFlashQuestions(items) {
       wordCn: item.wordCn,
       defEn: item.defEn,
       defCn: item.defCn,
+      accent: item.accent || "",
       examples: Array.isArray(item.examples) ? item.examples.slice(0, 2) : [],
       options: ensuredOptions,
       answerIndex: ensuredOptions.findIndex((option) => option.text === correctOption.text)
@@ -458,6 +461,7 @@ async function createFlashQuizBatch(count = 5, user, customWords = null) {
         wordCn: item.wordCn,
         defEn: item.defEn,
         defCn: item.defCn,
+        accent: item.accent || "",
         examples: Array.isArray(item.examples) ? item.examples.slice(0, 2) : [],
         options,
         answerIndex: options.findIndex((option) => option.text === flashItem.correctOption.text)

@@ -265,7 +265,7 @@ async function listFlashHistory(userId) {
 
 async function addFlashHistory(userId, record) {
   if (!record?.id) {
-    throw new Error("百词斩历史缺少 id");
+    throw new Error("闪卡刷词历史缺少 id");
   }
 
   await run(

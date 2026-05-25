@@ -304,6 +304,18 @@ function normalizeParaphrase(value) {
   );
 }
 
+function normalizeAccent(value) {
+  let source = String(value || "").trim();
+  if (!source) {
+    return "";
+  }
+  source = source.replace(/^\/+/, "").replace(/\/+$/, "").trim();
+  if (!source) {
+    return "";
+  }
+  return `/${source}/`;
+}
+
 function normalizeExampleEntry(rawEntry) {
   if (Array.isArray(rawEntry)) {
     const examples = normalizeExampleItems(rawEntry);
@@ -316,15 +328,17 @@ function normalizeExampleEntry(rawEntry) {
 
   const examples = normalizeExampleItems(rawEntry.examples);
   const paraphrase = normalizeParaphrase(rawEntry.paraphrase);
+  const accent = normalizeAccent(rawEntry.accent);
 
-  if (!examples.length && !paraphrase) {
+  if (!examples.length && !paraphrase && !accent) {
     return null;
   }
 
-  return {
-    examples,
-    paraphrase
-  };
+  const entry = { examples, paraphrase };
+  if (accent) {
+    entry.accent = accent;
+  }
+  return entry;
 }
 
 function getWordExamples(entry) {
@@ -333,6 +347,10 @@ function getWordExamples(entry) {
 
 function getWordParaphrase(entry) {
   return normalizeExampleEntry(entry)?.paraphrase || "";
+}
+
+function getWordAccent(entry) {
+  return normalizeExampleEntry(entry)?.accent || "";
 }
 
 function normalizeItems(items) {
@@ -419,7 +437,8 @@ async function mergeWordParaphrases(paraphraseMap, overwriteExisting = false) {
 
     currentMap[word] = {
       examples: currentEntry.examples,
-      paraphrase: entry.paraphrase
+      paraphrase: entry.paraphrase,
+      ...(currentEntry.accent ? { accent: currentEntry.accent } : {})
     };
     changed = true;
   }
@@ -485,10 +504,7 @@ async function mergeWordExamples(exampleMap) {
   let changed = false;
 
   for (const [word, entry] of Object.entries(normalized)) {
-    const currentEntry = normalizeExampleEntry(currentMap[word]) || {
-      examples: [],
-      paraphrase: ""
-    };
+    const currentEntry = normalizeExampleEntry(currentMap[word]) || { examples: [], paraphrase: "" };
 
     let entryChanged = false;
 
@@ -549,6 +565,7 @@ module.exports = {
   getCachedItems,
   getWordExamples,
   getWordParaphrase,
+  getWordAccent,
   readWordExamples,
   writeWordExamples,
   shuffle

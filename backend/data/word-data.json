@@ -1463,5 +1463,330 @@
     "wordCn": "v. 解冻，融化，缓和",
     "defEn": "to cause frozen material to return to a liquid or soft state, or to become less formal or hostile.",
     "defCn": "使冻结的物质恢复液态或柔软状态，或变得不那么正式或敌对。"
+  },
+  "desk": {
+    "wordCn": "n. 书桌，办公桌，服务台",
+    "defEn": "a piece of furniture with a flat surface for writing or working on",
+    "defCn": "一种带有平坦表面的家具，用于书写或办公"
+  },
+  "deceit": {
+    "wordCn": "n. 欺骗，欺诈，诡计",
+    "defEn": "the act of making someone believe something false",
+    "defCn": "故意让人相信不真实的事情的行为"
+  },
+  "refuge": {
+    "wordCn": "n. 避难所，庇护；v. 避难，躲避",
+    "defEn": "a place that provides shelter or protection from danger",
+    "defCn": "一个能提供安全、躲避危险的地方"
+  },
+  "prosperous": {
+    "wordCn": "adj. 繁荣的，兴旺的，成功的",
+    "defEn": "having success, wealth, or good fortune",
+    "defCn": "拥有成功、财富或好运的状态"
+  },
+  "overseas": {
+    "wordCn": "adv. 在海外，向国外；adj. 海外的，国外的",
+    "defEn": "in or to a foreign country across the sea",
+    "defCn": "在或前往海洋另一边的外国"
+  },
+  "failure": {
+    "wordCn": "n. 失败，失败者，失灵，故障",
+    "defEn": "lack of success in achieving a goal",
+    "defCn": "未能达到预期目标或结果的状态"
+  },
+  "confuse": {
+    "wordCn": "v. 使困惑，混淆，搞乱",
+    "defEn": "to cause someone to be unable to think clearly or understand",
+    "defCn": "让人无法清晰思考或分辨事物"
+  },
+  "presently": {
+    "wordCn": "adv. 目前，不久，一会儿",
+    "defEn": "after a short period of time; soon",
+    "defCn": "在很短的时间之后，即将发生"
+  },
+  "proponent": {
+    "wordCn": "n. 支持者，倡导者",
+    "defEn": "a person who argues for or supports something",
+    "defCn": "公开主张或拥护某一观点、计划的人"
+  },
+  "offspring": {
+    "wordCn": "n. 后代，子女，产物",
+    "defEn": "the young or children of a person, animal, or plant",
+    "defCn": "指人类、动物或植物所生育的后代或幼体"
+  },
+  "example": {
+    "wordCn": "n. 例子，榜样，范例",
+    "defEn": "a specific instance or case used to illustrate a general idea",
+    "defCn": "用来解释或证明某个普遍概念的具体事例"
+  },
+  "buy": {
+    "wordCn": "v. 购买，买；n. 购买，便宜货",
+    "defEn": "to obtain something in exchange for money",
+    "defCn": "用钱换取某物的行为"
+  },
+  "fling": {
+    "wordCn": "v. 扔，抛，猛冲；n. 一时的放纵，短暂的风流韵事",
+    "defEn": "to throw or hurl something with force or recklessness",
+    "defCn": "用力或随意地投掷某物"
+  },
+  "shaft": {
+    "wordCn": "n. 轴，杆，箭杆，矿井；v. 欺骗，苛待",
+    "defEn": "a long, narrow, cylindrical part or passage",
+    "defCn": "细长且通常为圆柱形的部件或通道"
+  },
+  "interact": {
+    "wordCn": "v. 互动，相互作用",
+    "defEn": "to act in such a way as to have an effect on each other",
+    "defCn": "双方或多方之间相互影响、彼此反应的过程"
+  },
+  "footstep": {
+    "wordCn": "n. 脚步，脚步声",
+    "defEn": "the sound or mark made by a foot when walking",
+    "defCn": "行走时脚落地发出的声音或留下的痕迹"
+  },
+  "outdated": {
+    "wordCn": "adj. 过时的，陈旧的",
+    "defEn": "no longer in use or fashionable because of being old",
+    "defCn": "因年代久远而不再被使用或不再流行的状态"
+  },
+  "sociology": {
+    "wordCn": "n. 社会学",
+    "defEn": "the study of human society and social behavior",
+    "defCn": "研究人类社会结构、关系及群体行为的学科"
+  },
+  "beautify": {
+    "wordCn": "v. 美化，使美丽",
+    "defEn": "to make something more attractive or beautiful",
+    "defCn": "通过装饰或改善外观使某物变得更好看"
+  },
+  "adhere": {
+    "wordCn": "vi. 粘附，附着",
+    "defEn": "to stick firmly to a surface or substance, often requiring pressure or time.",
+    "defCn": "牢固地贴在或附着在某个表面上，通常需要压力或时间才能粘住。"
+  },
+  "cohere": {
+    "wordCn": "vi. 粘合，凝聚",
+    "defEn": "to stick together as a unified mass, especially of particles or parts.",
+    "defCn": "作为统一的整体粘在一起，尤指颗粒或各部分之间相互结合。"
+  },
+  "bond": {
+    "wordCn": "vi. 粘合，结合",
+    "defEn": "to join or be joined together securely, often through a chemical or physical process.",
+    "defCn": "牢固地连接或结合在一起，常通过化学或物理过程实现。"
+  },
+  "fuse": {
+    "wordCn": "vi. 熔合，融合",
+    "defEn": "to join or blend together by melting or softening, resulting in a single entity.",
+    "defCn": "通过熔化或软化而结合在一起，形成一个整体。"
+  },
+  "blank": {
+    "wordCn": "adj. 空白的，茫然的，完全的；n. 空白，空白处",
+    "defEn": "showing no expression, emotion, or understanding",
+    "defCn": "面部或眼神中没有任何表情、情绪或理解迹象的"
+  },
+  "avert": {
+    "wordCn": "v. 避免，防止，转移（目光、注意力等）",
+    "defEn": "to turn something away, especially one's eyes or thoughts",
+    "defCn": "将目光或思绪从某事物上移开，通常是为了避免看到或想到不愉快的事情"
+  },
+  "valid": {
+    "wordCn": "adj. 有效的，合理的，有根据的",
+    "defEn": "based on truth or reason; able to be accepted",
+    "defCn": "建立在事实或逻辑基础上，因此可以被认可或接受的"
+  },
+  "brake": {
+    "wordCn": "n. 刹车，制动器；v. 刹车",
+    "defEn": "a device for slowing or stopping a moving vehicle",
+    "defCn": "用于降低或停止运动中的车辆速度的机械装置"
+  },
+  "clause": {
+    "wordCn": "n. 从句，分句，条款",
+    "defEn": "a group of words containing a subject and a verb, forming part of a sentence",
+    "defCn": "包含主语和谓语的一组词，作为句子的一部分，不能独立成句"
+  },
+  "miniskirt": {
+    "wordCn": "n. 迷你裙，超短裙",
+    "defEn": "a very short skirt",
+    "defCn": "一种长度远高于膝盖的短裙"
+  },
+  "communication": {
+    "wordCn": "n. 交流，沟通，通讯，传播",
+    "defEn": "the exchange of information or ideas",
+    "defCn": "信息或思想的传递与接收过程"
+  },
+  "rotate": {
+    "wordCn": "v. 旋转，转动，轮换，交替",
+    "defEn": "to turn around a central point",
+    "defCn": "围绕一个中心点做圆周运动"
+  },
+  "city": {
+    "wordCn": "n. 城市，都市",
+    "defEn": "a large and important town",
+    "defCn": "规模大且具有重要地位的人类聚居地"
+  },
+  "tomb": {
+    "wordCn": "n. 坟墓，墓穴",
+    "defEn": "a burial place for a dead body, often above ground",
+    "defCn": "存放死者遗体的地方，常指地面上的墓室"
+  },
+  "analytic": {
+    "wordCn": "adj. 分析的，解析的",
+    "defEn": "relating to or using logical reasoning to examine details",
+    "defCn": "涉及通过逻辑推理仔细检查各个部分或要素的"
+  },
+  "composite": {
+    "wordCn": "adj. 复合的，合成的；n. 合成物",
+    "defEn": "made up of various parts or elements combined together",
+    "defCn": "由多个不同部分或成分组合而成的"
+  },
+  "custom": {
+    "wordCn": "n. 习俗，风俗；adj. 定制的，定做的",
+    "defEn": "a traditional practice or usual way of behaving",
+    "defCn": "一个群体中长期沿袭下来的习惯性行为或做法"
+  },
+  "knowledge": {
+    "wordCn": "n. 知识，学识，了解",
+    "defEn": "facts, information, and skills acquired through experience or education",
+    "defCn": "通过经验或教育获得的事实、信息和技能的总称"
+  },
+  "least": {
+    "wordCn": "adj. 最小的，最少的；adv. 最少地；n. 最小，最少",
+    "defEn": "the smallest amount or degree possible",
+    "defCn": "在数量或程度上可能的最小值"
+  },
+  "elementary": {
+    "wordCn": "adj. 基本的，初级的，简单的",
+    "defEn": "relating to the most simple or basic aspects of a subject",
+    "defCn": "与某个主题最基础、最简单的部分相关的"
+  },
+  "turmoil": {
+    "wordCn": "n. 混乱，骚动，焦虑",
+    "defEn": "a state of great disturbance, confusion, or uncertainty",
+    "defCn": "一种极度动荡、混乱或不确定的局面"
+  },
+  "climax": {
+    "wordCn": "n. 高潮，顶点；v. 达到高潮",
+    "defEn": "the most intense or highest point of something",
+    "defCn": "某个过程或事件中强度最大或最关键的阶段"
+  },
+  "equation": {
+    "wordCn": "n. 方程式，等式，平衡",
+    "defEn": "a statement that two mathematical expressions are equal",
+    "defCn": "表示两个数学量之间相等关系的式子"
+  },
+  "recycle": {
+    "wordCn": "v. 回收利用，再循环",
+    "defEn": "to process used materials so they can be used again",
+    "defCn": "将废弃物品经过处理后重新变成可用资源"
+  },
+  "prestige": {
+    "wordCn": "n. 威望，声望，威信",
+    "defEn": "high respect or admiration earned by achievements or quality",
+    "defCn": "因成就或优秀品质而获得的广泛敬重和认可"
+  },
+  "altitude": {
+    "wordCn": "n. 高度，海拔，高处",
+    "defEn": "the height of an object or point above a reference level",
+    "defCn": "物体或地点相对于某个基准面（如海平面）的垂直距离"
+  },
+  "laughter": {
+    "wordCn": "n. 笑，笑声",
+    "defEn": "the sound or act of laughing",
+    "defCn": "发出笑声的行为或声音"
+  },
+  "juggle": {
+    "wordCn": "v. 玩杂耍，耍弄；n. 杂耍",
+    "defEn": "to keep several objects in the air by tossing and catching them",
+    "defCn": "连续抛接多个物体使其不落地"
+  },
+  "gear": {
+    "wordCn": "n. 齿轮，传动装置；v. 使适应",
+    "defEn": "a toothed wheel that transmits motion or power",
+    "defCn": "带有齿的轮子，用于传递运动或动力"
+  },
+  "ribbon": {
+    "wordCn": "n. 缎带，丝带；v. 用缎带装饰",
+    "defEn": "a narrow strip of fabric used for tying or decoration",
+    "defCn": "细长的布条，用于捆绑或装饰"
+  },
+  "impetus": {
+    "wordCn": "n. 动力，推动力，促进",
+    "defEn": "a force that makes something happen or happen more quickly",
+    "defCn": "促使某事发生或加速进行的推动力量"
+  },
+  "exceed": {
+    "wordCn": "v. 超过，超越，胜过",
+    "defEn": "to go beyond a limit or standard",
+    "defCn": "超出某个界限或规定的范围"
+  },
+  "worthwhile": {
+    "wordCn": "adj. 值得的，有价值的",
+    "defEn": "deserving the time, effort, or money spent",
+    "defCn": "值得投入时间、精力或金钱的"
+  },
+  "transfusion": {
+    "wordCn": "n. 输血，输液",
+    "defEn": "the process of transferring blood into a person's body",
+    "defCn": "将血液输入人体内的医疗过程"
+  },
+  "obedience": {
+    "wordCn": "n. 服从，顺从，遵从",
+    "defEn": "the act of following rules or commands",
+    "defCn": "按照规则或指令行事的行为"
+  },
+  "bureau": {
+    "wordCn": "n. 局，办事处，办公桌",
+    "defEn": "a department or office for specific administrative work",
+    "defCn": "负责特定行政事务的部门或办公机构"
+  },
+  "soil": {
+    "wordCn": "n. 土壤，土地；v. 弄脏，污损",
+    "defEn": "the top layer of earth in which plants grow",
+    "defCn": "地球表面可供植物生长的疏松表层"
+  },
+  "thrill": {
+    "wordCn": "n. 兴奋，激动；v. 使兴奋，使激动",
+    "defEn": "a sudden feeling of excitement and pleasure",
+    "defCn": "一种突然涌起的强烈快感和兴奋感"
+  },
+  "euthanasia": {
+    "wordCn": "n. 安乐死",
+    "defEn": "the practice of ending a life painlessly to relieve suffering",
+    "defCn": "为减轻无法治愈者的痛苦而无痛结束其生命的做法"
+  },
+  "haircut": {
+    "wordCn": "n. 理发，发型",
+    "defEn": "the act of cutting someone's hair",
+    "defCn": "修剪头发的过程或行为"
+  },
+  "model": {
+    "wordCn": "n. 模型，模特，模范；v. 模仿，建模",
+    "defEn": "a representation or example used for imitation or comparison",
+    "defCn": "用于模仿或参照的典型代表或简化表现形式"
+  },
+  "shade": {
+    "wordCn": "n. 阴凉处，遮光物，细微差别；v. 遮蔽，使阴暗",
+    "defEn": "a slight difference or variation",
+    "defCn": "指颜色、意义或性质上很小的区别或变化"
+  },
+  "detrimental": {
+    "wordCn": "adj. 有害的，不利的",
+    "defEn": "causing harm or damage",
+    "defCn": "导致伤害或破坏的，通常指对健康、发展或结果产生负面影响"
+  },
+  "excursion": {
+    "wordCn": "n. 短途旅行，远足，离题",
+    "defEn": "a short trip taken for pleasure",
+    "defCn": "为休闲或娱乐而进行的短暂外出活动，通常当天返回"
+  },
+  "evaporate": {
+    "wordCn": "v. 蒸发，消失，挥发",
+    "defEn": "to change from liquid into vapor",
+    "defCn": "液体受热后转化为气体并消散到空气中的过程"
+  },
+  "habitat": {
+    "wordCn": "n. 栖息地，生长地，居住地",
+    "defEn": "the natural environment where a species lives",
+    "defCn": "某种动植物自然生存和繁衍的特定地理区域或环境条件"
   }
 }

@@ -1,4 +1,4 @@
-﻿import "./style.css";
+import "./style.css";
 const MODE_LABELS = {
   random: "随机词",
   shape: "形近词",
@@ -9,7 +9,7 @@ const HOME_ENTRY_ITEMS = [
   { key: "random", label: "随机词", type: "quiz" },
   { key: "shape", label: "形近词", type: "quiz", requiresAi: true },
   { key: "synonym", label: "近义词", type: "quiz", requiresAi: true },
-  { key: "flash", label: "百词斩", type: "flash" },
+  { key: "flash", label: "闪卡刷词", type: "flash" },
   { key: "reading", label: "阅读训练", type: "reading", requiresAi: true }
 ];
 
@@ -84,6 +84,7 @@ const state = {
   selectedWord: "",
   evaluationResult: null,
   view: "home",
+  homeQuizExpanded: false,
   loading: false,
   loadingPercent: 0,
   loadingTimer: null,
@@ -168,6 +169,9 @@ const elements = {
   flashLoadingPercent: document.querySelector("#flash-loading-percent"),
   flashBoard: document.querySelector("#flash-board"),
   flashWord: document.querySelector("#flash-word"),
+  flashPhonetic: document.querySelector("#flash-phonetic"),
+  flashPrevDivider: document.querySelector("#flash-prev-divider"),
+  flashPrevSummary: document.querySelector("#flash-prev-summary"),
   flashDetail: document.querySelector("#flash-detail"),
   flashOptionList: document.querySelector("#flash-option-list"),
   readingBackHomeBtn: document.querySelector("#reading-back-home-btn"),
@@ -211,6 +215,8 @@ const elements = {
   settingsView: document.querySelector("#settings-view"),
   settingsBackBtn: document.querySelector("#settings-back-btn"),
   settingsUsername: document.querySelector("#settings-username"),
+  settingsAvatarLetter: document.querySelector("#settings-avatar-letter"),
+  settingsAvatarIcon: document.querySelector("#settings-avatar-icon"),
   settingsApiKeyInput: document.querySelector("#settings-api-key-input"),
   settingsApiKeyStatus: document.querySelector("#settings-api-key-status"),
   saveApiKeyBtn: document.querySelector("#save-api-key-btn"),
@@ -577,6 +583,18 @@ async function refreshStoredPersonalApiKeyStatus(apiKey = loadLocalPersonalApiKe
 function renderSessionUi() {
   const username = state.currentUser?.username || "";
   elements.settingsUsername.textContent = username || "-";
+  const firstChar = String(username || "").trim().slice(0, 1);
+  const hasLetter = Boolean(firstChar);
+  if (elements.settingsAvatarLetter) {
+    elements.settingsAvatarLetter.textContent = hasLetter ? firstChar.toUpperCase() : "";
+    elements.settingsAvatarLetter.classList.toggle("is-hidden", !hasLetter);
+  }
+  if (elements.settingsAvatarIcon) {
+    elements.settingsAvatarIcon.classList.toggle("is-hidden", hasLetter);
+  }
+  if (elements.settingsEntryBtn) {
+    elements.settingsEntryBtn.title = username ? `账号设置：${username}` : "账号设置";
+  }
   const localPersonalApiKey = loadLocalPersonalApiKey();
   elements.settingsApiKeyInput.value = localPersonalApiKey;
   renderApiKeyAvailabilityStatus(localPersonalApiKey);
@@ -1034,7 +1052,7 @@ async function clearUserHistory() {
     return;
   }
 
-  const confirmed = window.confirm("确定清空全部刷题记录吗？这会删除匹配历史和百词斩历史，但不会影响收藏夹。");
+  const confirmed = window.confirm("确定清空全部刷题记录吗？这会删除匹配历史和闪卡刷词历史，但不会影响收藏夹。");
   if (!confirmed) {
     return;
   }
@@ -1250,8 +1268,8 @@ function renderHistory() {
       const empty = document.createElement("div");
       empty.className = "history-empty";
       empty.innerHTML = state.historyWrongOnly
-        ? "<p>当前没有答错的百词斩记录。</p><p>关闭筛选后可查看全部历史。</p>"
-        : "<p>还没有百词斩历史。</p><p>先去刷几个单词吧。</p>";
+        ? "<p>当前没有答错的闪卡刷词记录。</p><p>关闭筛选后可查看全部历史。</p>"
+        : "<p>还没有闪卡刷词历史。</p><p>先去刷几个单词吧。</p>";
       elements.historyList.appendChild(empty);
       return;
     }
@@ -1288,7 +1306,7 @@ function renderHistory() {
       container: elements.historyList,
       loadedCount: state.historyVisibleCount,
       totalCount: visibleRecords.length,
-      emptyText: "继续加载百词斩历史",
+      emptyText: "继续加载闪卡刷词历史",
       onVisible: loadMoreHistoryItems,
       observerType: "history"
     });
@@ -1301,7 +1319,7 @@ function renderHistory() {
     empty.innerHTML = state.historyWrongOnly
       ? "<p>当前没有做错的普通刷题记录。</p><p>关闭筛选后可查看全部历史。</p>"
       : state.flashHistoryRecords.length
-        ? "<p>当前没有匹配模式历史。</p><p>如果你刚刷的是百词斩，点右上角切换查看。</p>"
+        ? "<p>当前没有匹配模式历史。</p><p>如果你刚刷的是闪卡刷词，点右上角切换查看。</p>"
         : "<p>还没有刷题记录。</p><p>先去做几道题吧。</p>";
     elements.historyList.appendChild(empty);
     return;
@@ -1635,7 +1653,7 @@ function renderHistorySwitchButton() {
   }
 
   const isFlashSection = state.historySection === "flash";
-  const label = isFlashSection ? "切换普通历史" : "切换百词斩历史";
+  const label = isFlashSection ? "切换普通历史" : "切换闪卡刷词历史";
   elements.flashHistoryBtn.setAttribute("aria-pressed", String(isFlashSection));
   elements.flashHistoryBtn.setAttribute("aria-label", label);
   elements.flashHistoryBtn.setAttribute("title", label);
@@ -1748,7 +1766,7 @@ function renderCollection() {
   if (!state.collection.length) {
     const empty = document.createElement("div");
     empty.className = "history-empty";
-    empty.innerHTML = "<p>还没有收藏单词。</p><p>在百词斩页面点击星星收藏单词吧。</p>";
+    empty.innerHTML = "<p>还没有收藏单词。</p><p>在闪卡刷词页面点击星星收藏单词吧。</p>";
     elements.collectionList.appendChild(empty);
     return;
   }
@@ -1799,7 +1817,7 @@ function renderCollection() {
 
 function startCollectionFlashTraining() {
   if (state.collection.length <= 5) {
-    showToast("收藏夹单词需超过 5 个后才能开始百词斩", "error");
+    showToast("收藏夹单词需超过 5 个后才能开始闪卡刷词", "error");
     return;
   }
   setFlashPreset("collection");
@@ -2195,7 +2213,8 @@ function renderQuizNavButtons() {
 
 function renderFlashNavButtons() {
   elements.flashPrevBtn.disabled = state.flashPast.length === 0;
-  elements.flashNextBtn.disabled = !state.flashCurrent && state.flashQueue.length === 0 && !state.flashFuture.length;
+  const hasNextCandidate = state.flashFuture.length > 0 || state.flashQueue.length > 0 || Boolean(state.flashCurrent);
+  elements.flashNextBtn.disabled = !state.flashCurrent || !state.flashEvaluation || !hasNextCandidate;
   elements.flashPronounceBtn.disabled = !state.flashCurrent;
 }
 
@@ -2349,12 +2368,45 @@ function renderFlashOptions() {
 
 function renderFlashQuestion() {
   elements.flashWord.textContent = state.flashCurrent ? state.flashCurrent.word : "";
+  const flashAccent = state.flashCurrent ? String(state.flashCurrent.accent || "").trim() : "";
+  if (elements.flashPhonetic) {
+    elements.flashPhonetic.textContent = flashAccent;
+    elements.flashPhonetic.classList.toggle("is-hidden", !flashAccent);
+  }
+  renderFlashPrevHeader();
   renderFlashLayoutState();
   renderFlashRevealButton();
   renderFlashDetail();
   renderFlashOptions();
   renderFlashNavButtons();
   renderCollectButton();
+}
+
+function renderFlashPrevHeader() {
+  if (!elements.flashPrevSummary) {
+    return;
+  }
+  const prevSnapshot = state.flashPast.length ? state.flashPast[state.flashPast.length - 1] : null;
+  const prevQuestion = prevSnapshot?.question || null;
+  const prevWord = String(prevQuestion?.word || "").trim();
+  const prevWordCn = String(prevQuestion?.wordCn || "").trim();
+  const shouldShow = Boolean(prevWord);
+  if (elements.flashPrevDivider) {
+    elements.flashPrevDivider.classList.toggle("is-hidden", !shouldShow);
+  }
+  elements.flashPrevSummary.classList.toggle("is-hidden", !shouldShow);
+  if (!shouldShow) {
+    return;
+  }
+  const enNode = elements.flashPrevSummary.querySelector(".flash-prev-en");
+  const cnNode = elements.flashPrevSummary.querySelector(".flash-prev-cn");
+  if (enNode) {
+    enNode.textContent = prevWord;
+  }
+  if (cnNode) {
+    cnNode.textContent = prevWordCn;
+    cnNode.classList.toggle("is-hidden", !prevWordCn);
+  }
 }
 
 function requestReadingExercise(preset = "default") {
@@ -2747,7 +2799,7 @@ async function loadFlashQuestion(options = {}) {
     }
     state.flashLoading = false;
     renderFlashLoadingState();
-    showToast(error.message || "百词斩题目加载失败", "error", 2600);
+    showToast(error.message || "闪卡刷词题目加载失败", "error", 2600);
   }
 }
 
@@ -2810,7 +2862,53 @@ function goToNextQuizQuestion() {
 
 function renderHomeModes() {
   elements.homeModeList.innerHTML = "";
-  HOME_ENTRY_ITEMS.forEach(({ key, label, type, requiresAi = false }) => {
+  const quizItems = HOME_ENTRY_ITEMS.filter((item) => item.type === "quiz");
+  const otherItems = HOME_ENTRY_ITEMS.filter((item) => item.type !== "quiz");
+
+  if (quizItems.length) {
+    const group = document.createElement("details");
+    group.className = "home-mode-group";
+    group.open = Boolean(state.homeQuizExpanded);
+    group.addEventListener("toggle", () => {
+      state.homeQuizExpanded = group.open;
+    });
+
+    const summary = document.createElement("summary");
+    summary.className = "home-mode-btn home-mode-summary";
+    summary.innerHTML = '<span>单词匹配</span><span class="home-mode-caret" aria-hidden="true"></span>';
+    group.appendChild(summary);
+
+    const sublist = document.createElement("div");
+    sublist.className = "home-mode-sublist";
+
+    quizItems.forEach(({ key, label, requiresAi = false }) => {
+      const button = document.createElement("button");
+      button.className = "home-mode-btn home-submode-btn";
+      button.textContent = label;
+      if (requiresAi && state.isAuthenticated && !hasAvailableAiCapability()) {
+        button.setAttribute("title", `未配置 API Key 时，${label}模式暂不可用`);
+        button.setAttribute("aria-disabled", "true");
+      }
+      button.addEventListener("click", () => {
+        if (!requireAuthFromHomeEntry()) {
+          return;
+        }
+        if (requiresAi && !hasAvailableAiCapability()) {
+          showToast(`未配置 API Key，${label}模式暂不可用`, "error");
+          return;
+        }
+        state.mode = key;
+        renderHomeModes();
+        loadQuiz();
+      });
+      sublist.appendChild(button);
+    });
+
+    group.appendChild(sublist);
+    elements.homeModeList.appendChild(group);
+  }
+
+  otherItems.forEach(({ key, label, type, requiresAi = false }) => {
     const button = document.createElement("button");
     button.className = "home-mode-btn";
     button.textContent = label;
@@ -2899,7 +2997,7 @@ function renderQuizHeader() {
   if (!elements.quizTitle) {
     return;
   }
-  elements.quizTitle.textContent = `${MODE_LABELS[state.mode] || "匹配"}模式`;
+  elements.quizTitle.textContent = `单词匹配-${MODE_LABELS[state.mode] || "随机词"}`;
 }
 
 function renderQuestions() {
@@ -3003,6 +3101,8 @@ function renderResults() {
           )
           .join("")
       : '<div class="example-item"><p>当前暂无本地例句。</p></div>';
+    const accentText = String(item.accent || "").trim();
+    const accentHtml = accentText ? `<p class="result-phonetic">${escapeHtml(accentText)}</p>` : "";
 
     const section = document.createElement("section");
     section.className = "result-item";
@@ -3014,6 +3114,7 @@ function renderResults() {
           ${createInlineCollectButton(item.word, item.wordCn, "result-collect-btn")}
         </span>
       </div>
+      ${accentHtml}
       <p>${item.wordCn}</p>
       <p>${item.defCn}</p>
       <p class="result-def-en">${item.defEn}</p>

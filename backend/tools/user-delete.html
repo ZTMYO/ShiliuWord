@@ -149,7 +149,7 @@
     <main class="page">
       <section class="panel">
         <h1>用户删除工具</h1>
-        <p class="intro">这个页面只做一件事：查看用户并删除某个用户。删除 `users` 表记录后，关联的收藏、匹配历史、百词斩历史会一起级联删除。</p>
+        <p class="intro">这个页面只做一件事：查看用户并删除某个用户。删除 `users` 表记录后，关联的收藏、匹配历史、闪卡刷词历史会一起级联删除。</p>
         <div class="toolbar">
           <button id="refresh-btn" class="ghost-btn" type="button">刷新列表</button>
           <span id="status" class="status">加载中...</span>
@@ -200,7 +200,7 @@
               <p class="user-name">${user.username}</p>
               <p class="user-meta">ID: ${user.id} · 注册时间: ${formatTime(user.createdAt)}</p>
               <p class="user-counts">
-                收藏 ${user.collectionCount} 条 · 匹配历史 ${user.quizHistoryCount} 条 · 百词斩历史 ${user.flashHistoryCount} 条
+                收藏 ${user.collectionCount} 条 · 匹配历史 ${user.quizHistoryCount} 条 · 闪卡刷词历史 ${user.flashHistoryCount} 条
               </p>
             </div>
             <button class="danger-btn" type="button" data-user-id="${user.id}" data-username="${user.username}">
