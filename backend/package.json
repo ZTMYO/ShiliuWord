@@ -4,8 +4,6 @@
   "private": true,
   "main": "server.js",
   "scripts": {
-    "extract:book": "node scripts/extract-source-words.js",
-    "extract:examples": "node scripts/extract-examples.js",
     "dev": "node server.js",
     "start": "node server.js",
     "user-delete": "node tools/user-delete-server.js"

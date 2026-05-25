@@ -7,13 +7,15 @@ const {
   SESSION_COOKIE_NAME,
   SESSION_TTL_HOURS
 } = require("./config");
-const { ensureDataFiles } = require("./lib/wordService");
+const { ensureDataFiles, listWordBooks, readAllBookWords, readWordExamples, readWordCache } = require("./lib/wordService");
 const { getDatabase } = require("./lib/db");
+const { get } = require("./lib/db");
 const {
   createUser,
   verifyUserCredentials,
   findUserById,
   formatSafeUser,
+  updateUserBook,
   listCollection,
   addCollectionItem,
   removeCollectionItem,
@@ -276,6 +278,91 @@ app.post("/api/user/api-key/validate", requireAuth, async (request, response, ne
     response.json({
       ok: true,
       ...result
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.get("/api/stats", async (request, response, next) => {
+  try {
+    const [books, exampleMap, wordCache, userCountRow] = await Promise.all([
+      listWordBooks(),
+      readWordExamples(),
+      readWordCache(),
+      get("SELECT COUNT(1) AS count FROM users")
+    ]);
+
+    const uniqueWordsInBooks = (await readAllBookWords()).length;
+
+    let examplePairCount = 0;
+    let accentedCount = 0;
+    for (const entry of Object.values(exampleMap || {})) {
+      const normalizedEntry = Array.isArray(entry) ? { examples: entry, paraphrase: "" } : entry;
+      const examples = Array.isArray(normalizedEntry?.examples) ? normalizedEntry.examples : [];
+      if (examples.length) {
+        examplePairCount += examples.length;
+      }
+      if (normalizedEntry?.accent) {
+        accentedCount += 1;
+      }
+    }
+
+    response.json({
+      ok: true,
+      words: {
+        uniqueWordsInBooks,
+        bookCount: Array.isArray(books) ? books.length : 0,
+        cachedDefinitionCount: Object.keys(wordCache || {}).length
+      },
+      examples: {
+        examplePairCount,
+        accentedEntryCount: accentedCount
+      },
+      users: {
+        registeredUsers: Number(userCountRow?.count || 0)
+      }
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.get("/api/user/book", requireAuth, async (request, response, next) => {
+  try {
+    response.json({
+      ok: true,
+      bookId: request.auth.user.bookId
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.post("/api/user/book", requireAuth, async (request, response, next) => {
+  try {
+    const user = await updateUserBook(request.auth.user.id, request.body?.bookId);
+    response.json({
+      ok: true,
+      user: formatSafeUser(user)
+    });
+  } catch (error) {
+    if (/词书参数不合法/.test(error.message || "")) {
+      response.status(400).json({
+        ok: false,
+        message: error.message
+      });
+      return;
+    }
+    next(error);
+  }
+});
+
+app.get("/api/books", requireAuth, async (request, response, next) => {
+  try {
+    response.json({
+      ok: true,
+      books: await listWordBooks()
     });
   } catch (error) {
     next(error);

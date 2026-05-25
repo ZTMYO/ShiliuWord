@@ -1,5 +1,7 @@
+const { WORD_BOOKS } = require("../config");
 const { generateForWords, generateReadingPassage } = require("./aiService");
 const {
+  readBookWords,
   readWordCache,
   readWordExamples,
   mergeCacheItems,
@@ -8,17 +10,27 @@ const {
   getCachedItems
 } = require("./wordService");
 
-function hasAiSupport(personalApiKey = "") {
-  const normalizedPersonalApiKey = String(personalApiKey || "").trim();
+function hasAiSupport(auth) {
+  const normalizedPersonalApiKey = String(auth?.personalApiKey || "").trim();
   return Boolean(normalizedPersonalApiKey);
 }
 
-async function resolveReadingItems(words, user) {
+function getBookNameById(bookId) {
+  const normalizedBookId = Math.max(1, Number(bookId || 0));
+  return (Array.isArray(WORD_BOOKS) ? WORD_BOOKS : []).find((book) => Number(book?.id) === normalizedBookId)?.name || "";
+}
+
+function isReadingCandidate(word) {
+  const normalized = String(word || "").trim().toLowerCase();
+  return normalized.length >= 3;
+}
+
+async function resolveReadingItems(words, auth) {
   const targetWords = [...new Set(
     words
       .map((word) => String(word || "").trim().toLowerCase())
       .filter(Boolean)
-  )];
+  )].filter(isReadingCandidate);
   const cache = await readWordCache();
   const cachedItems = getCachedItems(targetWords, cache);
   const cachedWordSet = new Set(cachedItems.map((item) => item.word));
@@ -28,7 +40,7 @@ async function resolveReadingItems(words, user) {
   for (let attempt = 0; attempt < 2 && remainingWords.length > 0; attempt += 1) {
     try {
       const requestedSet = new Set(remainingWords);
-      const batch = normalizeItems(await generateForWords(remainingWords, user)).filter((item) =>
+      const batch = normalizeItems(await generateForWords(remainingWords, auth?.personalApiKey, { bookName: getBookNameById(auth?.bookId) })).filter((item) =>
         requestedSet.has(item.word)
       );
       if (!batch.length) {
@@ -49,17 +61,17 @@ async function resolveReadingItems(words, user) {
   return [...cachedItems, ...freshItems];
 }
 
-async function createReadingExercise(user, customWords = null) {
-  if (!hasAiSupport(user)) {
+async function createReadingExercise(auth, customWords = null) {
+  if (!hasAiSupport(auth)) {
     throw new Error("当前未配置 API Key，阅读训练暂不可用");
   }
 
-  const cache = await readWordCache();
   const wordPool = (Array.isArray(customWords) && customWords.length
     ? customWords
-    : Object.keys(cache))
+    : await readBookWords(auth?.bookId))
     .map((word) => String(word || "").trim().toLowerCase())
-    .filter(Boolean);
+    .filter(Boolean)
+    .filter(isReadingCandidate);
 
   if (wordPool.length < 6) {
     throw new Error("本地词库不足，暂时无法生成阅读训练");
@@ -67,14 +79,14 @@ async function createReadingExercise(user, customWords = null) {
 
   const targetCount = Math.min(wordPool.length, 10);
   const pickedWords = pickRandomWords(wordPool, targetCount);
-  const items = await resolveReadingItems(pickedWords, user);
+  const items = await resolveReadingItems(pickedWords, auth);
   const exampleMap = await readWordExamples();
 
   if (items.length < 6) {
     throw new Error("可用词义不足，暂时无法生成阅读训练");
   }
 
-  const passage = await generateReadingPassage(items, user);
+  const passage = await generateReadingPassage(items, auth?.personalApiKey, { bookName: getBookNameById(auth?.bookId) });
   if (!passage) {
     throw new Error("阅读训练生成失败，请稍后再试");
   }

@@ -18,7 +18,13 @@ router.get("/", async (request, response, next) => {
       }
     }
 
-    const result = await createReadingExercise(request.auth?.personalApiKey, customWords);
+    const result = await createReadingExercise(
+      {
+        personalApiKey: request.auth?.personalApiKey,
+        bookId: request.auth?.user?.bookId
+      },
+      customWords
+    );
     response.json({
       mode: "reading",
       preset: preset || "default",

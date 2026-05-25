@@ -12,6 +12,16 @@ const {
 } = require("../config");
 const { normalizeItems, normalizeExamples } = require("./wordService");
 
+function normalizeBookName(bookName) {
+  const normalized = String(bookName || "").trim();
+  return normalized;
+}
+
+function applyBookContext(prompt, bookName) {
+  const normalizedBookName = normalizeBookName(bookName);
+  return String(prompt || "").replaceAll("{{bookName}}", normalizedBookName);
+}
+
 function resolveApiKey(personalApiKey = "") {
   const normalizedPersonalApiKey = String(personalApiKey || "").trim();
   if (normalizedPersonalApiKey) {
@@ -152,8 +162,11 @@ function parseRawJsonArray(content) {
   }
 }
 
-async function generateForWords(words, personalApiKey) {
-  const prompt = RANDOM_OR_SHAPE_PROMPT.replace("{{words}}", words.join(", "));
+async function generateForWords(words, personalApiKey, options = {}) {
+  const prompt = applyBookContext(
+    RANDOM_OR_SHAPE_PROMPT.replace("{{words}}", words.join(", ")),
+    options?.bookName
+  );
   return requestDeepSeek(prompt, personalApiKey);
 }
 
@@ -189,16 +202,20 @@ async function parseSynonymPayload(prompt, personalApiKey) {
   };
 }
 
-async function generateSynonyms(anchorWords = [], personalApiKey) {
+async function generateSynonyms(anchorWords = [], personalApiKey, options = {}) {
   const anchorText = normalizeAnchorText(anchorWords);
-  const prompt = SYNONYM_PROMPT.replace("{{anchors}}", anchorText || "common postgraduate English vocabulary");
+  const prompt = applyBookContext(
+    SYNONYM_PROMPT.replace("{{anchors}}", anchorText || "common English vocabulary"),
+    options?.bookName
+  );
   return parseSynonymPayload(prompt, personalApiKey);
 }
 
-async function supplementSynonyms(anchorWords = [], existingItems = [], missingCount = 0, personalApiKey) {
+async function supplementSynonyms(anchorWords = [], existingItems = [], missingCount = 0, personalApiKey, options = {}) {
   const anchorText = normalizeAnchorText(anchorWords);
-  const prompt = SYNONYM_SUPPLEMENT_PROMPT
-    .replace("{{anchors}}", anchorText || "common postgraduate English vocabulary")
+  const prompt = applyBookContext(
+    SYNONYM_SUPPLEMENT_PROMPT
+    .replace("{{anchors}}", anchorText || "common English vocabulary")
     .replace("{{missingCount}}", String(Math.max(0, Number(missingCount) || 0)))
     .replace(
       "{{existingItems}}",
@@ -212,7 +229,9 @@ async function supplementSynonyms(anchorWords = [], existingItems = [], missingC
         null,
         2
       )
-    );
+    ),
+    options?.bookName
+  );
   return parseSynonymPayload(prompt, personalApiKey);
 }
 
@@ -264,8 +283,11 @@ function normalizeExampleMap(exampleMap) {
   return normalized;
 }
 
-async function generateExamples(words, personalApiKey) {
-  const prompt = EXAMPLE_PROMPT.replace("{{words}}", words.join(", "));
+async function generateExamples(words, personalApiKey, options = {}) {
+  const prompt = applyBookContext(
+    EXAMPLE_PROMPT.replace("{{words}}", words.join(", ")),
+    options?.bookName
+  );
   const content = await requestDeepSeekRaw(prompt, personalApiKey);
   return normalizeExampleMap(parseJsonObject(content));
 }
@@ -317,34 +339,40 @@ function sanitizeReadingChineseText(text) {
     .trim();
 }
 
-async function translateReadingTitle(title, personalApiKey) {
+async function translateReadingTitle(title, personalApiKey, options = {}) {
   const source = String(title || "").trim();
   if (!source) {
     return "";
   }
 
-  const prompt = READING_TITLE_TRANSLATE_PROMPT.replace("{{title}}", source);
+  const prompt = applyBookContext(
+    READING_TITLE_TRANSLATE_PROMPT.replace("{{title}}", source),
+    options?.bookName
+  );
   return sanitizeReadingChineseText(await requestDeepSeekRaw(prompt, personalApiKey));
 }
 
-async function generateReadingPassage(items, personalApiKey) {
+async function generateReadingPassage(items, personalApiKey, options = {}) {
   const availableWords = new Set(
     (Array.isArray(items) ? items : [])
       .map((item) => String(item?.word || "").trim().toLowerCase())
       .filter(Boolean)
   );
-  const prompt = READING_PROMPT.replace(
-    "{{items}}",
-    JSON.stringify(
-      (Array.isArray(items) ? items : []).map((item) => ({
-        word: item.word,
-        wordCn: item.wordCn,
-        defEn: item.defEn,
-        defCn: item.defCn
-      })),
-      null,
-      2
-    )
+  const prompt = applyBookContext(
+    READING_PROMPT.replace(
+      "{{items}}",
+      JSON.stringify(
+        (Array.isArray(items) ? items : []).map((item) => ({
+          word: item.word,
+          wordCn: item.wordCn,
+          defEn: item.defEn,
+          defCn: item.defCn
+        })),
+        null,
+        2
+      )
+    ),
+    options?.bookName
   );
   const content = await requestDeepSeekRaw(prompt, personalApiKey);
   const payload = normalizeReadingPayload(parseJsonObject(content));
@@ -355,7 +383,7 @@ async function generateReadingPassage(items, personalApiKey) {
     payload.selectedWords = payload.selectedWords.filter((word) => availableWords.has(word));
   }
   if (!payload.titleCn && payload.title) {
-    payload.titleCn = await translateReadingTitle(payload.title, personalApiKey);
+    payload.titleCn = await translateReadingTitle(payload.title, personalApiKey, { bookName: options?.bookName });
   }
   return payload;
 }
@@ -500,19 +528,22 @@ function normalizeFlashQuestions(rawItems, targetWords = []) {
     });
 }
 
-async function generateFlashcardOptions(items, personalApiKey) {
-  const prompt = FLASHCARD_PROMPT.replace(
-    "{{items}}",
-    JSON.stringify(
-      (Array.isArray(items) ? items : []).map((item) => ({
-        word: item.word,
-        wordCn: item.wordCn,
-        defEn: item.defEn,
-        defCn: item.defCn
-      })),
-      null,
-      2
-    )
+async function generateFlashcardOptions(items, personalApiKey, options = {}) {
+  const prompt = applyBookContext(
+    FLASHCARD_PROMPT.replace(
+      "{{items}}",
+      JSON.stringify(
+        (Array.isArray(items) ? items : []).map((item) => ({
+          word: item.word,
+          wordCn: item.wordCn,
+          defEn: item.defEn,
+          defCn: item.defCn
+        })),
+        null,
+        2
+      )
+    ),
+    options?.bookName
   );
   const content = await requestDeepSeekRaw(prompt, personalApiKey);
   return normalizeFlashQuestions(

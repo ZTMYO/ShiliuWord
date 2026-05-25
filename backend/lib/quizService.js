@@ -1,4 +1,4 @@
-const { USE_MOCK_DATA } = require("../config");
+const { USE_MOCK_DATA, WORD_BOOKS } = require("../config");
 const {
   generateForWords,
   generateSynonyms,
@@ -7,8 +7,7 @@ const {
   generateFlashcardOptions
 } = require("./aiService");
 const {
-  readSourceWords,
-  appendSourceWords,
+  readBookWords,
   readWordCache,
   readWordExamples,
   pickRandomWords,
@@ -25,32 +24,60 @@ const {
   shuffle
 } = require("./wordService");
 
-function hasAiSupport(personalApiKey = "") {
-  const normalizedPersonalApiKey = String(personalApiKey || "").trim();
+function hasAiSupport(auth) {
+  const normalizedPersonalApiKey = String(auth?.personalApiKey || "").trim();
   return Boolean(normalizedPersonalApiKey);
 }
 
-async function getLocalWordPool() {
+function getBookNameById(bookId) {
+  const normalizedBookId = Math.max(1, Number(bookId || 0));
+  return (Array.isArray(WORD_BOOKS) ? WORD_BOOKS : []).find((book) => Number(book?.id) === normalizedBookId)?.name || "";
+}
+
+function normalizeWordKey(word) {
+  return String(word || "").trim().toLowerCase();
+}
+
+async function buildLocalWordPools(auth) {
+  const bookWords = await readBookWords(auth?.bookId);
   const cache = await readWordCache();
-  return Object.keys(cache)
-    .map((word) => String(word || "").trim().toLowerCase())
-    .filter(Boolean);
+  const cachedWords = [...new Set(Object.keys(cache).map(normalizeWordKey).filter(Boolean))];
+  const cacheWordSet = new Set(cachedWords);
+  const preferredWords = bookWords.filter((word) => cacheWordSet.has(word));
+  const preferredSet = new Set(preferredWords);
+  const fallbackWords = cachedWords.filter((word) => !preferredSet.has(word));
+
+  return {
+    bookWords,
+    preferredWords,
+    fallbackWords,
+    allWords: [...preferredWords, ...fallbackWords]
+  };
 }
 
-async function getQuizWordPool(user) {
-  if (!hasAiSupport(user)) {
-    return getLocalWordPool();
+async function pickLocalWordsPreferBook(auth, count = 5) {
+  const targetCount = Math.max(1, Number(count) || 5);
+  const pools = await buildLocalWordPools(auth);
+  const pickedPreferred = shuffle(pools.preferredWords).slice(0, targetCount);
+  if (pickedPreferred.length >= targetCount) {
+    return pickedPreferred;
   }
 
-  const sourceWords = await readSourceWords();
-  if (sourceWords.length) {
-    return sourceWords;
-  }
-
-  return getLocalWordPool();
+  const needed = targetCount - pickedPreferred.length;
+  return [...pickedPreferred, ...shuffle(pools.fallbackWords).slice(0, needed)];
 }
 
-async function attachExamples(items, user) {
+async function getQuizWordPool(auth) {
+  const bookWords = await readBookWords(auth?.bookId);
+  if (hasAiSupport(auth)) {
+    return bookWords;
+  }
+
+  const pools = await buildLocalWordPools(auth);
+  return pools.allWords;
+}
+
+async function attachExamples(items, auth) {
   let exampleMap = await readWordExamples();
   const missingWords = [...new Set(
     items
@@ -58,9 +85,9 @@ async function attachExamples(items, user) {
       .filter((word) => word && !getWordExamples(exampleMap[word]).length)
   )];
 
-  if (missingWords.length && !USE_MOCK_DATA && hasAiSupport(user)) {
+  if (missingWords.length && !USE_MOCK_DATA && hasAiSupport(auth)) {
     try {
-      const generatedMap = await generateExamples(missingWords, user);
+      const generatedMap = await generateExamples(missingWords, auth?.personalApiKey, { bookName: getBookNameById(auth?.bookId) });
       if (Object.keys(generatedMap).length) {
         exampleMap = await mergeWordExamples(generatedMap);
       }
@@ -76,7 +103,7 @@ async function attachExamples(items, user) {
   }));
 }
 
-async function resolveItemsForWords(words, user) {
+async function resolveItemsForWords(words, auth) {
   const targetWords = [...new Set(words.map((word) => String(word || "").trim().toLowerCase()))].slice(0, 5);
   const cache = await readWordCache();
   const cachedItems = getCachedItems(targetWords, cache);
@@ -89,11 +116,11 @@ async function resolveItemsForWords(words, user) {
   if (remainingWords.length > 0) {
     if (USE_MOCK_DATA) {
       freshItems = buildMockItems(Math.max(0, 5 - cachedItems.length), cachedItems.map((item) => item.word));
-    } else if (hasAiSupport(user)) {
+    } else if (hasAiSupport(auth)) {
       for (let attempt = 0; attempt < 2 && remainingWords.length > 0; attempt += 1) {
         try {
           const requestedSet = new Set(remainingWords);
-          const batch = normalizeItems(await generateForWords(remainingWords, user)).filter((item) =>
+          const batch = normalizeItems(await generateForWords(remainingWords, auth?.personalApiKey, { bookName: getBookNameById(auth?.bookId) })).filter((item) =>
             requestedSet.has(item.word)
           );
           const batchWordSet = new Set(batch.map((item) => item.word));
@@ -111,49 +138,51 @@ async function resolveItemsForWords(words, user) {
     }
   }
 
-  return attachExamples(shuffle([...cachedItems, ...freshItems]).slice(0, 5), user);
+  return attachExamples(shuffle([...cachedItems, ...freshItems]).slice(0, 5), auth);
 }
 
-async function createRandomQuiz(user) {
-  const wordPool = await getQuizWordPool(user);
+async function createRandomQuiz(auth) {
+  const wordPool = await getQuizWordPool(auth);
   if (wordPool.length < 5) {
     return {
-      items: await attachExamples(shuffle(pickMockSynonymItems(5)), user),
+      items: await attachExamples(shuffle(pickMockSynonymItems(5)), auth),
       source: "mock",
       note: "词库未准备完成，当前使用预置演示数据。"
     };
   }
 
   for (let attempt = 0; attempt < 3; attempt += 1) {
-    const pickedWords = pickRandomWords(wordPool, 5);
+    const pickedWords = (!USE_MOCK_DATA && !hasAiSupport(auth))
+      ? await pickLocalWordsPreferBook(auth, 5)
+      : pickRandomWords(wordPool, 5);
     if (pickedWords.length < 5) {
       continue;
     }
-    const items = await resolveItemsForWords(pickedWords, user);
+    const items = await resolveItemsForWords(pickedWords, auth);
     if (items.length === 5) {
       return {
         items,
-        source: USE_MOCK_DATA ? "mock" : hasAiSupport(user) ? "ai" : "local"
+        source: USE_MOCK_DATA ? "mock" : hasAiSupport(auth) ? "ai" : "local"
       };
     }
   }
 
   return {
-    items: await attachExamples(shuffle(pickMockSynonymItems(5)), user),
+    items: await attachExamples(shuffle(pickMockSynonymItems(5)), auth),
     source: "mock",
     note: "AI 返回结果不完整，当前回退到演示数据。"
   };
 }
 
-async function createShapeQuiz(user) {
-  if (!USE_MOCK_DATA && !hasAiSupport(user)) {
+async function createShapeQuiz(auth) {
+  if (!USE_MOCK_DATA && !hasAiSupport(auth)) {
     throw new Error("当前未配置 API Key，形近词模式暂不可用");
   }
 
-  const wordPool = await getQuizWordPool(user);
+  const wordPool = await getQuizWordPool(auth);
   if (wordPool.length < 5) {
     return {
-      items: await attachExamples(shuffle(pickMockSynonymItems(5)), user),
+      items: await attachExamples(shuffle(pickMockSynonymItems(5)), auth),
       source: "mock",
       note: "形近词模式暂用演示数据，待词库补充后自动启用真实筛选。"
     };
@@ -164,29 +193,29 @@ async function createShapeQuiz(user) {
     if (pickedWords.length < 5) {
       continue;
     }
-    const items = await resolveItemsForWords(pickedWords, user);
+    const items = await resolveItemsForWords(pickedWords, auth);
     if (items.length === 5) {
       return {
         items,
-        source: USE_MOCK_DATA ? "mock" : hasAiSupport(user) ? "ai" : "local"
+        source: USE_MOCK_DATA ? "mock" : hasAiSupport(auth) ? "ai" : "local"
       };
     }
   }
 
   return {
-    items: await attachExamples(shuffle(pickMockSynonymItems(5)), user),
+    items: await attachExamples(shuffle(pickMockSynonymItems(5)), auth),
     source: "mock",
     note: "形近词结果不完整，当前回退到演示数据。"
   };
 }
 
-async function createSynonymQuiz(user) {
-  if (!USE_MOCK_DATA && !hasAiSupport(user)) {
+async function createSynonymQuiz(auth) {
+  if (!USE_MOCK_DATA && !hasAiSupport(auth)) {
     throw new Error("当前未配置 API Key，近义词模式暂不可用");
   }
 
-  const sourceWords = await readSourceWords();
-  const anchorWords = pickRandomWords(sourceWords, 3);
+  const wordPool = await readBookWords(auth?.bookId);
+  const anchorWords = pickRandomWords(wordPool, 3);
 
   let items = [];
   let shouldPersistItems = false;
@@ -195,14 +224,14 @@ async function createSynonymQuiz(user) {
     items = pickMockSynonymItems(5);
   } else {
     try {
-      let synonymPayload = await generateSynonyms(anchorWords, user);
+      let synonymPayload = await generateSynonyms(anchorWords, auth?.personalApiKey, { bookName: getBookNameById(auth?.bookId) });
       items = synonymPayload.items;
       if (Object.keys(synonymPayload.examples || {}).length) {
         await mergeWordExamples(synonymPayload.examples);
       }
 
       for (let attempt = 0; attempt < 2 && items.length > 0 && items.length < 5; attempt += 1) {
-        const supplementPayload = await supplementSynonyms(anchorWords, items, 5 - items.length, user);
+        const supplementPayload = await supplementSynonyms(anchorWords, items, 5 - items.length, auth?.personalApiKey, { bookName: getBookNameById(auth?.bookId) });
         items = normalizeItems([...items, ...supplementPayload.items]);
         if (Object.keys(supplementPayload.examples || {}).length) {
           await mergeWordExamples(supplementPayload.examples);
@@ -220,14 +249,13 @@ async function createSynonymQuiz(user) {
 
   if (shouldPersistItems) {
     await mergeCacheItems(items);
-    await appendSourceWords(items.map((item) => item.word));
   }
 
   return {
-    items: await attachExamples(shuffle(items).slice(0, 5), user),
+    items: await attachExamples(shuffle(items).slice(0, 5), auth),
     source: USE_MOCK_DATA ? "mock" : "ai",
     anchorWords,
-    note: sourceWords.length
+    note: wordPool.length
       ? `近义词模式会围绕基准词 ${anchorWords.join(" / ") || "当前词库"} 生成同一语义片区的题目；若首次结果不足 5 个，会自动补全后再返回。`
       : "词库未准备时，近义词模式仍可正常出题，并自动补全词义与例句缓存。"
   };
@@ -408,7 +436,7 @@ async function buildFallbackFlashQuestions(items) {
   });
 }
 
-async function createFlashQuizBatch(count = 5, user, customWords = null) {
+async function createFlashQuizBatch(count = 5, auth, customWords = null) {
   const requestedBatchSize = Math.max(3, Number(count) || 5);
   const customWordPool = Array.isArray(customWords)
     ? [...new Set(
@@ -417,15 +445,17 @@ async function createFlashQuizBatch(count = 5, user, customWords = null) {
           .filter(Boolean)
       )]
     : [];
-  const wordPool = customWordPool.length ? customWordPool : await getQuizWordPool(user);
+  const wordPool = customWordPool.length ? customWordPool : await getQuizWordPool(auth);
   const batchSize = Math.min(8, requestedBatchSize, wordPool.length || requestedBatchSize);
   const pickedWords = wordPool.length >= batchSize
-    ? pickRandomWords(wordPool, batchSize)
+    ? (customWordPool.length || USE_MOCK_DATA || hasAiSupport(auth)
+        ? pickRandomWords(wordPool, batchSize)
+        : await pickLocalWordsPreferBook(auth, batchSize))
     : pickMockSynonymItems(batchSize).map((item) => item.word);
 
-  let items = await resolveItemsForWords(pickedWords, user);
+  let items = await resolveItemsForWords(pickedWords, auth);
   if (!items.length) {
-    items = await attachExamples(shuffle(pickMockSynonymItems(batchSize)), user);
+    items = await attachExamples(shuffle(pickMockSynonymItems(batchSize)), auth);
   }
 
   const normalizedItems = items.slice(0, batchSize);
@@ -439,9 +469,9 @@ async function createFlashQuizBatch(count = 5, user, customWords = null) {
 
   let flashPayload = [];
 
-  if (!USE_MOCK_DATA && hasAiSupport(user)) {
+  if (!USE_MOCK_DATA && hasAiSupport(auth)) {
     try {
-      flashPayload = await generateFlashcardOptions(normalizedItems, user);
+      flashPayload = await generateFlashcardOptions(normalizedItems, auth?.personalApiKey, { bookName: getBookNameById(auth?.bookId) });
     } catch {
       flashPayload = [];
     }
@@ -475,7 +505,7 @@ async function createFlashQuizBatch(count = 5, user, customWords = null) {
 
   return {
     questions: safeQuestions,
-    source: USE_MOCK_DATA ? "mock" : hasAiSupport(user) ? (flashPayload.length ? "ai" : "fallback") : "local"
+    source: USE_MOCK_DATA ? "mock" : hasAiSupport(auth) ? (flashPayload.length ? "ai" : "fallback") : "local"
   };
 }
 

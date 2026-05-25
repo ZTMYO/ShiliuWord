@@ -19,7 +19,14 @@ router.get("/", async (request, response, next) => {
       }
     }
 
-    const result = await createFlashQuizBatch(count, request.auth?.personalApiKey, customWords);
+    const result = await createFlashQuizBatch(
+      count,
+      {
+        personalApiKey: request.auth?.personalApiKey,
+        bookId: request.auth?.user?.bookId
+      },
+      customWords
+    );
     response.json({
       mode: "flash",
       preset: preset || "default",

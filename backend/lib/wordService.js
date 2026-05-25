@@ -1,22 +1,25 @@
 const fs = require("fs/promises");
 const {
-  SOURCE_WORD_FILE,
+  WORD_BOOK_DIR,
+  WORD_BOOKS,
+  DEFAULT_BOOK_ID,
   WORD_CACHE_FILE,
   WORD_EXAMPLE_FILE,
   DEMO_ITEMS
 } = require("../config");
 
 async function ensureDataFiles() {
-  await fs.mkdir(require("path").dirname(SOURCE_WORD_FILE), { recursive: true });
-
-  try {
-    await fs.access(SOURCE_WORD_FILE);
-  } catch {
-    await fs.writeFile(
-      SOURCE_WORD_FILE,
-      "# TODO: 后续填入考研英语词库，每行一个英文单词\n",
-      "utf8"
-    );
+  await fs.mkdir(WORD_BOOK_DIR, { recursive: true });
+  for (const book of Array.isArray(WORD_BOOKS) ? WORD_BOOKS : []) {
+    const filePath = require("path").join(WORD_BOOK_DIR, String(book.file || ""));
+    if (!filePath) {
+      continue;
+    }
+    try {
+      await fs.access(filePath);
+    } catch {
+      await fs.writeFile(filePath, "", "utf8");
+    }
   }
 
   try {
@@ -32,42 +35,97 @@ async function ensureDataFiles() {
   }
 }
 
-async function readSourceWords() {
-  await ensureDataFiles();
-  const content = await fs.readFile(SOURCE_WORD_FILE, "utf8");
-  return content
-    .split(/\r?\n/)
-    .map((item) => item.trim().toLowerCase())
-    .filter((item) => item && !item.startsWith("#"));
+function normalizeWord(word) {
+  return String(word || "")
+    .trim()
+    .toLowerCase()
+    .replace(/[’]/g, "'")
+    .replace(/[‐‑–—]/g, "-");
 }
 
-async function appendSourceWords(words) {
-  const normalizedWords = uniqueWords(
-    words
-      .map((item) => String(item || "").trim().toLowerCase())
-      .filter(Boolean)
-  );
-  if (!normalizedWords.length) {
-    return [];
-  }
+function isValidWord(word) {
+  return /^[a-z]+(?:['-][a-z]+)*$/.test(word);
+}
 
+function getBookFilePath(bookId) {
+  const normalizedBookId = Math.max(1, Number(bookId || DEFAULT_BOOK_ID || 2));
+  const hit = (Array.isArray(WORD_BOOKS) ? WORD_BOOKS : []).find((book) => Number(book.id) === normalizedBookId);
+  const filename = String(hit?.file || `book-${normalizedBookId}.txt`).trim();
+  return require("path").join(WORD_BOOK_DIR, filename);
+}
+
+async function readBookWords(bookId) {
   await ensureDataFiles();
-  const existingContent = await fs.readFile(SOURCE_WORD_FILE, "utf8");
-  const existingWords = new Set(
-    existingContent
-      .split(/\r?\n/)
-      .map((item) => item.trim().toLowerCase())
-      .filter((item) => item && !item.startsWith("#"))
-  );
+  const filePath = getBookFilePath(bookId);
+  const content = await fs.readFile(filePath, "utf8");
+  return content
+    .split(/\r?\n/)
+    .map(normalizeWord)
+    .filter(Boolean)
+    .filter(isValidWord);
+}
 
-  const missingWords = normalizedWords.filter((word) => !existingWords.has(word));
-  if (!missingWords.length) {
-    return [];
+async function readAllBookWords() {
+  await ensureDataFiles();
+  const words = [];
+  for (const book of Array.isArray(WORD_BOOKS) ? WORD_BOOKS : []) {
+    const list = await readBookWords(book.id);
+    words.push(...list);
   }
+  return uniqueWords(words);
+}
 
-  const prefix = existingContent.endsWith("\n") ? "" : "\n";
-  await fs.appendFile(SOURCE_WORD_FILE, `${prefix}${missingWords.join("\n")}\n`, "utf8");
-  return missingWords;
+function parseBookHeaderLine(line) {
+  const text = String(line || "").trim();
+  if (!text.startsWith("#")) {
+    return null;
+  }
+  const countMatch = text.match(/\bcount\s*=\s*(\d+)/i);
+  const nameMatch = text.match(/\bname\s*=\s*([^;]+)\s*(?:;|$)/i);
+  const idMatch = text.match(/\bid\s*=\s*(\d+)/i);
+  return {
+    id: idMatch ? Math.max(1, Number(idMatch[1])) : 0,
+    name: nameMatch ? String(nameMatch[1] || "").trim() : "",
+    count: countMatch ? Math.max(0, Number(countMatch[1])) : 0
+  };
+}
+
+async function readBookHeader(bookId) {
+  await ensureDataFiles();
+  const filePath = getBookFilePath(bookId);
+  try {
+    const handle = await fs.open(filePath, "r");
+    try {
+      const buffer = Buffer.alloc(2048);
+      const { bytesRead } = await handle.read(buffer, 0, buffer.length, 0);
+      const chunk = buffer.subarray(0, bytesRead).toString("utf8");
+      const firstLine = chunk.split(/\r?\n/)[0] || "";
+      return parseBookHeaderLine(firstLine);
+    } finally {
+      await handle.close();
+    }
+  } catch {
+    return null;
+  }
+}
+
+async function listWordBooks() {
+  await ensureDataFiles();
+  const books = Array.isArray(WORD_BOOKS) ? WORD_BOOKS : [];
+  const result = [];
+  for (const book of books) {
+    const normalizedBookId = Math.max(1, Number(book?.id || 0));
+    if (!normalizedBookId) {
+      continue;
+    }
+    const header = await readBookHeader(normalizedBookId);
+    result.push({
+      id: normalizedBookId,
+      name: header?.name ? header.name : String(book?.name || "").trim(),
+      wordCount: header?.count ? header.count : 0
+    });
+  }
+  return result;
 }
 
 async function readWordCache() {
@@ -549,8 +607,9 @@ function getCachedItems(words, cache) {
 
 module.exports = {
   ensureDataFiles,
-  readSourceWords,
-  appendSourceWords,
+  readBookWords,
+  readAllBookWords,
+  listWordBooks,
   readWordCache,
   writeWordCache,
   pickRandomWords,

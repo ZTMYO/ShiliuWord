@@ -1788,5 +1788,150 @@
     "wordCn": "n. 栖息地，生长地，居住地",
     "defEn": "the natural environment where a species lives",
     "defCn": "某种动植物自然生存和繁衍的特定地理区域或环境条件"
+  },
+  "tell": {
+    "wordCn": "v. 告诉，讲述，辨别，吩咐",
+    "defEn": "to communicate information or a story to someone",
+    "defCn": "向某人传递信息或叙述事件"
+  },
+  "legislature": {
+    "wordCn": "n. 立法机关，议会",
+    "defEn": "a group of people with the power to make or change laws",
+    "defCn": "有权制定或修改法律的机构或团体"
+  },
+  "side": {
+    "wordCn": "n. 侧面，方面，边；v. 支持，偏袒",
+    "defEn": "a position or surface that is not the front, back, top, or bottom",
+    "defCn": "物体上非前后上下方向的表面或位置"
+  },
+  "biology": {
+    "wordCn": "n. 生物学，生物",
+    "defEn": "the scientific study of living organisms and their life processes",
+    "defCn": "研究生物体及其生命活动的自然科学"
+  },
+  "predecessor": {
+    "wordCn": "n. 前任，前辈，前身",
+    "defEn": "someone who held a position or job before the current holder",
+    "defCn": "在某人之前担任同一职位或职务的人"
+  },
+  "eligible": {
+    "wordCn": "adj. 符合条件的，合格的，合适的",
+    "defEn": "having the right to do or obtain something",
+    "defCn": "有资格或权利去做某事或获得某物"
+  },
+  "physiologist": {
+    "wordCn": "n. 生理学家",
+    "defEn": "a scientist who studies how living bodies function",
+    "defCn": "研究生物体如何运作的科学家"
+  },
+  "thumb": {
+    "wordCn": "n. 拇指；v. 用拇指翻动，竖起拇指要求搭车",
+    "defEn": "the short, thick finger on the hand set apart from the others",
+    "defCn": "手上与其他手指分开的短而粗的手指"
+  },
+  "reluctant": {
+    "wordCn": "adj. 不情愿的，勉强的",
+    "defEn": "unwilling and hesitant to do something",
+    "defCn": "不愿意做某事且犹豫不决的"
+  },
+  "hurricane": {
+    "wordCn": "n. 飓风，暴风雨",
+    "defEn": "a violent tropical storm with very strong winds",
+    "defCn": "一种风力极强的热带风暴"
+  },
+  "coach": {
+    "wordCn": "n. 教练，长途汽车；v. 指导，训练",
+    "defEn": "a person who trains or instructs a team or individual",
+    "defCn": "负责训练运动员或团队的人"
+  },
+  "clue": {
+    "wordCn": "n. 线索，提示；v. 提供线索",
+    "defEn": "a piece of evidence or information used to solve a problem or mystery",
+    "defCn": "帮助解开谜题或问题的信息或迹象"
+  },
+  "cohesive": {
+    "wordCn": "adj. 有凝聚力的，团结的",
+    "defEn": "characterized by sticking together or forming a united whole",
+    "defCn": "各部分紧密结合、不易分散的"
+  },
+  "clip": {
+    "wordCn": "n. 夹子，回形针，片段；v. 夹住，修剪",
+    "defEn": "to cut or trim something with a sharp instrument",
+    "defCn": "用剪刀或类似工具将物体剪短或修整"
+  },
+  "clutch": {
+    "wordCn": "n. 离合器，一窝蛋；v. 紧握，抓住",
+    "defEn": "to grasp or hold tightly, often due to urgency or need",
+    "defCn": "因紧急或需要而用力抓住某物"
+  },
+  "code": {
+    "wordCn": "n. 代码，密码，法典；v. 编码",
+    "defEn": "a system of symbols or rules used to represent information or instructions",
+    "defCn": "一种用于表示信息或指令的符号或规则系统"
+  },
+  "coffee": {
+    "wordCn": "n. 咖啡，咖啡色",
+    "defEn": "a dark brown drink made from roasted and ground beans",
+    "defCn": "由烘焙并研磨的咖啡豆冲泡而成的深褐色饮品"
+  },
+  "coal": {
+    "wordCn": "n. 煤，煤炭",
+    "defEn": "a black or dark brown rock used as fuel",
+    "defCn": "一种黑色或深棕色、用作燃料的岩石"
+  },
+  "clothe": {
+    "wordCn": "v. 给…穿衣，覆盖",
+    "defEn": "to put garments on someone or something",
+    "defCn": "为某人或某物穿上衣服"
+  },
+  "fifth": {
+    "wordCn": "adj. 第五的；n. 第五，五分之一",
+    "defEn": "the position after the fourth in a sequence",
+    "defCn": "在顺序中排在第四之后的位置"
+  },
+  "active": {
+    "wordCn": "adj. 活跃的，积极的，主动的",
+    "defEn": "engaging in physical movement or action",
+    "defCn": "处于运动或行动状态中的"
+  },
+  "mail": {
+    "wordCn": "n. 邮件，邮政；v. 邮寄",
+    "defEn": "a system for sending letters and packages",
+    "defCn": "用于寄送信件和包裹的邮政系统"
+  },
+  "death": {
+    "wordCn": "n. 死亡，逝世，毁灭",
+    "defEn": "the permanent end of life in a living organism",
+    "defCn": "生物体生命活动的永久终止"
+  },
+  "chopstick": {
+    "wordCn": "n. 筷子",
+    "defEn": "one of a pair of thin sticks used for eating",
+    "defCn": "成对使用的细长棒状餐具，用于夹取食物"
+  },
+  "passed": {
+    "wordCn": "v. 通过，经过，传递；adj. 过去的，已通过的",
+    "defEn": "moved past or beyond something; succeeded in a test or requirement",
+    "defCn": "从某物旁边或上方移动过去；在考试或要求中达到标准"
+  },
+  "seat": {
+    "wordCn": "n. 座位，席位，所在地；v. 使坐下，容纳",
+    "defEn": "a place designed for sitting; the right to occupy such a place",
+    "defCn": "专门用来坐的位置；拥有使用该位置的权利"
+  },
+  "quickly": {
+    "wordCn": "adv. 迅速地，很快地",
+    "defEn": "at a fast speed; without delay",
+    "defCn": "以高速度进行；没有拖延地发生"
+  },
+  "work": {
+    "wordCn": "n. 工作，作品，成果；v. 工作，运转，起作用",
+    "defEn": "physical or mental effort to achieve a purpose; a task or job",
+    "defCn": "为达成目标而付出的体力或脑力活动；需要完成的具体任务"
+  },
+  "daughter": {
+    "wordCn": "n. 女儿",
+    "defEn": "a female child in relation to her parents",
+    "defCn": "相对于父母而言的女性后代"
   }
 }

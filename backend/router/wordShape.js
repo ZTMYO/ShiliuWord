@@ -5,7 +5,10 @@ const router = express.Router();
 
 router.get("/", async (request, response, next) => {
   try {
-    const result = await createShapeQuiz(request.auth?.personalApiKey);
+    const result = await createShapeQuiz({
+      personalApiKey: request.auth?.personalApiKey,
+      bookId: request.auth?.user?.bookId
+    });
     response.json({
       mode: "shape",
       ...result

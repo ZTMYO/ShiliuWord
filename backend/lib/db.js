@@ -71,6 +71,11 @@ function runSchema(db) {
       ON flash_history(user_id, created_at DESC);
   `);
 
+  const userColumns = db.exec("PRAGMA table_info(users);")?.[0]?.values || [];
+  const userColumnSet = new Set(userColumns.map((row) => String(row?.[1] || "").trim()));
+  if (!userColumnSet.has("book_id")) {
+    db.exec("ALTER TABLE users ADD COLUMN book_id INTEGER NOT NULL DEFAULT 2;");
+  }
 }
 
 async function createDatabase() {

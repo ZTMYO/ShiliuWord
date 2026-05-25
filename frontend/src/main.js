@@ -5,6 +5,18 @@ const MODE_LABELS = {
   synonym: "近义词"
 };
 
+const WORD_BOOKS = [
+  { id: 1, name: "四级词汇乱序便携版" },
+  { id: 2, name: "考研词汇便携版" },
+  { id: 3, name: "星火四级词汇必背乱序版" },
+  { id: 4, name: "雅思词汇念念不忘乱序版" },
+  { id: 5, name: "托福高频词汇精讲" },
+  { id: 6, name: "考研英语(二)词汇乱序版" },
+  { id: 7, name: "小学英语" },
+  { id: 8, name: "高中英语" },
+  { id: 9, name: "专八词汇乱序版" }
+];
+
 const HOME_ENTRY_ITEMS = [
   { key: "random", label: "随机词", type: "quiz" },
   { key: "shape", label: "形近词", type: "quiz", requiresAi: true },
@@ -132,11 +144,14 @@ const state = {
   collectionVisibleCount: 0,
   historyWrongOnly: false,
   historyOpenIds: new Set(),
+  wordBooks: [],
+  wordBooksLoaded: false,
 };
 
 let historyLoadObserver = null;
 let collectionLoadObserver = null;
 let pronunciationAudio = null;
+let wordBooksPromise = null;
 
 const elements = {
   authDialog: document.querySelector("#auth-dialog"),
@@ -215,6 +230,8 @@ const elements = {
   settingsView: document.querySelector("#settings-view"),
   settingsBackBtn: document.querySelector("#settings-back-btn"),
   settingsUsername: document.querySelector("#settings-username"),
+  settingsBookBtn: document.querySelector("#settings-book-btn"),
+  settingsBookName: document.querySelector("#settings-book-name"),
   settingsAvatarLetter: document.querySelector("#settings-avatar-letter"),
   settingsAvatarIcon: document.querySelector("#settings-avatar-icon"),
   settingsApiKeyInput: document.querySelector("#settings-api-key-input"),
@@ -222,7 +239,20 @@ const elements = {
   saveApiKeyBtn: document.querySelector("#save-api-key-btn"),
   clearApiKeyBtn: document.querySelector("#clear-api-key-btn"),
   clearHistoryBtn: document.querySelector("#clear-history-btn"),
-  settingsLogoutBtn: document.querySelector("#settings-logout-btn")
+  settingsLogoutBtn: document.querySelector("#settings-logout-btn"),
+  bookDialog: document.querySelector("#book-dialog"),
+  bookDialogList: document.querySelector("#book-dialog-list"),
+  closeBookDialogBtn: document.querySelector("#close-book-dialog-btn"),
+  siteInfoBtn: document.querySelector("#site-info-btn"),
+  siteInfoDialog: document.querySelector("#site-info-dialog"),
+  closeSiteInfoDialogBtn: document.querySelector("#close-site-info-dialog-btn"),
+  siteInfoMetrics: document.querySelector("#site-info-metrics"),
+  siteStatBooks: document.querySelector("#site-stat-books"),
+  siteStatWords: document.querySelector("#site-stat-words"),
+  siteStatDefs: document.querySelector("#site-stat-defs"),
+  siteStatExamplePairs: document.querySelector("#site-stat-example-pairs"),
+  siteStatAccents: document.querySelector("#site-stat-accents"),
+  siteStatUsers: document.querySelector("#site-stat-users")
 };
 
 function syncToastHost() {
@@ -580,9 +610,229 @@ async function refreshStoredPersonalApiKeyStatus(apiKey = loadLocalPersonalApiKe
   renderApiKeyAvailabilityStatus(normalizedApiKey);
 }
 
+function getBookName(bookId) {
+  const normalizedBookId = Math.max(1, Number(bookId || 0));
+  const runtimeBooks = Array.isArray(state.wordBooks) ? state.wordBooks : [];
+  const runtimeName = runtimeBooks.find((book) => Number(book?.id) === normalizedBookId)?.name;
+  if (runtimeName) {
+    return String(runtimeName || "").trim();
+  }
+  return WORD_BOOKS.find((book) => book.id === normalizedBookId)?.name || "";
+}
+
+async function ensureWordBooksLoaded(force = false) {
+  if (!state.isAuthenticated) {
+    return [];
+  }
+  if (!force && state.wordBooksLoaded && Array.isArray(state.wordBooks) && state.wordBooks.length) {
+    return state.wordBooks;
+  }
+  if (!force && wordBooksPromise) {
+    return wordBooksPromise;
+  }
+
+  wordBooksPromise = (async () => {
+    try {
+      const data = await requestJson("/api/books");
+      const books = Array.isArray(data.books) ? data.books : [];
+      state.wordBooks = books
+        .map((book) => ({
+          id: Math.max(1, Number(book?.id || 0)),
+          name: String(book?.name || "").trim(),
+          wordCount: Math.max(0, Number(book?.wordCount || 0))
+        }))
+        .filter((book) => book.id && book.name);
+      state.wordBooksLoaded = true;
+      return state.wordBooks;
+    } catch {
+      state.wordBooksLoaded = false;
+      return [];
+    } finally {
+      wordBooksPromise = null;
+    }
+  })();
+
+  return wordBooksPromise;
+}
+
+function resolveBookDialogBooks() {
+  if (Array.isArray(state.wordBooks) && state.wordBooks.length) {
+    return state.wordBooks;
+  }
+  return WORD_BOOKS.map((book) => ({
+    id: book.id,
+    name: book.name,
+    wordCount: 0
+  }));
+}
+
+function renderBookDialog() {
+  if (!elements.bookDialogList) {
+    return;
+  }
+
+  const books = resolveBookDialogBooks();
+  const currentBookId = Math.max(1, Number(state.currentUser?.bookId || 0));
+  elements.bookDialogList.innerHTML = "";
+
+  books.forEach((book, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `book-card book-card-${TONE_KEYS[index % TONE_KEYS.length] || "blue"}`;
+    button.dataset.bookId = String(book.id);
+    button.classList.toggle("is-active", book.id === currentBookId);
+
+    const nameNode = document.createElement("span");
+    nameNode.className = "book-card-name";
+    nameNode.textContent = book.name;
+
+    const countNode = document.createElement("span");
+    countNode.className = "book-card-count";
+    const count = Math.max(0, Number(book.wordCount || 0));
+    countNode.textContent = count ? `${count.toLocaleString("zh-CN")} 词` : "";
+
+    button.appendChild(nameNode);
+    button.appendChild(countNode);
+    elements.bookDialogList.appendChild(button);
+  });
+}
+
+function openBookDialog() {
+  if (!elements.bookDialog) {
+    return;
+  }
+  renderBookDialog();
+  if (!elements.bookDialog.open) {
+    elements.bookDialog.showModal();
+  }
+  void ensureWordBooksLoaded().then(() => {
+    if (elements.bookDialog?.open) {
+      renderBookDialog();
+    }
+  });
+}
+
+function closeBookDialog() {
+  if (elements.bookDialog?.open) {
+    elements.bookDialog.close();
+  }
+}
+
+function openSiteInfoDialog() {
+  if (!elements.siteInfoDialog || elements.siteInfoDialog.open) {
+    return;
+  }
+  elements.siteInfoDialog.showModal();
+  void loadAndRenderSiteStats();
+}
+
+function closeSiteInfoDialog() {
+  if (elements.siteInfoDialog?.open) {
+    elements.siteInfoDialog.close();
+  }
+}
+
+function formatStatNumber(value) {
+  const number = Number(value);
+  if (!Number.isFinite(number) || number < 0) {
+    return "-";
+  }
+  return number.toLocaleString("zh-CN");
+}
+
+async function loadAndRenderSiteStats() {
+  if (!elements.siteInfoDialog?.open) {
+    return;
+  }
+  if (elements.siteInfoMetrics) {
+    elements.siteInfoMetrics.classList.add("is-hidden");
+  }
+  if (elements.siteStatBooks) elements.siteStatBooks.textContent = "";
+  if (elements.siteStatWords) elements.siteStatWords.textContent = "";
+  if (elements.siteStatDefs) elements.siteStatDefs.textContent = "";
+  if (elements.siteStatExamplePairs) elements.siteStatExamplePairs.textContent = "";
+  if (elements.siteStatAccents) elements.siteStatAccents.textContent = "";
+  if (elements.siteStatUsers) elements.siteStatUsers.textContent = "";
+  try {
+    const data = await requestJson("/api/stats");
+    if (!elements.siteInfoDialog?.open) {
+      return;
+    }
+    if (elements.siteStatBooks) elements.siteStatBooks.textContent = formatStatNumber(data?.words?.bookCount);
+    if (elements.siteStatWords) elements.siteStatWords.textContent = formatStatNumber(data?.words?.uniqueWordsInBooks ?? data?.words?.totalWordsInBooks);
+    if (elements.siteStatDefs) elements.siteStatDefs.textContent = formatStatNumber(data?.words?.cachedDefinitionCount);
+    if (elements.siteStatExamplePairs) elements.siteStatExamplePairs.textContent = formatStatNumber(data?.examples?.examplePairCount ?? data?.examples?.exampleSentenceCount);
+    if (elements.siteStatAccents) elements.siteStatAccents.textContent = formatStatNumber(data?.examples?.accentedEntryCount);
+    if (elements.siteStatUsers) elements.siteStatUsers.textContent = formatStatNumber(data?.users?.registeredUsers);
+    if (elements.siteInfoMetrics) {
+      elements.siteInfoMetrics.classList.remove("is-hidden");
+    }
+  } catch {
+    if (!elements.siteInfoDialog?.open) {
+      return;
+    }
+    if (elements.siteInfoMetrics) {
+      elements.siteInfoMetrics.classList.add("is-hidden");
+    }
+  }
+}
+
+function clearLocalCachesForBookChange() {
+  try {
+    window.localStorage.removeItem(getQuizDraftStorageKey());
+    window.localStorage.removeItem(getLegacyQuizDraftStorageKey());
+    window.localStorage.removeItem(getFlashCacheStorageKey());
+    window.localStorage.removeItem(getReadingCacheStorageKey());
+  } catch {
+    // ignore cleanup failures
+  }
+}
+
+async function updateUserBook(bookId) {
+  const normalizedBookId = Math.max(1, Number(bookId || 0));
+  const currentBookId = Math.max(1, Number(state.currentUser?.bookId || 0));
+  if (normalizedBookId === currentBookId) {
+    return;
+  }
+
+  try {
+    const data = await requestJson("/api/user/book", {
+      method: "POST",
+      body: JSON.stringify({ bookId: normalizedBookId })
+    });
+    state.currentUser = data.user || state.currentUser;
+    clearLocalCachesForBookChange();
+    state.quiz = null;
+    state.quizPast = [];
+    state.quizFuture = [];
+    state.evaluationResult = null;
+    state.currentHistoryId = "";
+    state.placements = Array(5).fill("");
+    state.optionOrder = [];
+    state.selectedWord = "";
+    state.flashQueue = [];
+    state.flashCurrent = null;
+    state.flashPast = [];
+    state.flashFuture = [];
+    state.readingExercise = null;
+    state.readingPast = [];
+    state.readingFuture = [];
+    state.readingOpenSentenceIndexes = new Set();
+    state.readingTitleOpen = false;
+    renderSessionUi();
+    renderBookDialog();
+    showToast("已切换词书", "success");
+  } catch (error) {
+    showToast(error.message || "切换词书失败", "error");
+  }
+}
+
 function renderSessionUi() {
   const username = state.currentUser?.username || "";
   elements.settingsUsername.textContent = username || "-";
+  if (elements.settingsBookName) {
+    elements.settingsBookName.textContent = state.currentUser?.bookId ? getBookName(state.currentUser.bookId) : "-";
+  }
   const firstChar = String(username || "").trim().slice(0, 1);
   const hasLetter = Boolean(firstChar);
   if (elements.settingsAvatarLetter) {
@@ -3504,6 +3754,25 @@ function bindEvents() {
   elements.collectionBackBtn.addEventListener("click", () => {
     setView("home");
   });
+  if (elements.siteInfoBtn) {
+    elements.siteInfoBtn.addEventListener("click", () => {
+      openSiteInfoDialog();
+    });
+  }
+  if (elements.closeSiteInfoDialogBtn) {
+    elements.closeSiteInfoDialogBtn.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      closeSiteInfoDialog();
+    });
+  }
+  if (elements.siteInfoDialog) {
+    elements.siteInfoDialog.addEventListener("click", (event) => {
+      if (event.target === elements.siteInfoDialog) {
+        closeSiteInfoDialog();
+      }
+    });
+  }
   elements.settingsEntryBtn.addEventListener("click", () => {
     if (!requireAuthFromHomeEntry()) {
       return;
@@ -3511,6 +3780,36 @@ function bindEvents() {
     renderSessionUi();
     setView("settings");
   });
+  if (elements.settingsBookBtn) {
+    elements.settingsBookBtn.addEventListener("click", () => {
+      openBookDialog();
+    });
+  }
+  if (elements.closeBookDialogBtn) {
+    elements.closeBookDialogBtn.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      closeBookDialog();
+    });
+  }
+  if (elements.bookDialog) {
+    elements.bookDialog.addEventListener("click", (event) => {
+      if (event.target === elements.bookDialog) {
+        closeBookDialog();
+      }
+    });
+  }
+  if (elements.bookDialogList) {
+    elements.bookDialogList.addEventListener("click", (event) => {
+      const card = event.target.closest(".book-card");
+      if (!card) {
+        return;
+      }
+      const bookId = Math.max(1, Number(card.dataset.bookId || 0));
+      closeBookDialog();
+      void updateUserBook(bookId);
+    });
+  }
   elements.settingsBackBtn.addEventListener("click", () => {
     setView("home");
   });

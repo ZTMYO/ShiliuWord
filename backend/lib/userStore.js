@@ -28,6 +28,7 @@ function formatUser(row) {
     id: Number(row.id),
     username: String(row.username || ""),
     passwordHash: String(row.password_hash || ""),
+    bookId: Math.max(1, Number(row.book_id || 2)),
     createdAt: String(row.created_at || ""),
     updatedAt: String(row.updated_at || "")
   };
@@ -40,7 +41,8 @@ function formatSafeUser(user) {
 
   return {
     id: user.id,
-    username: user.username
+    username: user.username,
+    bookId: Math.max(1, Number(user.bookId || 2))
   };
 }
 
@@ -90,6 +92,20 @@ async function verifyUserCredentials(username, password) {
     return null;
   }
   return user;
+}
+
+async function updateUserBook(userId, bookId) {
+  const normalizedBookId = Math.max(1, Number(bookId || 0));
+  if (!Number.isFinite(normalizedBookId) || normalizedBookId < 1 || normalizedBookId > 9) {
+    throw new Error("词书参数不合法");
+  }
+
+  const now = new Date().toISOString();
+  await run(
+    "UPDATE users SET book_id = ?, updated_at = ? WHERE id = ?",
+    [normalizedBookId, now, Number(userId)]
+  );
+  return findUserById(userId);
 }
 
 async function listCollection(userId) {
@@ -296,6 +312,7 @@ module.exports = {
   verifyUserCredentials,
   findUserById,
   findUserByUsername,
+  updateUserBook,
   formatSafeUser,
   listCollection,
   addCollectionItem,
