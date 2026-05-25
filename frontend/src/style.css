@@ -961,6 +961,23 @@ summary {
   gap: 14px;
 }
 
+.reading-bottom-dock {
+  width: min(760px, 100%);
+}
+
+.reading-nav-wrap {
+  width: min(760px, 100%);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.reading-nav-btn {
+  min-width: 0;
+  padding: 10px 14px;
+  text-align: center;
+}
+
 .reading-card {
   overflow: hidden;
   transition: none;
@@ -2107,6 +2124,15 @@ summary {
 
   .reading-card-body {
     padding: 0 16px 16px;
+  }
+
+  .reading-nav-wrap {
+    gap: 8px;
+  }
+
+  .reading-nav-btn {
+    padding: 9px 10px;
+    font-size: 14px;
   }
 
   .flash-bottom-panel {

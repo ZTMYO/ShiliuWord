@@ -1,8 +1,6 @@
 const {
-  DEEPSEEK_API_KEY,
   DEEPSEEK_API_URL,
   DEEPSEEK_MODEL,
-  PUBLIC_MODEL_ENABLED,
   USE_MOCK_DATA,
   RANDOM_OR_SHAPE_PROMPT,
   SYNONYM_PROMPT,
@@ -18,10 +16,6 @@ function resolveApiKey(personalApiKey = "") {
   const normalizedPersonalApiKey = String(personalApiKey || "").trim();
   if (normalizedPersonalApiKey) {
     return normalizedPersonalApiKey;
-  }
-
-  if (PUBLIC_MODEL_ENABLED && DEEPSEEK_API_KEY) {
-    return DEEPSEEK_API_KEY;
   }
 
   throw new Error("请先在账号设置中填写个人 API Key");
@@ -283,6 +277,13 @@ function normalizeReadingPayload(payload) {
 
   const title = String(payload.title || "").trim();
   const titleCn = sanitizeReadingChineseText(payload.titleCn || payload.title_cn || "");
+  const selectedWords = Array.isArray(payload.selectedWords || payload.selected_words)
+    ? [...new Set(
+        (payload.selectedWords || payload.selected_words)
+          .map((word) => String(word || "").trim().toLowerCase())
+          .filter(Boolean)
+      )]
+    : [];
   const sentences = Array.isArray(payload.sentences)
     ? payload.sentences
         .map((item) => ({
@@ -299,6 +300,7 @@ function normalizeReadingPayload(payload) {
   return {
     title,
     titleCn,
+    selectedWords,
     sentences
   };
 }
@@ -326,6 +328,11 @@ async function translateReadingTitle(title, personalApiKey) {
 }
 
 async function generateReadingPassage(items, personalApiKey) {
+  const availableWords = new Set(
+    (Array.isArray(items) ? items : [])
+      .map((item) => String(item?.word || "").trim().toLowerCase())
+      .filter(Boolean)
+  );
   const prompt = READING_PROMPT.replace(
     "{{items}}",
     JSON.stringify(
@@ -343,6 +350,9 @@ async function generateReadingPassage(items, personalApiKey) {
   const payload = normalizeReadingPayload(parseJsonObject(content));
   if (!payload) {
     return null;
+  }
+  if (payload.selectedWords.length) {
+    payload.selectedWords = payload.selectedWords.filter((word) => availableWords.has(word));
   }
   if (!payload.titleCn && payload.title) {
     payload.titleCn = await translateReadingTitle(payload.title, personalApiKey);
@@ -371,6 +381,72 @@ function normalizeFlashOption(value) {
   };
 }
 
+function extractFlashOptionPos(text) {
+  const source = String(text || "").trim();
+  const match = source.match(/^(?:（[^）]*）|\([^)]*\))?\s*([a-z]+)\.\s*/i);
+  return match ? match[1].toLowerCase() : "";
+}
+
+function normalizeFlashGlossCore(text) {
+  return String(text || "")
+    .trim()
+    .toLowerCase()
+    .replace(/^(?:（[^）]*）|\([^)]*\))?\s*[a-z]+\.\s*/i, "")
+    .replace(/[（）()]/g, "")
+    .replace(/[;；,，、/]/g, "")
+    .replace(/\s+/g, "");
+}
+
+function areFlashOptionsNearDuplicate(left, right) {
+  const leftText = String(left?.text || "").trim();
+  const rightText = String(right?.text || "").trim();
+  if (!leftText || !rightText) {
+    return false;
+  }
+  if (leftText === rightText) {
+    return true;
+  }
+
+  const leftPos = extractFlashOptionPos(leftText);
+  const rightPos = extractFlashOptionPos(rightText);
+  if (leftPos && rightPos && leftPos !== rightPos) {
+    return false;
+  }
+
+  const leftCore = normalizeFlashGlossCore(leftText);
+  const rightCore = normalizeFlashGlossCore(rightText);
+  if (!leftCore || !rightCore) {
+    return false;
+  }
+
+  return (
+    leftCore === rightCore ||
+    leftCore.includes(rightCore) ||
+    rightCore.includes(leftCore)
+  );
+}
+
+function dedupeFlashOptions(options = [], correctOption = null) {
+  const kept = [];
+  const normalizedCorrect = correctOption ? normalizeFlashOption(correctOption) : null;
+
+  (Array.isArray(options) ? options : []).forEach((option) => {
+    if (!option?.text) {
+      return;
+    }
+    const isDuplicate = kept.some((existing) => areFlashOptionsNearDuplicate(existing, option));
+    if (!isDuplicate) {
+      kept.push(option);
+    }
+  });
+
+  if (normalizedCorrect?.text && !kept.some((option) => areFlashOptionsNearDuplicate(option, normalizedCorrect))) {
+    kept.unshift(normalizedCorrect);
+  }
+
+  return kept;
+}
+
 function normalizeFlashQuestions(rawItems, targetWords = []) {
   if (!Array.isArray(rawItems)) {
     return [];
@@ -394,17 +470,22 @@ function normalizeFlashQuestions(rawItems, targetWords = []) {
             .map(normalizeFlashOption)
             .filter((option) => option.text && option.word && option.word !== word)
         : [];
-      const mergedOptions = [correctOption, ...distractors]
+      const mergedOptions = dedupeFlashOptions(
+        [correctOption, ...distractors]
+          .filter((option) => option.text)
+          .filter(
+            (option, index, list) =>
+              list.findIndex((candidate) => candidate.text === option.text) === index
+          ),
+        correctOption
+      )
         .filter((option) => option.text)
-        .filter(
-          (option, index, list) =>
-            list.findIndex((candidate) => candidate.text === option.text) === index
-        );
+        .filter((option) => option.word || option.text === correctOption.text);
 
       return {
         word,
         correctOption,
-        distractors,
+        distractors: mergedOptions.filter((option) => option.text !== correctOption.text),
         options: mergedOptions
       };
     })
@@ -415,7 +496,7 @@ function normalizeFlashQuestions(rawItems, targetWords = []) {
       if (targetSet.size && !targetSet.has(item.word)) {
         return false;
       }
-      return item.options.length === 4;
+      return item.options.length >= 3;
     });
 }
 

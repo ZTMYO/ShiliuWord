@@ -7,7 +7,7 @@
 - 匹配模式：随机词、形近词、近义词
 - 百词斩模式：本地或 AI 出题、释义查看、上一题 / 下一题、朗读
 - 阅读训练：AI 基于 `word-data.json` 抽取的 5-10 个单词生成考研风格双语短文，句卡点击展开中文，标题支持点击查看中文翻译
-- 阅读词表弹窗：阅读页 header 可打开“单词列表”，复用现有弹窗能力查看朗读、收藏和例句
+- 阅读词表弹窗：阅读页 header 可打开“重点单词”，复用现有弹窗能力查看朗读、收藏和例句
 - 收藏功能：支持在列表、历史和答案解析中收藏 / 取消收藏
 - 收藏训练入口：收藏夹单词超过 5 个后，可直接按收藏词表进入“百词斩”或“阅读”
 - 历史功能：匹配历史、百词斩历史、清空历史记录
@@ -90,16 +90,12 @@ SESSION_SECRET=your_long_random_session_secret_here
 ```env
 PORT=3000
 SQLITE_FILE=./data/app.sqlite
-PUBLIC_MODEL_ENABLED=false
-DEEPSEEK_API_KEY=your_deepseek_api_key_here
 USE_MOCK_DATA=false
 ```
 
 说明：
 
 - `SESSION_SECRET`：必填，用于会话签名
-- `PUBLIC_MODEL_ENABLED=true` 且配置 `DEEPSEEK_API_KEY` 后，可启用站点公共 AI
-- 不启用公共 AI 时，用户仍可在前端个人信息页填写自己的 API Key
 - 当前默认按 DeepSeek 接口进行校验与调用，因此个人 API Key 也默认填写 DeepSeek API Key
 - 用户个人 API Key 只保存在浏览器本地，不写入后端数据库
 
@@ -172,7 +168,7 @@ npm run preview
 - 后端从 `word-data.json` 中抽取 5-10 个词，并调用 AI 生成 5-8 句双语短文
 - 英文句子中的目标词会高亮；中文通过 `【】` 标记高亮对应词义
 - 句子卡片点击后展开中文翻译；标题也支持点击展开中文标题
-- 阅读页支持“单词列表”弹窗，可继续使用朗读、收藏、例句能力
+- 阅读页支持“重点单词”弹窗，可继续使用朗读、收藏、例句能力
 - 阅读训练内容只保留在当前前端状态中，不写入匹配历史或百词斩历史
 - 为提升稳定性，前后端都会清洗 AI 误返回到英文句子中的标记符号
 

@@ -1,5 +1,4 @@
-﻿﻿﻿import "./style.css";
-
+﻿import "./style.css";
 const MODE_LABELS = {
   random: "随机词",
   shape: "形近词",
@@ -28,6 +27,8 @@ const PERSONAL_API_KEY_STORAGE_PREFIX = "shiliu-word-personal-api-key";
 const LEGACY_PERSONAL_API_KEY_STORAGE_PREFIX = "english-ai-personal-api-key";
 const QUIZ_DRAFT_STORAGE_PREFIX = "shiliu-word-drafts-v2";
 const LEGACY_QUIZ_DRAFT_STORAGE_PREFIX = "english-ai-word-drafts-v2";
+const FLASH_CACHE_STORAGE_PREFIX = "shiliu-word-flash-cache-v1";
+const READING_CACHE_STORAGE_PREFIX = "shiliu-word-reading-cache-v1";
 const LEGACY_HISTORY_STORAGE_KEY = "english-ai-word-history";
 const LEGACY_FLASH_HISTORY_STORAGE_KEY = "english-ai-flash-history";
 const LEGACY_QUIZ_DRAFT_STORAGE_KEY = "english-ai-word-drafts";
@@ -108,6 +109,11 @@ const state = {
   readingLoading: false,
   readingLoadingPercent: 0,
   readingLoadingTimer: null,
+  readingPast: [],
+  readingFuture: [],
+  readingPreset: "default",
+  readingOpenSentenceIndexes: new Set(),
+  readingTitleOpen: false,
   resultDialogPayload: null,
   flashPreload: {
     data: null,
@@ -125,7 +131,6 @@ const state = {
   collectionVisibleCount: 0,
   historyWrongOnly: false,
   historyOpenIds: new Set(),
-  publicAiEnabled: false
 };
 
 let historyLoadObserver = null;
@@ -176,6 +181,9 @@ const elements = {
   readingTitleBody: document.querySelector("#reading-title-body"),
   readingTitleCn: document.querySelector("#reading-title-cn"),
   readingSentenceList: document.querySelector("#reading-sentence-list"),
+  readingPrevBtn: document.querySelector("#reading-prev-btn"),
+  readingToggleAllBtn: document.querySelector("#reading-toggle-all-btn"),
+  readingNextBtn: document.querySelector("#reading-next-btn"),
   backHomeBtn: document.querySelector("#back-home-btn"),
   submitBtn: document.querySelector("#submit-btn"),
   nextBtn: document.querySelector("#next-btn"),
@@ -362,6 +370,16 @@ function getLegacyQuizDraftStorageKey() {
 function getPersonalApiKeyStorageKey() {
   const userId = state.currentUser?.id || "guest";
   return `${PERSONAL_API_KEY_STORAGE_PREFIX}-${userId}`;
+}
+
+function getReadingCacheStorageKey() {
+  const userId = state.currentUser?.id || "guest";
+  return `${READING_CACHE_STORAGE_PREFIX}-${userId}`;
+}
+
+function getFlashCacheStorageKey() {
+  const userId = state.currentUser?.id || "guest";
+  return `${FLASH_CACHE_STORAGE_PREFIX}-${userId}`;
 }
 
 function getLegacyPersonalApiKeyStorageKey() {
@@ -569,7 +587,7 @@ function renderSessionUi() {
 }
 
 function hasAvailableAiCapability() {
-  return Boolean(loadLocalPersonalApiKey() || state.publicAiEnabled);
+  return Boolean(loadLocalPersonalApiKey());
 }
 
 function shouldSkipAiLoading() {
@@ -610,9 +628,13 @@ function hasHistoryRecord(id) {
 }
 
 function getQuizDraft(mode) {
+  const normalizedMode = String(mode || "random").trim().toLowerCase() || "random";
   const draftMap = loadQuizDraftMap();
-  const draft = draftMap[mode];
+  const draft = draftMap[normalizedMode];
   if (!draft || typeof draft !== "object") {
+    return null;
+  }
+  if (String(draft.mode || "").trim().toLowerCase() !== normalizedMode) {
     return null;
   }
   if (!draft.quiz || !Array.isArray(draft.quiz.items) || draft.quiz.items.length !== 5) {
@@ -651,6 +673,7 @@ function clearQuizDraft(mode = state.mode) {
 }
 
 function restoreQuizDraft(draft) {
+  state.mode = String(draft?.mode || state.mode || "random").trim().toLowerCase() || "random";
   state.loading = false;
   state.loadingPercent = 0;
   state.quiz = draft.quiz;
@@ -669,9 +692,124 @@ function restoreQuizDraft(draft) {
   buildWordColorMap(state.optionOrder);
   setView("quiz");
   renderLoadingState();
+  renderQuizHeader();
   renderQuestions();
   renderOptions();
   renderSubmitButton();
+  renderHomeModes();
+}
+
+function cloneSerializable(value) {
+  if (value == null) {
+    return value;
+  }
+  try {
+    return JSON.parse(JSON.stringify(value));
+  } catch {
+    return null;
+  }
+}
+
+function loadFlashCacheMap() {
+  try {
+    const raw = window.localStorage.getItem(getFlashCacheStorageKey());
+    const parsed = raw ? JSON.parse(raw) : {};
+    return parsed && typeof parsed === "object" ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
+function saveFlashCacheMap(cacheMap) {
+  try {
+    window.localStorage.setItem(getFlashCacheStorageKey(), JSON.stringify(cacheMap));
+  } catch {
+    // ignore local cache failures
+  }
+}
+
+function createFlashSessionSnapshot() {
+  return {
+    preset: state.flashPreset,
+    current: createFlashSnapshot(),
+    queue: cloneSerializable(state.flashQueue) || [],
+    past: cloneSerializable(state.flashPast) || [],
+    future: cloneSerializable(state.flashFuture) || []
+  };
+}
+
+function getFlashCache(preset = state.flashPreset) {
+  const normalizedPreset = String(preset || "default").trim().toLowerCase() || "default";
+  const cacheMap = loadFlashCacheMap();
+  const snapshot = cacheMap[normalizedPreset];
+  if (!snapshot || typeof snapshot !== "object" || !snapshot.current?.question?.word) {
+    return null;
+  }
+  return snapshot;
+}
+
+function saveCurrentFlashCache(snapshot = null) {
+  const cacheMap = loadFlashCacheMap();
+  const nextSnapshot = snapshot || createFlashSessionSnapshot();
+  const normalizedPreset = String(nextSnapshot?.preset || state.flashPreset || "default").trim().toLowerCase() || "default";
+
+  if (!nextSnapshot?.current?.question?.word) {
+    delete cacheMap[normalizedPreset];
+    saveFlashCacheMap(cacheMap);
+    return;
+  }
+
+  cacheMap[normalizedPreset] = nextSnapshot;
+  saveFlashCacheMap(cacheMap);
+}
+
+function clearFlashCache(preset = state.flashPreset) {
+  const normalizedPreset = String(preset || "default").trim().toLowerCase() || "default";
+  const cacheMap = loadFlashCacheMap();
+  if (!(normalizedPreset in cacheMap)) {
+    return;
+  }
+  delete cacheMap[normalizedPreset];
+  saveFlashCacheMap(cacheMap);
+}
+
+function getReadingCache() {
+  try {
+    const raw = window.localStorage.getItem(getReadingCacheStorageKey());
+    const parsed = raw ? JSON.parse(raw) : null;
+    if (!parsed || typeof parsed !== "object") {
+      return null;
+    }
+    if (!parsed.exercise || !Array.isArray(parsed.exercise.sentences) || !parsed.exercise.sentences.length) {
+      return null;
+    }
+    if (parsed.preset && typeof parsed.preset !== "string") {
+      return null;
+    }
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
+function saveReadingCache(snapshot = null) {
+  try {
+    const nextSnapshot = snapshot || createReadingSnapshot();
+    if (!nextSnapshot?.exercise) {
+      return;
+    }
+    window.localStorage.setItem(getReadingCacheStorageKey(), JSON.stringify(nextSnapshot));
+  } catch {
+    // ignore local cache failures
+  }
+}
+
+function clearReadingCache() {
+  try {
+    window.localStorage.removeItem(getReadingCacheStorageKey());
+  } catch {
+    // ignore local cache failures
+  }
 }
 
 function getPreloadEntry(mode) {
@@ -779,11 +917,9 @@ async function checkAuthStatus() {
     const data = await requestJson("/api/auth/me", {}, { redirectOnUnauthorized: false });
     state.isAuthenticated = Boolean(data.authenticated);
     state.currentUser = data.user || null;
-    state.publicAiEnabled = Boolean(data.publicAiEnabled);
   } catch {
     state.isAuthenticated = false;
     state.currentUser = null;
-    state.publicAiEnabled = false;
   } finally {
     state.authPending = false;
     if (state.isAuthenticated) {
@@ -1964,7 +2100,7 @@ function setFlashPreset(preset = "default") {
 
 function createFlashSnapshot() {
   return {
-    question: state.flashCurrent,
+    question: cloneSerializable(state.flashCurrent),
     selectedIndex: state.flashSelectedIndex,
     evaluation: state.flashEvaluation ? { ...state.flashEvaluation } : null,
     detailVisible: state.flashDetailVisible
@@ -1972,10 +2108,19 @@ function createFlashSnapshot() {
 }
 
 function restoreFlashSnapshot(snapshot) {
-  state.flashCurrent = snapshot?.question || null;
+  state.flashCurrent = cloneSerializable(snapshot?.question) || null;
   state.flashSelectedIndex = Number.isInteger(snapshot?.selectedIndex) ? snapshot.selectedIndex : -1;
   state.flashEvaluation = snapshot?.evaluation ? { ...snapshot.evaluation } : null;
   state.flashDetailVisible = Boolean(snapshot?.detailVisible);
+}
+
+function restoreFlashSessionSnapshot(snapshot) {
+  state.flashPreset = String(snapshot?.preset || state.flashPreset || "default").trim().toLowerCase() || "default";
+  restoreFlashSnapshot(snapshot?.current);
+  state.flashQueue = Array.isArray(snapshot?.queue) ? cloneSerializable(snapshot.queue) || [] : [];
+  state.flashPast = Array.isArray(snapshot?.past) ? cloneSerializable(snapshot.past) || [] : [];
+  state.flashFuture = Array.isArray(snapshot?.future) ? cloneSerializable(snapshot.future) || [] : [];
+  resetFlashPreload();
 }
 
 function createQuizSnapshot() {
@@ -2008,6 +2153,41 @@ function restoreQuizSnapshot(snapshot) {
   renderQuizNavButtons();
 }
 
+function cloneReadingExercise(exercise) {
+  if (!exercise) {
+    return null;
+  }
+  return {
+    ...exercise,
+    words: Array.isArray(exercise.words) ? exercise.words.map((item) => ({
+      ...item,
+      examples: Array.isArray(item.examples) ? item.examples.map((example) => ({ ...example })) : []
+    })) : [],
+    sentences: Array.isArray(exercise.sentences) ? exercise.sentences.map((item) => ({ ...item })) : []
+  };
+}
+
+function createReadingSnapshot() {
+  return {
+    exercise: cloneReadingExercise(state.readingExercise),
+    preset: state.readingPreset,
+    openSentenceIndexes: [...state.readingOpenSentenceIndexes],
+    titleOpen: state.readingTitleOpen
+  };
+}
+
+function restoreReadingSnapshot(snapshot) {
+  state.readingExercise = cloneReadingExercise(snapshot?.exercise);
+  state.readingPreset = String(snapshot?.preset || "default").trim().toLowerCase() || "default";
+  state.readingOpenSentenceIndexes = new Set(
+    Array.isArray(snapshot?.openSentenceIndexes)
+      ? snapshot.openSentenceIndexes.filter((index) => Number.isInteger(index))
+      : []
+  );
+  state.readingTitleOpen = Boolean(snapshot?.titleOpen);
+  saveReadingCache(createReadingSnapshot());
+}
+
 function renderQuizNavButtons() {
   elements.prevBtn.disabled = state.quizPast.length === 0;
   elements.nextBtn.disabled = !state.quiz && state.quizFuture.length === 0;
@@ -2017,6 +2197,55 @@ function renderFlashNavButtons() {
   elements.flashPrevBtn.disabled = state.flashPast.length === 0;
   elements.flashNextBtn.disabled = !state.flashCurrent && state.flashQueue.length === 0 && !state.flashFuture.length;
   elements.flashPronounceBtn.disabled = !state.flashCurrent;
+}
+
+function warmFlashBatchForCurrentState() {
+  if (!state.flashCurrent) {
+    return;
+  }
+  if (state.flashQueue.length <= 1) {
+    warmFlashBatch();
+  }
+}
+
+function isReadingFullyExpanded() {
+  if (!state.readingExercise) {
+    return false;
+  }
+  const sentenceCount = Array.isArray(state.readingExercise.sentences) ? state.readingExercise.sentences.length : 0;
+  const titleReady = Boolean(state.readingExercise.titleCn);
+  return state.readingOpenSentenceIndexes.size >= sentenceCount && (!titleReady || state.readingTitleOpen);
+}
+
+function renderReadingToggleAllButton() {
+  const hasExercise = Boolean(state.readingExercise);
+  elements.readingToggleAllBtn.disabled = !hasExercise;
+  elements.readingToggleAllBtn.textContent = hasExercise && isReadingFullyExpanded() ? "折叠全部" : "展开全部";
+}
+
+function renderReadingNavButtons() {
+  elements.readingPrevBtn.disabled = state.readingPast.length === 0;
+  elements.readingNextBtn.disabled = state.readingLoading || (!state.readingExercise && state.readingFuture.length === 0);
+  renderReadingToggleAllButton();
+}
+
+function syncReadingTitleCardState() {
+  const hasTitleCn = Boolean(state.readingExercise?.titleCn);
+  elements.readingTitleCard.open = hasTitleCn && state.readingTitleOpen;
+  elements.readingTitleBody.classList.toggle("is-hidden", !hasTitleCn || !state.readingTitleOpen);
+}
+
+function setReadingAllExpanded(expanded) {
+  if (!state.readingExercise) {
+    return;
+  }
+  const sentenceCount = Array.isArray(state.readingExercise.sentences) ? state.readingExercise.sentences.length : 0;
+  state.readingOpenSentenceIndexes = expanded
+    ? new Set(Array.from({ length: sentenceCount }, (_, index) => index))
+    : new Set();
+  state.readingTitleOpen = expanded && Boolean(state.readingExercise.titleCn);
+  renderReadingExercise();
+  saveReadingCache(createReadingSnapshot());
 }
 
 function renderFlashRevealButton() {
@@ -2112,6 +2341,7 @@ function renderFlashOptions() {
       renderFlashRevealButton();
       renderFlashDetail();
       renderFlashNavButtons();
+      saveCurrentFlashCache();
     });
     elements.flashOptionList.appendChild(button);
   });
@@ -2145,6 +2375,7 @@ function renderReadingLoadingState() {
   elements.readingLoadingView.classList.toggle("is-hidden", !state.readingLoading || state.view !== "reading");
   elements.readingBoard.classList.toggle("is-hidden", state.readingLoading || state.view !== "reading" || !state.readingExercise);
   renderReadingLoadingProgress();
+  renderReadingNavButtons();
 }
 
 function startReadingLoadingProgress() {
@@ -2198,10 +2429,11 @@ function finishReadingLoadingProgress() {
 
 function renderReadingExercise() {
   if (!state.readingExercise) {
-    elements.readingTitleCard.open = false;
+    state.readingTitleOpen = false;
+    state.readingOpenSentenceIndexes = new Set();
     elements.readingTitle.textContent = "Reading Practice";
     elements.readingTitleCn.textContent = "";
-    elements.readingTitleBody.classList.add("is-hidden");
+    syncReadingTitleCardState();
     elements.readingSentenceList.innerHTML = `
       <div class="history-empty">
         <p>还没有阅读训练内容。</p>
@@ -2215,14 +2447,14 @@ function renderReadingExercise() {
   const words = Array.isArray(state.readingExercise.words) ? state.readingExercise.words : [];
   elements.readingTitle.textContent = state.readingExercise.title || "Reading Practice";
   elements.readingTitleCn.textContent = state.readingExercise.titleCn || "";
-  elements.readingTitleBody.classList.toggle("is-hidden", !state.readingExercise.titleCn);
-  elements.readingTitleCard.open = false;
+  syncReadingTitleCardState();
 
   elements.readingSentenceList.innerHTML = "";
   const highlightWords = words.map((item) => item.word);
   (Array.isArray(state.readingExercise.sentences) ? state.readingExercise.sentences : []).forEach((sentence, index) => {
     const details = document.createElement("details");
     details.className = "reading-card";
+    details.open = state.readingOpenSentenceIndexes.has(index);
     details.innerHTML = `
       <summary class="reading-card-summary">
         <p class="reading-card-en">${highlightReadingWords(sentence.en, highlightWords)}</p>
@@ -2231,6 +2463,15 @@ function renderReadingExercise() {
         <p class="reading-card-cn">${highlightReadingChinese(sentence.cn)}</p>
       </div>
     `;
+    details.addEventListener("toggle", () => {
+      if (details.open) {
+        state.readingOpenSentenceIndexes.add(index);
+      } else {
+        state.readingOpenSentenceIndexes.delete(index);
+      }
+      renderReadingToggleAllButton();
+      saveReadingCache(createReadingSnapshot());
+    });
     elements.readingSentenceList.appendChild(details);
   });
 
@@ -2240,45 +2481,78 @@ function renderReadingExercise() {
 function openReadingWordListDialog() {
   const items = Array.isArray(state.readingExercise?.words) ? state.readingExercise.words : [];
   if (!items.length) {
-    showToast("当前还没有可查看的单词列表", "error");
+    showToast("当前还没有可查看的重点单词", "error");
     return;
   }
 
   openResultDialog({
-    title: "单词列表",
+    title: "重点单词",
     items,
     showIndex: false
   });
 }
 
 async function loadReadingExercise(options = {}) {
-  const { forceNew = false, preset = "default" } = options;
+  const {
+    forceNew = false,
+    preset = "default",
+    pastSnapshot = null,
+    clearFuture = false
+  } = options;
+  const normalizedPreset = String(preset || "default").trim().toLowerCase() || "default";
   if (!hasAvailableAiCapability()) {
     showToast("未配置 API Key，阅读训练暂不可用", "error");
     return;
   }
 
   if (!forceNew && state.readingExercise) {
+    state.readingPreset = normalizedPreset;
     setView("reading");
     renderReadingLoadingState();
     renderReadingExercise();
     return;
   }
 
+  if (!forceNew && !state.readingExercise) {
+    const cachedSnapshot = getReadingCache();
+    if (cachedSnapshot?.exercise) {
+      restoreReadingSnapshot(cachedSnapshot);
+      state.readingPast = [];
+      state.readingFuture = [];
+      setView("reading");
+      renderReadingLoadingState();
+      renderReadingExercise();
+      return;
+    }
+  }
+
+  const previousExercise = cloneReadingExercise(state.readingExercise);
+  const previousPreset = state.readingPreset;
+  const previousOpenSentenceIndexes = new Set(state.readingOpenSentenceIndexes);
+  const previousTitleOpen = state.readingTitleOpen;
   state.readingLoading = true;
-  state.readingExercise = null;
   startReadingLoadingProgress();
   setView("reading");
   renderReadingLoadingState();
   renderReadingExercise();
 
   try {
-    const data = await requestReadingExercise(preset);
+    const data = await requestReadingExercise(normalizedPreset);
+    state.readingPreset = normalizedPreset;
     state.readingExercise = data;
+    state.readingOpenSentenceIndexes = new Set();
+    state.readingTitleOpen = false;
+    if (pastSnapshot?.exercise) {
+      state.readingPast.push(pastSnapshot);
+    }
+    if (clearFuture) {
+      state.readingFuture = [];
+    }
     await finishReadingLoadingProgress();
     state.readingLoading = false;
     renderReadingLoadingState();
     renderReadingExercise();
+    saveReadingCache(createReadingSnapshot());
   } catch (error) {
     if (state.readingLoadingTimer) {
       window.clearInterval(state.readingLoadingTimer);
@@ -2286,9 +2560,47 @@ async function loadReadingExercise(options = {}) {
     }
     state.readingLoadingPercent = 0;
     state.readingLoading = false;
+    state.readingExercise = previousExercise;
+    state.readingPreset = previousPreset;
+    state.readingOpenSentenceIndexes = new Set(previousOpenSentenceIndexes);
+    state.readingTitleOpen = previousTitleOpen;
     renderReadingLoadingState();
+    renderReadingExercise();
     showToast(error.message || "阅读训练生成失败", "error", 2600);
   }
+}
+
+function goToPrevReadingExercise() {
+  if (!state.readingPast.length) {
+    return;
+  }
+  if (state.readingExercise) {
+    state.readingFuture.push(createReadingSnapshot());
+  }
+  restoreReadingSnapshot(state.readingPast.pop());
+  setView("reading");
+  renderReadingLoadingState();
+  renderReadingExercise();
+}
+
+function goToNextReadingExercise() {
+  if (state.readingFuture.length) {
+    if (state.readingExercise) {
+      state.readingPast.push(createReadingSnapshot());
+    }
+    restoreReadingSnapshot(state.readingFuture.pop());
+    setView("reading");
+    renderReadingLoadingState();
+    renderReadingExercise();
+    return;
+  }
+
+  loadReadingExercise({
+    forceNew: true,
+    preset: state.readingPreset || "default",
+    pastSnapshot: state.readingExercise ? createReadingSnapshot() : null,
+    clearFuture: true
+  });
 }
 
 function requestFlashBatch(count = FLASH_BATCH_SIZE) {
@@ -2367,6 +2679,7 @@ function shiftFlashQuestionFromQueue() {
   });
   renderFlashQuestion();
   warmFlashBatchWhenNeeded();
+  saveCurrentFlashCache();
 }
 
 async function loadFlashQuestion(options = {}) {
@@ -2376,6 +2689,19 @@ async function loadFlashQuestion(options = {}) {
     renderFlashLoadingState();
     renderFlashQuestion();
     return;
+  }
+
+  if (!forceNew && !state.flashCurrent) {
+    const cachedSnapshot = getFlashCache(state.flashPreset);
+    if (cachedSnapshot?.current?.question?.word) {
+      restoreFlashSessionSnapshot(cachedSnapshot);
+      setView("flash");
+      renderFlashLoadingState();
+      renderFlashQuestion();
+      warmFlashBatchForCurrentState();
+      saveCurrentFlashCache();
+      return;
+    }
   }
 
   if (state.flashQueue.length) {
@@ -2434,6 +2760,8 @@ function goToPrevFlashQuestion() {
   }
   restoreFlashSnapshot(state.flashPast.pop());
   renderFlashQuestion();
+  warmFlashBatchForCurrentState();
+  saveCurrentFlashCache();
 }
 
 function goToNextFlashQuestion() {
@@ -2443,6 +2771,8 @@ function goToNextFlashQuestion() {
     }
     restoreFlashSnapshot(state.flashFuture.pop());
     renderFlashQuestion();
+    warmFlashBatchForCurrentState();
+    saveCurrentFlashCache();
     return;
   }
 
@@ -2450,6 +2780,7 @@ function goToNextFlashQuestion() {
     state.flashPast.push(createFlashSnapshot());
   }
   state.flashFuture = [];
+  saveCurrentFlashCache();
   loadFlashQuestion({ forceNew: true });
 }
 
@@ -2501,7 +2832,7 @@ function renderHomeModes() {
         return;
       }
       if (type === "reading") {
-        loadReadingExercise({ forceNew: true });
+        loadReadingExercise();
         return;
       }
       state.mode = key;
@@ -2899,6 +3230,7 @@ function bindEvents() {
     }
     state.flashLoading = false;
     state.flashLoadingPercent = 0;
+    saveCurrentFlashCache();
     renderFlashLoadingState();
     setView("home");
   });
@@ -2909,11 +3241,38 @@ function bindEvents() {
     }
     state.readingLoading = false;
     state.readingLoadingPercent = 0;
+    state.readingPast = [];
+    state.readingFuture = [];
+    if (state.readingExercise) {
+      saveReadingCache(createReadingSnapshot());
+    } else {
+      clearReadingCache();
+    }
     renderReadingLoadingState();
     setView("home");
   });
   elements.readingWordListBtn.addEventListener("click", () => {
     openReadingWordListDialog();
+  });
+  elements.readingTitleCard.addEventListener("toggle", () => {
+    if (!state.readingExercise?.titleCn) {
+      state.readingTitleOpen = false;
+      syncReadingTitleCardState();
+      return;
+    }
+    state.readingTitleOpen = elements.readingTitleCard.open;
+    syncReadingTitleCardState();
+    renderReadingToggleAllButton();
+    saveReadingCache(createReadingSnapshot());
+  });
+  elements.readingPrevBtn.addEventListener("click", () => {
+    goToPrevReadingExercise();
+  });
+  elements.readingToggleAllBtn.addEventListener("click", () => {
+    setReadingAllExpanded(!isReadingFullyExpanded());
+  });
+  elements.readingNextBtn.addEventListener("click", () => {
+    goToNextReadingExercise();
   });
   elements.flashRevealBtn.addEventListener("click", () => {
     if (!state.flashCurrent || !state.flashEvaluation) {
@@ -2921,6 +3280,7 @@ function bindEvents() {
     }
     state.flashDetailVisible = !state.flashDetailVisible;
     renderFlashQuestion();
+    saveCurrentFlashCache();
   });
   elements.flashPrevBtn.addEventListener("click", goToPrevFlashQuestion);
   elements.flashNextBtn.addEventListener("click", () => {
@@ -3140,7 +3500,9 @@ async function initializeApp() {
     renderSubmitButton();
     renderQuizHeader();
     renderFlashNavButtons();
+    renderReadingNavButtons();
     renderQuizNavButtons();
+    renderReadingExercise();
     renderHomeModes();
     renderHistory();
     renderCollection();

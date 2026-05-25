@@ -1,4 +1,4 @@
-const { USE_MOCK_DATA, PUBLIC_MODEL_ENABLED, DEEPSEEK_API_KEY } = require("../config");
+const { USE_MOCK_DATA } = require("../config");
 const {
   generateForWords,
   generateSynonyms,
@@ -26,7 +26,7 @@ const {
 
 function hasAiSupport(personalApiKey = "") {
   const normalizedPersonalApiKey = String(personalApiKey || "").trim();
-  return Boolean(normalizedPersonalApiKey || (PUBLIC_MODEL_ENABLED && DEEPSEEK_API_KEY));
+  return Boolean(normalizedPersonalApiKey);
 }
 
 async function getLocalWordPool() {
@@ -255,6 +255,72 @@ function splitGlossChoices(value = "") {
   )];
 }
 
+function extractFlashOptionPos(text = "") {
+  const source = String(text || "").trim();
+  const match = source.match(/^(?:（[^）]*）|\([^)]*\))?\s*([a-z]+)\.\s*/i);
+  return match ? match[1].toLowerCase() : "";
+}
+
+function normalizeFlashGlossCore(text = "") {
+  return String(text || "")
+    .trim()
+    .toLowerCase()
+    .replace(/^(?:（[^）]*）|\([^)]*\))?\s*[a-z]+\.\s*/i, "")
+    .replace(/[（）()]/g, "")
+    .replace(/[;；,，、/]/g, "")
+    .replace(/\s+/g, "");
+}
+
+function areFlashOptionsNearDuplicate(left, right) {
+  const leftText = String(left?.text || "").trim();
+  const rightText = String(right?.text || "").trim();
+  if (!leftText || !rightText) {
+    return false;
+  }
+  if (leftText === rightText) {
+    return true;
+  }
+
+  const leftPos = extractFlashOptionPos(leftText);
+  const rightPos = extractFlashOptionPos(rightText);
+  if (leftPos && rightPos && leftPos !== rightPos) {
+    return false;
+  }
+
+  const leftCore = normalizeFlashGlossCore(leftText);
+  const rightCore = normalizeFlashGlossCore(rightText);
+  if (!leftCore || !rightCore) {
+    return false;
+  }
+
+  return (
+    leftCore === rightCore ||
+    leftCore.includes(rightCore) ||
+    rightCore.includes(leftCore)
+  );
+}
+
+function dedupeFlashOptions(options = [], correctOption = null) {
+  const kept = [];
+  const correctText = String(correctOption?.text || "").trim();
+
+  (Array.isArray(options) ? options : []).forEach((option) => {
+    if (!option?.text) {
+      return;
+    }
+    if (kept.some((existing) => areFlashOptionsNearDuplicate(existing, option))) {
+      return;
+    }
+    kept.push(option);
+  });
+
+  if (correctText && !kept.some((option) => areFlashOptionsNearDuplicate(option, correctOption))) {
+    kept.unshift(correctOption);
+  }
+
+  return kept;
+}
+
 function buildLocalFlashOptionPool(cache = {}) {
   return Object.entries(cache)
     .map(([word, item]) => ({
@@ -320,7 +386,8 @@ async function buildFallbackFlashQuestions(items) {
     };
     const distractors = pickLocalDistractors(optionPool, item.word, correctOption.text);
 
-    const options = shuffle([correctOption, ...distractors]).slice(0, 4);
+    const uniqueOptions = dedupeFlashOptions([correctOption, ...distractors], correctOption);
+    const options = shuffle(uniqueOptions).slice(0, 4);
     const ensuredOptions = options.some((option) => option.text === correctOption.text)
       ? options
       : shuffle([correctOption, ...options.slice(0, 3)]).slice(0, 4);

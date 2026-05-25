@@ -30,20 +30,6 @@ function loadEnvFile() {
   }
 }
 
-function decodeMaskedSecret(value) {
-  const masked = String(value || "").trim();
-  if (!masked) {
-    return "";
-  }
-
-  try {
-    const reversed = Buffer.from(masked, "base64").toString("utf8");
-    return reversed.split("").reverse().join("");
-  } catch {
-    return "";
-  }
-}
-
 function requireEnvText(name) {
   const value = String(process.env[name] || "").trim();
   if (!value) {
@@ -52,8 +38,6 @@ function requireEnvText(name) {
   return value;
 }
 
-const DEEPSEEK_API_KEY =
-  process.env.DEEPSEEK_API_KEY || decodeMaskedSecret(process.env.DEEPSEEK_API_KEY_MASKED);
 const SESSION_SECRET = requireEnvText("SESSION_SECRET");
 
 module.exports = {
@@ -67,8 +51,6 @@ module.exports = {
   SESSION_SECRET,
   SESSION_COOKIE_NAME: process.env.SESSION_COOKIE_NAME || "word_unlock",
   SESSION_TTL_HOURS: Math.max(1, Number(process.env.SESSION_TTL_HOURS || 24 * 30)),
-  PUBLIC_MODEL_ENABLED: String(process.env.PUBLIC_MODEL_ENABLED || "false") === "true",
-  DEEPSEEK_API_KEY,
   DEEPSEEK_API_URL:
     process.env.DEEPSEEK_API_URL || "https://api.deepseek.com/chat/completions",
   DEEPSEEK_MODEL: process.env.DEEPSEEK_MODEL || "deepseek-chat",
@@ -160,6 +142,8 @@ Hard constraints:
 10. Distractor words should be common standalone English words, not phrases, and should match their own gloss naturally.
 11. Every distractor "word" must be non-empty and must NOT equal the target word.
 12. Do NOT use another meaning, part of speech, or paraphrase of the target word as a distractor.
+13. Do NOT return two options with the same part of speech and the same Chinese meaning.
+14. Do NOT return one option whose Chinese gloss is just a substring , such as "v. 拒绝" vs "v. 拒绝，排斥".
 
 Return pure JSON array only:
 [{"word":"","correctOption":"","correctOptionWord":"","distractors":[{"word":"","text":""},{"word":"","text":""},{"word":"","text":""}]}]
@@ -185,30 +169,28 @@ Hard constraints:
 3. Return plain Chinese text only.
 
 Title: {{title}}`,
-  READING_PROMPT: `You are generating a short bilingual English reading exercise for Chinese learners.
-Use these target words naturally in one coherent, exam-friendly short passage:
+  READING_PROMPT: `Write a short bilingual English reading exercise for Chinese learners using these candidate words:
 {{items}}
 
-Hard constraints:
-1. Write a short English passage with exactly 5 to 8 sentences.
-2. The passage should resemble Chinese postgraduate English reading materials: abstract topic, strong logic, formal tone, and moderate academic density.
-3. Prefer longer and more difficult sentences with clauses, modifiers, contrast, concession, cause-effect, and other structures typical of postgraduate English exams.
-4. At least 2 sentences should be clear long/complex sentences, but the passage must still remain grammatical and readable.
-5. Use the target words naturally and meaningfully; do not force awkward wording or simple word lists in disguise.
-6. Every English sentence must have one matching fluent Chinese translation.
-7. The Chinese should be a natural translation, not word-for-word gloss.
-8. In each Chinese sentence, wrap the Chinese phrase corresponding to any target word meaning with 【】 so it can be highlighted later.
-9. If one sentence contains multiple target words, mark each corresponding Chinese phrase with its own 【】.
-10. Do NOT wrap any English word or phrase with [], 【】, (), or any other marker in the English sentence.
-11. Do not add markdown, numbering, explanations, or extra commentary.
-12. Return pure JSON only.
+Requirements:
+- Write 5 to 8 sentence pairs.
+- Choose the largest natural subset and use as many candidate words as possible, but skip any word that would make the passage awkward.
+- Keep the passage coherent, formal, and similar to Chinese postgraduate English reading; include at least 2 clear long/complex sentences.
+- Each English sentence must have one natural Chinese translation.
+- In Chinese, mark the Chinese phrase that corresponds to a used target word with 【】.
+- The content inside 【】 must be Chinese only, never English, pinyin, or mixed text.
+- Do not add any marker in English.
+- Return selectedWords as the lowercase English words actually used.
+- Return pure JSON only.
 
-Return this exact JSON shape:
-{"title":"","titleCn":"","sentences":[{"en":"","cn":""}]}
+Example sentence pair:
+{"en":"Public trust may erode when institutions ignore obvious risks.","cn":"当机构忽视明显风险时，公众【信任】可能会被削弱。"}
 
-The title should be a short English title with a formal reading-comprehension style.
-titleCn should be the natural Chinese translation of the title.
-Each sentence object must include non-empty "en" and "cn".`,
+Return JSON:
+{"title":"","titleCn":"","selectedWords":[""],"sentences":[{"en":"","cn":""}]}
+
+title: short formal English title
+titleCn: natural Chinese translation of the title`,
   DEMO_ITEMS: [
     {
       word: "abandon",

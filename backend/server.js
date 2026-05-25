@@ -5,9 +5,7 @@ const {
   PORT,
   SESSION_SECRET,
   SESSION_COOKIE_NAME,
-  SESSION_TTL_HOURS,
-  PUBLIC_MODEL_ENABLED,
-  DEEPSEEK_API_KEY
+  SESSION_TTL_HOURS
 } = require("./config");
 const { ensureDataFiles } = require("./lib/wordService");
 const { getDatabase } = require("./lib/db");
@@ -258,8 +256,7 @@ app.get("/api/auth/me", async (request, response, next) => {
     response.json({
       ok: true,
       authenticated: Boolean(user),
-      user: formatSafeUser(user),
-      publicAiEnabled: Boolean(PUBLIC_MODEL_ENABLED && DEEPSEEK_API_KEY)
+      user: formatSafeUser(user)
     });
   } catch (error) {
     next(error);

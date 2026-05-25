@@ -1,4 +1,3 @@
-const { PUBLIC_MODEL_ENABLED, DEEPSEEK_API_KEY } = require("../config");
 const { generateForWords, generateReadingPassage } = require("./aiService");
 const {
   readWordCache,
@@ -11,7 +10,7 @@ const {
 
 function hasAiSupport(personalApiKey = "") {
   const normalizedPersonalApiKey = String(personalApiKey || "").trim();
-  return Boolean(normalizedPersonalApiKey || (PUBLIC_MODEL_ENABLED && DEEPSEEK_API_KEY));
+  return Boolean(normalizedPersonalApiKey);
 }
 
 async function resolveReadingItems(words, user) {
@@ -62,16 +61,16 @@ async function createReadingExercise(user, customWords = null) {
     .map((word) => String(word || "").trim().toLowerCase())
     .filter(Boolean);
 
-  if (wordPool.length < 5) {
+  if (wordPool.length < 6) {
     throw new Error("本地词库不足，暂时无法生成阅读训练");
   }
 
-  const targetCount = Math.min(wordPool.length, Math.max(5, Math.floor(Math.random() * 6) + 5));
+  const targetCount = Math.min(wordPool.length, 10);
   const pickedWords = pickRandomWords(wordPool, targetCount);
   const items = await resolveReadingItems(pickedWords, user);
   const exampleMap = await readWordExamples();
 
-  if (items.length < 5) {
+  if (items.length < 6) {
     throw new Error("可用词义不足，暂时无法生成阅读训练");
   }
 
@@ -80,10 +79,19 @@ async function createReadingExercise(user, customWords = null) {
     throw new Error("阅读训练生成失败，请稍后再试");
   }
 
+  const selectedWordSet = new Set(
+    (Array.isArray(passage.selectedWords) ? passage.selectedWords : [])
+      .map((word) => String(word || "").trim().toLowerCase())
+      .filter(Boolean)
+  );
+  const displayItems = selectedWordSet.size
+    ? items.filter((item) => selectedWordSet.has(item.word))
+    : items;
+
   return {
     title: passage.title || "Reading Practice",
     titleCn: passage.titleCn || "",
-    words: items.map((item) => ({
+    words: displayItems.map((item) => ({
       word: item.word,
       wordCn: item.wordCn,
       defEn: item.defEn,
