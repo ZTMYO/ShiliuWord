@@ -76,6 +76,15 @@ function runSchema(db) {
   if (!userColumnSet.has("book_id")) {
     db.exec("ALTER TABLE users ADD COLUMN book_id INTEGER NOT NULL DEFAULT 2;");
   }
+  if (!userColumnSet.has("current_streak")) {
+    db.exec("ALTER TABLE users ADD COLUMN current_streak INTEGER NOT NULL DEFAULT 0;");
+  }
+  if (!userColumnSet.has("best_streak")) {
+    db.exec("ALTER TABLE users ADD COLUMN best_streak INTEGER NOT NULL DEFAULT 0;");
+  }
+  if (userColumnSet.has("streak")) {
+    db.exec("ALTER TABLE users DROP COLUMN streak;");
+  }
 }
 
 async function createDatabase() {

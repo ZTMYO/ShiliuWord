@@ -1,10 +1,11 @@
 const { WORD_BOOKS } = require("../config");
-const { generateForWords, generateReadingPassage } = require("./aiService");
+const { generateForWords, generateReadingPassage, generateExamples } = require("./aiService");
 const {
   readBookWords,
   readWordCache,
   readWordExamples,
   mergeCacheItems,
+  mergeWordExamples,
   normalizeItems,
   pickRandomWords,
   getCachedItems
@@ -80,7 +81,7 @@ async function createReadingExercise(auth, customWords = null) {
   const targetCount = Math.min(wordPool.length, 10);
   const pickedWords = pickRandomWords(wordPool, targetCount);
   const items = await resolveReadingItems(pickedWords, auth);
-  const exampleMap = await readWordExamples();
+  let exampleMap = await readWordExamples();
 
   if (items.length < 6) {
     throw new Error("可用词义不足，暂时无法生成阅读训练");
@@ -99,6 +100,22 @@ async function createReadingExercise(auth, customWords = null) {
   const displayItems = selectedWordSet.size
     ? items.filter((item) => selectedWordSet.has(item.word))
     : items;
+
+  const missingExampleWords = displayItems
+    .map((item) => String(item.word || "").trim().toLowerCase())
+    .filter(Boolean)
+    .filter((word) => !(Array.isArray(exampleMap[word]?.examples) && exampleMap[word].examples.length));
+
+  if (missingExampleWords.length) {
+    try {
+      const generatedMap = await generateExamples(missingExampleWords, auth?.personalApiKey, { bookName: getBookNameById(auth?.bookId) });
+      if (Object.keys(generatedMap || {}).length) {
+        exampleMap = await mergeWordExamples(generatedMap);
+      }
+    } catch {
+      // ignore example backfill failures for reading exercise
+    }
+  }
 
   return {
     title: passage.title || "Reading Practice",

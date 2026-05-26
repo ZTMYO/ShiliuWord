@@ -1,123 +1,150 @@
 <!doctype html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>石榴刷词</title>
-    <style>
-      html,
-      body {
-        margin: 0;
-      }
 
-      html {
-        background: #ffffff;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <title>石榴刷词</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+    }
 
-      html[data-theme="dark"] {
-        background: #1a1b1d;
-      }
+    html {
+      background: #ffffff;
+    }
 
-      body {
-        background: inherit;
-      }
+    html[data-theme="dark"] {
+      background: #1a1b1d;
+    }
 
-      body:not(.app-ready) .app-shell,
-      body:not(.app-ready) #toast,
-      body:not(.app-ready) dialog {
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
+    body {
+      background: inherit;
+    }
+
+    body:not(.app-ready) .app-shell,
+    body:not(.app-ready) #toast,
+    body:not(.app-ready) dialog {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+  </style>
+  <script>
+    try {
+      const savedTheme =
+        window.localStorage.getItem("shiliu-word-theme") ||
+        window.localStorage.getItem("english-ai-theme");
+      if (savedTheme === "dark") {
+        document.documentElement.dataset.theme = "dark";
       }
-    </style>
-    <script>
-      try {
-        const savedTheme =
-          window.localStorage.getItem("shiliu-word-theme") ||
-          window.localStorage.getItem("english-ai-theme");
-        if (savedTheme === "dark") {
-          document.documentElement.dataset.theme = "dark";
-        }
-      } catch {}
-    </script>
-    <script type="module" src="/src/main.js"></script>
-  </head>
-  <body>
-    <div class="app-shell">
-      <section id="home-view" class="page page-home">
-        <header class="page-header home-header">
-          <div class="page-header-inner">
-            <div class="page-header-main">
-              <h1>石榴刷词</h1>
-            </div>
-            <div class="page-header-actions">
-              <button id="history-entry-btn" class="icon-btn home-entry-btn" type="button" aria-label="刷题记录" title="刷题记录">
-                <svg viewBox="0 0 1024 1024" aria-hidden="true">
-                  <path d="M885.312 512c0-205.12-169.088-373.312-380.16-373.312a381.12 381.12 0 0 0-322.624 175.872h141.44v74.88H99.84a35.84 35.84 0 0 1-35.84-35.84V128h74.432v118.912A456.448 456.448 0 0 1 505.152 64C756.352 64 960 264.576 960 512s-203.648 448-454.848 448C292.288 960 113.536 815.936 64 621.44l74.048-12.16c43.52 158.464 190.72 276.032 367.104 276.032 211.072 0 380.16-168.192 380.16-373.312z m-445.12 27.776V332.672h71.68V510.08l168.704 168.704-50.688 50.688-189.696-189.696z" fill="currentColor"></path>
-                </svg>
-              </button>
-              <button id="collection-entry-btn" class="icon-btn home-entry-btn" type="button" aria-label="我的收藏" title="我的收藏">
-                <svg viewBox="0 0 1024 1024" aria-hidden="true">
-                  <path d="M138.684889 767.968001h746.635557V73.12762H213.348445c-20.991125 0.767968-38.48373 8.020999-52.477814 21.759093a73.12762 73.12762 0 0 0-22.185742 51.411191V767.968001z m821.299113 18.303238v164.558476a73.12762 73.12762 0 0 1-22.185743 51.411192c-13.994084 13.738094-31.486688 20.94846-52.477813 21.716428H194.661223c-37.289113-0.767968-68.263822-13.140786-92.710803-37.118453-22.143077-21.716428-34.55856-48.509979-37.374443-80.423316L64.021333 907.396858V146.255239c0.767968-41.128953 15.35936-75.602183 43.731512-103.41969C136.167661 15.060706 171.323529 0.767968 213.348445 0h709.303779c10.879547 0 19.839173 3.413191 26.836215 10.282238 6.997042 6.826382 10.495563 15.615349 10.495563 26.281572V786.313904zM194.661223 841.095621c-15.53002 0.767968-28.585476 6.314404-39.081038 16.596642-10.495563 10.239573-15.743344 23.03904-15.743344 38.270405s5.247781 27.988167 15.786009 38.270406c10.495563 10.282238 23.465689 15.786009 39.081038 16.596641H885.320446v-109.734094H194.661223zM288.012 73.04229H661.329779v362.352902a35.667847 35.667847 0 0 1-21.588434 32.595975c-13.6101 6.485063-26.622891 5.119787-39.081038-4.0105L474.67089 365.680763l-125.989418 98.299904c-12.458148 9.130286-25.470939 10.495563-39.081038 4.0105a35.667847 35.667847 0 0 1-21.588434-32.595975V73.04229zM362.675556 73.12762v286.836048l111.995334-87.975001 111.995333 88.017666V73.084955H362.675556z" fill="currentColor"></path>
-                </svg>
-              </button>
-              <button id="site-info-btn" class="icon-btn github-link-btn" type="button" aria-label="网站信息" title="网站信息">
-                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <path d="M12 16v-4"></path>
-                  <path d="M12 8h.01"></path>
-                </svg>
-              </button>
-              <button id="home-theme-toggle-btn" class="icon-btn theme-toggle-btn" type="button" aria-label="切换暗色模式"></button>
-              <button id="settings-entry-btn" class="icon-btn user-avatar-btn" type="button" aria-label="账号设置" title="账号设置">
-                <span id="settings-avatar-letter" class="user-avatar-letter">A</span>
-                <svg id="settings-avatar-icon" class="user-avatar-icon is-hidden" viewBox="0 0 1024 1024" aria-hidden="true">
-                  <path d="M512 590.75c-142.5 0-258.75-116.25-258.75-258.75s116.25-262.5 258.75-262.5 258.75 116.25 258.75 258.75-116.25 262.5-258.75 262.5zM512 144.5c-101.25 0-183.75 82.5-183.75 183.75s82.5 183.75 183.75 183.75 183.75-82.5 183.75-183.75-82.5-183.75-183.75-183.75z"></path>
-                  <path d="M170.75 950.75c-18.75 0-37.5-15-37.5-37.5 0-7.5 0-11.25 0-15 0-210 172.5-382.5 382.5-382.5 22.5 0 37.5 15 37.5 37.5s-15 37.5-37.5 37.5c-168.75 0-307.5 138.75-307.5 307.5v11.25c0 22.5-18.75 41.25-37.5 41.25v0z"></path>
-                  <path d="M853.25 947v0c-22.5 0-37.5-15-37.5-37.5v-11.25c0-168.75-138.75-307.5-307.5-307.5-22.5 0-37.5-15-37.5-37.5s15-37.5 37.5-37.5c210 0 382.5 172.5 382.5 382.5 0 3.75 0 7.5 0 11.25 0 22.5-15 37.5-37.5 37.5z"></path>
-                </svg>
-              </button>
-            </div>
+    } catch { }
+  </script>
+  <script type="module" src="/src/main.js"></script>
+</head>
+
+<body>
+  <div class="app-shell">
+    <section id="home-view" class="page page-home">
+      <header class="page-header home-header">
+        <div class="page-header-inner">
+          <div class="page-header-main">
+            <h1>石榴刷词</h1>
           </div>
-        </header>
-        <div class="page-content home-content">
-          <div class="home-card">
-          <div id="home-mode-list" class="home-mode-list"></div>
+          <div class="page-header-actions">
+            <button id="history-entry-btn" class="icon-btn home-entry-btn" type="button" aria-label="刷题记录" title="刷题记录">
+              <svg viewBox="0 0 1024 1024" aria-hidden="true">
+                <path
+                  d="M885.312 512c0-205.12-169.088-373.312-380.16-373.312a381.12 381.12 0 0 0-322.624 175.872h141.44v74.88H99.84a35.84 35.84 0 0 1-35.84-35.84V128h74.432v118.912A456.448 456.448 0 0 1 505.152 64C756.352 64 960 264.576 960 512s-203.648 448-454.848 448C292.288 960 113.536 815.936 64 621.44l74.048-12.16c43.52 158.464 190.72 276.032 367.104 276.032 211.072 0 380.16-168.192 380.16-373.312z m-445.12 27.776V332.672h71.68V510.08l168.704 168.704-50.688 50.688-189.696-189.696z"
+                  fill="currentColor"></path>
+              </svg>
+            </button>
+            <button id="collection-entry-btn" class="icon-btn home-entry-btn" type="button" aria-label="我的收藏"
+              title="我的收藏">
+              <svg viewBox="0 0 1024 1024" aria-hidden="true">
+                <path
+                  d="M138.684889 767.968001h746.635557V73.12762H213.348445c-20.991125 0.767968-38.48373 8.020999-52.477814 21.759093a73.12762 73.12762 0 0 0-22.185742 51.411191V767.968001z m821.299113 18.303238v164.558476a73.12762 73.12762 0 0 1-22.185743 51.411192c-13.994084 13.738094-31.486688 20.94846-52.477813 21.716428H194.661223c-37.289113-0.767968-68.263822-13.140786-92.710803-37.118453-22.143077-21.716428-34.55856-48.509979-37.374443-80.423316L64.021333 907.396858V146.255239c0.767968-41.128953 15.35936-75.602183 43.731512-103.41969C136.167661 15.060706 171.323529 0.767968 213.348445 0h709.303779c10.879547 0 19.839173 3.413191 26.836215 10.282238 6.997042 6.826382 10.495563 15.615349 10.495563 26.281572V786.313904zM194.661223 841.095621c-15.53002 0.767968-28.585476 6.314404-39.081038 16.596642-10.495563 10.239573-15.743344 23.03904-15.743344 38.270405s5.247781 27.988167 15.786009 38.270406c10.495563 10.282238 23.465689 15.786009 39.081038 16.596641H885.320446v-109.734094H194.661223zM288.012 73.04229H661.329779v362.352902a35.667847 35.667847 0 0 1-21.588434 32.595975c-13.6101 6.485063-26.622891 5.119787-39.081038-4.0105L474.67089 365.680763l-125.989418 98.299904c-12.458148 9.130286-25.470939 10.495563-39.081038 4.0105a35.667847 35.667847 0 0 1-21.588434-32.595975V73.04229zM362.675556 73.12762v286.836048l111.995334-87.975001 111.995333 88.017666V73.084955H362.675556z"
+                  fill="currentColor"></path>
+              </svg>
+            </button>
+            <button id="site-info-btn" class="icon-btn github-link-btn" type="button" aria-label="网站信息" title="网站信息">
+              <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 16v-4"></path>
+                <path d="M12 8h.01"></path>
+              </svg>
+            </button>
+            <button id="home-theme-toggle-btn" class="icon-btn theme-toggle-btn" type="button"
+              aria-label="切换暗色模式"></button>
+            <div class="user-avatar-wrap">
+              <button id="settings-entry-btn" class="icon-btn user-avatar-btn" type="button" aria-label="账号设置"
+                title="账号设置">
+                <span id="settings-avatar-letter" class="user-avatar-letter">A</span>
+                <svg id="settings-avatar-icon" class="user-avatar-icon is-hidden" viewBox="0 0 1024 1024"
+                  aria-hidden="true">
+                  <path
+                    d="M512 590.75c-142.5 0-258.75-116.25-258.75-258.75s116.25-262.5 258.75-262.5 258.75 116.25 258.75 258.75-116.25 262.5-258.75 262.5zM512 144.5c-101.25 0-183.75 82.5-183.75 183.75s82.5 183.75 183.75 183.75 183.75-82.5 183.75-183.75-82.5-183.75-183.75-183.75z">
+                  </path>
+                  <path
+                    d="M170.75 950.75c-18.75 0-37.5-15-37.5-37.5 0-7.5 0-11.25 0-15 0-210 172.5-382.5 382.5-382.5 22.5 0 37.5 15 37.5 37.5s-15 37.5-37.5 37.5c-168.75 0-307.5 138.75-307.5 307.5v11.25c0 22.5-18.75 41.25-37.5 41.25v0z">
+                  </path>
+                  <path
+                    d="M853.25 947v0c-22.5 0-37.5-15-37.5-37.5v-11.25c0-168.75-138.75-307.5-307.5-307.5-22.5 0-37.5-15-37.5-37.5s15-37.5 37.5-37.5c210 0 382.5 172.5 382.5 382.5 0 3.75 0 7.5 0 11.25 0 22.5-15 37.5-37.5 37.5z">
+                  </path>
+                </svg>
+              </button>
+              <div id="welcome-hint-bubble" class="hint-bubble is-hidden">
+                <div class="hint-bubble-content">
+                  <p>可以在个人信息页面配置词书和 API Key</p>
+                  <button id="welcome-hint-close-btn" class="hint-bubble-close-btn" type="button">知道了</button>
+                </div>
+                <div class="hint-bubble-arrow"></div>
+              </div>
+            </div>
           </div>
         </div>
-      </section>
+      </header>
+      <div class="page-content home-content">
+        <div class="home-card">
+          <div id="home-mode-list" class="home-mode-list"></div>
+        </div>
+      </div>
+    </section>
 
-      <section id="quiz-view" class="page page-quiz is-hidden">
-        <header class="page-header quiz-header">
-          <div class="page-header-inner">
-            <div class="page-header-main">
-              <h2 id="quiz-title">匹配刷词</h2>
+    <section id="quiz-view" class="page page-quiz is-hidden">
+      <header class="page-header quiz-header">
+        <div class="page-header-inner">
+          <div class="page-header-main">
+            <h2 id="quiz-title">匹配刷词</h2>
+          </div>
+          <div class="page-header-actions">
+            <button id="back-home-btn" class="icon-btn" type="button" aria-label="返回主页" title="返回主页">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
+              </svg>
+            </button>
+            <button id="quiz-theme-toggle-btn" class="icon-btn theme-toggle-btn" type="button"
+              aria-label="切换暗色模式"></button>
+          </div>
+        </div>
+      </header>
+      <div class="page-content quiz-content">
+        <div id="loading-view" class="loading-view is-hidden">
+          <div class="loading-panel">
+            <div class="loading-head">
+              <p class="loading-text">AI 正在生成题目</p>
+              <span id="loading-percent" class="loading-percent">0%</span>
             </div>
-            <div class="page-header-actions">
-              <button id="back-home-btn" class="icon-btn" type="button" aria-label="返回主页">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
-                </svg>
-              </button>
-              <button id="quiz-theme-toggle-btn" class="icon-btn theme-toggle-btn" type="button" aria-label="切换暗色模式"></button>
+            <div class="loading-track">
+              <div id="loading-bar" class="loading-bar"></div>
             </div>
           </div>
-        </header>
-        <div class="page-content quiz-content">
-          <div id="loading-view" class="loading-view is-hidden">
-            <div class="loading-panel">
-              <div class="loading-head">
-                <p class="loading-text">AI 正在生成题目</p>
-                <span id="loading-percent" class="loading-percent">0%</span>
-              </div>
-              <div class="loading-track">
-                <div id="loading-bar" class="loading-bar"></div>
-              </div>
-            </div>
-          </div>
+        </div>
 
-          <main id="quiz-board" class="quiz-board">
+        <main id="quiz-board" class="quiz-board">
           <section class="quiz-panel">
             <div id="question-list" class="question-list"></div>
           </section>
@@ -131,65 +158,68 @@
             <button id="submit-btn" class="primary-btn submit-btn">提交</button>
             <button id="next-btn" class="tool-btn next-btn">下一题</button>
           </div>
-          </main>
+        </main>
+      </div>
+    </section>
+
+    <section id="flash-view" class="page page-flash is-hidden">
+      <header class="page-header flash-header">
+        <div class="page-header-inner">
+          <div class="page-header-main">
+            <div class="flash-header-title">
+              <h2 class="flash-title">闪卡刷词</h2>
+              <span id="flash-prev-divider" class="flash-title-divider is-hidden" aria-hidden="true">|</span>
+              <span id="flash-prev-summary" class="flash-prev-summary is-hidden">
+                <span class="flash-prev-en"></span>
+                <span class="flash-prev-cn"></span>
+              </span>
+            </div>
+          </div>
+          <div class="page-header-actions">
+            <button id="flash-back-home-btn" class="icon-btn" type="button" aria-label="返回主页" title="返回主页">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
+              </svg>
+            </button>
+            <button id="flash-collect-btn" class="icon-btn collect-btn is-hidden" type="button" aria-label="收藏"
+              title="收藏">
+              <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                </polygon>
+              </svg>
+            </button>
+            <button id="flash-theme-toggle-btn" class="icon-btn theme-toggle-btn" type="button"
+              aria-label="切换暗色模式"></button>
+          </div>
         </div>
-      </section>
-
-      <section id="flash-view" class="page page-flash is-hidden">
-        <header class="page-header flash-header">
-          <div class="page-header-inner">
-            <div class="page-header-main">
-              <div class="flash-header-title">
-                <h2 class="flash-title">闪卡刷词</h2>
-                <span id="flash-prev-divider" class="flash-title-divider is-hidden" aria-hidden="true">|</span>
-                <span id="flash-prev-summary" class="flash-prev-summary is-hidden">
-                  <span class="flash-prev-en"></span>
-                  <span class="flash-prev-cn"></span>
-                </span>
-              </div>
+      </header>
+      <div class="page-content flash-content">
+        <div id="flash-loading-view" class="loading-view is-hidden">
+          <div class="loading-panel">
+            <div class="loading-head">
+              <p class="loading-text">AI 正在生成闪卡刷词题目</p>
+              <span id="flash-loading-percent" class="loading-percent">0%</span>
             </div>
-            <div class="page-header-actions">
-              <button id="flash-back-home-btn" class="icon-btn" type="button" aria-label="返回主页">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
-                </svg>
-              </button>
-              <button id="flash-collect-btn" class="icon-btn collect-btn is-hidden" type="button" aria-label="收藏" title="收藏">
-                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                </svg>
-              </button>
-              <button id="flash-theme-toggle-btn" class="icon-btn theme-toggle-btn" type="button" aria-label="切换暗色模式"></button>
+            <div class="loading-track">
+              <div id="flash-loading-bar" class="loading-bar"></div>
             </div>
           </div>
-        </header>
-        <div class="page-content flash-content">
-          <div id="flash-loading-view" class="loading-view is-hidden">
-            <div class="loading-panel">
-              <div class="loading-head">
-                <p class="loading-text">AI 正在生成闪卡刷词题目</p>
-                <span id="flash-loading-percent" class="loading-percent">0%</span>
-              </div>
-              <div class="loading-track">
-                <div id="flash-loading-bar" class="loading-bar"></div>
-              </div>
-            </div>
-          </div>
+        </div>
 
-          <main id="flash-board" class="flash-board">
+        <main id="flash-board" class="flash-board">
           <section class="flash-panel flash-word-panel">
             <div class="flash-word-anchor">
               <h2 id="flash-word" class="flash-word"></h2>
               <div id="flash-phonetic" class="flash-phonetic"></div>
-              <div class="flash-reveal-wrap">
-                <button id="flash-reveal-btn" class="tool-btn flash-reveal-btn is-hidden">查看释义</button>
-              </div>
+              <div id="flash-hint-example" class="flash-hint-example is-hidden"></div>
             </div>
           </section>
 
           <section class="flash-panel flash-bottom-panel">
             <div id="flash-detail" class="flash-detail is-hidden"></div>
-            
+
             <div class="flash-option-section">
               <div id="flash-option-list" class="flash-option-list"></div>
             </div>
@@ -198,278 +228,444 @@
           <div class="flash-bottom-dock">
             <div class="submit-wrap">
               <button id="flash-prev-btn" class="tool-btn prev-btn flash-prev-btn">上一题</button>
-              <button id="flash-pronounce-btn" class="tool-btn flash-pronounce-btn" type="button">朗读</button>
+              <button id="flash-hint-btn" class="tool-btn flash-hint-btn" type="button">提示</button>
               <button id="flash-next-btn" class="tool-btn next-btn">下一题</button>
             </div>
           </div>
-          </main>
-        </div>
-      </section>
-
-      <section id="reading-view" class="page page-reading is-hidden">
-        <header class="page-header reading-header">
-          <div class="page-header-inner">
-            <div class="page-header-main">
-              <h2>阅读训练</h2>
-            </div>
-            <div class="page-header-actions">
-              <button id="reading-word-list-btn" class="tool-btn reading-word-list-btn" type="button">重点单词</button>
-              <button id="reading-back-home-btn" class="icon-btn" type="button" aria-label="返回主页">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
-                </svg>
-              </button>
-              <button id="reading-theme-toggle-btn" class="icon-btn theme-toggle-btn" type="button" aria-label="切换暗色模式"></button>
-            </div>
-          </div>
-        </header>
-        <div class="page-content reading-content">
-          <div id="reading-loading-view" class="loading-view is-hidden">
-            <div class="loading-panel">
-              <div class="loading-head">
-                <p class="loading-text">AI 正在生成阅读训练</p>
-                <span id="reading-loading-percent" class="loading-percent">0%</span>
-              </div>
-              <div class="loading-track">
-                <div id="reading-loading-bar" class="loading-bar"></div>
-              </div>
-            </div>
-          </div>
-
-          <main id="reading-board" class="reading-board is-hidden">
-            <details id="reading-title-card" class="reading-panel reading-head-panel reading-title-card">
-              <summary class="reading-title-summary">
-                <h3 id="reading-title" class="reading-title">Reading Practice</h3>
-              </summary>
-              <div id="reading-title-body" class="reading-title-body is-hidden">
-                <p id="reading-title-cn" class="reading-title-cn"></p>
-              </div>
-            </details>
-
-            <section id="reading-sentence-list" class="reading-sentence-list"></section>
-
-            <div class="reading-bottom-dock">
-              <div class="reading-nav-wrap">
-                <button id="reading-prev-btn" class="tool-btn prev-btn reading-nav-btn" type="button">上一篇</button>
-                <button id="reading-toggle-all-btn" class="tool-btn reading-nav-btn" type="button">展开全部</button>
-                <button id="reading-next-btn" class="tool-btn next-btn reading-nav-btn" type="button">下一篇</button>
-              </div>
-            </div>
-          </main>
-        </div>
-      </section>
-
-      <section id="history-view" class="page page-history is-hidden">
-        <header class="page-header history-header">
-          <div class="page-header-inner">
-            <div class="page-header-main">
-              <h2>刷题记录</h2>
-            </div>
-            <div class="page-header-actions history-actions">
-              <button id="history-back-btn" class="icon-btn" type="button" aria-label="返回主页">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
-                </svg>
-              </button>
-              <button id="history-filter-btn" class="icon-btn history-filter-btn" type="button" aria-label="只看错题" title="只看错题">
-              </button>
-              <button id="history-theme-toggle-btn" class="icon-btn theme-toggle-btn" type="button" aria-label="切换暗色模式"></button>
-              <button id="flash-history-btn" class="icon-btn history-switch-btn" type="button" aria-label="切换闪卡刷词历史" title="切换闪卡刷词历史">
-                <svg class="history-switch-icon" viewBox="0 0 1024 1024" aria-hidden="true">
-                  <path d="M155.04 448v-64h567.392l-186.464-194.24 43.616-45.44 291.2 303.68zM149.504 576H865.28v64H297.6l186.432 194.24-43.296 45.44z"></path>
-                </svg>
-              </button>
-            </div>
-          </div>
-        </header>
-        <div class="page-content history-content">
-          <main class="history-board">
-            <div id="history-list" class="history-list"></div>
-          </main>
-        </div>
-      </section>
-
-      <section id="collection-view" class="page page-collection is-hidden">
-        <header class="page-header collection-header">
-          <div class="page-header-inner">
-            <div class="page-header-main">
-              <h2>我的收藏</h2>
-            </div>
-            <div class="page-header-actions">
-              <button id="collection-flash-btn" class="tool-btn collection-train-btn is-hidden" type="button">闪卡刷词</button>
-              <button id="collection-reading-btn" class="tool-btn collection-train-btn is-hidden" type="button">阅读</button>
-              <button id="collection-back-btn" class="icon-btn" type="button" aria-label="返回主页">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
-                </svg>
-              </button>
-              <button id="collection-theme-toggle-btn" class="icon-btn theme-toggle-btn" type="button" aria-label="切换暗色模式"></button>
-            </div>
-          </div>
-        </header>
-        <div class="page-content collection-content">
-          <main class="history-board">
-            <div id="collection-list" class="history-list"></div>
-          </main>
-        </div>
-      </section>
-
-      <section id="settings-view" class="page page-settings is-hidden">
-        <header class="page-header settings-header">
-          <div class="page-header-inner">
-            <div class="page-header-main">
-              <h2>个人信息</h2>
-            </div>
-            <div class="page-header-actions">
-              <button id="settings-back-btn" class="icon-btn" type="button" aria-label="返回主页">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
-                </svg>
-              </button>
-              <button id="settings-theme-toggle-btn" class="icon-btn theme-toggle-btn" type="button" aria-label="切换暗色模式"></button>
-            </div>
-          </div>
-        </header>
-        <div class="page-content collection-content">
-          <main class="history-board settings-board">
-            <section class="settings-panel">
-              <p class="settings-label">当前账号</p>
-              <p id="settings-username" class="settings-username">-</p>
-
-              <p class="settings-label settings-section-label">词书</p>
-              <div class="settings-book-row">
-                <button id="settings-book-btn" type="button" class="tool-btn settings-book-btn">选择词书</button>
-                <p id="settings-book-name" class="settings-book-name">-</p>
-              </div>
-
-              <p class="settings-label settings-section-label">个人 API Key</p>
-              <p class="settings-help">
-                只保存在当前设备浏览器中，可直接覆盖编辑。<br />
-                当前默认按 DeepSeek 接口校验与调用，可前往 <a class="settings-help-link" href="https://platform.deepseek.com/" target="_blank" rel="noreferrer noopener">DeepSeek 获取 API Key</a>。
-              </p>
-              <input
-                id="settings-api-key-input"
-                type="password"
-                class="password-input settings-input"
-                autocomplete="off"
-                autocapitalize="none"
-                autocorrect="off"
-                spellcheck="false"
-                placeholder="输入个人 DeepSeek API Key"
-              />
-              <div class="settings-actions">
-                <button id="save-api-key-btn" type="button" class="primary-btn settings-save-btn">保存 API Key</button>
-                <button id="clear-api-key-btn" type="button" class="tool-btn settings-clear-btn">清空</button>
-              </div>
-              <p id="settings-api-key-status" class="settings-status"></p>
-
-              <div class="settings-actions">
-                <button id="clear-history-btn" type="button" class="tool-btn settings-clear-history-btn">清空刷题记录</button>
-              </div>
-
-            </section>
-            <button id="settings-logout-btn" type="button" class="tool-btn settings-logout-btn">退出登录</button>
-          </main>
-        </div>
-      </section>
-
-    </div>
-
-    <div id="toast" class="toast" aria-live="polite"></div>
-
-    <dialog id="site-info-dialog" class="site-info-dialog">
-      <div class="dialog-header">
-        <h3>网站信息</h3>
-        <button id="close-site-info-dialog-btn" type="button" class="icon-btn" aria-label="关闭">
-          <svg viewBox="0 0 20 20" aria-hidden="true">
-            <path d="M5 5l10 10M15 5 5 15"></path>
-          </svg>
-        </button>
+        </main>
       </div>
-<div class="site-info-body">
-  <p class="site-info-intro">石榴刷词是一个支持多词书、可离线刷题、可选 AI 增强的刷词网站。</p>
-  <div id="site-info-metrics" class="site-info-metrics is-hidden" aria-label="网站数据统计">
-    <div class="site-info-metrics-group">
-      <p class="site-info-metrics-item">
-        已整理 <span class="site-info-number" id="site-stat-books"></span> 本词书，
-        覆盖 <span class="site-info-number" id="site-stat-words"></span> 个单词
-      </p>
-      <p class="site-info-metrics-item">
-        已收录单词定义 <span class="site-info-number" id="site-stat-defs"></span> 条
-      </p>
-      <p class="site-info-metrics-item">
-        共收录 <span class="site-info-number" id="site-stat-example-pairs"></span> 对例句
-      </p>
-      <p class="site-info-metrics-item">
-        已收录音标 <span class="site-info-number" id="site-stat-accents"></span> 个
-      </p>
-      <p class="site-info-metrics-item">
-        注册用户 <span class="site-info-number" id="site-stat-users"></span> 人
-      </p>
-    </div>
+    </section>
+
+    <section id="wordle-view" class="page page-wordle is-hidden">
+      <header class="page-header wordle-header">
+        <div class="page-header-inner">
+          <div class="page-header-main">
+            <h2>Wordle</h2>
+          </div>
+          <div class="page-header-actions">
+            <button id="wordle-leaderboard-btn" class="icon-btn" type="button" aria-label="排行榜" title="排行榜" tabindex="-1">
+              <svg viewBox="0 0 1024 1024" width="24" height="24" aria-hidden="true">
+                <path d="M576 221.42v576H448v-576h128m64-64H384v704h256v-704zM864 445.42v352H736v-352h128m64-64H672v480h256v-480zM288 637.42v160H160v-160h128m64-64H96v288h256v-288z" fill="currentColor"></path>
+              </svg>
+            </button>
+            <button id="wordle-help-btn" class="icon-btn" type="button" aria-label="游戏说明" title="游戏说明">
+              <svg viewBox="0 0 1024 1024" width="24" height="24" aria-hidden="true">
+                <path d="M512 42.666667a469.333333 469.333333 0 1 0 469.333333 469.333333A469.333333 469.333333 0 0 0 512 42.666667z m0 864a394.666667 394.666667 0 1 1 394.666667-394.666667 395.146667 395.146667 0 0 1-394.666667 394.666667z" fill="currentColor"></path>
+                <path d="M474.666667 706.933333m5.333333 0l64 0q5.333333 0 5.333333 5.333334l0 64q0 5.333333-5.333333 5.333333l-64 0q-5.333333 0-5.333333-5.333333l0-64q0-5.333333 5.333333-5.333334Z" fill="currentColor"></path>
+                <path d="M682.133333 399.093333a170.666667 170.666667 0 0 0-340.8 8.533334 5.333333 5.333333 0 0 0 5.333334 5.333333h64a5.333333 5.333333 0 0 0 5.333333-5.333333 96 96 0 1 1 96 101.333333h-32a5.333333 5.333333 0 0 0-5.333333 5.333333v128a5.333333 5.333333 0 0 0 5.333333 5.333334h64a5.333333 5.333333 0 0 0 5.333333-5.333334v-58.666666a5.333333 5.333333 0 0 1 4.053334-5.333334 170.986667 170.986667 0 0 0 128.746666-179.2z" fill="currentColor"></path>
+              </svg>
+            </button>
+            <button id="wordle-back-home-btn" class="icon-btn" type="button" aria-label="返回主页" title="返回主页">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
+              </svg>
+            </button>
+            <button id="wordle-theme-toggle-btn" class="icon-btn theme-toggle-btn" type="button"
+              aria-label="切换暗色模式"></button>
+          </div>
+        </div>
+      </header>
+      <div class="page-content wordle-content">
+          <div id="wordle-word-preview" class="wordle-word-preview is-hidden">
+            <div class="wordle-word-preview-content">
+              <div class="wordle-preview-word-line">
+                <span id="wordle-preview-word" class="wordle-preview-word"></span>
+                <span id="wordle-preview-accent" class="wordle-preview-accent"></span>
+              </div>
+              <span id="wordle-preview-paraphrase" class="wordle-preview-paraphrase"></span>
+            </div>
+          </div>
+          <main id="wordle-board" class="wordle-board">
+            <div id="wordle-message" class="wordle-message is-hidden"></div>
+            <div id="wordle-grid" class="wordle-grid"></div>
+            <div id="wordle-keyboard" class="wordle-keyboard"></div>
+          </main>
+          <div id="wordle-bottom-actions" class="wordle-bottom-actions is-hidden">
+            <button id="wordle-bottom-new-game-btn" type="button" class="primary-btn">再来一词</button>
+          </div>
+        </div>
+    </section>
+
+    <section id="reading-view" class="page page-reading is-hidden">
+      <header class="page-header reading-header">
+        <div class="page-header-inner">
+          <div class="page-header-main">
+            <h2>阅读训练</h2>
+          </div>
+          <div class="page-header-actions">
+            <button id="reading-word-list-btn" class="tool-btn reading-word-list-btn" type="button">重点单词</button>
+            <button id="reading-back-home-btn" class="icon-btn" type="button" aria-label="返回主页" title="返回主页">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
+              </svg>
+            </button>
+            <button id="reading-theme-toggle-btn" class="icon-btn theme-toggle-btn" type="button"
+              aria-label="切换暗色模式"></button>
+          </div>
+        </div>
+      </header>
+      <div class="page-content reading-content">
+        <div id="reading-loading-view" class="loading-view is-hidden">
+          <div class="loading-panel">
+            <div class="loading-head">
+              <p class="loading-text">AI 正在生成阅读训练</p>
+              <span id="reading-loading-percent" class="loading-percent">0%</span>
+            </div>
+            <div class="loading-track">
+              <div id="reading-loading-bar" class="loading-bar"></div>
+            </div>
+          </div>
+        </div>
+
+        <main id="reading-board" class="reading-board is-hidden">
+          <details id="reading-title-card" class="reading-panel reading-head-panel reading-title-card">
+            <summary class="reading-title-summary">
+              <h3 id="reading-title" class="reading-title">Reading Practice</h3>
+            </summary>
+            <div id="reading-title-body" class="reading-title-body is-hidden">
+              <p id="reading-title-cn" class="reading-title-cn"></p>
+            </div>
+          </details>
+
+          <section id="reading-sentence-list" class="reading-sentence-list"></section>
+
+          <div class="reading-bottom-dock">
+            <div class="reading-nav-wrap">
+              <button id="reading-prev-btn" class="tool-btn prev-btn reading-nav-btn" type="button">上一篇</button>
+              <button id="reading-toggle-all-btn" class="tool-btn reading-nav-btn" type="button">展开全部</button>
+              <button id="reading-next-btn" class="tool-btn next-btn reading-nav-btn" type="button">下一篇</button>
+            </div>
+          </div>
+        </main>
+      </div>
+    </section>
+
+    <section id="history-view" class="page page-history is-hidden">
+      <header class="page-header history-header">
+        <div class="page-header-inner">
+          <div class="page-header-main">
+            <h2>刷题记录</h2>
+          </div>
+          <div class="page-header-actions history-actions">
+            <button id="history-back-btn" class="icon-btn" type="button" aria-label="返回主页" title="返回主页">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
+              </svg>
+            </button>
+            <button id="history-filter-btn" class="icon-btn history-filter-btn" type="button" aria-label="只看错题"
+              title="只看错题">
+            </button>
+            <button id="history-theme-toggle-btn" class="icon-btn theme-toggle-btn" type="button"
+              aria-label="切换暗色模式"></button>
+            <button id="flash-history-btn" class="icon-btn history-switch-btn" type="button" aria-label="切换闪卡刷词历史"
+              title="切换闪卡刷词历史">
+              <svg class="history-switch-icon" viewBox="0 0 1024 1024" aria-hidden="true">
+                <path
+                  d="M155.04 448v-64h567.392l-186.464-194.24 43.616-45.44 291.2 303.68zM149.504 576H865.28v64H297.6l186.432 194.24-43.296 45.44z">
+                </path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </header>
+      <div class="page-content history-content">
+        <main class="history-board">
+          <div id="history-list" class="history-list"></div>
+        </main>
+      </div>
+    </section>
+
+    <section id="collection-view" class="page page-collection is-hidden">
+      <header class="page-header collection-header">
+        <div class="page-header-inner">
+          <div class="page-header-main">
+            <h2>我的收藏</h2>
+          </div>
+          <div class="page-header-actions">
+            <button id="collection-flash-btn" class="tool-btn collection-train-btn is-hidden"
+              type="button">闪卡刷词</button>
+            <button id="collection-reading-btn" class="tool-btn collection-train-btn is-hidden"
+              type="button">阅读</button>
+            <button id="collection-back-btn" class="icon-btn" type="button" aria-label="返回主页">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
+              </svg>
+            </button>
+            <button id="collection-theme-toggle-btn" class="icon-btn theme-toggle-btn" type="button"
+              aria-label="切换暗色模式"></button>
+          </div>
+        </div>
+      </header>
+      <div class="page-content collection-content">
+        <main class="history-board">
+          <div id="collection-list" class="history-list"></div>
+        </main>
+      </div>
+    </section>
+
+    <section id="settings-view" class="page page-settings is-hidden">
+      <header class="page-header settings-header">
+        <div class="page-header-inner">
+          <div class="page-header-main">
+            <h2>个人信息</h2>
+          </div>
+          <div class="page-header-actions">
+            <button id="settings-back-btn" class="icon-btn" type="button" aria-label="返回主页">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
+              </svg>
+            </button>
+            <button id="settings-theme-toggle-btn" class="icon-btn theme-toggle-btn" type="button"
+              aria-label="切换暗色模式"></button>
+          </div>
+        </div>
+      </header>
+      <div class="page-content collection-content">
+        <main class="history-board settings-board">
+          <section class="settings-panel">
+            <p class="settings-label">当前账号</p>
+            <p id="settings-username" class="settings-username">-</p>
+
+            <p class="settings-label settings-section-label">切换词书</p>
+            <button id="settings-book-btn" type="button" class="tool-btn settings-book-btn">选择词书</button>
+
+            <p class="settings-label settings-section-label">个人 API Key</p>
+            <p class="settings-help">
+              只保存在当前设备浏览器中，可直接覆盖编辑。<br />
+              当前默认按 DeepSeek 接口校验与调用，可前往 <a class="settings-help-link" href="https://platform.deepseek.com/"
+                target="_blank" rel="noreferrer noopener">DeepSeek 获取 API Key</a>。
+            </p>
+            <input id="settings-api-key-input" type="password" class="password-input settings-input" autocomplete="off"
+              autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="输入个人 DeepSeek API Key" />
+            <div class="settings-actions">
+              <button id="save-api-key-btn" type="button" class="primary-btn settings-save-btn">保存 API Key</button>
+              <button id="clear-api-key-btn" type="button" class="tool-btn settings-clear-btn">清空</button>
+            </div>
+            <p id="settings-api-key-status" class="settings-status"></p>
+
+            <div class="settings-actions">
+              <button id="clear-history-btn" type="button" class="tool-btn settings-clear-history-btn">清空刷题记录</button>
+            </div>
+
+          </section>
+          <button id="settings-logout-btn" type="button" class="tool-btn settings-logout-btn">退出登录</button>
+        </main>
+      </div>
+    </section>
+
   </div>
-  <div class="site-info-footer">
-    <a class="icon-btn site-info-github-btn" href="https://github.com/ZTMYO/ShiliuWord" target="_blank" rel="noreferrer" aria-label="GitHub 仓库" title="GitHub 仓库">
-      <svg viewBox="0 0 1024 1024" aria-hidden="true">
-        <path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9 23.5 23.2 38.1 55.4 38.1 91v112.5c0.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z" fill="currentColor"></path>
-      </svg>
-    </a>
-  </div>
-</div>
-    </dialog>
 
-    <dialog id="auth-dialog" class="auth-dialog">
-      <div class="auth-card auth-entry-card auth-modal-card">
-        <div class="auth-modal-head">
-          <h2>欢迎</h2>
+  <div id="toast" class="toast" aria-live="polite"></div>
+
+  <dialog id="site-info-dialog" class="site-info-dialog">
+    <div class="dialog-header">
+      <h3>网站信息</h3>
+      <button id="close-site-info-dialog-btn" type="button" class="icon-btn" aria-label="关闭">
+        <svg viewBox="0 0 20 20" aria-hidden="true">
+          <path d="M5 5l10 10M15 5 5 15"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="site-info-body">
+      <p class="site-info-intro">石榴刷词是一个支持多词书、可离线刷题、可选 AI 增强的刷词网站。</p>
+      <div id="site-info-metrics" class="site-info-metrics is-hidden" aria-label="网站数据统计">
+        <div class="site-info-metrics-group">
+          <p class="site-info-metrics-item">
+            已整理 <span class="site-info-number" id="site-stat-books"></span> 本词书，
+            覆盖 <span class="site-info-number" id="site-stat-words"></span> 个单词
+          </p>
+          <p class="site-info-metrics-item">
+            已收录单词定义 <span class="site-info-number" id="site-stat-defs"></span> 条
+          </p>
+          <p class="site-info-metrics-item">
+            共收录 <span class="site-info-number" id="site-stat-example-pairs"></span> 对例句
+          </p>
+          <p class="site-info-metrics-item">
+            已收录音标 <span class="site-info-number" id="site-stat-accents"></span> 个
+          </p>
+          <p class="site-info-metrics-item">
+            注册用户 <span class="site-info-number" id="site-stat-users"></span> 人
+          </p>
         </div>
-        <p class="auth-subtitle">登录后即可同步历史、错题与收藏，支持多设备使用。</p>
-        <div class="auth-switch" role="tablist" aria-label="登录注册切换">
-          <button id="auth-login-tab-btn" type="button" class="auth-switch-btn is-active" aria-pressed="true">登录</button>
-          <button id="auth-register-tab-btn" type="button" class="auth-switch-btn" aria-pressed="false">注册</button>
+      </div>
+      <p class="site-info-disclaimer">
+        声明：个人 API Key 仅保存在当前设备浏览器中，不上传、不写入服务端数据库；服务端仅用于账号、收藏与历史同步。
+      </p>
+      <div class="site-info-footer">
+        <a class="icon-btn site-info-github-btn" href="https://github.com/ZTMYO/ShiliuWord" target="_blank"
+          rel="noreferrer" aria-label="GitHub 仓库" title="GitHub 仓库">
+          <svg viewBox="0 0 1024 1024" aria-hidden="true">
+            <path
+              d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9 23.5 23.2 38.1 55.4 38.1 91v112.5c0.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"
+              fill="currentColor"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="auth-dialog" class="auth-dialog">
+    <div class="auth-card auth-entry-card auth-modal-card">
+      <div class="auth-modal-head">
+        <h2>欢迎</h2>
+      </div>
+      <p class="auth-subtitle">登录后即可同步历史、错题与收藏，支持多设备使用。</p>
+      <div class="auth-switch" role="tablist" aria-label="登录注册切换">
+        <button id="auth-login-tab-btn" type="button" class="auth-switch-btn is-active" aria-pressed="true">登录</button>
+        <button id="auth-register-tab-btn" type="button" class="auth-switch-btn" aria-pressed="false">注册</button>
+      </div>
+      <form id="auth-form" class="auth-form" autocomplete="off">
+        <input id="auth-username-input" class="password-input" autocomplete="off" autocapitalize="none"
+          autocorrect="off" spellcheck="false" placeholder="用户名（3-24 位）" />
+        <input id="auth-password-input" type="password" class="password-input" autocomplete="off" autocapitalize="none"
+          autocorrect="off" spellcheck="false" placeholder="密码（至少 6 位）" />
+        <input id="auth-confirm-input" type="password" class="password-input is-hidden" autocomplete="off"
+          autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="再次输入密码" />
+        <button id="auth-submit-btn" type="submit" class="primary-btn password-submit-btn">登录</button>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog id="captcha-dialog" class="captcha-dialog">
+    <div class="dialog-header">
+      <h3>人机验证</h3>
+      <button id="close-captcha-dialog-btn" type="button" class="icon-btn" aria-label="关闭">
+        <svg viewBox="0 0 20 20" aria-hidden="true">
+          <path d="M5 5l10 10M15 5 5 15"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="captcha-body">
+      <p class="captcha-instruction">请点击 <span id="captcha-target" class="captcha-target"></span></p>
+      <div id="captcha-shapes" class="captcha-shapes"></div>
+    </div>
+  </dialog>
+
+  <dialog id="result-dialog" class="result-dialog">
+    <div class="dialog-header">
+      <h3 id="result-dialog-title">答案解析</h3>
+      <button id="close-dialog-btn" class="icon-btn" aria-label="关闭">
+        <svg viewBox="0 0 20 20" aria-hidden="true">
+          <path d="M5 5l10 10M15 5 5 15"></path>
+        </svg>
+      </button>
+    </div>
+    <div id="result-list" class="result-list"></div>
+  </dialog>
+
+  <dialog id="book-dialog" class="book-dialog">
+    <div class="dialog-header">
+      <h3>选择词书</h3>
+      <button id="close-book-dialog-btn" type="button" class="icon-btn" aria-label="关闭">
+        <svg viewBox="0 0 20 20" aria-hidden="true">
+          <path d="M5 5l10 10M15 5 5 15"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="book-dialog-body">
+      <div id="book-dialog-list" class="book-dialog-list"></div>
+    </div>
+  </dialog>
+
+  <dialog id="wordle-leaderboard-dialog" class="dialog wordle-leaderboard-dialog">
+    <div class="dialog-header">
+      <h3>最高连胜排行</h3>
+      <button id="close-wordle-leaderboard-btn" type="button" class="icon-btn" aria-label="关闭">
+        <svg viewBox="0 0 20 20" aria-hidden="true">
+          <path d="M5 5l10 10M15 5 5 15"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="wordle-leaderboard-body">
+      <div id="wordle-leaderboard-list" class="wordle-leaderboard-list"></div>
+    </div>
+    <div id="wordle-leaderboard-footer" class="wordle-leaderboard-footer">
+      <div class="wordle-leaderboard-self">
+        <span class="wordle-leaderboard-self-label">我的排行</span>
+        <span id="wordle-leaderboard-self-rank" class="wordle-leaderboard-self-rank">-</span>
+        <span id="wordle-leaderboard-self-username" class="wordle-leaderboard-self-username">-</span>
+        <span class="wordle-leaderboard-self-streak-wrap">
+          <span class="wordle-leaderboard-self-streak-inner-wrap">
+            <span id="wordle-leaderboard-self-current-streak" class="wordle-leaderboard-self-current-streak">-</span>
+            <span class="wordle-leaderboard-self-streak-label">当前</span>
+          </span>
+          <span class="wordle-leaderboard-self-streak-divider">|</span>
+          <span class="wordle-leaderboard-self-streak-inner-wrap">
+            <span id="wordle-leaderboard-self-best-streak" class="wordle-leaderboard-self-best-streak">-</span>
+            <span class="wordle-leaderboard-self-streak-label">最高</span>
+          </span>
+        </span>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="wordle-help-dialog" class="dialog wordle-help-dialog">
+    <div class="dialog-header">
+      <h3>游戏说明</h3>
+      <button id="close-wordle-help-btn" type="button" class="icon-btn" aria-label="关闭">
+        <svg viewBox="0 0 20 20" aria-hidden="true">
+          <path d="M5 5l10 10M15 5 5 15"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="wordle-help-body">
+      <p class="wordle-help-text">在 6 次尝试内猜出隐藏的 5 个字母的英文单词。</p>
+
+      <div class="wordle-help-examples">
+        <div class="wordle-help-example">
+          <div class="wordle-help-grid">
+            <span class="wordle-help-cell is-correct">W</span>
+            <span class="wordle-help-cell">O</span>
+            <span class="wordle-help-cell">R</span>
+            <span class="wordle-help-cell">D</span>
+            <span class="wordle-help-cell">S</span>
+          </div>
+          <p class="wordle-help-desc">字母在单词中且位置正确</p>
         </div>
-        <form id="auth-form" class="auth-form" autocomplete="off">
-          <input id="auth-username-input" class="password-input" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="用户名（3-24 位）" />
-          <input id="auth-password-input" type="password" class="password-input" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="密码（至少 6 位）" />
-          <input
-            id="auth-confirm-input"
-            type="password"
-            class="password-input is-hidden"
-            autocomplete="off"
-            autocapitalize="none"
-            autocorrect="off"
-            spellcheck="false"
-            placeholder="再次输入密码"
-          />
-          <button id="auth-submit-btn" type="submit" class="primary-btn password-submit-btn">登录</button>
-        </form>
-      </div>
-    </dialog>
 
-    <dialog id="result-dialog" class="result-dialog">
-      <div class="dialog-header">
-        <h3 id="result-dialog-title">答案解析</h3>
-        <button id="close-dialog-btn" class="icon-btn" aria-label="关闭">
-          <svg viewBox="0 0 20 20" aria-hidden="true">
-            <path d="M5 5l10 10M15 5 5 15"></path>
-          </svg>
-        </button>
-      </div>
-      <div id="result-list" class="result-list"></div>
-    </dialog>
+        <div class="wordle-help-example">
+          <div class="wordle-help-grid">
+            <span class="wordle-help-cell">P</span>
+            <span class="wordle-help-cell is-present">L</span>
+            <span class="wordle-help-cell">A</span>
+            <span class="wordle-help-cell">Y</span>
+            <span class="wordle-help-cell">S</span>
+          </div>
+          <p class="wordle-help-desc">字母在单词中但位置不对</p>
+        </div>
 
-    <dialog id="book-dialog" class="book-dialog">
-      <div class="dialog-header">
-        <h3>选择词书</h3>
-        <button id="close-book-dialog-btn" type="button" class="icon-btn" aria-label="关闭">
-          <svg viewBox="0 0 20 20" aria-hidden="true">
-            <path d="M5 5l10 10M15 5 5 15"></path>
-          </svg>
-        </button>
+        <div class="wordle-help-example">
+          <div class="wordle-help-grid">
+            <span class="wordle-help-cell">V</span>
+            <span class="wordle-help-cell">I</span>
+            <span class="wordle-help-cell is-absent">B</span>
+            <span class="wordle-help-cell">E</span>
+            <span class="wordle-help-cell">S</span>
+          </div>
+          <p class="wordle-help-desc">字母不在单词中</p>
+        </div>
       </div>
-      <div class="book-dialog-body">
-        <div id="book-dialog-list" class="book-dialog-list"></div>
-      </div>
-    </dialog>
-  </body>
+    </div>
+  </dialog>
+
+  <dialog id="wordle-result-dialog" class="wordle-result-dialog">
+    <div class="dialog-header">
+      <h3 id="wordle-result-title"></h3>
+      <button id="close-wordle-result-btn" type="button" class="icon-btn" aria-label="关闭">
+        <svg viewBox="0 0 20 20" aria-hidden="true">
+          <path d="M5 5l10 10M15 5 5 15"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="wordle-result-body">
+      <div id="wordle-result-word" class="wordle-result-word"></div>
+      <div id="wordle-result-accent" class="wordle-result-accent"></div>
+      <div id="wordle-result-paraphrase" class="wordle-result-paraphrase"></div>
+      <div id="wordle-result-defs" class="wordle-result-defs"></div>
+      <div id="wordle-result-examples" class="wordle-result-examples"></div>
+    </div>
+    <button id="wordle-new-game-btn" type="button" class="wordle-result-footer">再来一词</button>
+  </dialog>
+</body>
+
 </html>

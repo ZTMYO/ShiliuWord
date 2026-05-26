@@ -146,6 +146,8 @@ Target word book: {{bookName}}
 Adjust difficulty and sense selection to fit the learner level and exam-focus implied by the word book.
 If the word book name clearly indicates an exam track (e.g., 考研, 四级/六级, 雅思, 托福, 专八), prefer the common exam-relevant meaning; otherwise prefer the most common learner-relevant meaning in general usage.
 For each input word, create exactly 1 correct concise Chinese gloss and exactly 3 concise distractor glosses.
+That means 4 options total per word: 1 correct + 3 distractors (NOT 3 options total).
+The distractors array must contain exactly 3 items for every word.
 For every option, also provide the actual English word that matches that gloss.
 
 Input items:
@@ -166,6 +168,7 @@ Hard constraints:
 12. Do NOT use another meaning, part of speech, or paraphrase of the target word as a distractor.
 13. Do NOT return two options with the same part of speech and the same Chinese meaning.
 14. Do NOT return one option whose Chinese gloss is just a substring , such as "v. 拒绝" vs "v. 拒绝，排斥".
+15. Do NOT label any distractor as "拼写错误" or mention spelling in the Chinese gloss. The Chinese text should be a normal, legitimate meaning of some English word.
 
 Return pure JSON array only:
 [{"word":"","correctOption":"","correctOptionWord":"","distractors":[{"word":"","text":""},{"word":"","text":""},{"word":"","text":""}]}]
@@ -205,11 +208,24 @@ Requirements:
 - Choose the largest natural subset and use as many candidate words as possible, but skip any word that would make the passage awkward.
 - Keep the passage coherent and natural. If the target word book is advanced, you may include longer/complex sentences; otherwise keep sentence structures simpler.
 - Each English sentence must have one natural Chinese translation.
-- In Chinese, mark the Chinese phrase that corresponds to a used target word with 【】.
+- In each English sentence, try to use at most 1 target word. If you use multiple target words in one sentence, you must mark each one in Chinese with separate 【】 in the same order as the English target words appear.
+- CRITICAL: For EVERY target word used in the English sentence, you MUST mark its EXACT translation in the Chinese sentence with 【】. NO EXCEPTIONS.
+- In Chinese, mark ONLY the Chinese phrase that translates the used target word sense with 【】. The marked phrase must be the best direct translation of the target word in that sentence, consistent with the provided wordCn/defCn for that word (do NOT invent an unrelated highlight).
+- For each used target word in English, the paired Chinese sentence must contain exactly one corresponding marked phrase 【】 for that word. Do not mark anything if no target word is used in that English sentence.
 - The content inside 【】 must be Chinese only, never English, pinyin, or mixed text.
 - Do not add any marker in English.
-- Return selectedWords as the lowercase English words actually used.
+- selectedWords must list exactly the lowercase target words you actually used in the English sentences (no extras, no missing).
 - Return pure JSON only.
+
+Self-check before output (MANDATORY):
+1. First, for EACH sentence pair:
+   - Count the number of target words used in the English sentence
+   - Count the number of 【】 markers in the Chinese sentence
+   - THESE TWO NUMBERS MUST BE EXACTLY EQUAL
+   - If they are not equal, FIX IT BEFORE PROCEEDING
+2. For EVERY target word in English, verify that its Chinese translation is properly marked with 【】 in the Chinese sentence
+3. Ensure every 【】 phrase is the translation of a used target word in that sentence, not other phrases
+4. DO NOT skip any word's Chinese marking - EVERY used target word MUST have its translation marked
 
 Example sentence pair:
 {"en":"Public trust may erode when institutions ignore obvious risks.","cn":"当机构忽视明显风险时，公众【信任】可能会被削弱。"}

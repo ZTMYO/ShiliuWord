@@ -22,7 +22,8 @@ const HOME_ENTRY_ITEMS = [
   { key: "shape", label: "形近词", type: "quiz", requiresAi: true },
   { key: "synonym", label: "近义词", type: "quiz", requiresAi: true },
   { key: "flash", label: "闪卡刷词", type: "flash" },
-  { key: "reading", label: "阅读训练", type: "reading", requiresAi: true }
+  { key: "reading", label: "阅读训练", type: "reading", requiresAi: true },
+  { key: "wordle", label: "Wordle", type: "wordle" }
 ];
 
 const TONE_KEYS = [
@@ -68,11 +69,40 @@ const SUN_ICON = `
     <path d="M17.66 6.34l1.41-1.41"></path>
   </svg>
 `.trim();
-const PRONOUNCE_ICON = `
-  <svg class="pronounce-icon" viewBox="0 0 1024 1024" aria-hidden="true">
-    <path d="M64 549.34v-74.67c0-61.85 50.14-112 112-112h9.71c17.8 0 35.01-6.35 48.53-17.92l209.06-179.2a112.024 112.024 0 0 1 74.67-26.88c38.97 0 70.56 31.59 70.56 70.55v605.53c0 38.96-31.59 70.55-70.56 70.55-27.34 0.46-53.89-9.11-74.67-26.88l-209.06-179.2a74.648 74.648 0 0 0-48.53-17.92H176c-61.85 0.03-112-50.11-112-111.96z m653.32 66.08c79.69-45.89 107.09-147.69 61.2-227.38a166.421 166.421 0 0 0-61.2-61.2c-17.4-11.06-40.47-5.93-51.54 11.47s-5.93 40.47 11.47 51.53c0.89 0.57 1.8 1.09 2.74 1.59 44.02 25.19 59.28 81.31 34.08 125.32a91.763 91.763 0 0 1-34.08 34.09c-18.27 9.55-25.34 32.11-15.78 50.38 9.55 18.27 32.11 25.34 50.38 15.79 0.93-0.5 1.84-1.03 2.73-1.59z m116.85 119.46c145.57-117.73 168.13-331.16 50.41-476.73a338.383 338.383 0 0 0-50.41-50.41c-16.62-12.2-39.98-8.61-52.19 8-11.36 15.48-9.13 37.04 5.15 49.86 113.4 91.92 130.81 258.37 38.89 371.77a264.291 264.291 0 0 1-38.89 38.89c-15.34 13.78-16.6 37.38-2.82 52.72 12.83 14.28 34.39 16.51 49.86 5.15v0.75z"></path>
+const TTS_CONFIG = {
+  enabled: true,
+  lang: "en-US",
+  voiceName: "",
+  rate: 0.8,
+  pitch: 1,
+  volume: 1
+};
+const SPEAKER_ICON_1 = `
+  <svg class="pronounce-icon" viewBox="0 0 30 30" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M1.875 16.0939V13.9063C1.875 12.0943 3.34395 10.6251 5.15625 10.6251H5.44072C5.96221 10.6251 6.46641 10.4391 6.8625 10.1001L12.9873 4.8501C13.596 4.32945 14.374 4.04936 15.1749 4.0626C16.3166 4.0626 17.2421 4.98809 17.2421 6.12949V23.8696C17.2421 25.011 16.3166 25.9365 15.1749 25.9365C14.3739 25.95 13.5961 25.6696 12.9873 25.149L6.8625 19.899C6.4663 19.5601 5.96208 19.374 5.44072 19.374H5.15625C3.34424 19.3749 1.875 17.906 1.875 16.0939ZM21.0152 18.0299C23.3499 16.6854 24.1526 13.703 22.8082 11.3684C22.3791 10.623 21.7606 10.0045 21.0152 9.57539C20.5055 9.25137 19.8296 9.40166 19.5053 9.91143C19.181 10.4212 19.3315 11.0971 19.8413 11.4211C19.8674 11.4378 19.894 11.453 19.9216 11.4677C21.2112 12.2057 21.6583 13.8498 20.92 15.1392C20.6822 15.5551 20.3374 15.8999 19.9216 16.1379C19.3863 16.4177 19.1792 17.0786 19.4593 17.6139C19.7391 18.1491 20.4 18.3563 20.9353 18.0765C20.9625 18.0618 20.9892 18.0463 21.0152 18.0299ZM24.4386 21.5297C28.7033 18.0806 29.3643 11.8277 25.9154 7.56299C25.4765 7.02007 24.9815 6.52504 24.4386 6.08613C23.9517 5.72871 23.2673 5.83389 22.9096 6.32051C22.5768 6.77402 22.6421 7.40566 23.0604 7.78125C26.3827 10.4742 26.8928 15.3507 24.1998 18.6729C23.8607 19.0913 23.4788 19.4732 23.0604 19.8123C22.611 20.216 22.5741 20.9074 22.9778 21.3568C23.3537 21.7752 23.9854 21.8405 24.4386 21.5077V21.5297Z" fill="currentColor"/>
   </svg>
 `.trim();
+const SPEAKER_ICON_2 = `
+  <svg class="pronounce-icon" viewBox="0 0 30 30" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M1.875 16.0939V13.9063C1.875 12.0943 3.34395 10.6251 5.15625 10.6251H5.44072C5.96221 10.6251 6.46641 10.4391 6.8625 10.1001L12.9873 4.8501C13.596 4.32945 14.374 4.04936 15.1749 4.0626C16.3166 4.0626 17.2421 4.98809 17.2421 6.12949V23.8696C17.2421 25.011 16.3166 25.9365 15.1749 25.9365C14.3739 25.95 13.5961 25.6696 12.9873 25.149L6.8625 19.899C6.4663 19.5601 5.96208 19.374 5.44072 19.374H5.15625C3.34424 19.3749 1.875 17.906 1.875 16.0939ZM21.0152 18.0299C23.3499 16.6854 24.1526 13.703 22.8082 11.3684C22.3791 10.623 21.7606 10.0045 21.0152 9.57539C20.5055 9.25137 19.8296 9.40166 19.5053 9.91143C19.181 10.4212 19.3315 11.0971 19.8413 11.4211C19.8674 11.4378 19.894 11.453 19.9216 11.4677C21.2112 12.2057 21.6583 13.8498 20.92 15.1392C20.6822 15.5551 20.3374 15.8999 19.9216 16.1379C19.3863 16.4177 19.1792 17.0786 19.4593 17.6139C19.7391 18.1491 20.4 18.3562 20.9353 18.0765C20.9625 18.0618 20.9892 18.0463 21.0152 18.0299Z" fill="currentColor"/>
+  </svg>
+`.trim();
+const SPEAKER_ICON_3 = `
+  <svg class="pronounce-icon" viewBox="0 0 30 30" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M1.875 16.0939V13.9063C1.875 12.0943 3.34395 10.6251 5.15625 10.6251H5.44072C5.96221 10.6251 6.46641 10.4391 6.8625 10.1001L12.9873 4.8501C13.596 4.32945 14.374 4.04936 15.1749 4.0626C16.3166 4.0626 17.2421 4.98809 17.2421 6.12949V23.8696C17.2421 25.011 16.3166 25.9365 15.1749 25.9365C14.3739 25.95 13.5961 25.6696 12.9873 25.149L6.8625 19.899C6.4663 19.5601 5.96208 19.374 5.44072 19.374H5.15625C3.34424 19.3749 1.875 17.906 1.875 16.0939Z" fill="currentColor"/>
+  </svg>
+`.trim();
+const PRONOUNCE_ICON = SPEAKER_ICON_1;
+const SPEAKER_PULSE_FRAMES = [
+  SPEAKER_ICON_1,
+  SPEAKER_ICON_3,
+  SPEAKER_ICON_2,
+  SPEAKER_ICON_1,
+  SPEAKER_ICON_3,
+  SPEAKER_ICON_2,
+  SPEAKER_ICON_1
+];
+const speakerPulseState = new WeakMap();
 const HISTORY_FILTER_OUTLINE_ICON = `
   <svg class="filter-icon" width="30" height="30" viewBox="0 0 30 30" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M25.5625 3.9375C25.1875 3.625 24.6875 3.4375 24.125 3.4375H5.8125C4.625 3.4375 3.625 4.4375 3.625 5.625C3.625 6.125 3.8125 6.625 4.125 7.0625L11.625 15.9375V23.3125C11.625 23.6875 11.8125 24 12.125 24.125L16.875 26.5C17 26.5625 17.125 26.625 17.3125 26.625C17.5 26.625 17.625 26.5625 17.8125 26.5C18.0625 26.3125 18.25 26 18.25 25.6875V15.875L25.75 7C26.125 6.5625 26.3125 6 26.25 5.4375C26.3125 4.875 26.0625 4.3125 25.5625 3.9375ZM24.4375 5.8125L16.6875 14.9375C16.5625 15.125 16.4375 15.3125 16.4375 15.5625V24.125L13.5625 22.6875V15.5625C13.5625 15.3125 13.5 15.125 13.3125 14.9375L5.5625 5.8125C5.5625 5.75 5.5 5.6875 5.5 5.625C5.5 5.4375 5.625 5.3125 5.8125 5.3125H24.125C24.1875 5.3125 24.25 5.3125 24.3125 5.375C24.375 5.4375 24.4375 5.5625 24.4375 5.5625C24.5 5.625 24.5 5.75 24.4375 5.8125Z" fill="currentColor"/>
@@ -111,6 +141,7 @@ const state = {
   flashSelectedIndex: -1,
   flashEvaluation: null,
   flashDetailVisible: false,
+  flashHintExampleVisible: false,
   flashPast: [],
   flashFuture: [],
   flashLoading: false,
@@ -163,9 +194,16 @@ const elements = {
   authPasswordInput: document.querySelector("#auth-password-input"),
   authConfirmInput: document.querySelector("#auth-confirm-input"),
   authSubmitBtn: document.querySelector("#auth-submit-btn"),
+  captchaDialog: document.querySelector("#captcha-dialog"),
+  captchaTarget: document.querySelector("#captcha-target"),
+  captchaShapes: document.querySelector("#captcha-shapes"),
+  closeCaptchaDialogBtn: document.querySelector("#close-captcha-dialog-btn"),
+  welcomeHintBubble: document.querySelector("#welcome-hint-bubble"),
+  welcomeHintCloseBtn: document.querySelector("#welcome-hint-close-btn"),
   homeView: document.querySelector("#home-view"),
   flashView: document.querySelector("#flash-view"),
   readingView: document.querySelector("#reading-view"),
+  wordleView: document.querySelector("#wordle-view"),
   quizView: document.querySelector("#quiz-view"),
   historyView: document.querySelector("#history-view"),
   homeModeList: document.querySelector("#home-mode-list"),
@@ -175,16 +213,16 @@ const elements = {
   historyFilterBtn: document.querySelector("#history-filter-btn"),
   historyList: document.querySelector("#history-list"),
   flashBackHomeBtn: document.querySelector("#flash-back-home-btn"),
-  flashRevealBtn: document.querySelector("#flash-reveal-btn"),
   flashPrevBtn: document.querySelector("#flash-prev-btn"),
   flashNextBtn: document.querySelector("#flash-next-btn"),
-  flashPronounceBtn: document.querySelector("#flash-pronounce-btn"),
+  flashHintBtn: document.querySelector("#flash-hint-btn"),
   flashLoadingView: document.querySelector("#flash-loading-view"),
   flashLoadingBar: document.querySelector("#flash-loading-bar"),
   flashLoadingPercent: document.querySelector("#flash-loading-percent"),
   flashBoard: document.querySelector("#flash-board"),
   flashWord: document.querySelector("#flash-word"),
   flashPhonetic: document.querySelector("#flash-phonetic"),
+  flashHintExample: document.querySelector("#flash-hint-example"),
   flashPrevDivider: document.querySelector("#flash-prev-divider"),
   flashPrevSummary: document.querySelector("#flash-prev-summary"),
   flashDetail: document.querySelector("#flash-detail"),
@@ -203,6 +241,11 @@ const elements = {
   readingPrevBtn: document.querySelector("#reading-prev-btn"),
   readingToggleAllBtn: document.querySelector("#reading-toggle-all-btn"),
   readingNextBtn: document.querySelector("#reading-next-btn"),
+  wordleBackHomeBtn: document.querySelector("#wordle-back-home-btn"),
+  wordleNewGameBtn: document.querySelector("#wordle-new-game-btn"),
+  wordleBoard: document.querySelector("#wordle-board"),
+  wordleGrid: document.querySelector("#wordle-grid"),
+  wordleKeyboard: document.querySelector("#wordle-keyboard"),
   backHomeBtn: document.querySelector("#back-home-btn"),
   submitBtn: document.querySelector("#submit-btn"),
   nextBtn: document.querySelector("#next-btn"),
@@ -231,7 +274,6 @@ const elements = {
   settingsBackBtn: document.querySelector("#settings-back-btn"),
   settingsUsername: document.querySelector("#settings-username"),
   settingsBookBtn: document.querySelector("#settings-book-btn"),
-  settingsBookName: document.querySelector("#settings-book-name"),
   settingsAvatarLetter: document.querySelector("#settings-avatar-letter"),
   settingsAvatarIcon: document.querySelector("#settings-avatar-icon"),
   settingsApiKeyInput: document.querySelector("#settings-api-key-input"),
@@ -252,7 +294,33 @@ const elements = {
   siteStatDefs: document.querySelector("#site-stat-defs"),
   siteStatExamplePairs: document.querySelector("#site-stat-example-pairs"),
   siteStatAccents: document.querySelector("#site-stat-accents"),
-  siteStatUsers: document.querySelector("#site-stat-users")
+  siteStatUsers: document.querySelector("#site-stat-users"),
+  wordleResultDialog: document.querySelector("#wordle-result-dialog"),
+  wordleResultTitle: document.querySelector("#wordle-result-title"),
+  wordleResultWord: document.querySelector("#wordle-result-word"),
+  wordleResultAccent: document.querySelector("#wordle-result-accent"),
+  wordleResultParaphrase: document.querySelector("#wordle-result-paraphrase"),
+  wordleResultDefs: document.querySelector("#wordle-result-defs"),
+  wordleResultExamples: document.querySelector("#wordle-result-examples"),
+  closeWordleResultBtn: document.querySelector("#close-wordle-result-btn"),
+  wordleNewGameBtn: document.querySelector("#wordle-new-game-btn"),
+  wordleHelpDialog: document.querySelector("#wordle-help-dialog"),
+  wordleHelpBtn: document.querySelector("#wordle-help-btn"),
+  closeWordleHelpBtn: document.querySelector("#close-wordle-help-btn"),
+  wordleBottomActions: document.querySelector("#wordle-bottom-actions"),
+  wordleBottomNewGameBtn: document.querySelector("#wordle-bottom-new-game-btn"),
+  wordleLeaderboardDialog: document.querySelector("#wordle-leaderboard-dialog"),
+  wordleLeaderboardBtn: document.querySelector("#wordle-leaderboard-btn"),
+  closeWordleLeaderboardBtn: document.querySelector("#close-wordle-leaderboard-btn"),
+  wordleLeaderboardList: document.querySelector("#wordle-leaderboard-list"),
+  wordleLeaderboardSelfRank: document.querySelector("#wordle-leaderboard-self-rank"),
+  wordleLeaderboardSelfUsername: document.querySelector("#wordle-leaderboard-self-username"),
+  wordleLeaderboardSelfCurrentStreak: document.querySelector("#wordle-leaderboard-self-current-streak"),
+  wordleLeaderboardSelfBestStreak: document.querySelector("#wordle-leaderboard-self-best-streak"),
+  wordleWordPreview: document.querySelector("#wordle-word-preview"),
+  wordlePreviewWord: document.querySelector("#wordle-preview-word"),
+  wordlePreviewAccent: document.querySelector("#wordle-preview-accent"),
+  wordlePreviewParaphrase: document.querySelector("#wordle-preview-paraphrase")
 };
 
 function syncToastHost() {
@@ -292,7 +360,201 @@ function buildPronunciationUrl(word) {
   return `https://dict.youdao.com/dictvoice?audio=${encodeURIComponent(String(word || "").trim())}&type=2`;
 }
 
-function playWordPronunciation(word) {
+function getSpeechSynthesis() {
+  return typeof window !== "undefined" ? window.speechSynthesis : null;
+}
+
+function isTtsAvailable() {
+  return Boolean(getSpeechSynthesis()) && typeof window.SpeechSynthesisUtterance === "function";
+}
+
+function normalizeLang(value) {
+  return String(value || "").trim().toLowerCase();
+}
+
+function resolvePreferredVoice() {
+  const synth = getSpeechSynthesis();
+  if (!synth) {
+    return null;
+  }
+
+  const voices = typeof synth.getVoices === "function" ? synth.getVoices() : [];
+  if (!voices.length) {
+    return null;
+  }
+
+  const targetName = String(TTS_CONFIG.voiceName || "").trim();
+  if (targetName) {
+    const byName = voices.find((voice) => String(voice?.name || "").trim() === targetName);
+    if (byName) {
+      return byName;
+    }
+  }
+
+  const targetLang = normalizeLang(TTS_CONFIG.lang);
+  if (targetLang) {
+    const byLang = voices.find((voice) => normalizeLang(voice?.lang) === targetLang);
+    if (byLang) {
+      return byLang;
+    }
+    const byPrefix = voices.find((voice) => normalizeLang(voice?.lang).startsWith(targetLang.split("-")[0] || ""));
+    if (byPrefix) {
+      return byPrefix;
+    }
+  }
+
+  return voices.find((voice) => voice?.default) || voices[0] || null;
+}
+
+let ttsPlayToken = 0;
+let activeTtsButton = null;
+let youdaoPlayToken = 0;
+
+function speakEnglishText(text, sourceButton, options = {}) {
+  const silent = Boolean(options?.silent);
+  if (!TTS_CONFIG.enabled) {
+    return;
+  }
+  if (!isTtsAvailable()) {
+    if (!silent) {
+      showToast("当前浏览器不支持 TTS", "error");
+    }
+    return;
+  }
+
+  const normalized = String(text || "").trim();
+  if (!normalized) {
+    return;
+  }
+
+  const synth = getSpeechSynthesis();
+  if (!synth) {
+    if (!silent) {
+      showToast("当前浏览器不支持 TTS", "error");
+    }
+    return;
+  }
+
+  try {
+    ttsPlayToken += 1;
+    const token = ttsPlayToken;
+    if (activeTtsButton) {
+      stopPronounceButtonPulse(activeTtsButton);
+    }
+    activeTtsButton = sourceButton || null;
+    if (typeof synth.cancel === "function") {
+      synth.cancel();
+    }
+
+    const utterance = new SpeechSynthesisUtterance(normalized);
+    utterance.lang = String(TTS_CONFIG.lang || "en-US");
+    utterance.rate = Math.min(2, Math.max(0.5, Number(TTS_CONFIG.rate || 1)));
+    utterance.pitch = Math.min(2, Math.max(0, Number(TTS_CONFIG.pitch || 1)));
+    utterance.volume = Math.min(1, Math.max(0, Number(TTS_CONFIG.volume || 1)));
+    const voice = resolvePreferredVoice();
+    if (voice) {
+      utterance.voice = voice;
+    }
+
+    utterance.onstart = () => {
+      if (token !== ttsPlayToken) {
+        return;
+      }
+      startPronounceButtonPulse(sourceButton);
+    };
+    utterance.onend = () => {
+      if (token !== ttsPlayToken) {
+        return;
+      }
+      stopPronounceButtonPulse(sourceButton);
+      if (activeTtsButton === sourceButton) {
+        activeTtsButton = null;
+      }
+    };
+    utterance.onerror = (event) => {
+      if (token !== ttsPlayToken) {
+        return;
+      }
+      const errorCode = String(event?.error || "").trim().toLowerCase();
+      if (errorCode === "interrupted" || errorCode === "canceled" || errorCode === "cancelled") {
+        stopPronounceButtonPulse(sourceButton);
+        if (activeTtsButton === sourceButton) {
+          activeTtsButton = null;
+        }
+        return;
+      }
+      stopPronounceButtonPulse(sourceButton);
+      if (activeTtsButton === sourceButton) {
+        activeTtsButton = null;
+      }
+      if (!silent) {
+        showToast("TTS 播放失败", "error");
+      }
+    };
+
+    synth.speak(utterance);
+  } catch {
+    if (!silent) {
+      showToast("TTS 播放失败", "error");
+    }
+  }
+}
+
+function startPronounceButtonPulse(button, durationMs = 0) {
+  if (!button?.classList?.contains("pronounce-btn")) {
+    return;
+  }
+
+  const previous = speakerPulseState.get(button);
+  if (previous) {
+    window.clearInterval(previous.intervalId);
+    if (previous.timeoutId) {
+      window.clearTimeout(previous.timeoutId);
+    }
+  }
+
+  const baseHtml = PRONOUNCE_ICON;
+  let frameIndex = 0;
+  button.innerHTML = SPEAKER_PULSE_FRAMES[frameIndex] || baseHtml;
+
+  const intervalId = window.setInterval(() => {
+    frameIndex = (frameIndex + 1) % SPEAKER_PULSE_FRAMES.length;
+    button.innerHTML = SPEAKER_PULSE_FRAMES[frameIndex] || baseHtml;
+  }, 160);
+
+  const timeoutId = typeof durationMs === "number" && durationMs > 0
+    ? window.setTimeout(() => {
+        stopPronounceButtonPulse(button);
+      }, durationMs)
+    : 0;
+
+  speakerPulseState.set(button, { intervalId, timeoutId, baseHtml });
+}
+
+function stopPronounceButtonPulse(button) {
+  if (!button?.classList?.contains("pronounce-btn")) {
+    return;
+  }
+
+  const previous = speakerPulseState.get(button);
+  if (!previous) {
+    button.innerHTML = PRONOUNCE_ICON;
+    return;
+  }
+
+  window.clearInterval(previous.intervalId);
+  if (previous.timeoutId) {
+    window.clearTimeout(previous.timeoutId);
+  }
+  button.innerHTML = previous.baseHtml || PRONOUNCE_ICON;
+  speakerPulseState.delete(button);
+}
+
+function pulsePronounceButton(button) {
+  startPronounceButtonPulse(button, 960);
+}
+
+function playWordPronunciation(word, sourceButton = null) {
   const normalizedWord = String(word || "").trim();
   if (!normalizedWord) {
     return;
@@ -302,14 +564,190 @@ function playWordPronunciation(word) {
     if (!pronunciationAudio) {
       pronunciationAudio = new Audio();
     }
+    youdaoPlayToken += 1;
+    const token = youdaoPlayToken;
+    let finished = false;
+
+    const cleanup = () => {
+      if (finished) {
+        return;
+      }
+      finished = true;
+      pronunciationAudio.removeEventListener("error", onError);
+      pronunciationAudio.removeEventListener("ended", onEnded);
+      pronunciationAudio.removeEventListener("pause", onPause);
+    };
+
+    const onEnded = () => {
+      if (token !== youdaoPlayToken) {
+        return;
+      }
+      cleanup();
+    };
+
+    const onPause = () => {
+      if (token !== youdaoPlayToken) {
+        return;
+      }
+      cleanup();
+    };
+
+    const onError = () => {
+      if (token !== youdaoPlayToken) {
+        return;
+      }
+      cleanup();
+      speakEnglishText(normalizedWord, sourceButton, { silent: true });
+    };
+
+    pronunciationAudio.addEventListener("error", onError);
+    pronunciationAudio.addEventListener("ended", onEnded);
+    pronunciationAudio.addEventListener("pause", onPause);
+
     pronunciationAudio.pause();
+    pronunciationAudio.volume = 1;
     pronunciationAudio.src = buildPronunciationUrl(normalizedWord);
     pronunciationAudio.currentTime = 0;
-    pronunciationAudio.play().catch(() => {
-      showToast("朗读播放失败", "error");
-    });
+    const playPromise = pronunciationAudio.play();
+    if (playPromise && typeof playPromise.then === "function") {
+      playPromise
+        .then(() => {
+          pulsePronounceButton(sourceButton);
+        })
+        .catch(() => {
+          if (token !== youdaoPlayToken) {
+            return;
+          }
+          cleanup();
+          speakEnglishText(normalizedWord, sourceButton, { silent: true });
+        });
+      return;
+    }
+    pulsePronounceButton(sourceButton);
   } catch {
-    showToast("朗读播放失败", "error");
+    speakEnglishText(normalizedWord, sourceButton, { silent: true });
+  }
+}
+
+const CAPTCHA_SHAPES = [
+  { type: "circle", name: "圆形" },
+  { type: "square", name: "方形" },
+  { type: "triangle", name: "三角形" },
+  { type: "diamond", name: "菱形" }
+];
+
+let captchaState = {
+  targetShape: null,
+  shapes: [],
+  callback: null
+};
+
+function generateRandomPosition(existingPositions, shapeSize, containerWidth, containerHeight, extraMargin = 0) {
+  let attempts = 0;
+  const maxAttempts = 100;
+  const margin = Math.max(15, 20 + extraMargin);
+  
+  const availableWidth = Math.max(shapeSize + 20, containerWidth - margin * 2);
+  const availableHeight = Math.max(shapeSize + 20, containerHeight - margin * 2);
+  
+  while (attempts < maxAttempts) {
+    const x = Math.random() * (availableWidth - shapeSize) + margin;
+    const y = Math.random() * (availableHeight - shapeSize) + margin;
+    
+    let overlaps = false;
+    for (const pos of existingPositions) {
+      const dx = Math.abs(x - pos.x);
+      const dy = Math.abs(y - pos.y);
+      if (dx < shapeSize + 15 && dy < shapeSize + 15) {
+        overlaps = true;
+        break;
+      }
+    }
+    
+    if (!overlaps) {
+      return { x, y };
+    }
+    attempts++;
+  }
+  
+  return { 
+    x: Math.random() * (availableWidth - shapeSize) + margin, 
+    y: Math.random() * (availableHeight - shapeSize) + margin 
+  };
+}
+
+function renderCaptcha() {
+  if (!elements.captchaShapes) {
+    return;
+  }
+  
+  const containerWidth = elements.captchaShapes.offsetWidth || 340;
+  const containerHeight = elements.captchaShapes.offsetHeight || 200;
+  
+  let shapeSize = 50;
+  let triangleWidth = 50;
+  let triangleHeight = 43;
+  
+  if (containerWidth < 360) {
+    shapeSize = 36;
+    triangleWidth = 36;
+    triangleHeight = 31;
+  } else if (containerWidth < 420) {
+    shapeSize = 42;
+    triangleWidth = 42;
+    triangleHeight = 36;
+  }
+  
+  const diamondExtraSize = shapeSize * 0.5;
+  
+  const shuffledShapes = [...CAPTCHA_SHAPES].sort(() => Math.random() - 0.5);
+  const targetIndex = Math.floor(Math.random() * shuffledShapes.length);
+  captchaState.targetShape = shuffledShapes[targetIndex];
+  
+  if (elements.captchaTarget) {
+    elements.captchaTarget.textContent = captchaState.targetShape.name;
+  }
+  
+  const positions = [];
+  captchaState.shapes = shuffledShapes.map((shape, index) => {
+    const extraMargin = shape.type === "diamond" ? diamondExtraSize : 0;
+    const pos = generateRandomPosition(positions, shapeSize, containerWidth, containerHeight, extraMargin);
+    positions.push(pos);
+    return { ...shape, x: pos.x, y: pos.y };
+  });
+  
+  elements.captchaShapes.innerHTML = captchaState.shapes.map(shape => {
+    let shapeHtml = "";
+    
+    if (shape.type === "circle") {
+      shapeHtml = `<div class="captcha-shape captcha-shape-circle" style="left:${shape.x}px;top:${shape.y}px;width:${shapeSize}px;height:${shapeSize}px;background:var(--accent);" data-shape-type="${shape.type}"></div>`;
+    } else if (shape.type === "square") {
+      shapeHtml = `<div class="captcha-shape captcha-shape-square" style="left:${shape.x}px;top:${shape.y}px;width:${shapeSize}px;height:${shapeSize}px;background:var(--accent);" data-shape-type="${shape.type}"></div>`;
+    } else if (shape.type === "triangle") {
+      shapeHtml = `<div class="captcha-shape captcha-shape-triangle" style="left:${shape.x}px;top:${shape.y}px;width:0;height:0;border-left:${triangleWidth/2}px solid transparent;border-right:${triangleWidth/2}px solid transparent;border-bottom:${triangleHeight}px solid var(--accent);background:transparent;" data-shape-type="${shape.type}"></div>`;
+    } else if (shape.type === "diamond") {
+      const diamondSize = shapeSize - Math.max(8, shapeSize * 0.2);
+      const diamondOffset = diamondSize / 2;
+      shapeHtml = `<div class="captcha-shape captcha-shape-diamond" style="left:${shape.x + diamondOffset}px;top:${shape.y + diamondOffset}px;width:${diamondSize}px;height:${diamondSize}px;background:var(--accent);" data-shape-type="${shape.type}"></div>`;
+    }
+    
+    return shapeHtml;
+  }).join("");
+}
+
+function openCaptchaDialog(callback) {
+  captchaState.callback = callback;
+  if (elements.captchaDialog) {
+    elements.captchaDialog.showModal();
+    setTimeout(() => {
+      renderCaptcha();
+    }, 50);
+  }
+}
+
+function closeCaptchaDialog() {
+  if (elements.captchaDialog) {
+    elements.captchaDialog.close();
   }
 }
 
@@ -318,6 +756,7 @@ function setView(view) {
   elements.homeView.classList.toggle("is-hidden", view !== "home");
   elements.flashView.classList.toggle("is-hidden", view !== "flash");
   elements.readingView.classList.toggle("is-hidden", view !== "reading");
+  elements.wordleView.classList.toggle("is-hidden", view !== "wordle");
   elements.quizView.classList.toggle("is-hidden", view !== "quiz");
   elements.historyView.classList.toggle("is-hidden", view !== "history");
   elements.collectionView.classList.toggle("is-hidden", view !== "collection");
@@ -830,8 +1269,8 @@ async function updateUserBook(bookId) {
 function renderSessionUi() {
   const username = state.currentUser?.username || "";
   elements.settingsUsername.textContent = username || "-";
-  if (elements.settingsBookName) {
-    elements.settingsBookName.textContent = state.currentUser?.bookId ? getBookName(state.currentUser.bookId) : "-";
+  if (elements.settingsBookBtn) {
+    elements.settingsBookBtn.textContent = state.currentUser?.bookId ? getBookName(state.currentUser.bookId) : "选择词书";
   }
   const firstChar = String(username || "").trim().slice(0, 1);
   const hasLetter = Boolean(firstChar);
@@ -915,7 +1354,7 @@ function getQuizDraft(mode) {
 }
 
 function saveCurrentQuizDraft() {
-  if (!state.quiz || state.loading || state.evaluationResult || hasHistoryRecord(state.currentHistoryId)) {
+  if (!state.quiz || state.loading || hasHistoryRecord(state.currentHistoryId)) {
     return;
   }
 
@@ -926,7 +1365,10 @@ function saveCurrentQuizDraft() {
     placements: [...state.placements],
     optionOrder: [...state.optionOrder],
     selectedWord: state.selectedWord,
-    currentHistoryId: state.currentHistoryId
+    currentHistoryId: state.currentHistoryId,
+    evaluationResult: state.evaluationResult ? cloneSerializable(state.evaluationResult) : null,
+    quizPast: cloneSerializable(state.quizPast) || [],
+    quizFuture: cloneSerializable(state.quizFuture) || []
   };
   saveQuizDraftMap(draftMap);
 }
@@ -955,8 +1397,10 @@ function restoreQuizDraft(draft) {
     ? [...draft.optionOrder]
     : draft.quiz.items.map((item) => item.word);
   state.selectedWord = draft.selectedWord || "";
-  state.evaluationResult = null;
+  state.evaluationResult = draft.evaluationResult ? cloneSerializable(draft.evaluationResult) : null;
   state.currentHistoryId = draft.currentHistoryId || new Date().toISOString();
+  state.quizPast = Array.isArray(draft.quizPast) ? [...draft.quizPast] : [];
+  state.quizFuture = Array.isArray(draft.quizFuture) ? [...draft.quizFuture] : [];
   buildWordColorMap(state.optionOrder);
   setView("quiz");
   renderLoadingState();
@@ -964,6 +1408,7 @@ function restoreQuizDraft(draft) {
   renderQuestions();
   renderOptions();
   renderSubmitButton();
+  renderQuizNavButtons();
   renderHomeModes();
 }
 
@@ -996,13 +1441,68 @@ function saveFlashCacheMap(cacheMap) {
   }
 }
 
+function getWordleCacheStorageKey() {
+  return "wordle-game-cache";
+}
+
+function loadWordleCache() {
+  try {
+    const raw = window.localStorage.getItem(getWordleCacheStorageKey());
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+function saveWordleCache(snapshot) {
+  try {
+    if (snapshot) {
+      window.localStorage.setItem(getWordleCacheStorageKey(), JSON.stringify(snapshot));
+    } else {
+      window.localStorage.removeItem(getWordleCacheStorageKey());
+    }
+  } catch {
+    // ignore local cache failures
+  }
+}
+
+function clearWordleCache() {
+  saveWordleCache(null);
+}
+
+function createWordleSnapshot() {
+  return {
+    targetWord: wordleState.targetWord,
+    guesses: cloneSerializable(wordleState.guesses) || [],
+    currentGuess: wordleState.currentGuess,
+    gameOver: wordleState.gameOver,
+    keyStates: cloneSerializable(wordleState.keyStates) || {},
+    resultDialogClosed: wordleState.resultDialogClosed
+  };
+}
+
+function hasIncompleteWordleGame() {
+  const cache = loadWordleCache();
+  return cache && !cache.gameOver;
+}
+
+function restoreWordleGame(snapshot) {
+  wordleState.targetWord = snapshot.targetWord || "";
+  wordleState.guesses = Array.isArray(snapshot.guesses) ? [...snapshot.guesses] : [];
+  wordleState.currentGuess = snapshot.currentGuess || "";
+  wordleState.gameOver = Boolean(snapshot.gameOver);
+  wordleState.keyStates = snapshot.keyStates && typeof snapshot.keyStates === "object" ? { ...snapshot.keyStates } : {};
+  wordleState.resultDialogClosed = Boolean(snapshot.resultDialogClosed);
+  console.log("🎯 Wordle answer (restored):", wordleState.targetWord?.toUpperCase() || "");
+  setView("wordle");
+  renderWordleGame();
+}
+
 function createFlashSessionSnapshot() {
   return {
     preset: state.flashPreset,
     current: createFlashSnapshot(),
-    queue: cloneSerializable(state.flashQueue) || [],
-    past: cloneSerializable(state.flashPast) || [],
-    future: cloneSerializable(state.flashFuture) || []
+    queue: cloneSerializable(state.flashQueue) || []
   };
 }
 
@@ -1230,9 +1730,43 @@ async function submitAuthForm() {
   const password = elements.authPasswordInput.value;
   const confirmPassword = elements.authConfirmInput.value;
 
+  if (state.authMode === "register") {
+    openCaptchaDialog(async (captchaPassed) => {
+      if (captchaPassed) {
+        await doSubmitAuth(username, password, confirmPassword);
+      }
+    });
+  } else {
+    await doSubmitAuth(username, password, confirmPassword);
+  }
+}
+
+let welcomeHintBubbleTimer = null;
+
+function showWelcomeHintBubble() {
+  if (welcomeHintBubbleTimer) {
+    clearTimeout(welcomeHintBubbleTimer);
+  }
+  elements.welcomeHintBubble.classList.remove("is-hidden");
+  
+  welcomeHintBubbleTimer = setTimeout(() => {
+    hideWelcomeHintBubble();
+  }, 8000);
+}
+
+function hideWelcomeHintBubble() {
+  if (welcomeHintBubbleTimer) {
+    clearTimeout(welcomeHintBubbleTimer);
+    welcomeHintBubbleTimer = null;
+  }
+  elements.welcomeHintBubble.classList.add("is-hidden");
+}
+
+async function doSubmitAuth(username, password, confirmPassword) {
   try {
+    const originalAuthMode = state.authMode;
     const data = await requestJson(
-      state.authMode === "register" ? "/api/auth/register" : "/api/auth/login",
+      originalAuthMode === "register" ? "/api/auth/register" : "/api/auth/login",
       {
         method: "POST",
         body: JSON.stringify({
@@ -1246,7 +1780,7 @@ async function submitAuthForm() {
     state.currentUser = data.user || null;
     state.isAuthenticated = Boolean(state.currentUser);
     elements.authForm.reset();
-    const nextModeMessage = state.authMode === "register" ? "注册成功" : "登录成功";
+    const nextModeMessage = originalAuthMode === "register" ? "注册成功" : "登录成功";
     setAuthMode("login");
     await loadUserDataFromBackend();
     closeAuthDialog();
@@ -1254,6 +1788,12 @@ async function submitAuthForm() {
     renderSessionUi();
     setView("home");
     showToast(nextModeMessage, "success");
+    
+    if (originalAuthMode === "register") {
+      setTimeout(() => {
+        showWelcomeHintBubble();
+      }, 300);
+    }
   } catch (error) {
     showToast(error.message || "登录失败", "error");
   }
@@ -1602,10 +2142,24 @@ function renderHistory() {
     const questionHtml = Array.isArray(record.items)
       ? record.items
           .map((item, index) => {
-            return `
-              <div class="history-question-card">
+            const defHtml = `
+              <p class="history-def">
                 <button
                   type="button"
+                  class="history-def-tts-btn pronounce-btn"
+                  data-tts-text="${escapeHtmlAttribute(item.defEn)}"
+                  aria-label="朗读释义"
+                  title="朗读"
+                >
+                  ${PRONOUNCE_ICON}
+                </button>
+                ${index + 1}. ${item.defEn}
+              </p>
+            `;
+            
+            return `
+              <div class="history-question-card">
+                <div
                   class="history-question"
                   data-lang="en"
                   data-index="${index + 1}"
@@ -1616,9 +2170,9 @@ function renderHistory() {
                   data-word-en="${escapeHtmlAttribute(item.word)}"
                   data-word-cn="${escapeHtmlAttribute(item.wordCn)}"
                 >
-                  <p class="history-def">${index + 1}. ${item.defEn}</p>
+                  ${defHtml}
                   <p class="history-answer">${item.word}</p>
-                </button>
+                </div>
                 <span class="history-question-side">
                   ${createInlinePronounceButton(item.word, "history-pronounce-btn")}
                   ${createInlineCollectButton(item.word, item.wordCn, "history-collect-btn")}
@@ -2346,6 +2900,7 @@ function resetFlashState() {
   state.flashSelectedIndex = -1;
   state.flashEvaluation = null;
   state.flashDetailVisible = false;
+  state.flashHintExampleVisible = false;
   state.flashPast = [];
   state.flashFuture = [];
 }
@@ -2371,7 +2926,8 @@ function createFlashSnapshot() {
     question: cloneSerializable(state.flashCurrent),
     selectedIndex: state.flashSelectedIndex,
     evaluation: state.flashEvaluation ? { ...state.flashEvaluation } : null,
-    detailVisible: state.flashDetailVisible
+    detailVisible: state.flashDetailVisible,
+    hintExampleVisible: state.flashHintExampleVisible
   };
 }
 
@@ -2380,15 +2936,25 @@ function restoreFlashSnapshot(snapshot) {
   state.flashSelectedIndex = Number.isInteger(snapshot?.selectedIndex) ? snapshot.selectedIndex : -1;
   state.flashEvaluation = snapshot?.evaluation ? { ...snapshot.evaluation } : null;
   state.flashDetailVisible = Boolean(snapshot?.detailVisible);
+  state.flashHintExampleVisible = Boolean(snapshot?.hintExampleVisible);
 }
 
 function restoreFlashSessionSnapshot(snapshot) {
   state.flashPreset = String(snapshot?.preset || state.flashPreset || "default").trim().toLowerCase() || "default";
   restoreFlashSnapshot(snapshot?.current);
-  state.flashQueue = Array.isArray(snapshot?.queue) ? cloneSerializable(snapshot.queue) || [] : [];
-  state.flashPast = Array.isArray(snapshot?.past) ? cloneSerializable(snapshot.past) || [] : [];
-  state.flashFuture = Array.isArray(snapshot?.future) ? cloneSerializable(snapshot.future) || [] : [];
+  state.flashQueue = Array.isArray(snapshot?.queue) ? [...snapshot.queue] : [];
+  state.flashPast = [];
+  state.flashFuture = [];
   resetFlashPreload();
+}
+
+function persistLearningProgress() {
+  saveCurrentQuizDraft();
+  if (state.flashCurrent?.word) {
+    saveCurrentFlashCache();
+  } else {
+    clearFlashCache();
+  }
 }
 
 function createQuizSnapshot() {
@@ -2465,7 +3031,7 @@ function renderFlashNavButtons() {
   elements.flashPrevBtn.disabled = state.flashPast.length === 0;
   const hasNextCandidate = state.flashFuture.length > 0 || state.flashQueue.length > 0 || Boolean(state.flashCurrent);
   elements.flashNextBtn.disabled = !state.flashCurrent || !state.flashEvaluation || !hasNextCandidate;
-  elements.flashPronounceBtn.disabled = !state.flashCurrent;
+  elements.flashHintBtn.disabled = !state.flashCurrent;
 }
 
 function warmFlashBatchForCurrentState() {
@@ -2518,10 +3084,10 @@ function setReadingAllExpanded(expanded) {
 }
 
 function renderFlashRevealButton() {
-  const shouldShow = Boolean(state.flashCurrent && state.flashEvaluation);
-  elements.flashRevealBtn.classList.toggle("is-hidden", !shouldShow);
-  if (shouldShow) {
-    elements.flashRevealBtn.textContent = state.flashDetailVisible ? "查看选项" : "查看释义";
+  if (state.flashCurrent && state.flashEvaluation) {
+    elements.flashHintBtn.textContent = state.flashDetailVisible ? "查看选项" : "查看释义";
+  } else {
+    elements.flashHintBtn.textContent = "提示";
   }
 }
 
@@ -2544,7 +3110,18 @@ function renderFlashDetail() {
         .map(
           (example, index) => `
             <div class="flash-example-item">
-              <p><strong>例句 ${index + 1}：</strong>${highlightExampleWord(example.en, current.word)}</p>
+              <p>
+                <button
+                  type="button"
+                  class="example-tts-btn pronounce-btn"
+                  data-tts-text="${escapeHtmlAttribute(example.en)}"
+                  aria-label="朗读例句 ${index + 1}"
+                  title="朗读"
+                >
+                  ${PRONOUNCE_ICON}
+                </button>
+                ${highlightExampleWord(example.en, current.word)}
+              </p>
               <p>${escapeHtml(example.cn)}</p>
             </div>
           `
@@ -2604,8 +3181,10 @@ function renderFlashOptions() {
         isCorrect: index === state.flashCurrent.answerIndex
       };
       state.flashDetailVisible = false;
+      state.flashHintExampleVisible = false;
       appendFlashHistoryRecord();
       warmFlashBatch();
+      renderFlashQuestion();
       renderFlashOptions();
       renderFlashRevealButton();
       renderFlashDetail();
@@ -2620,9 +3199,42 @@ function renderFlashQuestion() {
   elements.flashWord.textContent = state.flashCurrent ? state.flashCurrent.word : "";
   const flashAccent = state.flashCurrent ? String(state.flashCurrent.accent || "").trim() : "";
   if (elements.flashPhonetic) {
-    elements.flashPhonetic.textContent = flashAccent;
-    elements.flashPhonetic.classList.toggle("is-hidden", !flashAccent);
+    if (flashAccent) {
+      elements.flashPhonetic.innerHTML = `
+        <button
+          type="button"
+          class="flash-phonetic-tts-btn pronounce-btn"
+          data-word="${escapeHtmlAttribute(state.flashCurrent?.word || "")}"
+          aria-label="朗读单词"
+          title="朗读"
+        >
+          ${PRONOUNCE_ICON}
+        </button>
+        ${escapeHtml(flashAccent)}
+      `;
+      elements.flashPhonetic.classList.remove("is-hidden");
+    } else {
+      elements.flashPhonetic.textContent = "";
+      elements.flashPhonetic.classList.add("is-hidden");
+    }
   }
+  
+  if (elements.flashHintExample) {
+    const showHint = Boolean(!state.flashEvaluation && state.flashHintExampleVisible && state.flashCurrent?.examples?.[0]);
+    if (showHint) {
+      const example = state.flashCurrent.examples[0];
+      elements.flashHintExample.innerHTML = `
+        <div class="flash-hint-example-content">
+          <p class="flash-hint-example-en">${highlightExampleWord(example.en, state.flashCurrent.word)}</p>
+        </div>
+      `;
+      elements.flashHintExample.classList.remove("is-hidden");
+    } else {
+      elements.flashHintExample.innerHTML = "";
+      elements.flashHintExample.classList.add("is-hidden");
+    }
+  }
+  
   renderFlashPrevHeader();
   renderFlashLayoutState();
   renderFlashRevealButton();
@@ -2670,7 +3282,7 @@ function requestReadingExercise(preset = "default") {
 
 function renderReadingLoadingProgress() {
   elements.readingLoadingBar.style.width = `${state.readingLoadingPercent}%`;
-  elements.readingLoadingPercent.textContent = `${state.readingLoadingPercent}%`;
+  elements.readingLoadingPercent.textContent = `${Math.floor(state.readingLoadingPercent)}%`;
 }
 
 function renderReadingLoadingState() {
@@ -2687,18 +3299,20 @@ function startReadingLoadingProgress() {
 
   state.readingLoadingPercent = 0;
   renderReadingLoadingProgress();
+  const intervalMs = 80;
+  const maxPercent = 92;
   state.readingLoadingTimer = window.setInterval(() => {
-    if (state.readingLoadingPercent >= 92) {
+    if (state.readingLoadingPercent >= maxPercent) {
       window.clearInterval(state.readingLoadingTimer);
       state.readingLoadingTimer = null;
       return;
     }
-    state.readingLoadingPercent += state.readingLoadingPercent < 60 ? 8 : 4;
-    if (state.readingLoadingPercent > 92) {
-      state.readingLoadingPercent = 92;
+    state.readingLoadingPercent += state.readingLoadingPercent < 40 ? 1.2 : state.readingLoadingPercent < 70 ? 0.7 : 0.4;
+    if (state.readingLoadingPercent > maxPercent) {
+      state.readingLoadingPercent = maxPercent;
     }
     renderReadingLoadingProgress();
-  }, 120);
+  }, intervalMs);
 }
 
 function finishReadingLoadingProgress() {
@@ -2712,17 +3326,17 @@ function finishReadingLoadingProgress() {
       if (state.readingLoadingPercent >= 100) {
         state.readingLoadingPercent = 100;
         renderReadingLoadingProgress();
-        window.setTimeout(resolve, 100);
+        window.setTimeout(resolve, 150);
         return;
       }
 
       const remaining = 100 - state.readingLoadingPercent;
-      state.readingLoadingPercent += Math.max(3, Math.ceil(remaining / 3));
+      state.readingLoadingPercent += Math.max(0.8, remaining / 6);
       if (state.readingLoadingPercent > 100) {
         state.readingLoadingPercent = 100;
       }
       renderReadingLoadingProgress();
-      window.setTimeout(stepToComplete, 35);
+      window.setTimeout(stepToComplete, 50);
     };
 
     stepToComplete();
@@ -2977,7 +3591,8 @@ function shiftFlashQuestionFromQueue() {
     question: nextQuestion,
     selectedIndex: -1,
     evaluation: null,
-    detailVisible: false
+    detailVisible: false,
+    hintExampleVisible: false
   });
   renderFlashQuestion();
   warmFlashBatchWhenNeeded();
@@ -2985,21 +3600,34 @@ function shiftFlashQuestionFromQueue() {
 }
 
 async function loadFlashQuestion(options = {}) {
-  const { forceNew = false } = options;
-  if (!forceNew && state.flashCurrent) {
+  const { forceNew = false, fromHome = false } = options;
+  
+  if (fromHome) {
+    state.flashPast = [];
+    state.flashFuture = [];
+  }
+  
+  if (!forceNew && !fromHome && state.flashCurrent) {
     setView("flash");
     renderFlashLoadingState();
     renderFlashQuestion();
+    renderFlashNavButtons();
+    saveCurrentFlashCache();
     return;
   }
 
-  if (!forceNew && !state.flashCurrent) {
+  if (!forceNew) {
     const cachedSnapshot = getFlashCache(state.flashPreset);
     if (cachedSnapshot?.current?.question?.word) {
       restoreFlashSessionSnapshot(cachedSnapshot);
+      if (fromHome) {
+        state.flashPast = [];
+        state.flashFuture = [];
+      }
       setView("flash");
       renderFlashLoadingState();
       renderFlashQuestion();
+      renderFlashNavButtons();
       warmFlashBatchForCurrentState();
       saveCurrentFlashCache();
       return;
@@ -3082,6 +3710,12 @@ function goToNextFlashQuestion() {
     state.flashPast.push(createFlashSnapshot());
   }
   state.flashFuture = [];
+  
+  if (state.flashQueue.length) {
+    shiftFlashQuestionFromQueue();
+    return;
+  }
+  
   saveCurrentFlashCache();
   loadFlashQuestion({ forceNew: true });
 }
@@ -3149,7 +3783,7 @@ function renderHomeModes() {
         }
         state.mode = key;
         renderHomeModes();
-        loadQuiz();
+        loadQuiz({ fromHome: true });
       });
       sublist.appendChild(button);
     });
@@ -3167,6 +3801,18 @@ function renderHomeModes() {
       button.setAttribute("aria-disabled", "true");
     }
     button.addEventListener("click", () => {
+      if (type === "wordle") {
+        if (!requireAuthFromHomeEntry()) {
+          return;
+        }
+        const cache = loadWordleCache();
+        if (cache && !cache.gameOver) {
+          restoreWordleGame(cache);
+        } else {
+          startWordleGame();
+        }
+        return;
+      }
       if (!requireAuthFromHomeEntry()) {
         return;
       }
@@ -3175,8 +3821,8 @@ function renderHomeModes() {
         return;
       }
       if (type === "flash") {
-        setFlashPreset("default");
-        loadFlashQuestion();
+        state.flashPreset = "default";
+        loadFlashQuestion({ fromHome: true });
         return;
       }
       if (type === "reading") {
@@ -3344,7 +3990,18 @@ function renderResults() {
           .map(
             (example, exampleIndex) => `
               <div class="example-item">
-                <p><strong>例句 ${exampleIndex + 1}：</strong>${highlightExampleWord(example.en, item.word)}</p>
+                <p>
+                  <button
+                    type="button"
+                    class="example-tts-btn pronounce-btn"
+                    data-tts-text="${escapeHtmlAttribute(example.en)}"
+                    aria-label="朗读例句 ${exampleIndex + 1}"
+                    title="朗读"
+                  >
+                    ${PRONOUNCE_ICON}
+                  </button>
+                  ${highlightExampleWord(example.en, item.word)}
+                </p>
                 <p>${escapeHtml(example.cn)}</p>
               </div>
             `
@@ -3416,15 +4073,24 @@ function onSlotClick(index) {
 }
 
 async function loadQuiz(options = {}) {
-  const { forceNew = false } = options;
+  const { forceNew = false, fromHome = false } = options;
   if (elements.dialog.open) {
     elements.dialog.close();
+  }
+
+  if (fromHome) {
+    state.quizPast = [];
+    state.quizFuture = [];
   }
 
   if (!forceNew) {
     const draft = getQuizDraft(state.mode);
     if (draft) {
       restoreQuizDraft(draft);
+      if (fromHome) {
+        state.quizPast = [];
+        state.quizFuture = [];
+      }
       renderQuizNavButtons();
       return;
     }
@@ -3505,7 +4171,7 @@ function submitQuiz() {
 
   state.evaluationResult = state.quiz.items.map((item, index) => state.placements[index] === item.word);
   upsertHistoryRecord();
-  clearQuizDraft();
+  saveCurrentQuizDraft();
   warmNextQuiz(state.mode);
   renderQuestions();
   renderSubmitButton();
@@ -3513,6 +4179,31 @@ function submitQuiz() {
 }
 
 function bindEvents() {
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "hidden") {
+      persistLearningProgress();
+    }
+  });
+  window.addEventListener("pagehide", () => {
+    persistLearningProgress();
+  });
+  if (elements.welcomeHintCloseBtn) {
+    elements.welcomeHintCloseBtn.addEventListener("click", (event) => {
+      event.stopPropagation();
+      hideWelcomeHintBubble();
+    });
+  }
+  document.addEventListener("click", (event) => {
+    if (!elements.welcomeHintBubble.classList.contains("is-hidden")) {
+      const target = event.target;
+      const isInsideBubble = elements.welcomeHintBubble.contains(target);
+      const isInsideAvatar = elements.settingsEntryBtn.contains(target);
+      if (!isInsideBubble && !isInsideAvatar) {
+        hideWelcomeHintBubble();
+      }
+    }
+  });
+
   elements.themeToggleBtns.forEach((button) => {
     button.addEventListener("click", (event) => {
       toggleThemeWithTransition(event);
@@ -3625,20 +4316,42 @@ function bindEvents() {
   elements.readingNextBtn.addEventListener("click", () => {
     goToNextReadingExercise();
   });
-  elements.flashRevealBtn.addEventListener("click", () => {
-    if (!state.flashCurrent || !state.flashEvaluation) {
-      return;
-    }
-    state.flashDetailVisible = !state.flashDetailVisible;
-    renderFlashQuestion();
-    saveCurrentFlashCache();
-  });
   elements.flashPrevBtn.addEventListener("click", goToPrevFlashQuestion);
   elements.flashNextBtn.addEventListener("click", () => {
     goToNextFlashQuestion();
   });
-  elements.flashPronounceBtn.addEventListener("click", () => {
-    playWordPronunciation(state.flashCurrent?.word || "");
+  elements.flashHintBtn.addEventListener("click", () => {
+    if (!state.flashCurrent) {
+      return;
+    }
+    if (!state.flashEvaluation) {
+      state.flashHintExampleVisible = true;
+      renderFlashQuestion();
+      saveCurrentFlashCache();
+    } else {
+      state.flashDetailVisible = !state.flashDetailVisible;
+      if (state.flashDetailVisible) {
+        state.flashHintExampleVisible = false;
+      }
+      renderFlashQuestion();
+      saveCurrentFlashCache();
+    }
+  });
+  elements.flashPhonetic.addEventListener("click", (event) => {
+    const ttsBtn = event.target.closest(".flash-phonetic-tts-btn");
+    if (ttsBtn) {
+      event.preventDefault();
+      event.stopPropagation();
+      playWordPronunciation(ttsBtn.dataset.word || "", ttsBtn);
+      return;
+    }
+  });
+  elements.flashDetail.addEventListener("click", (event) => {
+    const ttsBtn = event.target.closest(".example-tts-btn");
+    if (!ttsBtn) {
+      return;
+    }
+    speakEnglishText(ttsBtn.dataset.ttsText || "", ttsBtn);
   });
   elements.backHomeBtn.addEventListener("click", () => {
     if (elements.dialog.open) {
@@ -3657,6 +4370,26 @@ function bindEvents() {
     renderLoadingState();
     renderSubmitButton();
     setView("home");
+  });
+  elements.closeCaptchaDialogBtn?.addEventListener("click", closeCaptchaDialog);
+  elements.captchaShapes?.addEventListener("click", (event) => {
+    const shapeEl = event.target.closest(".captcha-shape");
+    if (!shapeEl) {
+      return;
+    }
+    const shapeType = shapeEl.dataset.shapeType;
+    if (shapeType === captchaState.targetShape?.type) {
+      const callback = captchaState.callback;
+      closeCaptchaDialog();
+      if (typeof callback === "function") {
+        callback(true);
+      }
+      captchaState.callback = null;
+    } else {
+      showToast("验证失败，请重试", "error", 2000);
+      closeCaptchaDialog();
+      captchaState.callback = null;
+    }
   });
   elements.prevBtn.addEventListener("click", goToPrevQuizQuestion);
   elements.nextBtn.addEventListener("click", goToNextQuizQuestion);
@@ -3686,9 +4419,17 @@ function bindEvents() {
     syncToastHost();
   });
   elements.historyList.addEventListener("click", (event) => {
+    const historyDefTtsBtn = event.target.closest(".history-def-tts-btn");
+    if (historyDefTtsBtn) {
+      event.preventDefault();
+      event.stopPropagation();
+      speakEnglishText(historyDefTtsBtn.dataset.ttsText || "", historyDefTtsBtn);
+      return;
+    }
+
     const pronounceBtn = event.target.closest(".history-pronounce-btn, .flash-history-pronounce-btn");
     if (pronounceBtn) {
-      playWordPronunciation(pronounceBtn.dataset.word || "");
+      playWordPronunciation(pronounceBtn.dataset.word || "", pronounceBtn);
       return;
     }
 
@@ -3732,7 +4473,26 @@ function bindEvents() {
     const nextLang = currentLang === "en" ? "cn" : "en";
     question.dataset.lang = nextLang;
     const label = question.dataset.index || "";
-    defNode.textContent = `${label ? `${label}. ` : ""}${nextLang === "en" ? question.dataset.defEn || "" : question.dataset.defCn || ""}`;
+    const defText = `${label ? `${label}. ` : ""}${nextLang === "en" ? question.dataset.defEn || "" : question.dataset.defCn || ""}`;
+    
+    if (nextLang === "en") {
+      const ttsText = question.dataset.defEn || "";
+      defNode.innerHTML = `
+        <button
+          type="button"
+          class="history-def-tts-btn pronounce-btn"
+          data-tts-text="${escapeHtmlAttribute(ttsText)}"
+          aria-label="朗读释义"
+          title="朗读"
+        >
+          ${PRONOUNCE_ICON}
+        </button>
+        ${defText}
+      `;
+    } else {
+      defNode.textContent = defText;
+    }
+    
     if (answerNode) {
       answerNode.textContent = nextLang === "en" ? question.dataset.answerEn || "" : question.dataset.answerCn || "";
     }
@@ -3835,7 +4595,7 @@ function bindEvents() {
   elements.collectionList.addEventListener("click", (event) => {
     const pronounceBtn = event.target.closest(".collection-pronounce-btn");
     if (pronounceBtn) {
-      playWordPronunciation(pronounceBtn.dataset.word || "");
+      playWordPronunciation(pronounceBtn.dataset.word || "", pronounceBtn);
       return;
     }
 
@@ -3866,9 +4626,14 @@ function bindEvents() {
     }
   });
   elements.resultList.addEventListener("click", (event) => {
+    const exampleBtn = event.target.closest(".example-tts-btn");
+    if (exampleBtn) {
+      speakEnglishText(exampleBtn.dataset.ttsText || "", exampleBtn);
+      return;
+    }
     const pronounceBtn = event.target.closest(".result-pronounce-btn");
     if (pronounceBtn) {
-      playWordPronunciation(pronounceBtn.dataset.word || "");
+      playWordPronunciation(pronounceBtn.dataset.word || "", pronounceBtn);
       return;
     }
 
@@ -3890,11 +4655,755 @@ function bindEvents() {
       }
     });
   });
+  elements.wordleBackHomeBtn.addEventListener("click", () => {
+    setView("home");
+  });
+  
+  if (elements.wordleHelpBtn) {
+    elements.wordleHelpBtn.addEventListener("click", () => {
+      elements.wordleHelpDialog.showModal();
+    });
+  }
+  
+  if (elements.closeWordleHelpBtn) {
+    elements.closeWordleHelpBtn.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      elements.wordleHelpDialog.close();
+    });
+  }
+  
+  if (elements.wordleHelpDialog) {
+    elements.wordleHelpDialog.addEventListener("click", (event) => {
+      if (event.target === elements.wordleHelpDialog) {
+        elements.wordleHelpDialog.close();
+      }
+    });
+  }
+  
+  if (elements.closeWordleResultBtn) {
+    elements.closeWordleResultBtn.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      elements.wordleResultDialog.close();
+    });
+  }
+  
+  if (elements.wordleResultDialog) {
+    elements.wordleResultDialog.addEventListener("click", (event) => {
+      if (event.target === elements.wordleResultDialog) {
+        elements.wordleResultDialog.close();
+      }
+    });
+  }
+  
+  if (elements.wordleNewGameBtn) {
+    elements.wordleNewGameBtn.addEventListener("click", (event) => {
+      elements.wordleResultDialog.close();
+      startWordleGame();
+    });
+  }
+  
+  if (elements.wordleResultAccent) {
+    elements.wordleResultAccent.addEventListener("click", (event) => {
+      const ttsBtn = event.target.closest(".wordle-result-word-tts-btn");
+      if (ttsBtn) {
+        event.preventDefault();
+        event.stopPropagation();
+        playWordPronunciation(ttsBtn.dataset.word || "", ttsBtn);
+        return;
+      }
+    });
+  }
+  
+  if (elements.wordleResultExamples) {
+    elements.wordleResultExamples.addEventListener("click", (event) => {
+      const ttsBtn = event.target.closest(".wordle-result-example-tts-btn");
+      if (ttsBtn) {
+        event.preventDefault();
+        event.stopPropagation();
+        speakEnglishText(ttsBtn.dataset.ttsText || "", ttsBtn);
+        return;
+      }
+    });
+  }
+  
+  document.addEventListener("click", (event) => {
+    if (!elements.wordleWordPreview.classList.contains("is-hidden")) {
+      const clickedPreview = event.target.closest(".wordle-word-preview");
+      if (!clickedPreview) {
+        hideWordleWordPreview();
+      }
+    }
+  });
+  
+  if (elements.wordleBottomNewGameBtn) {
+    elements.wordleBottomNewGameBtn.addEventListener("click", () => {
+      startWordleGame();
+    });
+  }
+  
+  if (elements.wordleLeaderboardBtn) {
+    elements.wordleLeaderboardBtn.addEventListener("click", async () => {
+      await showWordleLeaderboardDialog();
+    });
+  }
+  
+  if (elements.closeWordleLeaderboardBtn) {
+    elements.closeWordleLeaderboardBtn.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      elements.wordleLeaderboardDialog.close();
+    });
+  }
+  
+  if (elements.wordleLeaderboardDialog) {
+    elements.wordleLeaderboardDialog.addEventListener("click", (event) => {
+      if (event.target === elements.wordleLeaderboardDialog) {
+        elements.wordleLeaderboardDialog.close();
+      }
+    });
+  }
 }
+
+const WORDLE_KEYBOARD_LAYOUT = [
+  ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
+  ["A", "S", "D", "F", "G", "H", "J", "K", "L", "⌫"],
+  ["Z", "X", "C", "V", "B", "N", "M", "ENTER"]
+];
+
+const WORDLE_REVEAL_STEP_MS = 140;
+const WORDLE_REVEAL_DURATION_MS = 520;
+
+let wordleState = {
+  targetWord: "",
+  guesses: [],
+  currentGuess: "",
+  gameOver: false,
+  isRevealing: false,
+  answers: [],
+  validWords: [],
+  keyStates: {},
+  resultDialogClosed: false,
+  previewWordInfo: null,
+  previewHideTimer: null
+};
+
+async function loadWordleWords() {
+  try {
+    const response = await fetch("/api/wordle/words");
+    const data = await response.json();
+    if (data.ok && data.answers && data.validWords) {
+      wordleState.answers = data.answers;
+      wordleState.validWords = data.validWords;
+    } else {
+      throw new Error("Invalid response");
+    }
+  } catch (err) {
+    console.error("Failed to load Wordle words:", err);
+    wordleState.answers = [
+      "apple", "table", "chair", "water", "music"
+    ];
+    wordleState.validWords = [
+      "abase", "abate", "abide", "abode", "abort", "about", "above", "abuse", "acorn", "actor",
+      "acute", "adapt", "adept", "admit", "adopt", "adore", "adorn", "adult", "after", "again",
+      "agent", "agile", "agony", "agree", "ahead", "alarm", "album", "alert", "alike", "alive"
+    ];
+  }
+}
+
+function initWordleGame() {
+  if (!wordleState.validWords.length) {
+    loadWordleWords();
+  }
+}
+
+async function startWordleGame() {
+  if (!wordleState.validWords.length) {
+    await loadWordleWords();
+  }
+  
+  if (wordleState.answers.length) {
+    wordleState.targetWord = wordleState.answers[Math.floor(Math.random() * wordleState.answers.length)].toLowerCase();
+  } else {
+    wordleState.targetWord = "apple";
+  }
+  console.log("🎯 Wordle answer:", wordleState.targetWord.toUpperCase());
+  
+  hideWordleWordPreview();
+  wordleState.guesses = [];
+  wordleState.currentGuess = "";
+  wordleState.gameOver = false;
+  wordleState.isRevealing = false;
+  wordleState.keyStates = {};
+  wordleState.resultDialogClosed = false;
+  
+  saveWordleCache(createWordleSnapshot());
+  
+  setView("wordle");
+  renderWordleGame();
+}
+
+function renderWordleGame(skipLastRowColor = false) {
+  renderWordleGrid(null, skipLastRowColor);
+  renderWordleKeyboard();
+  renderWordleBottomActions();
+}
+
+function renderWordleBottomActions() {
+  if (wordleState.gameOver && wordleState.resultDialogClosed) {
+    elements.wordleBottomActions.classList.remove("is-hidden");
+  } else {
+    elements.wordleBottomActions.classList.add("is-hidden");
+  }
+}
+
+function renderWordleLeaderboardItem(item, rank) {
+  const el = document.createElement("div");
+  el.className = "wordle-leaderboard-item";
+  
+  el.innerHTML = `
+    <span class="wordle-leaderboard-rank">${rank}</span>
+    <span class="wordle-leaderboard-username">${item.username}</span>
+    <span class="wordle-leaderboard-streak-wrap">
+      <span class="wordle-leaderboard-streak">${item.bestStreak}</span>
+      <span class="wordle-leaderboard-streak-label">最高连胜</span>
+    </span>
+  `;
+  return el;
+}
+
+function renderWordleLeaderboard(list) {
+  elements.wordleLeaderboardList.innerHTML = "";
+  list.forEach((item, index) => {
+    const el = renderWordleLeaderboardItem(item, index + 1);
+    elements.wordleLeaderboardList.appendChild(el);
+  });
+}
+
+function renderWordleLeaderboardSelf(rank, username, currentStreak, bestStreak) {
+  elements.wordleLeaderboardSelfRank.textContent = rank ?? "-";
+  elements.wordleLeaderboardSelfUsername.textContent = username || "-";
+  elements.wordleLeaderboardSelfCurrentStreak.textContent = currentStreak ?? "-";
+  elements.wordleLeaderboardSelfBestStreak.textContent = bestStreak ?? "-";
+}
+
+async function syncWordleResult(won) {
+  if (!state.isAuthenticated) {
+    return;
+  }
+
+  try {
+    const data = await requestJson("/api/wordle/result", {
+      method: "POST",
+      body: JSON.stringify({ won: Boolean(won) })
+    });
+    state.currentUser = data.user || state.currentUser;
+    renderSessionUi();
+  } catch (error) {
+    console.error("Failed to sync Wordle result:", error);
+  }
+}
+
+async function showWordleLeaderboardDialog() {
+  try {
+    const data = await requestJson("/api/wordle/leaderboard");
+    const leaderboard = Array.isArray(data.leaderboard) ? data.leaderboard : [];
+    const self = data.self || null;
+
+    renderWordleLeaderboard(leaderboard);
+    renderWordleLeaderboardSelf(
+      self?.rank || "-", 
+      self?.username || "-", 
+      self?.currentStreak ?? "-", 
+      self?.bestStreak ?? "-"
+    );
+    elements.wordleLeaderboardDialog.showModal();
+  } catch (error) {
+    showToast(error.message || "加载排行榜失败", "error");
+  }
+}
+
+function renderWordleGrid(animateCol = null, skipLastRowColor = false) {
+  elements.wordleGrid.innerHTML = "";
+  
+  for (let row = 0; row < 6; row++) {
+    const rowEl = document.createElement("div");
+    rowEl.className = "wordle-row";
+    
+    for (let col = 0; col < 5; col++) {
+      const cell = document.createElement("div");
+      cell.className = "wordle-cell";
+      
+      const guess = wordleState.guesses[row];
+      if (guess) {
+        const letter = guess[col];
+        cell.textContent = letter.toUpperCase();
+        const isLastRow = row === wordleState.guesses.length - 1;
+        if (!skipLastRowColor || !isLastRow) {
+          const result = getLetterResult(guess, col);
+          cell.classList.add(`is-${result}`);
+        }
+      } else if (row === wordleState.guesses.length && wordleState.currentGuess[col]) {
+        cell.textContent = wordleState.currentGuess[col].toUpperCase();
+        cell.classList.add("is-filled");
+        if (animateCol === col) {
+          cell.classList.add("is-pop");
+        }
+      }
+      
+      rowEl.appendChild(cell);
+    }
+    
+    elements.wordleGrid.appendChild(rowEl);
+  }
+}
+
+function animateWordleRevealRow(rowIndex) {
+  const row = elements.wordleGrid.querySelectorAll(".wordle-row")[rowIndex];
+  if (!row) {
+    return 0;
+  }
+
+  const guess = wordleState.guesses[rowIndex];
+  const cells = [...row.querySelectorAll(".wordle-cell")];
+  cells.forEach((cell, index) => {
+    cell.classList.remove("is-flip");
+    cell.style.animationDelay = `${index * WORDLE_REVEAL_STEP_MS}ms`;
+    void cell.offsetWidth;
+    
+    const result = getLetterResult(guess, index);
+    cell.classList.add("is-flip");
+    
+    window.setTimeout(() => {
+      cell.classList.add(`is-${result}`);
+    }, WORDLE_REVEAL_DURATION_MS / 2 + index * WORDLE_REVEAL_STEP_MS);
+    
+    window.setTimeout(() => {
+      cell.classList.remove("is-flip");
+      cell.style.animationDelay = "";
+    }, WORDLE_REVEAL_DURATION_MS + index * WORDLE_REVEAL_STEP_MS);
+  });
+
+  return WORDLE_REVEAL_DURATION_MS + Math.max(cells.length - 1, 0) * WORDLE_REVEAL_STEP_MS;
+}
+
+function getLetterResult(guess, index) {
+  const target = wordleState.targetWord;
+  const letter = guess[index];
+  
+  if (letter === target[index]) {
+    return "correct";
+  }
+  
+  if (target.includes(letter)) {
+    const targetLetters = target.split("");
+    const guessLetters = guess.split("");
+    
+    for (let i = 0; i < 5; i++) {
+      if (guessLetters[i] === targetLetters[i]) {
+        targetLetters[i] = null;
+        guessLetters[i] = null;
+      }
+    }
+    
+    for (let i = 0; i < 5; i++) {
+      if (i !== index && guessLetters[i] === letter && targetLetters.includes(letter)) {
+        targetLetters[targetLetters.indexOf(letter)] = null;
+        guessLetters[i] = null;
+      }
+    }
+    
+    if (targetLetters.includes(letter)) {
+      return "present";
+    }
+  }
+  
+  return "absent";
+}
+
+function renderWordleKeyboard() {
+  elements.wordleKeyboard.innerHTML = "";
+  
+  WORDLE_KEYBOARD_LAYOUT.forEach(row => {
+    const rowEl = document.createElement("div");
+    rowEl.className = "wordle-keyboard-row";
+    
+    row.forEach(key => {
+      const button = document.createElement("button");
+      button.className = "wordle-key";
+      button.dataset.key = key;
+      button.setAttribute('tabindex', '-1');
+      const releasePressedState = () => button.classList.remove("is-pressed");
+      button.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ' || e.code === 'Space') {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      });
+      button.addEventListener('keyup', (e) => {
+        if (e.key === 'Enter' || e.key === ' ' || e.code === 'Space') {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      });
+      button.addEventListener('focus', (e) => {
+        e.preventDefault();
+        button.blur();
+      });
+      button.addEventListener("pointerdown", () => {
+        button.classList.add("is-pressed");
+      });
+      button.addEventListener("pointerup", releasePressedState);
+      button.addEventListener("pointerleave", releasePressedState);
+      button.addEventListener("pointercancel", releasePressedState);
+      
+      if (key === "⌫") {
+        button.innerHTML = `<svg viewBox="0 0 1024 1024" width="26" height="26" aria-hidden="true"><path d="M494.48 673.68l113.136-113.152 113.152 113.136 56.56-56.56-113.136-113.12 113.136-113.152-56.56-56.56-113.152 113.136-113.136-113.136-56.56 56.56 113.136 113.136-113.136 113.136 56.56 56.56zM324.912 160L22.576 508.64 325.264 848H1008V160H324.912zM928 768H361.2L128.928 507.904 361.536 240H928v528z" fill="currentColor"></path></svg>`;
+      } else {
+        button.textContent = key;
+      }
+      
+      if (key === "ENTER") {
+        button.classList.add("is-wide");
+      }
+      
+      const normalizedKey = key === "ENTER" ? "ENTER" : key === "⌫" ? "BACKSPACE" : key.toLowerCase();
+      if (wordleState.keyStates[normalizedKey]) {
+        button.classList.add(`is-${wordleState.keyStates[normalizedKey]}`);
+      }
+      
+      button.addEventListener("click", () => handleWordleKey(key));
+      rowEl.appendChild(button);
+    });
+    
+    elements.wordleKeyboard.appendChild(rowEl);
+  });
+}
+
+async function showWordleWordPreview(word) {
+  if (!word || word.length !== 5 || !wordleState.validWords.includes(word)) {
+    hideWordleWordPreview();
+    return;
+  }
+  
+  if (wordleState.previewHideTimer) {
+    clearTimeout(wordleState.previewHideTimer);
+    wordleState.previewHideTimer = null;
+  }
+  
+  try {
+    const response = await fetch(`/api/word/info/${word}`);
+    const data = await response.json();
+    if (data.ok && data.info) {
+      wordleState.previewWordInfo = data.info;
+      elements.wordlePreviewWord.textContent = word.toUpperCase();
+      elements.wordlePreviewAccent.textContent = data.info.accent || "";
+      elements.wordlePreviewParaphrase.textContent = data.info.paraphrase || "";
+      elements.wordleWordPreview.classList.remove("is-hidden");
+    } else {
+      hideWordleWordPreview();
+    }
+  } catch (err) {
+    console.error("Failed to load word info for preview:", err);
+    hideWordleWordPreview();
+  }
+}
+
+function hideWordleWordPreview() {
+  if (wordleState.previewHideTimer) {
+    clearTimeout(wordleState.previewHideTimer);
+    wordleState.previewHideTimer = null;
+  }
+  elements.wordleWordPreview.classList.add("is-hidden");
+  wordleState.previewWordInfo = null;
+}
+
+function handleWordleKey(key) {
+  if (wordleState.gameOver && wordleState.resultDialogClosed && key === "ENTER") {
+    wordleState.resultDialogClosed = false;
+    renderWordleBottomActions();
+    showWordleResultDialog(wordleState.targetWord);
+    return;
+  }
+  
+  if (wordleState.gameOver || wordleState.isRevealing) return;
+  
+  if (key === "ENTER") {
+    if (wordleState.currentGuess.length === 5 && wordleState.validWords.includes(wordleState.currentGuess)) {
+      showWordleWordPreview(wordleState.currentGuess);
+    }
+    submitWordleGuess();
+  } else if (key === "⌫") {
+    if (wordleState.currentGuess.length > 0) {
+      wordleState.currentGuess = wordleState.currentGuess.slice(0, -1);
+      renderWordleGrid();
+      hideWordleWordPreview();
+      if (!wordleState.gameOver) {
+        saveWordleCache(createWordleSnapshot());
+      }
+    }
+  } else if (wordleState.currentGuess.length < 5) {
+    wordleState.currentGuess += key.toLowerCase();
+    renderWordleGrid(wordleState.currentGuess.length - 1);
+    hideWordleWordPreview();
+    if (!wordleState.gameOver) {
+      saveWordleCache(createWordleSnapshot());
+    }
+  }
+}
+
+function submitWordleGuess() {
+  if (wordleState.currentGuess.length !== 5) {
+    shakeCurrentRow();
+    renderWordleMessage("单词不够长");
+    return;
+  }
+  
+  if (wordleState.validWords.length && !wordleState.validWords.includes(wordleState.currentGuess)) {
+    shakeCurrentRow();
+    renderWordleMessage("单词无效");
+    return;
+  }
+  
+  const guess = wordleState.currentGuess;
+  wordleState.guesses.push(guess);
+  
+  const won = guess === wordleState.targetWord;
+  const lost = wordleState.guesses.length >= 6;
+  const revealedRowIndex = wordleState.guesses.length - 1;
+  
+  wordleState.currentGuess = "";
+  wordleState.gameOver = won || lost;
+  wordleState.isRevealing = true;
+  wordleState.resultDialogClosed = false;
+  
+  if (wordleState.gameOver) {
+    clearWordleCache();
+  } else {
+    saveWordleCache(createWordleSnapshot());
+  }
+  
+  renderWordleGame(true);
+  hideWordleWordPreview();
+  const revealDuration = animateWordleRevealRow(revealedRowIndex);
+  
+  window.setTimeout(() => {
+    updateKeyStates(guess);
+    renderWordleKeyboard();
+  }, revealDuration);
+  
+  if (won || lost) {
+    syncWordleResult(won);
+    setTimeout(async () => {
+      await showWordleResultDialog(won);
+    }, revealDuration + 120);
+    return;
+  }
+
+  window.setTimeout(() => {
+    wordleState.isRevealing = false;
+  }, revealDuration);
+}
+
+async function showWordleResultDialog(won) {
+  const word = wordleState.targetWord;
+  
+  elements.wordleResultTitle.textContent = won ? "恭喜答对！" : "再接再厉";
+  elements.wordleResultWord.textContent = word.toUpperCase();
+  elements.wordleResultAccent.innerHTML = `
+    <button
+      type="button"
+      class="wordle-result-word-tts-btn pronounce-btn"
+      data-word="${escapeHtmlAttribute(word)}"
+      aria-label="朗读单词"
+      title="朗读"
+    >
+      ${PRONOUNCE_ICON}
+    </button>
+  `;
+  elements.wordleResultAccent.classList.remove("is-hidden");
+  elements.wordleResultParaphrase.textContent = "";
+  elements.wordleResultParaphrase.classList.add("is-hidden");
+  elements.wordleResultDefs.innerHTML = "";
+  elements.wordleResultDefs.classList.add("is-hidden");
+  elements.wordleResultExamples.innerHTML = "";
+  elements.wordleResultExamples.classList.add("is-hidden");
+  
+  const onResultDialogClose = () => {
+    wordleState.resultDialogClosed = true;
+    renderWordleBottomActions();
+    elements.wordleResultDialog.removeEventListener("close", onResultDialogClose);
+  };
+  elements.wordleResultDialog.addEventListener("close", onResultDialogClose);
+  
+  elements.wordleResultDialog.showModal();
+  
+  let wordInfo = null;
+  try {
+    const response = await fetch(`/api/word/info/${word}`);
+    const data = await response.json();
+    if (data.ok && data.info) {
+      wordInfo = data.info;
+    }
+  } catch (err) {
+    console.error("Failed to load word info:", err);
+  }
+  
+  if (wordInfo && wordInfo.accent) {
+    elements.wordleResultAccent.innerHTML = `
+      <button
+        type="button"
+        class="wordle-result-word-tts-btn pronounce-btn"
+        data-word="${escapeHtmlAttribute(word)}"
+        aria-label="朗读单词"
+        title="朗读"
+      >
+        ${PRONOUNCE_ICON}
+      </button>
+      ${escapeHtml(wordInfo.accent)}
+    `;
+  }
+  
+  if (wordInfo && wordInfo.paraphrase) {
+    elements.wordleResultParaphrase.textContent = wordInfo.paraphrase;
+    elements.wordleResultParaphrase.classList.remove("is-hidden");
+  }
+  
+  if (wordInfo && (wordInfo.wordCn || wordInfo.defEn || wordInfo.defCn)) {
+    let defHtml = "";
+    if (wordInfo.wordCn) {
+      defHtml += `<p class="wordle-result-wordcn">${wordInfo.wordCn}</p>`;
+    }
+    if (wordInfo.defEn) {
+      defHtml += `<p class="wordle-result-defen">${wordInfo.defEn}</p>`;
+    }
+    if (wordInfo.defCn) {
+      defHtml += `<p class="wordle-result-defcn">${wordInfo.defCn}</p>`;
+    }
+    elements.wordleResultDefs.innerHTML = defHtml;
+    elements.wordleResultDefs.classList.remove("is-hidden");
+  }
+  
+  if (wordInfo && wordInfo.examples && wordInfo.examples.length) {
+    let examplesHtml = "";
+    wordInfo.examples.forEach(example => {
+      if (example.en && example.cn) {
+        examplesHtml += `
+          <div class="wordle-result-example">
+            <button
+              type="button"
+              class="wordle-result-example-tts-btn example-tts-btn"
+              data-tts-text="${escapeHtmlAttribute(example.en)}"
+              aria-label="朗读例句"
+              title="朗读"
+            >
+              ${PRONOUNCE_ICON}
+            </button>
+            <p class="wordle-result-example-en">${example.en}</p>
+            <p class="wordle-result-example-cn">${example.cn}</p>
+          </div>
+        `;
+      }
+    });
+    if (examplesHtml) {
+      elements.wordleResultExamples.innerHTML = examplesHtml;
+      elements.wordleResultExamples.classList.remove("is-hidden");
+    }
+  }
+}
+
+function updateKeyStates(guess) {
+  for (let i = 0; i < 5; i++) {
+    const letter = guess[i].toLowerCase();
+    const result = getLetterResult(guess, i);
+    const currentState = wordleState.keyStates[letter];
+    
+    if (!currentState || 
+        (currentState === "absent" && (result === "correct" || result === "present")) ||
+        (currentState === "present" && result === "correct")) {
+      wordleState.keyStates[letter] = result;
+    }
+  }
+}
+
+function shakeCurrentRow() {
+  renderWordleGrid();
+  const rows = elements.wordleGrid.querySelectorAll(".wordle-row");
+  const currentRow = rows[wordleState.guesses.length];
+  if (currentRow) {
+    const cells = currentRow.querySelectorAll(".wordle-cell");
+    cells.forEach(cell => {
+      cell.classList.add("is-shake");
+      setTimeout(() => cell.classList.remove("is-shake"), 400);
+    });
+  }
+}
+
+function renderWordleMessage(message) {
+  if (message) {
+    showToast(message, "error");
+  }
+}
+
+document.addEventListener("keydown", (event) => {
+  if (state.view !== "wordle") return;
+  
+  if (event.key === "Tab") {
+    event.preventDefault();
+    return;
+  }
+  
+  const key = event.key.toUpperCase();
+  
+  if (key === "ENTER") {
+    event.preventDefault();
+    event.stopPropagation();
+    handleWordleKey("ENTER");
+  } else if (key === "BACKSPACE") {
+    handleWordleKey("⌫");
+  } else if (/^[A-Z]$/.test(key)) {
+    handleWordleKey(key);
+  }
+}, true);
+
+document.addEventListener("keyup", (event) => {
+  if (state.view !== "wordle") return;
+  
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+}, true);
+
+initWordleGame();
+
 async function initializeApp() {
   try {
     applyTheme(loadThemePreference());
     clearLegacyLocalData();
+    
+    const allButtons = document.querySelectorAll('button');
+    allButtons.forEach(button => {
+      button.setAttribute('tabindex', '-1');
+      button.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ' || e.code === 'Space') {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      });
+      button.addEventListener('keyup', (e) => {
+        if (e.key === 'Enter' || e.key === ' ' || e.code === 'Space') {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      });
+      button.addEventListener('focus', (e) => {
+        e.preventDefault();
+        button.blur();
+      });
+    });
+    
     renderLoadingState();
     renderFlashLoadingState();
     renderSubmitButton();

@@ -29,6 +29,8 @@ function formatUser(row) {
     username: String(row.username || ""),
     passwordHash: String(row.password_hash || ""),
     bookId: Math.max(1, Number(row.book_id || 2)),
+    currentStreak: Math.max(0, Number(row.current_streak || 0)),
+    bestStreak: Math.max(0, Number(row.best_streak || 0)),
     createdAt: String(row.created_at || ""),
     updatedAt: String(row.updated_at || "")
   };
@@ -42,7 +44,63 @@ function formatSafeUser(user) {
   return {
     id: user.id,
     username: user.username,
-    bookId: Math.max(1, Number(user.bookId || 2))
+    bookId: Math.max(1, Number(user.bookId || 2)),
+    currentStreak: Math.max(0, Number(user.currentStreak || 0)),
+    bestStreak: Math.max(0, Number(user.bestStreak || 0))
+  };
+}
+
+async function getWordleLeaderboard(userId, limit = 20) {
+  const normalizedUserId = Number(userId);
+  const normalizedLimit = Math.max(1, Math.min(100, Number(limit || 20)));
+  const leaderboardRows = await all(
+    `
+      SELECT id, username, best_streak
+      FROM users
+      ORDER BY best_streak DESC, id ASC
+      LIMIT ?
+    `,
+    [normalizedLimit]
+  );
+
+  const selfRow = await get(
+    `
+      SELECT id, username, current_streak, best_streak
+      FROM users
+      WHERE id = ?
+      LIMIT 1
+    `,
+    [normalizedUserId]
+  );
+
+  let self = null;
+  if (selfRow) {
+    const normalizedBestStreak = Math.max(0, Number(selfRow.best_streak || 0));
+    const rankRow = await get(
+      `
+        SELECT COUNT(1) AS count
+        FROM users
+        WHERE best_streak > ?
+           OR (best_streak = ? AND id < ?)
+      `,
+      [normalizedBestStreak, normalizedBestStreak, normalizedUserId]
+    );
+
+    self = {
+      rank: Number(rankRow?.count || 0) + 1,
+      username: normalizeUsername(selfRow.username),
+      currentStreak: Math.max(0, Number(selfRow.current_streak || 0)),
+      bestStreak: normalizedBestStreak
+    };
+  }
+
+  return {
+    leaderboard: leaderboardRows.map((row) => ({
+      id: Number(row.id),
+      username: normalizeUsername(row.username),
+      bestStreak: Math.max(0, Number(row.best_streak || 0))
+    })),
+    self
   };
 }
 
@@ -106,6 +164,47 @@ async function updateUserBook(userId, bookId) {
     [normalizedBookId, now, Number(userId)]
   );
   return findUserById(userId);
+}
+
+async function applyWordleResult(userId, won) {
+  const normalizedUserId = Number(userId);
+  const didWin = Boolean(won);
+
+  return withTransaction(async (db) => {
+    const row = db.get(
+      `
+        SELECT id, current_streak, best_streak
+        FROM users
+        WHERE id = ?
+        LIMIT 1
+      `,
+      [normalizedUserId]
+    );
+
+    if (!row) {
+      throw new Error("用户不存在");
+    }
+
+    const currentStreak = Math.max(0, Number(row.current_streak || 0));
+    const bestStreak = Math.max(0, Number(row.best_streak || 0));
+    const nextCurrentStreak = didWin ? currentStreak + 1 : 0;
+    const nextBestStreak = didWin ? Math.max(bestStreak, nextCurrentStreak) : bestStreak;
+    const updatedAt = new Date().toISOString();
+
+    db.run(
+      `
+        UPDATE users
+        SET current_streak = ?, best_streak = ?, updated_at = ?
+        WHERE id = ?
+      `,
+      [nextCurrentStreak, nextBestStreak, updatedAt, normalizedUserId]
+    );
+
+    return {
+      currentStreak: nextCurrentStreak,
+      bestStreak: nextBestStreak
+    };
+  });
 }
 
 async function listCollection(userId) {
@@ -313,10 +412,12 @@ module.exports = {
   findUserById,
   findUserByUsername,
   updateUserBook,
+  applyWordleResult,
   formatSafeUser,
   listCollection,
   addCollectionItem,
   removeCollectionItem,
+  getWordleLeaderboard,
   listQuizHistory,
   upsertQuizHistory,
   listFlashHistory,

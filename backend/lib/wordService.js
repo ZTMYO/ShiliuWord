@@ -8,6 +8,10 @@ const {
   DEMO_ITEMS
 } = require("../config");
 
+let _bookCache = new Map();
+let _wordDataCache = null;
+let _wordExamplesCache = null;
+
 async function ensureDataFiles() {
   await fs.mkdir(WORD_BOOK_DIR, { recursive: true });
   for (const book of Array.isArray(WORD_BOOKS) ? WORD_BOOKS : []) {
@@ -54,22 +58,31 @@ function getBookFilePath(bookId) {
   return require("path").join(WORD_BOOK_DIR, filename);
 }
 
-async function readBookWords(bookId) {
+async function readBookWords(bookId, options = {}) {
   await ensureDataFiles();
+  const normalizedBookId = Math.max(1, Number(bookId || DEFAULT_BOOK_ID || 2));
+  
+  if (!options.forceRefresh && _bookCache.has(normalizedBookId)) {
+    return _bookCache.get(normalizedBookId);
+  }
+  
   const filePath = getBookFilePath(bookId);
   const content = await fs.readFile(filePath, "utf8");
-  return content
+  const words = content
     .split(/\r?\n/)
     .map(normalizeWord)
     .filter(Boolean)
     .filter(isValidWord);
+  
+  _bookCache.set(normalizedBookId, words);
+  return words;
 }
 
-async function readAllBookWords() {
+async function readAllBookWords(options = {}) {
   await ensureDataFiles();
   const words = [];
   for (const book of Array.isArray(WORD_BOOKS) ? WORD_BOOKS : []) {
-    const list = await readBookWords(book.id);
+    const list = await readBookWords(book.id, options);
     words.push(...list);
   }
   return uniqueWords(words);
@@ -128,31 +141,47 @@ async function listWordBooks() {
   return result;
 }
 
-async function readWordCache() {
+async function readWordCache(options = {}) {
   await ensureDataFiles();
+  
+  if (!options.forceRefresh && _wordDataCache !== null) {
+    return _wordDataCache;
+  }
+  
   try {
     const content = await fs.readFile(WORD_CACHE_FILE, "utf8");
-    return content.trim() ? JSON.parse(content) : {};
+    _wordDataCache = content.trim() ? JSON.parse(content) : {};
+    return _wordDataCache;
   } catch {
-    return {};
+    _wordDataCache = {};
+    return _wordDataCache;
   }
 }
 
 async function writeWordCache(cache) {
+  _wordDataCache = cache;
   await fs.writeFile(WORD_CACHE_FILE, `${JSON.stringify(cache, null, 2)}\n`, "utf8");
 }
 
-async function readWordExamples() {
+async function readWordExamples(options = {}) {
   await ensureDataFiles();
+  
+  if (!options.forceRefresh && _wordExamplesCache !== null) {
+    return _wordExamplesCache;
+  }
+  
   try {
     const content = await fs.readFile(WORD_EXAMPLE_FILE, "utf8");
-    return content.trim() ? normalizeExamples(JSON.parse(content)) : {};
+    _wordExamplesCache = content.trim() ? normalizeExamples(JSON.parse(content)) : {};
+    return _wordExamplesCache;
   } catch {
-    return {};
+    _wordExamplesCache = {};
+    return _wordExamplesCache;
   }
 }
 
 async function writeWordExamples(exampleMap) {
+  _wordExamplesCache = exampleMap;
   await fs.writeFile(WORD_EXAMPLE_FILE, `${JSON.stringify(exampleMap, null, 2)}\n`, "utf8");
 }
 
@@ -548,7 +577,7 @@ async function mergeCacheItems(items, allowWordSet = null) {
 
   if (changed) {
     await writeWordCache(cache);
-    await mergeWordParaphrases(syncedParaphrases, true);
+    await mergeWordParaphrases(syncedParaphrases, false);
   }
 }
 

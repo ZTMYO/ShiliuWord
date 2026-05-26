@@ -5,7 +5,8 @@ const {
   PORT,
   SESSION_SECRET,
   SESSION_COOKIE_NAME,
-  SESSION_TTL_HOURS
+  SESSION_TTL_HOURS,
+  DATA_DIR
 } = require("./config");
 const { ensureDataFiles, listWordBooks, readAllBookWords, readWordExamples, readWordCache } = require("./lib/wordService");
 const { getDatabase } = require("./lib/db");
@@ -16,9 +17,11 @@ const {
   findUserById,
   formatSafeUser,
   updateUserBook,
+  applyWordleResult,
   listCollection,
   addCollectionItem,
   removeCollectionItem,
+  getWordleLeaderboard,
   listQuizHistory,
   upsertQuizHistory,
   listFlashHistory,
@@ -35,6 +38,10 @@ const { validatePersonalApiKey } = require("./lib/aiService");
 const app = express();
 const DIST_DIR = path.join(__dirname, "..", "frontend", "dist");
 const SESSION_TTL_MS = SESSION_TTL_HOURS * 60 * 60 * 1000;
+
+let _statsCache = null;
+let _statsCacheTime = 0;
+const STATS_CACHE_TTL = 2 * 60 * 1000;
 
 app.use(express.json());
 
@@ -286,14 +293,19 @@ app.post("/api/user/api-key/validate", requireAuth, async (request, response, ne
 
 app.get("/api/stats", async (request, response, next) => {
   try {
+    if (_statsCache && Date.now() - _statsCacheTime < STATS_CACHE_TTL) {
+      response.json(_statsCache);
+      return;
+    }
+
     const [books, exampleMap, wordCache, userCountRow] = await Promise.all([
       listWordBooks(),
-      readWordExamples(),
-      readWordCache(),
+      readWordExamples({ forceRefresh: true }),
+      readWordCache({ forceRefresh: true }),
       get("SELECT COUNT(1) AS count FROM users")
     ]);
 
-    const uniqueWordsInBooks = (await readAllBookWords()).length;
+    const uniqueWordsInBooks = (await readAllBookWords({ forceRefresh: true })).length;
 
     let examplePairCount = 0;
     let accentedCount = 0;
@@ -308,7 +320,7 @@ app.get("/api/stats", async (request, response, next) => {
       }
     }
 
-    response.json({
+    _statsCache = {
       ok: true,
       words: {
         uniqueWordsInBooks,
@@ -322,7 +334,10 @@ app.get("/api/stats", async (request, response, next) => {
       users: {
         registeredUsers: Number(userCountRow?.count || 0)
       }
-    });
+    };
+    _statsCacheTime = Date.now();
+
+    response.json(_statsCache);
   } catch (error) {
     next(error);
   }
@@ -487,6 +502,114 @@ app.delete("/api/history", requireAuth, async (request, response, next) => {
     });
   } catch (error) {
     next(error);
+  }
+});
+
+app.get("/api/wordle/leaderboard", requireAuth, async (request, response, next) => {
+  try {
+    const limit = Math.max(1, Math.min(100, Number(request.query.limit || 20)));
+    const result = await getWordleLeaderboard(request.auth.user.id, limit);
+    response.json({
+      ok: true,
+      leaderboard: result.leaderboard,
+      self: result.self
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.post("/api/wordle/result", requireAuth, async (request, response, next) => {
+  try {
+    const won = request.body?.won;
+    if (typeof won !== "boolean") {
+      response.status(400).json({
+        ok: false,
+        message: "结算参数不合法"
+      });
+      return;
+    }
+
+    await applyWordleResult(request.auth.user.id, won);
+    const user = await findUserById(request.auth.user.id);
+    response.json({
+      ok: true,
+      user: formatSafeUser(user)
+    });
+  } catch (error) {
+    if (/用户不存在/.test(error.message || "")) {
+      response.status(404).json({
+        ok: false,
+        message: error.message
+      });
+      return;
+    }
+    next(error);
+  }
+});
+
+app.get("/api/wordle/words", async (request, response, next) => {
+  try {
+    const fs = require("fs/promises");
+    const path = require("path");
+    
+    const [answersContent, wordsJsonContent] = await Promise.all([
+      fs.readFile(path.join(DATA_DIR, "five-letter-answers.txt"), "utf8"),
+      fs.readFile(path.join(DATA_DIR, "five-letter-words.json"), "utf8")
+    ]);
+    
+    const answers = answersContent
+      .split(/\r?\n/)
+      .map((w) => w.trim().toLowerCase())
+      .filter((w) => w.length === 5);
+    
+    const wordsJson = JSON.parse(wordsJsonContent);
+    const validWords = Object.keys(wordsJson).map((w) => w.toLowerCase());
+    
+    response.json({
+      ok: true,
+      answers,
+      validWords
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.get("/api/word/info/:word", async (request, response, next) => {
+  try {
+    const word = String(request.params.word || "").trim().toLowerCase();
+    if (!word) {
+      return response.json({ ok: false, error: "Missing word" });
+    }
+
+    const fs = require("fs/promises");
+    const path = require("path");
+
+    const [wordData, wordExamples, fiveLetterWords] = await Promise.all([
+      readWordCache(),
+      readWordExamples(),
+      fs.readFile(path.join(DATA_DIR, "five-letter-words.json"), "utf8")
+    ]);
+
+    const fiveLetterWordsJson = JSON.parse(fiveLetterWords);
+
+    const info = {
+      word,
+      wordCn: wordData[word]?.wordCn || "",
+      defEn: wordData[word]?.defEn || "",
+      defCn: wordData[word]?.defCn || "",
+      examples: wordExamples[word]?.examples || [],
+      paraphrase: wordExamples[word]?.paraphrase || fiveLetterWordsJson[word]?.paraphrase || "",
+      accent: wordExamples[word]?.accent || fiveLetterWordsJson[word]?.accent || ""
+    };
+
+    response.json({
+      ok: true,
+      info
+    });
+  } catch (err) {
+    next(err);
   }
 });
 

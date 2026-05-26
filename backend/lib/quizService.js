@@ -344,8 +344,13 @@ function dedupeFlashOptions(options = [], correctOption = null) {
     kept.push(option);
   });
 
-  if (correctText && !kept.some((option) => areFlashOptionsNearDuplicate(option, correctOption))) {
-    kept.unshift(correctOption);
+  if (correctText) {
+    const index = kept.findIndex((option) => areFlashOptionsNearDuplicate(option, correctOption));
+    if (index >= 0) {
+      kept[index] = correctOption;
+    } else {
+      kept.unshift(correctOption);
+    }
   }
 
   return kept;
@@ -369,29 +374,56 @@ function buildParaphraseOptionPool(exampleMap = {}) {
     .filter((item) => item.word && item.glosses.length);
 }
 
-function pickLocalDistractors(optionPool, currentWord, correctText, count = 3) {
+function pickLocalDistractors(optionPool, currentWord, existingOptions = [], count = 3) {
   const normalizedCurrentWord = String(currentWord || "").trim().toLowerCase();
-  const usedTexts = new Set([String(correctText || "").trim()]);
+  const usedTexts = new Set(
+    (Array.isArray(existingOptions) ? existingOptions : [])
+      .map((option) => String(option?.text || "").trim())
+      .filter(Boolean)
+  );
+  const usedWords = new Set(
+    (Array.isArray(existingOptions) ? existingOptions : [])
+      .map((option) => String(option?.word || "").trim().toLowerCase())
+      .filter(Boolean)
+  );
+  usedWords.add(normalizedCurrentWord);
+
   const distractors = [];
 
-  for (const candidate of shuffle([...optionPool])) {
-    if (candidate.word === normalizedCurrentWord) {
+  for (const candidate of shuffle([...(Array.isArray(optionPool) ? optionPool : [])])) {
+    if (!candidate?.word || candidate.word === normalizedCurrentWord) {
+      continue;
+    }
+    if (usedWords.has(candidate.word)) {
       continue;
     }
 
-    const availableGlosses = shuffle(
-      candidate.glosses.filter((gloss) => !usedTexts.has(gloss))
-    );
-    const pickedGloss = availableGlosses[0];
+    const glosses = shuffle(Array.isArray(candidate.glosses) ? candidate.glosses : []);
+    const pickedGloss = glosses.find((gloss) => {
+      const text = String(gloss || "").trim();
+      if (!text) {
+        return false;
+      }
+      if (usedTexts.has(text)) {
+        return false;
+      }
+      const option = { word: candidate.word, text };
+      return !(Array.isArray(existingOptions) ? existingOptions : []).some((existing) =>
+        areFlashOptionsNearDuplicate(existing, option)
+      );
+    });
+
     if (!pickedGloss) {
       continue;
     }
 
-    distractors.push({
+    const option = {
       word: candidate.word,
-      text: pickedGloss
-    });
-    usedTexts.add(pickedGloss);
+      text: String(pickedGloss || "").trim()
+    };
+    distractors.push(option);
+    usedTexts.add(option.text);
+    usedWords.add(option.word);
 
     if (distractors.length >= count) {
       break;
@@ -401,26 +433,89 @@ function pickLocalDistractors(optionPool, currentWord, correctText, count = 3) {
   return distractors;
 }
 
-async function buildFallbackFlashQuestions(items) {
-  const cache = await readWordCache();
-  const exampleMap = await readWordExamples();
+function buildBookAwareOptionPools(optionPool = [], bookWords = []) {
+  const bookSet = new Set(
+    (Array.isArray(bookWords) ? bookWords : [])
+      .map((word) => String(word || "").trim().toLowerCase())
+      .filter(Boolean)
+  );
+
+  const allPool = Array.isArray(optionPool) ? optionPool : [];
+  const bookPool = allPool.filter((item) => bookSet.has(item.word));
+
+  return { allPool, bookPool };
+}
+
+async function buildFlashOptionPools(auth) {
+  const [cache, exampleMap, bookWords] = await Promise.all([
+    readWordCache(),
+    readWordExamples(),
+    readBookWords(auth?.bookId)
+  ]);
+
   const optionPool = [
     ...buildLocalFlashOptionPool(cache),
     ...buildParaphraseOptionPool(exampleMap)
   ];
 
-  return items.map((item, index) => {
-    const correctOption = {
-      word: item.word,
-      text: takePrimaryGloss(item.wordCn) || String(item.wordCn || "").trim() || item.word
-    };
-    const distractors = pickLocalDistractors(optionPool, item.word, correctOption.text);
+  return buildBookAwareOptionPools(optionPool, bookWords);
+}
 
-    const uniqueOptions = dedupeFlashOptions([correctOption, ...distractors], correctOption);
-    const options = shuffle(uniqueOptions).slice(0, 4);
-    const ensuredOptions = options.some((option) => option.text === correctOption.text)
-      ? options
-      : shuffle([correctOption, ...options.slice(0, 3)]).slice(0, 4);
+function ensureFlashOptions(baseOptions, currentWord, correctOption, optionPools) {
+  const normalizedCorrectText = String(correctOption?.text || "").trim();
+  const normalizedCorrectOption = {
+    word: String(correctOption?.word || currentWord || "").trim().toLowerCase(),
+    text: normalizedCorrectText
+  };
+
+  let options = dedupeFlashOptions(
+    (Array.isArray(baseOptions) ? baseOptions : []).filter((option) => option?.text),
+    normalizedCorrectOption
+  );
+
+  if (options.length > 4) {
+    const others = options.filter((option) => option.text !== normalizedCorrectText);
+    options = [normalizedCorrectOption, ...shuffle(others).slice(0, 3)];
+  }
+
+  if (options.length < 4) {
+    const missing = 4 - options.length;
+    options.push(
+      ...pickLocalDistractors(optionPools?.bookPool || [], currentWord, options, missing)
+    );
+  }
+
+  if (options.length < 4) {
+    const missing = 4 - options.length;
+    options.push(
+      ...pickLocalDistractors(optionPools?.allPool || [], currentWord, options, missing)
+    );
+  }
+
+  options = options.slice(0, 4);
+  if (!options.some((option) => option.text === normalizedCorrectText)) {
+    options = [normalizedCorrectOption, ...options.slice(0, 3)];
+  }
+
+  const shuffled = shuffle(options).slice(0, 4);
+  const answerIndex = shuffled.findIndex((option) => option.text === normalizedCorrectText);
+
+  return {
+    options: shuffled,
+    answerIndex
+  };
+}
+
+async function buildFallbackFlashQuestions(items, auth) {
+  const optionPools = await buildFlashOptionPools(auth);
+  return items.map((item, index) => {
+    const correctText = takePrimaryGloss(item.wordCn) || String(item.wordCn || "").trim() || item.word;
+    const ensured = ensureFlashOptions(
+      [],
+      item.word,
+      { word: item.word, text: correctText },
+      optionPools
+    );
 
     return {
       id: `${item.word}-${Date.now()}-${index}`,
@@ -430,8 +525,8 @@ async function buildFallbackFlashQuestions(items) {
       defCn: item.defCn,
       accent: item.accent || "",
       examples: Array.isArray(item.examples) ? item.examples.slice(0, 2) : [],
-      options: ensuredOptions,
-      answerIndex: ensuredOptions.findIndex((option) => option.text === correctOption.text)
+      options: ensured.options,
+      answerIndex: ensured.answerIndex
     };
   });
 }
@@ -477,6 +572,7 @@ async function createFlashQuizBatch(count = 5, auth, customWords = null) {
     }
   }
 
+  const optionPools = await buildFlashOptionPools(auth);
   const flashMap = new Map(flashPayload.map((item) => [item.word, item]));
   const questions = normalizedItems
     .map((item, index) => {
@@ -484,7 +580,15 @@ async function createFlashQuizBatch(count = 5, auth, customWords = null) {
       if (!flashItem) {
         return null;
       }
-      const options = shuffle([...flashItem.options]);
+      const ensured = ensureFlashOptions(
+        flashItem.options,
+        item.word,
+        { word: item.word, text: flashItem.correctOption?.text || "" },
+        optionPools
+      );
+      if (ensured.answerIndex < 0) {
+        return null;
+      }
       return {
         id: `${item.word}-${Date.now()}-${index}`,
         word: item.word,
@@ -493,15 +597,15 @@ async function createFlashQuizBatch(count = 5, auth, customWords = null) {
         defCn: item.defCn,
         accent: item.accent || "",
         examples: Array.isArray(item.examples) ? item.examples.slice(0, 2) : [],
-        options,
-        answerIndex: options.findIndex((option) => option.text === flashItem.correctOption.text)
+        options: ensured.options,
+        answerIndex: ensured.answerIndex
       };
     })
     .filter((item) => item && item.answerIndex >= 0);
 
   const safeQuestions = questions.length >= 3
     ? questions
-    : await buildFallbackFlashQuestions(normalizedItems);
+    : await buildFallbackFlashQuestions(normalizedItems, auth);
 
   return {
     questions: safeQuestions,
