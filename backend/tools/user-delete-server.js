@@ -22,6 +22,7 @@ app.get("/api/users", async (request, response, next) => {
         SELECT
           u.id,
           u.username,
+          u.nickname,
           u.created_at,
           (
             SELECT COUNT(*)
@@ -48,6 +49,7 @@ app.get("/api/users", async (request, response, next) => {
       users: users.map((row) => ({
         id: Number(row.id),
         username: String(row.username || ""),
+        nickname: String(row.nickname || ""),
         createdAt: String(row.created_at || ""),
         collectionCount: Number(row.collection_count || 0),
         quizHistoryCount: Number(row.quiz_history_count || 0),

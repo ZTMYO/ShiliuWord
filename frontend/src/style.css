@@ -2261,9 +2261,103 @@ button.result-collect-btn:hover {
 
 .settings-username {
   margin: 0;
-  color: var(--text-secondary);
-  font-size: 20px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.settings-nickname-wrap {
+  margin-bottom: 6px;
+}
+
+.settings-nickname-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.settings-nickname-edit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.settings-nickname-edit.is-hidden {
+  display: none;
+}
+
+.settings-nickname-input {
+  flex: 1 1 auto;
+  min-width: 100px;
+  max-width: 200px;
+  min-height: 38px;
+  padding: 0 12px;
+  font-size: 15px;
+}
+
+.settings-nickname-save-btn {
+  min-height: 38px;
+  padding: 0 14px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.settings-nickname-cancel-btn {
+  min-height: 38px;
+  padding: 0 10px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.settings-password-save-btn,
+.settings-password-cancel-btn {
+  min-height: 42px;
+  padding: 0 14px;
+  border-radius: 12px;
+}
+
+.settings-nickname {
+  margin: 0;
+  color: var(--text);
+  font-size: 24px;
   font-weight: 700;
+}
+
+.settings-nickname-edit-btn {
+  padding: 6px;
+  border: 0;
+  background: transparent;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.settings-nickname-edit-btn:hover {
+  background: var(--bg-soft);
+}
+
+.settings-password-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.settings-password-edit.is-hidden {
+  display: none;
+}
+
+.settings-password-edit .settings-input {
+  margin-bottom: 0;
+}
+
+.settings-nickname-edit-btn svg path {
+  fill: currentColor;
 }
 
 .settings-help,
@@ -2494,7 +2588,8 @@ button.result-collect-btn:hover {
 }
 
 .settings-clear-btn,
-.settings-clear-history-btn {
+.settings-clear-history-btn,
+.settings-password-edit-btn {
   min-height: 44px;
   padding: 0 14px;
   border-radius: 12px;
@@ -2588,6 +2683,7 @@ button.result-collect-btn:hover {
   z-index: 100;
   transform: translateY(-100%);
   transition: transform 0.3s ease;
+  pointer-events: none;
 }
 
 .wordle-word-preview:not(.is-hidden) {
@@ -2605,6 +2701,7 @@ button.result-collect-btn:hover {
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   max-width: 420px;
+  pointer-events: auto;
 }
 
 .wordle-preview-word-line {
@@ -3115,7 +3212,7 @@ button.result-collect-btn:hover {
 
 .wordle-result-example-en {
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 400;
   color: var(--text-primary);
   margin: 0 0 6px 0;
   line-height: 1.5;
@@ -3235,40 +3332,6 @@ button.result-collect-btn:hover {
   text-align: center;
 }
 
-.wordle-bottom-actions {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.wordle-bottom-actions.is-hidden {
-  display: none;
-}
-
-.wordle-bottom-actions .primary-btn {
-  min-width: 160px;
-}
-
-#wordle-bottom-new-game-btn {
-  background: var(--wordle-correct);
-  color: var(--wordle-contrast-text);
-  border-color: var(--wordle-correct);
-}
-
-#wordle-bottom-new-game-btn:hover {
-  filter: brightness(0.98);
-  background: var(--wordle-correct);
-  color: var(--wordle-contrast-text);
-  border-color: var(--wordle-correct);
-}
-
-#wordle-bottom-new-game-btn:active {
-  filter: brightness(0.94);
-  background: var(--wordle-correct);
-  color: var(--wordle-contrast-text);
-  border-color: var(--wordle-correct);
-}
-
 .wordle-leaderboard-dialog {
   border: 0;
   border-radius: 16px;
@@ -3315,6 +3378,74 @@ button.result-collect-btn:hover {
 
 .wordle-leaderboard-body::-webkit-scrollbar-thumb:hover {
   background: var(--scrollbar-hover);
+}
+
+.wordle-surrender-confirm-dialog {
+  border: 0;
+  border-radius: 8px;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-page);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  width: 90%;
+  max-width: 400px;
+}
+
+.wordle-surrender-confirm-dialog:not([open]) {
+  display: none;
+}
+
+.wordle-surrender-confirm-dialog::backdrop {
+  background: var(--overlay);
+}
+
+.wordle-surrender-confirm-body {
+  padding: 24px 20px;
+}
+
+.wordle-surrender-confirm-body p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 15px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.wordle-surrender-confirm-actions {
+  display: flex;
+  gap: 12px;
+  padding: 0 20px 20px;
+}
+
+.wordle-surrender-confirm-actions button {
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 10px;
+  border: 0;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.wordle-surrender-confirm-actions .secondary-btn {
+  background: var(--bg-soft);
+  color: var(--text-primary);
+}
+
+.wordle-surrender-confirm-actions .secondary-btn:hover {
+  background: var(--bg-soft-strong);
+}
+
+.wordle-surrender-confirm-actions .danger-btn {
+  background: var(--error);
+  color: white;
+}
+
+.wordle-surrender-confirm-actions .danger-btn:hover {
+  filter: brightness(0.95);
 }
 
 .wordle-leaderboard-list {
@@ -3549,7 +3680,8 @@ button {
   .page-reading,
   .page-history,
   .page-collection,
-  .page-wordle {
+  .page-wordle,
+  .page-settings {
     display: block;
     padding-top: calc(env(safe-area-inset-top, 0px) + 50px);
   }

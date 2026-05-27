@@ -114,6 +114,12 @@
         font-size: 18px;
         font-weight: 700;
       }
+      
+      .user-nickname {
+        margin: 4px 0 0;
+        font-size: 14px;
+        color: var(--muted);
+      }
 
       .user-meta,
       .user-counts {
@@ -198,6 +204,7 @@
           item.innerHTML = `
             <div class="user-main">
               <p class="user-name">${user.username}</p>
+              <p class="user-nickname">昵称: ${user.nickname || user.username || "-"}</p>
               <p class="user-meta">ID: ${user.id} · 注册时间: ${formatTime(user.createdAt)}</p>
               <p class="user-counts">
                 收藏 ${user.collectionCount} 条 · 匹配历史 ${user.quizHistoryCount} 条 · 闪卡刷词历史 ${user.flashHistoryCount} 条

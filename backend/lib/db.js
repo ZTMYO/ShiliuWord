@@ -85,6 +85,9 @@ function runSchema(db) {
   if (userColumnSet.has("streak")) {
     db.exec("ALTER TABLE users DROP COLUMN streak;");
   }
+  if (!userColumnSet.has("nickname")) {
+    db.exec("ALTER TABLE users ADD COLUMN nickname TEXT NOT NULL DEFAULT '';");
+  }
 }
 
 async function createDatabase() {

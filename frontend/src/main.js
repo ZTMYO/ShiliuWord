@@ -243,6 +243,7 @@ const elements = {
   readingNextBtn: document.querySelector("#reading-next-btn"),
   wordleBackHomeBtn: document.querySelector("#wordle-back-home-btn"),
   wordleNewGameBtn: document.querySelector("#wordle-new-game-btn"),
+  wordleSurrenderBtn: document.querySelector("#wordle-surrender-btn"),
   wordleBoard: document.querySelector("#wordle-board"),
   wordleGrid: document.querySelector("#wordle-grid"),
   wordleKeyboard: document.querySelector("#wordle-keyboard"),
@@ -273,6 +274,21 @@ const elements = {
   settingsView: document.querySelector("#settings-view"),
   settingsBackBtn: document.querySelector("#settings-back-btn"),
   settingsUsername: document.querySelector("#settings-username"),
+  settingsNickname: document.querySelector("#settings-nickname"),
+  settingsNicknameDisplay: document.querySelector("#settings-nickname-display"),
+  settingsNicknameEdit: document.querySelector("#settings-nickname-edit"),
+  settingsNicknameInput: document.querySelector("#settings-nickname-input"),
+  settingsNicknameEditBtn: document.querySelector("#settings-nickname-edit-btn"),
+  settingsNicknameSaveBtn: document.querySelector("#settings-nickname-save-btn"),
+  settingsNicknameCancelBtn: document.querySelector("#settings-nickname-cancel-btn"),
+  settingsPasswordEditBtn: document.querySelector("#settings-password-edit-btn"),
+  settingsPasswordDisplay: document.querySelector("#settings-password-display"),
+  settingsPasswordEdit: document.querySelector("#settings-password-edit"),
+  settingsPasswordOldInput: document.querySelector("#settings-password-old-input"),
+  settingsPasswordNewInput: document.querySelector("#settings-password-new-input"),
+  settingsPasswordConfirmInput: document.querySelector("#settings-password-confirm-input"),
+  settingsPasswordSaveBtn: document.querySelector("#settings-password-save-btn"),
+  settingsPasswordCancelBtn: document.querySelector("#settings-password-cancel-btn"),
   settingsBookBtn: document.querySelector("#settings-book-btn"),
   settingsAvatarLetter: document.querySelector("#settings-avatar-letter"),
   settingsAvatarIcon: document.querySelector("#settings-avatar-icon"),
@@ -320,7 +336,10 @@ const elements = {
   wordleWordPreview: document.querySelector("#wordle-word-preview"),
   wordlePreviewWord: document.querySelector("#wordle-preview-word"),
   wordlePreviewAccent: document.querySelector("#wordle-preview-accent"),
-  wordlePreviewParaphrase: document.querySelector("#wordle-preview-paraphrase")
+  wordlePreviewParaphrase: document.querySelector("#wordle-preview-paraphrase"),
+  wordleSurrenderConfirmDialog: document.querySelector("#wordle-surrender-confirm-dialog"),
+  wordleSurrenderCancelBtn: document.querySelector("#wordle-surrender-cancel-btn"),
+  wordleSurrenderConfirmBtn: document.querySelector("#wordle-surrender-confirm-btn")
 };
 
 function syncToastHost() {
@@ -1268,11 +1287,13 @@ async function updateUserBook(bookId) {
 
 function renderSessionUi() {
   const username = state.currentUser?.username || "";
+  const nickname = state.currentUser?.nickname || username;
   elements.settingsUsername.textContent = username || "-";
+  elements.settingsNickname.textContent = nickname || "-";
   if (elements.settingsBookBtn) {
     elements.settingsBookBtn.textContent = state.currentUser?.bookId ? getBookName(state.currentUser.bookId) : "选择词书";
   }
-  const firstChar = String(username || "").trim().slice(0, 1);
+  const firstChar = String(nickname || "").trim().slice(0, 1);
   const hasLetter = Boolean(firstChar);
   if (elements.settingsAvatarLetter) {
     elements.settingsAvatarLetter.textContent = hasLetter ? firstChar.toUpperCase() : "";
@@ -1284,6 +1305,7 @@ function renderSessionUi() {
   if (elements.settingsEntryBtn) {
     elements.settingsEntryBtn.title = username ? `账号设置：${username}` : "账号设置";
   }
+}
   const localPersonalApiKey = loadLocalPersonalApiKey();
   elements.settingsApiKeyInput.value = localPersonalApiKey;
   renderApiKeyAvailabilityStatus(localPersonalApiKey);
@@ -1291,7 +1313,6 @@ function renderSessionUi() {
     void refreshStoredPersonalApiKeyStatus(localPersonalApiKey);
   }
   renderHomeModes();
-}
 
 function hasAvailableAiCapability() {
   return Boolean(loadLocalPersonalApiKey());
@@ -4585,6 +4606,114 @@ function bindEvents() {
   elements.settingsLogoutBtn.addEventListener("click", () => {
     logout();
   });
+  elements.settingsNicknameEditBtn.addEventListener("click", () => {
+    const currentNickname = state.currentUser?.nickname || state.currentUser?.username || "";
+    elements.settingsNicknameInput.value = currentNickname;
+    elements.settingsNicknameDisplay.classList.add("is-hidden");
+    elements.settingsNicknameEdit.classList.remove("is-hidden");
+    elements.settingsNicknameInput.focus();
+  });
+  async function saveNickname() {
+    const newNickname = elements.settingsNicknameInput.value.trim();
+    if (!newNickname) {
+      showToast("昵称不能为空", "error");
+      return;
+    }
+    try {
+      const data = await requestJson("/api/user/nickname", {
+        method: "POST",
+        body: JSON.stringify({ nickname: newNickname })
+      });
+      state.currentUser = data.user || state.currentUser;
+      elements.settingsNicknameDisplay.classList.remove("is-hidden");
+      elements.settingsNicknameEdit.classList.add("is-hidden");
+      renderSessionUi();
+      showToast("昵称已更新", "success");
+    } catch (error) {
+      showToast(error.message || "更新失败", "error");
+    }
+  }
+
+  elements.settingsNicknameCancelBtn.addEventListener("click", () => {
+    elements.settingsNicknameDisplay.classList.remove("is-hidden");
+    elements.settingsNicknameEdit.classList.add("is-hidden");
+  });
+  elements.settingsNicknameSaveBtn.addEventListener("click", saveNickname);
+  elements.settingsNicknameInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      saveNickname();
+    }
+  });
+
+  async function savePassword() {
+    const oldPassword = elements.settingsPasswordOldInput.value.trim();
+    const newPassword = elements.settingsPasswordNewInput.value.trim();
+    const confirmPassword = elements.settingsPasswordConfirmInput.value.trim();
+
+    if (!oldPassword) {
+      showToast("请输入旧密码", "error");
+      elements.settingsPasswordOldInput.focus();
+      return;
+    }
+    if (!newPassword) {
+      showToast("请输入新密码", "error");
+      elements.settingsPasswordNewInput.focus();
+      return;
+    }
+    if (newPassword.length < 6) {
+      showToast("新密码至少 6 位", "error");
+      elements.settingsPasswordNewInput.focus();
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      showToast("两次输入的新密码不一致", "error");
+      elements.settingsPasswordConfirmInput.focus();
+      return;
+    }
+
+    try {
+      await requestJson("/api/user/password", {
+        method: "POST",
+        body: JSON.stringify({
+          oldPassword: oldPassword,
+          newPassword: newPassword
+        })
+      });
+
+      elements.settingsPasswordOldInput.value = "";
+      elements.settingsPasswordNewInput.value = "";
+      elements.settingsPasswordConfirmInput.value = "";
+      elements.settingsPasswordDisplay.classList.remove("is-hidden");
+      elements.settingsPasswordEdit.classList.add("is-hidden");
+      showToast("密码已更新", "success");
+    } catch (error) {
+      showToast(error.message || "更新失败", "error");
+    }
+  }
+
+  elements.settingsPasswordEditBtn.addEventListener("click", () => {
+    elements.settingsPasswordDisplay.classList.add("is-hidden");
+    elements.settingsPasswordEdit.classList.remove("is-hidden");
+    elements.settingsPasswordOldInput.focus();
+  });
+
+  elements.settingsPasswordCancelBtn.addEventListener("click", () => {
+    elements.settingsPasswordOldInput.value = "";
+    elements.settingsPasswordNewInput.value = "";
+    elements.settingsPasswordConfirmInput.value = "";
+    elements.settingsPasswordDisplay.classList.remove("is-hidden");
+    elements.settingsPasswordEdit.classList.add("is-hidden");
+  });
+
+  elements.settingsPasswordSaveBtn.addEventListener("click", savePassword);
+  elements.settingsPasswordConfirmInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      savePassword();
+    }
+  });
+
   elements.settingsApiKeyInput.addEventListener("input", () => {
     setApiKeyValidationState();
     renderApiKeyAvailabilityStatus(elements.settingsApiKeyInput.value);
@@ -4658,6 +4787,33 @@ function bindEvents() {
   elements.wordleBackHomeBtn.addEventListener("click", () => {
     setView("home");
   });
+  
+  if (elements.wordleSurrenderBtn) {
+    elements.wordleSurrenderBtn.addEventListener("click", () => {
+      if (!wordleState.gameOver && !wordleState.isRevealing) {
+        elements.wordleSurrenderConfirmDialog.showModal();
+      }
+    });
+  }
+  
+  if (elements.wordleSurrenderCancelBtn) {
+    elements.wordleSurrenderCancelBtn.addEventListener("click", () => {
+      elements.wordleSurrenderConfirmDialog.close();
+    });
+  }
+  
+  if (elements.wordleSurrenderConfirmBtn) {
+    elements.wordleSurrenderConfirmBtn.addEventListener("click", async () => {
+      elements.wordleSurrenderConfirmDialog.close();
+      wordleState.guesses.push(wordleState.targetWord);
+      wordleState.gameOver = true;
+      wordleState.surrendered = true;
+      clearWordleCache();
+      renderWordleGrid();
+      await syncWordleResult(false);
+      await showWordleResultDialog(false);
+    });
+  }
   
   if (elements.wordleHelpBtn) {
     elements.wordleHelpBtn.addEventListener("click", () => {
@@ -4737,12 +4893,6 @@ function bindEvents() {
     }
   });
   
-  if (elements.wordleBottomNewGameBtn) {
-    elements.wordleBottomNewGameBtn.addEventListener("click", () => {
-      startWordleGame();
-    });
-  }
-  
   if (elements.wordleLeaderboardBtn) {
     elements.wordleLeaderboardBtn.addEventListener("click", async () => {
       await showWordleLeaderboardDialog();
@@ -4786,7 +4936,8 @@ let wordleState = {
   keyStates: {},
   resultDialogClosed: false,
   previewWordInfo: null,
-  previewHideTimer: null
+  previewHideTimer: null,
+  surrendered: false
 };
 
 async function loadWordleWords() {
@@ -4837,6 +4988,7 @@ async function startWordleGame() {
   wordleState.isRevealing = false;
   wordleState.keyStates = {};
   wordleState.resultDialogClosed = false;
+  wordleState.surrendered = false;
   
   saveWordleCache(createWordleSnapshot());
   
@@ -4847,15 +4999,6 @@ async function startWordleGame() {
 function renderWordleGame(skipLastRowColor = false) {
   renderWordleGrid(null, skipLastRowColor);
   renderWordleKeyboard();
-  renderWordleBottomActions();
-}
-
-function renderWordleBottomActions() {
-  if (wordleState.gameOver && wordleState.resultDialogClosed) {
-    elements.wordleBottomActions.classList.remove("is-hidden");
-  } else {
-    elements.wordleBottomActions.classList.add("is-hidden");
-  }
 }
 
 function renderWordleLeaderboardItem(item, rank) {
@@ -4864,7 +5007,7 @@ function renderWordleLeaderboardItem(item, rank) {
   
   el.innerHTML = `
     <span class="wordle-leaderboard-rank">${rank}</span>
-    <span class="wordle-leaderboard-username">${item.username}</span>
+    <span class="wordle-leaderboard-username">${item.nickname || item.username}</span>
     <span class="wordle-leaderboard-streak-wrap">
       <span class="wordle-leaderboard-streak">${item.bestStreak}</span>
       <span class="wordle-leaderboard-streak-label">最高连胜</span>
@@ -4881,9 +5024,9 @@ function renderWordleLeaderboard(list) {
   });
 }
 
-function renderWordleLeaderboardSelf(rank, username, currentStreak, bestStreak) {
+function renderWordleLeaderboardSelf(rank, username, currentStreak, bestStreak, nickname) {
   elements.wordleLeaderboardSelfRank.textContent = rank ?? "-";
-  elements.wordleLeaderboardSelfUsername.textContent = username || "-";
+  elements.wordleLeaderboardSelfUsername.textContent = nickname || username || "-";
   elements.wordleLeaderboardSelfCurrentStreak.textContent = currentStreak ?? "-";
   elements.wordleLeaderboardSelfBestStreak.textContent = bestStreak ?? "-";
 }
@@ -4916,7 +5059,8 @@ async function showWordleLeaderboardDialog() {
       self?.rank || "-", 
       self?.username || "-", 
       self?.currentStreak ?? "-", 
-      self?.bestStreak ?? "-"
+      self?.bestStreak ?? "-",
+      self?.nickname
     );
     elements.wordleLeaderboardDialog.showModal();
   } catch (error) {
@@ -5121,16 +5265,21 @@ function hideWordleWordPreview() {
 
 function handleWordleKey(key) {
   if (wordleState.gameOver && wordleState.resultDialogClosed && key === "ENTER") {
+    if (wordleState.surrendered) {
+      wordleState.resultDialogClosed = false;
+      showWordleResultDialog(false);
+      return;
+    }
+    const won = wordleState.guesses[wordleState.guesses.length - 1] === wordleState.targetWord;
     wordleState.resultDialogClosed = false;
-    renderWordleBottomActions();
-    showWordleResultDialog(wordleState.targetWord);
+    showWordleResultDialog(won);
     return;
   }
   
   if (wordleState.gameOver || wordleState.isRevealing) return;
   
   if (key === "ENTER") {
-    if (wordleState.currentGuess.length === 5 && wordleState.validWords.includes(wordleState.currentGuess)) {
+    if (wordleState.currentGuess.length === 5 && wordleState.validWords.includes(wordleState.currentGuess) && wordleState.currentGuess !== wordleState.targetWord) {
       showWordleWordPreview(wordleState.currentGuess);
     }
     submitWordleGuess();
@@ -5232,7 +5381,6 @@ async function showWordleResultDialog(won) {
   
   const onResultDialogClose = () => {
     wordleState.resultDialogClosed = true;
-    renderWordleBottomActions();
     elements.wordleResultDialog.removeEventListener("close", onResultDialogClose);
   };
   elements.wordleResultDialog.addEventListener("close", onResultDialogClose);
@@ -5300,7 +5448,7 @@ async function showWordleResultDialog(won) {
             >
               ${PRONOUNCE_ICON}
             </button>
-            <p class="wordle-result-example-en">${example.en}</p>
+            <p class="wordle-result-example-en">${highlightExampleWord(example.en, word)}</p>
             <p class="wordle-result-example-cn">${example.cn}</p>
           </div>
         `;

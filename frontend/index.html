@@ -243,6 +243,11 @@
             <h2>Wordle</h2>
           </div>
           <div class="page-header-actions">
+            <button id="wordle-surrender-btn" class="icon-btn" type="button" aria-label="投降" title="投降" tabindex="-1">
+              <svg viewBox="0 0 1024 1024" width="24" height="24" aria-hidden="true">
+                <path d="M298.65984 42.65984q35.328 0 76.00128 8.82688t78.336 21.34016l75.32544 25.00608t78.336 21.34016 76.00128 8.82688q36.00384 0 71.00416-4.34176t59.65824-10.67008 44.17536-12.67712 29.16352-10.67008l9.33888-4.34176 0 597.34016q-3.33824 1.65888-9.99424 4.5056t-28.16 10.3424-44.83072 13.0048-58.83904 10.15808-71.49568 4.66944q-35.328 0-76.00128-8.82688t-78.336-21.34016l-75.32544-25.00608t-78.336-21.34016-76.00128-8.82688q-63.67232 0-128 14.336l0 284.32384q0 17.67424-12.4928 30.16704t-30.16704 12.4928-30.16704-12.4928-12.4928-30.16704l0-853.34016q3.33824-1.65888 9.99424-4.5056t28.16-10.3424 44.83072-13.0048 58.83904-10.15808 71.49568-4.66944zM298.65984 128q-65.3312 0-128 16.9984l0 422.33856q64-12.67712 128-12.67712 47.32928 0 94.65856 10.83392t107.66336 30.84288q7.65952 2.6624 28.83584 9.8304t31.00672 10.3424 28.83584 8.66304 31.82592 8.00768 29.4912 4.66944 31.66208 2.17088q65.3312 0 128-16.9984l0-422.33856q-64 12.67712-128 12.67712-47.32928 0-94.65856-10.83392t-107.66336-30.84288q-7.65952-2.6624-28.83584-9.8304t-31.00672-10.3424-28.83584-8.66304-31.82592-8.00768-29.4912-4.66944-31.66208-2.17088z" fill="currentColor"></path>
+              </svg>
+            </button>
             <button id="wordle-leaderboard-btn" class="icon-btn" type="button" aria-label="排行榜" title="排行榜" tabindex="-1">
               <svg viewBox="0 0 1024 1024" width="24" height="24" aria-hidden="true">
                 <path d="M576 221.42v576H448v-576h128m64-64H384v704h256v-704zM864 445.42v352H736v-352h128m64-64H672v480h256v-480zM288 637.42v160H160v-160h128m64-64H96v288h256v-288z" fill="currentColor"></path>
@@ -280,9 +285,6 @@
             <div id="wordle-grid" class="wordle-grid"></div>
             <div id="wordle-keyboard" class="wordle-keyboard"></div>
           </main>
-          <div id="wordle-bottom-actions" class="wordle-bottom-actions is-hidden">
-            <button id="wordle-bottom-new-game-btn" type="button" class="primary-btn">再来一词</button>
-          </div>
         </div>
     </section>
 
@@ -423,8 +425,22 @@
       <div class="page-content collection-content">
         <main class="history-board settings-board">
           <section class="settings-panel">
-            <p class="settings-label">当前账号</p>
-            <p id="settings-username" class="settings-username">-</p>
+            <div class="settings-nickname-wrap">
+              <div id="settings-nickname-display" class="settings-nickname-display">
+                <span id="settings-nickname" class="settings-nickname">-</span>
+                <button id="settings-nickname-edit-btn" type="button" class="settings-nickname-edit-btn" aria-label="编辑昵称">
+                  <svg viewBox="0 0 1024 1024" width="20" height="20" aria-hidden="true">
+                    <path d="M603.168 188.48a141.76 141.76 0 0 1 200.384-6.08l3.072 2.976a148.608 148.608 0 0 1 3.136 206.944L426.048 800H832a32 32 0 0 1 3.744 63.776L832 864H224a64 64 0 0 1-64-64v-115.296a64 64 0 0 1 17.408-43.872z m-22.592 117.312L224 684.672V800h114.176l357.12-379.488-114.72-114.72z m179.104-76.8a77.76 77.76 0 0 0-109.92 3.328l-25.312 26.88 114.72 114.688 24-25.44c29.984-31.84 30.56-80.96 2.24-113.504l-4.032-4.32z"></path>
+                  </svg>
+                </button>
+              </div>
+              <div id="settings-nickname-edit" class="settings-nickname-edit is-hidden">
+                <input id="settings-nickname-input" type="text" class="password-input settings-nickname-input" maxlength="8" placeholder="输入昵称（最多8字）" autocomplete="off"/>
+                <button id="settings-nickname-save-btn" type="button" class="primary-btn settings-nickname-save-btn">保存</button>
+                <button id="settings-nickname-cancel-btn" type="button" class="tool-btn settings-nickname-cancel-btn">取消</button>
+              </div>
+              <p id="settings-username" class="settings-username">-</p>
+            </div>
 
             <p class="settings-label settings-section-label">切换词书</p>
             <button id="settings-book-btn" type="button" class="tool-btn settings-book-btn">选择词书</button>
@@ -442,6 +458,22 @@
               <button id="clear-api-key-btn" type="button" class="tool-btn settings-clear-btn">清空</button>
             </div>
             <p id="settings-api-key-status" class="settings-status"></p>
+
+            <p class="settings-label settings-section-label">修改密码</p>
+            <div class="settings-actions">
+              <div id="settings-password-display">
+                <button id="settings-password-edit-btn" type="button" class="tool-btn settings-password-edit-btn">修改密码</button>
+              </div>
+            </div>
+            <div id="settings-password-edit" class="settings-password-edit is-hidden">
+              <input id="settings-password-old-input" type="password" class="password-input settings-input" placeholder="旧密码" autocomplete="current-password" />
+              <input id="settings-password-new-input" type="password" class="password-input settings-input" placeholder="新密码（至少6位）" autocomplete="new-password" />
+              <input id="settings-password-confirm-input" type="password" class="password-input settings-input" placeholder="确认新密码" autocomplete="new-password" />
+              <div class="settings-actions">
+                <button id="settings-password-save-btn" type="button" class="primary-btn settings-password-save-btn">保存</button>
+                <button id="settings-password-cancel-btn" type="button" class="tool-btn settings-password-cancel-btn">取消</button>
+              </div>
+            </div>
 
             <div class="settings-actions">
               <button id="clear-history-btn" type="button" class="tool-btn settings-clear-history-btn">清空刷题记录</button>
@@ -516,7 +548,7 @@
       </div>
       <form id="auth-form" class="auth-form" autocomplete="off">
         <input id="auth-username-input" class="password-input" autocomplete="off" autocapitalize="none"
-          autocorrect="off" spellcheck="false" placeholder="用户名（3-24 位）" />
+          autocorrect="off" spellcheck="false" placeholder="用户名（3-15 位字母数字）" />
         <input id="auth-password-input" type="password" class="password-input" autocomplete="off" autocapitalize="none"
           autocorrect="off" spellcheck="false" placeholder="密码（至少 6 位）" />
         <input id="auth-confirm-input" type="password" class="password-input is-hidden" autocomplete="off"
@@ -665,6 +697,19 @@
       <div id="wordle-result-examples" class="wordle-result-examples"></div>
     </div>
     <button id="wordle-new-game-btn" type="button" class="wordle-result-footer">再来一词</button>
+  </dialog>
+  
+  <dialog id="wordle-surrender-confirm-dialog" class="wordle-surrender-confirm-dialog">
+    <div class="dialog-header">
+      <h3>确认投降？</h3>
+    </div>
+    <div class="wordle-surrender-confirm-body">
+      <p>投降会中断你的连胜，确定要继续吗？</p>
+    </div>
+    <div class="wordle-surrender-confirm-actions">
+      <button id="wordle-surrender-cancel-btn" type="button" class="secondary-btn">取消</button>
+      <button id="wordle-surrender-confirm-btn" type="button" class="danger-btn">确认投降</button>
+    </div>
   </dialog>
 </body>
 

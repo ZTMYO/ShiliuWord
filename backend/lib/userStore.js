@@ -1,5 +1,6 @@
 const { all, get, run, withTransaction } = require("./db");
 const { hashPassword, verifyPassword } = require("./security");
+const { containsForbiddenWord } = require("./forbiddenWords");
 
 const HISTORY_RECORD_LIMIT = 50;
 
@@ -27,6 +28,7 @@ function formatUser(row) {
   return {
     id: Number(row.id),
     username: String(row.username || ""),
+    nickname: String(row.nickname || ""),
     passwordHash: String(row.password_hash || ""),
     bookId: Math.max(1, Number(row.book_id || 2)),
     currentStreak: Math.max(0, Number(row.current_streak || 0)),
@@ -44,6 +46,7 @@ function formatSafeUser(user) {
   return {
     id: user.id,
     username: user.username,
+    nickname: user.nickname || user.username,
     bookId: Math.max(1, Number(user.bookId || 2)),
     currentStreak: Math.max(0, Number(user.currentStreak || 0)),
     bestStreak: Math.max(0, Number(user.bestStreak || 0))
@@ -55,7 +58,7 @@ async function getWordleLeaderboard(userId, limit = 20) {
   const normalizedLimit = Math.max(1, Math.min(100, Number(limit || 20)));
   const leaderboardRows = await all(
     `
-      SELECT id, username, best_streak
+      SELECT id, username, nickname, best_streak
       FROM users
       ORDER BY best_streak DESC, id ASC
       LIMIT ?
@@ -65,7 +68,7 @@ async function getWordleLeaderboard(userId, limit = 20) {
 
   const selfRow = await get(
     `
-      SELECT id, username, current_streak, best_streak
+      SELECT id, username, nickname, current_streak, best_streak
       FROM users
       WHERE id = ?
       LIMIT 1
@@ -89,6 +92,7 @@ async function getWordleLeaderboard(userId, limit = 20) {
     self = {
       rank: Number(rankRow?.count || 0) + 1,
       username: normalizeUsername(selfRow.username),
+      nickname: String(selfRow.nickname || "") || normalizeUsername(selfRow.username),
       currentStreak: Math.max(0, Number(selfRow.current_streak || 0)),
       bestStreak: normalizedBestStreak
     };
@@ -98,6 +102,7 @@ async function getWordleLeaderboard(userId, limit = 20) {
     leaderboard: leaderboardRows.map((row) => ({
       id: Number(row.id),
       username: normalizeUsername(row.username),
+      nickname: String(row.nickname || "") || normalizeUsername(row.username),
       bestStreak: Math.max(0, Number(row.best_streak || 0))
     })),
     self
@@ -114,16 +119,21 @@ async function findUserByUsername(username) {
   return formatUser(row);
 }
 
-async function createUser(username, password) {
+async function createUser(username, password, nickname) {
   const normalizedUsername = normalizeUsername(username);
   const normalizedPassword = String(password || "");
+  const normalizedNickname = String(nickname || "").trim().slice(0, 8) || normalizedUsername;
 
-  if (!/^\S{3,24}$/.test(normalizedUsername)) {
-    throw new Error("用户名需为 3 到 24 位，且不能包含空格");
+  if (!/^[a-zA-Z0-9]{3,15}$/.test(normalizedUsername)) {
+    throw new Error("用户名需为 3 到 15 位字母数字");
   }
 
   if (normalizedPassword.length < 6) {
     throw new Error("密码至少 6 位");
+  }
+
+  if (containsForbiddenWord(normalizedNickname)) {
+    throw new Error("昵称包含违规内容");
   }
 
   const existingUser = await findUserByUsername(normalizedUsername);
@@ -134,10 +144,10 @@ async function createUser(username, password) {
   const now = new Date().toISOString();
   await run(
     `
-      INSERT INTO users (username, password_hash, created_at, updated_at)
-      VALUES (?, ?, ?, ?)
+      INSERT INTO users (username, nickname, password_hash, created_at, updated_at)
+      VALUES (?, ?, ?, ?, ?)
     `,
-    [normalizedUsername, hashPassword(normalizedPassword), now, now]
+    [normalizedUsername, normalizedNickname, hashPassword(normalizedPassword), now, now]
   );
 
   const createdUser = await findUserByUsername(normalizedUsername);
@@ -399,11 +409,59 @@ async function addFlashHistory(userId, record) {
   );
 }
 
+async function updateUserNickname(userId, nickname) {
+  const normalizedUserId = Number(userId);
+  const normalizedNickname = String(nickname || "").trim().slice(0, 8);
+  
+  if (!normalizedNickname) {
+    throw new Error("昵称不能为空");
+  }
+
+  if (containsForbiddenWord(normalizedNickname)) {
+    throw new Error("昵称包含违规内容");
+  }
+
+  const now = new Date().toISOString();
+  await run(
+    "UPDATE users SET nickname = ?, updated_at = ? WHERE id = ?",
+    [normalizedNickname, now, normalizedUserId]
+  );
+  return findUserById(normalizedUserId);
+}
+
 async function clearHistory(userId) {
   await withTransaction(async (db) => {
     db.run("DELETE FROM quiz_history WHERE user_id = ?", [Number(userId)]);
     db.run("DELETE FROM flash_history WHERE user_id = ?", [Number(userId)]);
   });
+}
+
+async function updateUserPassword(userId, oldPassword, newPassword) {
+  const normalizedUserId = Number(userId);
+  const normalizedOldPassword = String(oldPassword || "");
+  const normalizedNewPassword = String(newPassword || "");
+
+  const user = await findUserById(normalizedUserId);
+  if (!user) {
+    throw new Error("用户不存在");
+  }
+
+  const row = await get("SELECT password_hash FROM users WHERE id = ? LIMIT 1", [normalizedUserId]);
+  if (!row || !verifyPassword(normalizedOldPassword, row.password_hash)) {
+    throw new Error("旧密码不正确");
+  }
+
+  if (normalizedNewPassword.length < 6) {
+    throw new Error("新密码至少 6 位");
+  }
+
+  const now = new Date().toISOString();
+  await run(
+    "UPDATE users SET password_hash = ?, updated_at = ? WHERE id = ?",
+    [hashPassword(normalizedNewPassword), now, normalizedUserId]
+  );
+
+  return findUserById(normalizedUserId);
 }
 
 module.exports = {
@@ -412,6 +470,8 @@ module.exports = {
   findUserById,
   findUserByUsername,
   updateUserBook,
+  updateUserNickname,
+  updateUserPassword,
   applyWordleResult,
   formatSafeUser,
   listCollection,

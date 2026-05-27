@@ -17,6 +17,8 @@ const {
   findUserById,
   formatSafeUser,
   updateUserBook,
+  updateUserNickname,
+  updateUserPassword,
   applyWordleResult,
   listCollection,
   addCollectionItem,
@@ -34,6 +36,7 @@ const synonymRouter = require("./router/wordSynonym");
 const flashRouter = require("./router/wordFlash");
 const readingRouter = require("./router/wordReading");
 const { validatePersonalApiKey } = require("./lib/aiService");
+const { loadForbiddenWords } = require("./lib/forbiddenWords");
 
 const app = express();
 const DIST_DIR = path.join(__dirname, "..", "frontend", "dist");
@@ -216,7 +219,7 @@ app.post("/api/auth/register", async (request, response, next) => {
       return;
     }
 
-    const user = await createUser(username, password);
+    const user = await createUser(username, password, username);
     setSessionCookie(request, response, user);
     response.json({
       ok: true,
@@ -363,6 +366,43 @@ app.post("/api/user/book", requireAuth, async (request, response, next) => {
     });
   } catch (error) {
     if (/词书参数不合法/.test(error.message || "")) {
+      response.status(400).json({
+        ok: false,
+        message: error.message
+      });
+      return;
+    }
+    next(error);
+  }
+});
+
+app.post("/api/user/nickname", requireAuth, async (request, response, next) => {
+  try {
+    const user = await updateUserNickname(request.auth.user.id, request.body?.nickname);
+    response.json({
+      ok: true,
+      user: formatSafeUser(user)
+    });
+  } catch (error) {
+    if (/昵称/.test(error.message || "")) {
+      response.status(400).json({
+        ok: false,
+        message: error.message
+      });
+      return;
+    }
+    next(error);
+  }
+});
+
+app.post("/api/user/password", requireAuth, async (request, response, next) => {
+  try {
+    await updateUserPassword(request.auth.user.id, request.body?.oldPassword, request.body?.newPassword);
+    response.json({
+      ok: true
+    });
+  } catch (error) {
+    if (/密码/.test(error.message || "")) {
       response.status(400).json({
         ok: false,
         message: error.message
@@ -639,6 +679,7 @@ app.use((error, request, response, next) => {
 
 Promise.all([ensureDataFiles(), getDatabase()])
   .then(() => {
+    loadForbiddenWords();
     app.listen(PORT, () => {
       console.log(`Backend running at http://localhost:${PORT}`);
     });
