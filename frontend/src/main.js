@@ -1305,7 +1305,6 @@ function renderSessionUi() {
   if (elements.settingsEntryBtn) {
     elements.settingsEntryBtn.title = username ? `账号设置：${username}` : "账号设置";
   }
-}
   const localPersonalApiKey = loadLocalPersonalApiKey();
   elements.settingsApiKeyInput.value = localPersonalApiKey;
   renderApiKeyAvailabilityStatus(localPersonalApiKey);
@@ -1313,6 +1312,7 @@ function renderSessionUi() {
     void refreshStoredPersonalApiKeyStatus(localPersonalApiKey);
   }
   renderHomeModes();
+}
 
 function hasAvailableAiCapability() {
   return Boolean(loadLocalPersonalApiKey());
@@ -1512,8 +1512,13 @@ function restoreWordleGame(snapshot) {
   wordleState.guesses = Array.isArray(snapshot.guesses) ? [...snapshot.guesses] : [];
   wordleState.currentGuess = snapshot.currentGuess || "";
   wordleState.gameOver = Boolean(snapshot.gameOver);
-  wordleState.keyStates = snapshot.keyStates && typeof snapshot.keyStates === "object" ? { ...snapshot.keyStates } : {};
+  wordleState.keyStates = {};
   wordleState.resultDialogClosed = Boolean(snapshot.resultDialogClosed);
+  
+  for (const guess of wordleState.guesses) {
+    updateKeyStates(guess);
+  }
+  
   console.log("🎯 Wordle answer (restored):", wordleState.targetWord?.toUpperCase() || "");
   setView("wordle");
   renderWordleGame();
@@ -4919,7 +4924,7 @@ function bindEvents() {
 const WORDLE_KEYBOARD_LAYOUT = [
   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
   ["A", "S", "D", "F", "G", "H", "J", "K", "L", "⌫"],
-  ["Z", "X", "C", "V", "B", "N", "M", "ENTER"]
+  ["Z", "X", "C", "V", "B", "N", "M", "Enter"]
 ];
 
 const WORDLE_REVEAL_STEP_MS = 140;
@@ -5151,10 +5156,11 @@ function getLetterResult(guess, index) {
       }
     }
     
-    for (let i = 0; i < 5; i++) {
-      if (i !== index && guessLetters[i] === letter && targetLetters.includes(letter)) {
+    let assignedBefore = 0;
+    for (let i = 0; i < index; i++) {
+      if (guessLetters[i] === letter && targetLetters.includes(letter)) {
+        assignedBefore++;
         targetLetters[targetLetters.indexOf(letter)] = null;
-        guessLetters[i] = null;
       }
     }
     
@@ -5208,8 +5214,10 @@ function renderWordleKeyboard() {
         button.textContent = key;
       }
       
-      if (key === "ENTER") {
-        button.classList.add("is-wide");
+      if (key === "Enter") {
+        button.classList.add("is-enter");
+      } else if (key === "⌫") {
+        button.classList.add("is-backspace");
       }
       
       const normalizedKey = key === "ENTER" ? "ENTER" : key === "⌫" ? "BACKSPACE" : key.toLowerCase();
@@ -5241,7 +5249,7 @@ async function showWordleWordPreview(word) {
     const data = await response.json();
     if (data.ok && data.info) {
       wordleState.previewWordInfo = data.info;
-      elements.wordlePreviewWord.textContent = word.toUpperCase();
+      elements.wordlePreviewWord.textContent = word;
       elements.wordlePreviewAccent.textContent = data.info.accent || "";
       elements.wordlePreviewParaphrase.textContent = data.info.paraphrase || "";
       elements.wordleWordPreview.classList.remove("is-hidden");
@@ -5264,7 +5272,9 @@ function hideWordleWordPreview() {
 }
 
 function handleWordleKey(key) {
-  if (wordleState.gameOver && wordleState.resultDialogClosed && key === "ENTER") {
+  const normalizedKey = key === "Enter" ? "ENTER" : key;
+  
+  if (wordleState.gameOver && wordleState.resultDialogClosed && normalizedKey === "ENTER") {
     if (wordleState.surrendered) {
       wordleState.resultDialogClosed = false;
       showWordleResultDialog(false);
@@ -5278,7 +5288,7 @@ function handleWordleKey(key) {
   
   if (wordleState.gameOver || wordleState.isRevealing) return;
   
-  if (key === "ENTER") {
+  if (normalizedKey === "ENTER") {
     if (wordleState.currentGuess.length === 5 && wordleState.validWords.includes(wordleState.currentGuess) && wordleState.currentGuess !== wordleState.targetWord) {
       showWordleWordPreview(wordleState.currentGuess);
     }
@@ -5499,6 +5509,16 @@ document.addEventListener("keydown", (event) => {
   
   if (event.key === "Tab") {
     event.preventDefault();
+    return;
+  }
+  
+  if (elements.wordleResultDialog?.open) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      event.stopPropagation();
+      elements.wordleResultDialog.close();
+      startWordleGame();
+    }
     return;
   }
   

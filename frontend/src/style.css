@@ -1458,9 +1458,35 @@ summary {
 
 .loading-view {
   width: min(760px, 100%);
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: calc(50dvh - 200px);
   min-height: calc(100dvh - 240px);
+}
+
+.loading-logo {
+  margin-bottom: 20px;
+}
+
+.logo-slime {
+  width: 60px;
+  height: 60px;
+  transform-origin: center bottom;
+  animation: slime-bounce 1.2s ease-in-out infinite;
+}
+
+@keyframes slime-bounce {
+  0%, 100% {
+    transform: translateY(0) scaleY(1) scaleX(1);
+  }
+  30% {
+    transform: translateY(-15px) scaleY(1.02) scaleX(0.99);
+  }
+  70% {
+    transform: translateY(0) scaleY(0.92) scaleX(1.05);
+  }
 }
 
 .loading-panel {
@@ -2390,6 +2416,10 @@ button.result-collect-btn:hover {
   border-radius: 12px;
 }
 
+#settings-api-key-input {
+  width: min(320px, 80%);
+}
+
 .settings-book-btn {
   margin-top: 14px;
   min-height: 44px;
@@ -2714,7 +2744,6 @@ button.result-collect-btn:hover {
   font-size: 20px;
   font-weight: 700;
   color: var(--text-primary);
-  text-transform: uppercase;
 }
 
 .wordle-preview-accent {
@@ -2903,14 +2932,18 @@ button.result-collect-btn:hover {
   gap: 6px;
 }
 
+.wordle-keyboard-row:last-child {
+  padding-left: 30px;
+}
+
 .wordle-key {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 1 0 auto;
-  min-width: 32px;
+  flex: 1 0 0;
+  width: 32px;
   height: 45px;
-  padding: 0 8px;
+  padding: 0;
   background: var(--bg-soft);
   background: var(--bg-soft);
   border: 0;
@@ -2930,10 +2963,16 @@ button.result-collect-btn:hover {
   background: var(--line);
 }
 
-.wordle-key.is-wide {
-  flex: 1.5 0 auto;
-  min-width: 50px;
+.wordle-key.is-backspace {
+  flex: 1.2 0 0;
+  width: 60px;
   font-size: 14px;
+}
+
+.wordle-key.is-enter {
+  flex: 1.8 0 0;
+  width: 60px;
+  font-size: 16px;
 }
 
 .wordle-key.is-correct {
@@ -2951,41 +2990,7 @@ button.result-collect-btn:hover {
   color: var(--wordle-contrast-text);
 }
 
-@media (max-width: 480px) {
-  .wordle-content {
-    padding: 16px 12px;
-  }
 
-  .wordle-grid {
-    max-width: 300px;
-    gap: 5px;
-  }
-
-  .wordle-row {
-    gap: 5px;
-  }
-
-  .wordle-cell {
-    font-size: clamp(20px, 6vw, 28px);
-    border-radius: 6px;
-  }
-
-  .wordle-keyboard {
-    gap: 6px;
-    padding: 0 4px;
-  }
-
-  .wordle-key {
-    height: 48px;
-    min-width: 28px;
-    font-size: 16px;
-  }
-
-  .wordle-key.is-wide {
-    min-width: 45px;
-    font-size: 13px;
-  }
-}
 
 .collection-remove-btn .collect-icon.is-filled {
   fill: currentColor;
@@ -4022,5 +4027,42 @@ button {
 
   .history-header {
     padding: 0;
+  }
+  .wordle-content {
+    padding: 16px 12px;
+  }
+
+  .wordle-grid {
+    max-width: 300px;
+    gap: 5px;
+  }
+
+  .wordle-row {
+    gap: 5px;
+  }
+
+  .wordle-cell {
+    font-size: clamp(20px, 6vw, 28px);
+    border-radius: 6px;
+  }
+
+  .wordle-keyboard {
+    gap: 4px;
+    padding: 0 4px;
+  }
+.wordle-keyboard-row {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+  .wordle-key {
+    height: 48px;
+    min-width: 28px;
+    font-size: 16px;
+  }
+
+  .wordle-key.is-wide {
+    min-width: 45px;
+    font-size: 13px;
   }
 }

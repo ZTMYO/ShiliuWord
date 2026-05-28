@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
   <title>石榴刷词</title>
   <style>
     html,
@@ -133,6 +133,9 @@
       </header>
       <div class="page-content quiz-content">
         <div id="loading-view" class="loading-view is-hidden">
+          <div class="loading-logo">
+            <img src="src/logo.png" alt="Logo" class="logo-slime" />
+          </div>
           <div class="loading-panel">
             <div class="loading-head">
               <p class="loading-text">AI 正在生成题目</p>
@@ -197,6 +200,9 @@
       </header>
       <div class="page-content flash-content">
         <div id="flash-loading-view" class="loading-view is-hidden">
+          <div class="loading-logo">
+            <img src="src/logo.png" alt="Logo" class="logo-slime" />
+          </div>
           <div class="loading-panel">
             <div class="loading-head">
               <p class="loading-text">AI 正在生成闪卡刷词题目</p>
@@ -308,6 +314,9 @@
       </header>
       <div class="page-content reading-content">
         <div id="reading-loading-view" class="loading-view is-hidden">
+          <div class="loading-logo">
+            <img src="src/logo.png" alt="Logo" class="logo-slime" />
+          </div>
           <div class="loading-panel">
             <div class="loading-head">
               <p class="loading-text">AI 正在生成阅读训练</p>
@@ -459,7 +468,7 @@
             </div>
             <p id="settings-api-key-status" class="settings-status"></p>
 
-            <p class="settings-label settings-section-label">修改密码</p>
+            <p class="settings-label settings-section-label">其他设置</p>
             <div class="settings-actions">
               <div id="settings-password-display">
                 <button id="settings-password-edit-btn" type="button" class="tool-btn settings-password-edit-btn">修改密码</button>
@@ -657,21 +666,21 @@
 
         <div class="wordle-help-example">
           <div class="wordle-help-grid">
-            <span class="wordle-help-cell">P</span>
-            <span class="wordle-help-cell is-present">L</span>
+            <span class="wordle-help-cell">L</span>
+            <span class="wordle-help-cell is-present">E</span>
             <span class="wordle-help-cell">A</span>
-            <span class="wordle-help-cell">Y</span>
-            <span class="wordle-help-cell">S</span>
+            <span class="wordle-help-cell">R</span>
+            <span class="wordle-help-cell">N</span>
           </div>
           <p class="wordle-help-desc">字母在单词中但位置不对</p>
         </div>
 
         <div class="wordle-help-example">
           <div class="wordle-help-grid">
-            <span class="wordle-help-cell">V</span>
-            <span class="wordle-help-cell">I</span>
-            <span class="wordle-help-cell is-absent">B</span>
-            <span class="wordle-help-cell">E</span>
+            <span class="wordle-help-cell">P</span>
+            <span class="wordle-help-cell">L</span>
+            <span class="wordle-help-cell is-absent">A</span>
+            <span class="wordle-help-cell">Y</span>
             <span class="wordle-help-cell">S</span>
           </div>
           <p class="wordle-help-desc">字母不在单词中</p>
