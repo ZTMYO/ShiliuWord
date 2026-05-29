@@ -306,6 +306,11 @@ function normalizeReadingPayload(payload) {
           .filter(Boolean)
       )]
     : [];
+  const realWords = Array.isArray(payload.realWords || payload.real_words)
+    ? (payload.realWords || payload.real_words)
+        .map((word) => String(word || "").trim())
+        .filter(Boolean)
+    : [];
   const sentences = Array.isArray(payload.sentences)
     ? payload.sentences
         .map((item) => ({
@@ -323,6 +328,7 @@ function normalizeReadingPayload(payload) {
     title,
     titleCn,
     selectedWords,
+    realWords,
     sentences
   };
 }

@@ -84,36 +84,40 @@ Strictly return pure JSON array:
 No extra text, no explanation.
 Words: {{words}}`,
   SYNONYM_PROMPT: `Target word book: {{bookName}}
-Use these anchor words as reference points: {{anchors}}.
-Generate exactly 5 English words that are true near-synonyms in the shared semantic neighborhood suggested by these anchors, with difficulty matching the target word book.
+Use these anchor words as SEMANTIC REFERENCE: {{anchors}}. First, identify the SINGLE SHARED CORE MEANING that connects the anchors. Then generate exactly 5 English words that are TRUE NEAR-SYNONYMS belonging to ONE TIGHTLY GROUPED SEMANTIC CLUSTER around this core meaning. You may include anchors if they fit the cluster.
+
+CRITICAL INSTRUCTION: ALL 5 words MUST share ONE CLEARLY DEFINABLE CORE MEANING. Do NOT generate separate synonym groups from different anchors and merge them together. For example, if anchors are "happy, joyful, sad", identify "happiness" as the core and generate 5 synonyms for happiness (happy, joyful, cheerful, delighted, glad) - NOT a mix of happiness words and sadness words.
+
 Hard constraints:
-1. All 5 words must belong to the same part of speech.
-2. They must stay in the common semantic neighborhood implied by the anchors, and be close in meaning and comparable in usage, not just topic-related, not antonyms, not cause-effect pairs, and not words from the same broad field.
-3. A learner should be able to confuse them because of semantic similarity, not because they appear in the same context.
-4. Restrict the difficulty to match the target word book; avoid overly rare/technical words unless the book is clearly advanced.
-5. Ensure the 5 words are distinct and each one is a valid standalone vocabulary item.
-6. Do NOT repeatedly default to the "alleviate/ease/relieve/mitigate" cluster unless the anchors genuinely point to that sense.
-7. If one anchor is an outlier, follow the common core meaning shared by the other anchors instead of forcing a wrong cluster.
+1. ALL 5 words must share the SAME PART OF SPEECH. NO mixing parts of speech.
+2. ALL 5 words must express the SAME CORE CONCEPT - they must be truly interchangeable in at least one common context.
+3. They must be CLOSELY SEMANTICALLY RELATED, not just topic-related, not antonyms, not cause-effect pairs, not from the same general field.
+4. A learner should naturally confuse them due to their near-identical meaning in core usage, not because they appear in similar contexts.
+5. Restrict difficulty to match the target word book; avoid overly rare/technical words unless the book is clearly advanced.
+6. Ensure all 5 words are distinct and valid standalone vocabulary items.
+7. If anchors have NO CLEAR COMMON CORE MEANING (e.g., "apple, airplane, book"), return [] immediately.
+8. If you cannot find 5 words sharing ONE UNIFIED MEANING, return [] instead of forcing unrelated words together.
 
 For each word:
-1. wordCn: dictionary-style Chinese gloss with part of speech, and keep all 5 words aligned to the same core Chinese meaning as much as possible. Use comma for multiple meanings under the same part of speech, and use semicolon only when switching to a different part of speech. Example: "adj. 温和的，轻微的；n. 温和派".
-2. defEn: brief English definition centered on the shared core meaning, but reflecting the word's own nuance, and DO NOT contain the original word.
-3. defCn: Chinese paraphrase of defEn only, without part of speech.
-4. defCn must NOT copy wordCn, must NOT be identical to the base meaning in wordCn, and should be a Chinese explanation of defEn.
-5. Keep defCn concise but explanatory, suitable for review.
-6. examples: exactly 2 bilingual examples for each word, in the form [{"en":"","cn":""},{"en":"","cn":""}].
-7. Each English example must use the target word naturally in a concise, clear sentence suitable for study (or exam prep if the book implies it).
-8. Each Chinese example must be a fluent translation of the English sentence.
+1. wordCn: dictionary-style Chinese gloss with part of speech. All 5 words must translate to the SAME CORE CHINESE CONCEPT. Use comma for multiple meanings under the same part of speech, semicolon only for different parts of speech. Example: "adj. 温和的，轻微的；n. 温和派".
+2. defEn: brief English definition centered on the shared core meaning, reflecting the word's nuance, WITHOUT containing the word itself.
+3. defCn: Chinese paraphrase of defEn only, no part of speech.
+4. defCn must NOT copy wordCn, must NOT be identical to wordCn's base meaning.
+5. Keep defCn concise but explanatory.
+6. examples: exactly 2 bilingual examples per word, format: [{"en":"","cn":""},{"en":"","cn":""}].
+7. English examples must use the target word naturally in concise, study-appropriate sentences.
+8. Chinese examples must be fluent translations.
 
 Self-check before output:
-- Remove any word that is only loosely related rather than semantically close.
-- Remove any word whose main meaning does not match the same core sense as the other four.
-- Remove any word whose main meaning is not close to the common sense implied by the anchors.
-- Remove any antonym, near-antonym, opposite-direction word, contrastive word, or semantically conflicting word immediately.
-- Remove any word that feels above the target word book's typical vocabulary range.
-- Keep the final set tightly grouped around one shared meaning.
-- Ensure every returned word includes exactly 2 usable bilingual examples.
-- If you cannot find 5 safe near-synonyms, return [] instead of forcing a bad set.
+- [FAIL] If the 5 words cannot be described by ONE SINGLE CORE MEANING, return [].
+- [FAIL] If any word's primary meaning differs from the group's core meaning, remove it or return [].
+- [FAIL] If parts of speech are mixed, return [].
+- [PASS] All words must be true near-synonyms with minimal semantic distance.
+- [PASS] Remove any word only loosely related rather than semantically close.
+- [PASS] Remove antonyms, near-antonyms, or semantically conflicting words immediately.
+- [PASS] Remove words outside the target word book's vocabulary range.
+- [PASS] Ensure every word has exactly 2 usable bilingual examples.
+- [PASS] If you cannot find 5 safe near-synonyms forming ONE UNIFIED GROUP, return [].
 
 Only output pure JSON array:
 [{"word":"","wordCn":"","defEn":"","defCn":"","examples":[{"en":"","cn":""},{"en":"","cn":""}]}]
@@ -197,44 +201,33 @@ Hard constraints:
 3. Return plain Chinese text only.
 
 Title: {{title}}`,
-  READING_PROMPT: `Write a short bilingual English reading exercise for Chinese learners, with difficulty matching the target word book.
-Target word book: {{bookName}}
+  READING_PROMPT: `Write a short bilingual English reading exercise for Chinese learners, difficulty matching {{bookName}}.
 
-Use these candidate words:
+Candidate words:
 {{items}}
 
 Requirements:
-- Write 5 to 8 sentence pairs.
-- Choose the largest natural subset and use as many candidate words as possible, but skip any word that would make the passage awkward.
-- Keep the passage coherent and natural. If the target word book is advanced, you may include longer/complex sentences; otherwise keep sentence structures simpler.
-- Each English sentence must have one natural Chinese translation.
-- In each English sentence, try to use at most 1 target word. If you use multiple target words in one sentence, you must mark each one in Chinese with separate 【】 in the same order as the English target words appear.
-- CRITICAL: For EVERY target word used in the English sentence, you MUST mark its EXACT translation in the Chinese sentence with 【】. NO EXCEPTIONS.
-- In Chinese, mark ONLY the Chinese phrase that translates the used target word sense with 【】. The marked phrase must be the best direct translation of the target word in that sentence, consistent with the provided wordCn/defCn for that word (do NOT invent an unrelated highlight).
-- For each used target word in English, the paired Chinese sentence must contain exactly one corresponding marked phrase 【】 for that word. Do not mark anything if no target word is used in that English sentence.
-- The content inside 【】 must be Chinese only, never English, pinyin, or mixed text.
-- Do not add any marker in English.
-- selectedWords must list exactly the lowercase target words you actually used in the English sentences (no extras, no missing).
-- Return pure JSON only.
+1. Write 5-8 sentence pairs forming a coherent narrative with logical flow (beginning → development → conclusion). Each sentence must naturally follow the previous one; no abrupt topic switches.
+2. Use as many candidate words as possible, but skip words that would break coherence. Advanced books may use longer sentences; keep simple otherwise.
+3. Each English sentence needs a natural Chinese translation. Try 1 target word per sentence; if multiple, mark each in Chinese with 【】 in order.
+4. CRITICAL: Every target word in English MUST be accurately translated to Chinese and marked with 【】. NEVER leave English words in Chinese sentences.
+5. In Chinese, mark ONLY the exact translation phrase in 【】, consistent with provided wordCn/defCn. Content inside 【】 must be Chinese only (no English/pinyin/numbers).
+6. selectedWords: lowercase original target words used. realWords: exact forms as they appear in English (same order, e.g., "worked" for "work").
+7. Return pure JSON only.
 
-Self-check before output (MANDATORY):
-1. First, for EACH sentence pair:
-   - Count the number of target words used in the English sentence
-   - Count the number of 【】 markers in the Chinese sentence
-   - THESE TWO NUMBERS MUST BE EXACTLY EQUAL
-   - If they are not equal, FIX IT BEFORE PROCEEDING
-2. For EVERY target word in English, verify that its Chinese translation is properly marked with 【】 in the Chinese sentence
-3. Ensure every 【】 phrase is the translation of a used target word in that sentence, not other phrases
-4. DO NOT skip any word's Chinese marking - EVERY used target word MUST have its translation marked
+Verify BEFORE output:
+- Sentences flow logically with consistent subject/setting
+- No English words remain in Chinese translations
+- Each target word in English has exactly one 【】 marker in Chinese
+- 【】 contains only Chinese text matching the target word
 
-Example sentence pair:
+Example:
 {"en":"Public trust may erode when institutions ignore obvious risks.","cn":"当机构忽视明显风险时，公众【信任】可能会被削弱。"}
 
 Return JSON:
-{"title":"","titleCn":"","selectedWords":[""],"sentences":[{"en":"","cn":""}]}
+{"title":"","titleCn":"","selectedWords":[""],"realWords":[""],"sentences":[{"en":"","cn":""}]}
 
-title: short formal English title
-titleCn: natural Chinese translation of the title`,
+title: short English title; titleCn: Chinese translation; selectedWords: lowercase originals; realWords: exact forms in sentences`,
   DEMO_ITEMS: [
     {
       word: "abandon",

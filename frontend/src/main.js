@@ -1518,8 +1518,7 @@ function restoreWordleGame(snapshot) {
   for (const guess of wordleState.guesses) {
     updateKeyStates(guess);
   }
-  
-  console.log("🎯 Wordle answer (restored):", wordleState.targetWord?.toUpperCase() || "");
+
   setView("wordle");
   renderWordleGame();
 }
@@ -4984,8 +4983,7 @@ async function startWordleGame() {
   } else {
     wordleState.targetWord = "apple";
   }
-  console.log("🎯 Wordle answer:", wordleState.targetWord.toUpperCase());
-  
+
   hideWordleWordPreview();
   wordleState.guesses = [];
   wordleState.currentGuess = "";
