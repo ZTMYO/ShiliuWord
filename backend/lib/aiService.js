@@ -516,11 +516,17 @@ function normalizeFlashQuestions(rawItems, targetWords = []) {
         .filter((option) => option.text)
         .filter((option) => option.word || option.text === correctOption.text);
 
+      const hintExample = item?.hintExample ? {
+        en: String(item.hintExample?.en || "").trim(),
+        cn: String(item.hintExample?.cn || "").trim()
+      } : null;
+
       return {
         word,
         correctOption,
         distractors: mergedOptions.filter((option) => option.text !== correctOption.text),
-        options: mergedOptions
+        options: mergedOptions,
+        hintExample: hintExample && hintExample.en && hintExample.cn ? hintExample : null
       };
     })
     .filter((item) => {

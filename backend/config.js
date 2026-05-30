@@ -153,6 +153,7 @@ For each input word, create exactly 1 correct concise Chinese gloss and exactly 
 That means 4 options total per word: 1 correct + 3 distractors (NOT 3 options total).
 The distractors array must contain exactly 3 items for every word.
 For every option, also provide the actual English word that matches that gloss.
+Also generate 1 hint example sentence in bilingual format that matches the correct option's meaning.
 
 Input items:
 {{items}}
@@ -173,9 +174,10 @@ Hard constraints:
 13. Do NOT return two options with the same part of speech and the same Chinese meaning.
 14. Do NOT return one option whose Chinese gloss is just a substring , such as "v. 拒绝" vs "v. 拒绝，排斥".
 15. Do NOT label any distractor as "拼写错误" or mention spelling in the Chinese gloss. The Chinese text should be a normal, legitimate meaning of some English word.
+16. The hint example must match the correct option's meaning and use the target word naturally.
 
 Return pure JSON array only:
-[{"word":"","correctOption":"","correctOptionWord":"","distractors":[{"word":"","text":""},{"word":"","text":""},{"word":"","text":""}]}]
+[{"word":"","correctOption":"","correctOptionWord":"","distractors":[{"word":"","text":""},{"word":"","text":""},{"word":"","text":""}],"hintExample":{"en":"","cn":""}}]
 
 No markdown, no commentary, no extra text.`,
   EXAMPLE_PROMPT: `Generate 2 natural bilingual example sentences for each word.

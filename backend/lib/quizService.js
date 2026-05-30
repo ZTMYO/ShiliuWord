@@ -517,6 +517,8 @@ async function buildFallbackFlashQuestions(items, auth) {
       optionPools
     );
 
+    const hintExample = Array.isArray(item.examples) && item.examples.length > 0 ? item.examples[0] : null;
+
     return {
       id: `${item.word}-${Date.now()}-${index}`,
       word: item.word,
@@ -525,6 +527,7 @@ async function buildFallbackFlashQuestions(items, auth) {
       defCn: item.defCn,
       accent: item.accent || "",
       examples: Array.isArray(item.examples) ? item.examples.slice(0, 2) : [],
+      hintExample: hintExample,
       options: ensured.options,
       answerIndex: ensured.answerIndex
     };
@@ -597,6 +600,7 @@ async function createFlashQuizBatch(count = 5, auth, customWords = null) {
         defCn: item.defCn,
         accent: item.accent || "",
         examples: Array.isArray(item.examples) ? item.examples.slice(0, 2) : [],
+        hintExample: flashItem.hintExample || (Array.isArray(item.examples) && item.examples.length > 0 ? item.examples[0] : null),
         options: ensured.options,
         answerIndex: ensured.answerIndex
       };

@@ -3312,12 +3312,14 @@ function renderFlashQuestion() {
   }
   
   if (elements.flashHintExample) {
-    const showHint = Boolean(!state.flashEvaluation && state.flashHintExampleVisible && state.flashCurrent?.examples?.[0]);
+    const hintExample = state.flashCurrent?.hintExample;
+    const fallbackExample = state.flashCurrent?.examples?.[0];
+    const exampleToUse = hintExample || fallbackExample;
+    const showHint = Boolean(!state.flashEvaluation && state.flashHintExampleVisible && exampleToUse);
     if (showHint) {
-      const example = state.flashCurrent.examples[0];
       elements.flashHintExample.innerHTML = `
         <div class="flash-hint-example-content">
-          <p class="flash-hint-example-en">${highlightExampleWord(example.en, state.flashCurrent.word)}</p>
+          <p class="flash-hint-example-en">${highlightExampleWord(exampleToUse.en, state.flashCurrent.word)}</p>
         </div>
       `;
       elements.flashHintExample.classList.remove("is-hidden");

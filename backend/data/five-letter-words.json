@@ -111,6 +111,10 @@
     "paraphrase": "n. 入口，平硐（adit 的复数）",
     "accent": "/ˈædɪts/"
   },
+  "adieu": {
+    "paraphrase": "n. 再见，再见",
+    "accent": "/ædˈjuː/"
+  },
   "admin": {
     "paraphrase": "n. 管理；管理员；行政",
     "accent": "/ˈædmɪn/"
@@ -6515,6 +6519,10 @@
   },
   "leans": {
     "paraphrase": "v. 倾斜（lean 的第三人称单数）",
+    "accent": "/liːnz/"
+  },
+  "leant": {
+    "paraphrase": "v. 倾斜（lean 的过去式及过去分词）",
     "accent": "/liːnz/"
   },
   "leaps": {
