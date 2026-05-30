@@ -2321,6 +2321,7 @@ button.result-collect-btn:hover {
   min-height: 38px;
   padding: 0 12px;
   font-size: 15px;
+  border-radius: 12px;
 }
 
 .settings-nickname-save-btn {
@@ -2644,6 +2645,15 @@ button.result-collect-btn:hover {
   border-radius: 12px;
 }
 
+.settings-delete-account-btn {
+  border-radius: 12px;
+  background: var(--error);
+  color: white;
+}
+.settings-delete-account-btn:hover {
+  background: var(--error);
+  filter: brightness(0.95);
+}
 .collection-item {
   width: 100%;
   display: flex;

@@ -489,6 +489,7 @@
             </div>
 
           </section>
+          <button id="settings-delete-account-btn" type="button" class="danger-btn settings-delete-account-btn tool-btn">注销账号</button>
           <button id="settings-logout-btn" type="button" class="tool-btn settings-logout-btn">退出登录</button>
         </main>
       </div>
@@ -720,6 +721,20 @@
       <button id="wordle-surrender-confirm-btn" type="button" class="danger-btn">确认投降</button>
     </div>
   </dialog>
-</body>
+
+  <dialog id="delete-account-confirm-dialog" class="wordle-surrender-confirm-dialog">
+    <div class="dialog-header">
+      <h3>确认注销账号？</h3>
+    </div>
+    <div class="wordle-surrender-confirm-body">
+      <p>此操作将永久删除您的所有数据且无法恢复！</p>
+    </div>
+    <div class="wordle-surrender-confirm-actions">
+      <button id="delete-account-cancel-btn" type="button" class="secondary-btn">取消</button>
+      <button id="delete-account-confirm-btn" type="button" class="danger-btn">确认注销</button>
+    </div>
+  </dialog>
+
+  </body>
 
 </html>

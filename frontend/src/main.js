@@ -298,6 +298,10 @@ const elements = {
   clearApiKeyBtn: document.querySelector("#clear-api-key-btn"),
   clearHistoryBtn: document.querySelector("#clear-history-btn"),
   settingsLogoutBtn: document.querySelector("#settings-logout-btn"),
+  settingsDeleteAccountBtn: document.querySelector("#settings-delete-account-btn"),
+  deleteAccountConfirmDialog: document.querySelector("#delete-account-confirm-dialog"),
+  deleteAccountConfirmBtn: document.querySelector("#delete-account-confirm-btn"),
+  deleteAccountCancelBtn: document.querySelector("#delete-account-cancel-btn"),
   bookDialog: document.querySelector("#book-dialog"),
   bookDialogList: document.querySelector("#book-dialog-list"),
   closeBookDialogBtn: document.querySelector("#close-book-dialog-btn"),
@@ -658,7 +662,8 @@ const CAPTCHA_SHAPES = [
 let captchaState = {
   targetShape: null,
   shapes: [],
-  callback: null
+  callback: null,
+  isOpen: false
 };
 
 function generateRandomPosition(existingPositions, shapeSize, containerWidth, containerHeight, extraMargin = 0) {
@@ -756,6 +761,7 @@ function renderCaptcha() {
 
 function openCaptchaDialog(callback) {
   captchaState.callback = callback;
+  captchaState.isOpen = true;
   if (elements.captchaDialog) {
     elements.captchaDialog.showModal();
     setTimeout(() => {
@@ -765,6 +771,7 @@ function openCaptchaDialog(callback) {
 }
 
 function closeCaptchaDialog() {
+  captchaState.isOpen = false;
   if (elements.captchaDialog) {
     elements.captchaDialog.close();
   }
@@ -1748,6 +1755,66 @@ async function logout() {
   state.currentUser = null;
   state.isAuthenticated = false;
   handleUnauthorized("已退出登录", { openDialog: false, toastType: "success" });
+}
+
+async function deleteAccount() {
+  if (!state.isAuthenticated) {
+    return;
+  }
+
+  const dialog = elements.deleteAccountConfirmDialog;
+  const confirmBtn = elements.deleteAccountConfirmBtn;
+  const cancelBtn = elements.deleteAccountCancelBtn;
+
+  let resolvePromise;
+  const confirmPromise = new Promise((resolve) => {
+    resolvePromise = resolve;
+  });
+
+  const handleConfirm = () => {
+    dialog.close();
+    confirmBtn.removeEventListener("click", handleConfirm);
+    cancelBtn.removeEventListener("click", handleCancel);
+    resolvePromise(true);
+  };
+
+  const handleCancel = () => {
+    dialog.close();
+    confirmBtn.removeEventListener("click", handleConfirm);
+    cancelBtn.removeEventListener("click", handleCancel);
+    resolvePromise(false);
+  };
+
+  confirmBtn.addEventListener("click", handleConfirm);
+  cancelBtn.addEventListener("click", handleCancel);
+
+  dialog.showModal();
+
+  const confirmed = await confirmPromise;
+
+  if (!confirmed) {
+    return;
+  }
+
+  try {
+    await requestJson(
+      "/api/auth/delete",
+      {
+        method: "DELETE",
+        body: JSON.stringify({})
+      },
+      { redirectOnUnauthorized: false }
+    );
+
+    state.currentUser = null;
+    state.isAuthenticated = false;
+    showToast("账号已注销", "success");
+    setView("home");
+    renderAccountFeatures();
+    renderSessionUi();
+  } catch (error) {
+    showToast(error.message || "注销失败", "error");
+  }
 }
 
 async function submitAuthForm() {
@@ -4243,8 +4310,25 @@ function bindEvents() {
       event.clientY <= rect.bottom;
 
     if (!inside) {
+      if (captchaState.isOpen) {
+        return;
+      }
       closeAuthDialog();
       syncToastHost();
+    }
+  });
+  elements.authDialog.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      if (!captchaState.isOpen) {
+        elements.authForm.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
+      }
+    }
+    if (event.key === "Escape") {
+      if (captchaState.isOpen) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
     }
   });
   elements.authLoginTabBtn.addEventListener("click", () => {
@@ -4266,6 +4350,14 @@ function bindEvents() {
     if (event.key === "ArrowDown") {
       event.preventDefault();
       focusAdjacentAuthInput(1);
+      return;
+    }
+    if (event.key === "Enter") {
+      if (captchaState.isOpen) {
+        event.preventDefault();
+        event.stopPropagation();
+        return;
+      }
     }
   });
   elements.historyEntryBtn.addEventListener("click", () => {
@@ -4397,6 +4489,12 @@ function bindEvents() {
     setView("home");
   });
   elements.closeCaptchaDialogBtn?.addEventListener("click", closeCaptchaDialog);
+  elements.captchaDialog?.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  });
   elements.captchaShapes?.addEventListener("click", (event) => {
     const shapeEl = event.target.closest(".captcha-shape");
     if (!shapeEl) {
@@ -4609,6 +4707,9 @@ function bindEvents() {
   });
   elements.settingsLogoutBtn.addEventListener("click", () => {
     logout();
+  });
+  elements.settingsDeleteAccountBtn.addEventListener("click", () => {
+    deleteAccount();
   });
   elements.settingsNicknameEditBtn.addEventListener("click", () => {
     const currentNickname = state.currentUser?.nickname || state.currentUser?.username || "";

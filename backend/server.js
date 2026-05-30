@@ -9,8 +9,7 @@ const {
   DATA_DIR
 } = require("./config");
 const { ensureDataFiles, listWordBooks, readAllBookWords, readWordExamples, readWordCache } = require("./lib/wordService");
-const { getDatabase } = require("./lib/db");
-const { get } = require("./lib/db");
+const { getDatabase, get, run } = require("./lib/db");
 const {
   createUser,
   verifyUserCredentials,
@@ -45,6 +44,57 @@ const SESSION_TTL_MS = SESSION_TTL_HOURS * 60 * 60 * 1000;
 let _statsCache = null;
 let _statsCacheTime = 0;
 const STATS_CACHE_TTL = 2 * 60 * 1000;
+
+const RATE_LIMIT_WINDOW_MS = 2 * 60 * 1000;
+const RATE_LIMIT_MAX_REQUESTS = 1;
+const rateLimitStore = new Map();
+
+function getClientIp(request) {
+  return request.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
+         request.connection.remoteAddress ||
+         request.socket.remoteAddress ||
+         request.connection.socket?.remoteAddress ||
+         'unknown';
+}
+
+function rateLimitMiddleware(maxRequests = RATE_LIMIT_MAX_REQUESTS, windowMs = RATE_LIMIT_WINDOW_MS) {
+  return function(request, response, next) {
+    const ip = getClientIp(request);
+    const now = Date.now();
+    const key = `rate_limit_${ip}_${request.path}`;
+    
+    const entry = rateLimitStore.get(key);
+    
+    if (entry) {
+      if (now - entry.timestamp < windowMs) {
+        entry.count++;
+        if (entry.count > maxRequests) {
+          const remainingMs = windowMs - (now - entry.timestamp);
+          response.status(429).json({
+            ok: false,
+            message: `请求过于频繁，请 ${Math.ceil(remainingMs / 1000)} 秒后再试`
+          });
+          return;
+        }
+      } else {
+        rateLimitStore.set(key, { timestamp: now, count: 1 });
+      }
+    } else {
+      rateLimitStore.set(key, { timestamp: now, count: 1 });
+    }
+    
+    next();
+  };
+}
+
+setInterval(() => {
+  const now = Date.now();
+  rateLimitStore.forEach((entry, key) => {
+    if (now - entry.timestamp > RATE_LIMIT_WINDOW_MS * 2) {
+      rateLimitStore.delete(key);
+    }
+  });
+}, RATE_LIMIT_WINDOW_MS);
 
 app.use(express.json());
 
@@ -205,7 +255,7 @@ app.get("/api/health", async (request, response) => {
   });
 });
 
-app.post("/api/auth/register", async (request, response, next) => {
+app.post("/api/auth/register", rateLimitMiddleware(5, 60000), async (request, response, next) => {
   try {
     const username = sanitizeUsername(request.body?.username);
     const password = sanitizePassword(request.body?.password);
@@ -280,6 +330,34 @@ app.post("/api/auth/logout", (request, response) => {
   response.json({
     ok: true
   });
+});
+
+app.delete("/api/auth/delete", requireAuth, async (request, response, next) => {
+  try {
+    const userId = request.auth.session.userId;
+
+    const user = await get(
+      `SELECT id, username FROM users WHERE id = ? LIMIT 1`,
+      [userId]
+    );
+    if (!user) {
+      response.status(404).json({
+        ok: false,
+        message: "用户不存在"
+      });
+      return;
+    }
+
+    await run("DELETE FROM users WHERE id = ?", [userId]);
+
+    clearSessionCookie(request, response);
+    response.json({
+      ok: true,
+      message: "账号已注销"
+    });
+  } catch (error) {
+    next(error);
+  }
 });
 
 app.post("/api/user/api-key/validate", requireAuth, async (request, response, next) => {
