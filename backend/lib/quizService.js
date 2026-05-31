@@ -149,7 +149,7 @@ async function resolveItemsForWords(words, auth) {
     const exampleEntry = normalizeExampleEntry(updatedExampleMap[item.word]);
     return {
       ...item,
-      wordCn: exampleEntry?.paraphrase || item.wordCn
+      paraphrase: exampleEntry?.paraphrase || ""
     };
   });
 
@@ -511,7 +511,7 @@ function ensureFlashOptions(baseOptions, currentWord, correctOption, optionPools
 async function buildFallbackFlashQuestions(items, auth) {
   const optionPools = await buildFlashOptionPools(auth);
   return items.map((item, index) => {
-    const correctText = takePrimaryGloss(item.wordCn) || String(item.wordCn || "").trim() || item.word;
+    const correctText = takePrimaryGloss(item.paraphrase) || String(item.paraphrase || "").trim() || item.word;
     const ensured = ensureFlashOptions(
       [],
       item.word,
@@ -524,7 +524,7 @@ async function buildFallbackFlashQuestions(items, auth) {
     return {
       id: `${item.word}-${Date.now()}-${index}`,
       word: item.word,
-      wordCn: item.wordCn,
+      paraphrase: item.paraphrase,
       defEn: item.defEn,
       defCn: item.defCn,
       accent: item.accent || "",
@@ -597,7 +597,7 @@ async function createFlashQuizBatch(count = 5, auth, customWords = null) {
       return {
         id: `${item.word}-${Date.now()}-${index}`,
         word: item.word,
-        wordCn: item.wordCn,
+        paraphrase: item.paraphrase,
         defEn: item.defEn,
         defCn: item.defCn,
         accent: item.accent || "",

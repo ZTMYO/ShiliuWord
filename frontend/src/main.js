@@ -2169,7 +2169,7 @@ function renderHistory() {
       itemNode.className = "flash-history-item";
       itemNode.dataset.lang = "en";
       itemNode.dataset.wordEn = record.word || "";
-      itemNode.dataset.wordCn = record.wordCn || "";
+      itemNode.dataset.paraphrase = record.paraphrase || "";
       itemNode.setAttribute("role", "button");
       itemNode.setAttribute("tabindex", "0");
       const dotClass = record.isCorrect ? "flash-history-dot is-correct" : "flash-history-dot is-wrong";
@@ -2181,7 +2181,7 @@ function renderHistory() {
         <span class="flash-history-side">
           <span class="flash-history-time">${formatHistoryTime(record.createdAt)}</span>
           ${createInlinePronounceButton(record.word, "flash-history-pronounce-btn")}
-          ${createInlineCollectButton(record.word, record.wordCn, "flash-history-collect-btn")}
+          ${createInlineCollectButton(record.word, record.paraphrase, "flash-history-collect-btn")}
         </span>
       `;
       elements.historyList.appendChild(itemNode);
@@ -2261,16 +2261,16 @@ function renderHistory() {
                   data-def-en="${escapeHtmlAttribute(item.defEn)}"
                   data-def-cn="${escapeHtmlAttribute(item.defCn)}"
                   data-answer-en="${escapeHtmlAttribute(item.word)}"
-                  data-answer-cn="${escapeHtmlAttribute(item.wordCn)}"
+                  data-answer-cn="${escapeHtmlAttribute(item.paraphrase)}"
                   data-word-en="${escapeHtmlAttribute(item.word)}"
-                  data-word-cn="${escapeHtmlAttribute(item.wordCn)}"
+                  data-word-cn="${escapeHtmlAttribute(item.paraphrase)}"
                 >
                   ${defHtml}
                   <p class="history-answer">${item.word}</p>
                 </div>
                 <span class="history-question-side">
                   ${createInlinePronounceButton(item.word, "history-pronounce-btn")}
-                  ${createInlineCollectButton(item.word, item.wordCn, "history-collect-btn")}
+                  ${createInlineCollectButton(item.word, item.paraphrase, "history-collect-btn")}
                 </span>
               </div>
             `;
@@ -2332,7 +2332,7 @@ function appendFlashHistoryRecord() {
   const record = {
     id: `${state.flashCurrent.word}-${Date.now()}`,
     word: state.flashCurrent.word,
-    wordCn: state.flashCurrent.wordCn,
+    paraphrase: state.flashCurrent.paraphrase,
     isCorrect: state.flashEvaluation?.isCorrect ?? false,
     createdAt: new Date().toISOString()
   };
@@ -2364,7 +2364,7 @@ function upsertHistoryRecord() {
     result: Array.isArray(state.evaluationResult) ? [...state.evaluationResult] : [],
     items: state.quiz.items.map((item) => ({
       word: item.word,
-      wordCn: item.wordCn,
+      paraphrase: item.paraphrase,
       defEn: item.defEn,
       defCn: item.defCn
     }))
@@ -2452,7 +2452,7 @@ async function addToCollection(wordItem) {
     }
     state.collection.unshift({
       word: normalizedWord,
-      wordCn: data.item?.wordCn || wordItem.wordCn || "",
+      paraphrase: data.item?.paraphrase || wordItem.paraphrase || "",
       collectedAt: data.item?.collectedAt || new Date().toISOString()
     });
     syncCollectionWordSet();
@@ -2558,7 +2558,7 @@ function renderHistorySwitchButton() {
   elements.flashHistoryBtn.setAttribute("title", label);
 }
 
-function createInlineCollectButton(word, wordCn, extraClass = "") {
+function createInlineCollectButton(word, paraphrase, extraClass = "") {
   if (!state.isAuthenticated) {
     return "";
   }
@@ -2572,7 +2572,7 @@ function createInlineCollectButton(word, wordCn, extraClass = "") {
       type="button"
       class="${buttonClassName}"
       data-word="${escapeHtmlAttribute(word || "")}"
-      data-word-cn="${escapeHtmlAttribute(wordCn || "")}"
+      data-word-cn="${escapeHtmlAttribute(paraphrase || "")}"
       aria-pressed="${String(isCollected)}"
       aria-label="${isCollected ? "取消收藏单词" : "收藏单词"}"
       title="${isCollected ? "取消收藏" : "收藏"}"
@@ -2617,7 +2617,7 @@ async function toggleCollection(wordItem) {
 
   return addToCollection({
     word: normalizedWord,
-    wordCn: wordItem.wordCn || ""
+    paraphrase: wordItem.paraphrase || ""
   });
 }
 
@@ -2644,7 +2644,7 @@ async function toggleCollect() {
   }
   const result = await toggleCollection({
     word: state.flashCurrent.word,
-    wordCn: state.flashCurrent.wordCn
+    paraphrase: state.flashCurrent.paraphrase
   });
   refreshCollectUi();
   if (result === "added") {
@@ -2680,7 +2680,7 @@ function renderCollection() {
     itemNode.className = "collection-item";
     itemNode.dataset.lang = "en";
     itemNode.dataset.wordEn = item.word || "";
-    itemNode.dataset.wordCn = item.wordCn || "";
+    itemNode.dataset.paraphrase = item.paraphrase || "";
     itemNode.dataset.collectedAt = item.collectedAt || "";
     itemNode.innerHTML = `
       <span class="collection-word">${escapeHtml(item.word)}</span>
@@ -3226,7 +3226,7 @@ function renderFlashDetail() {
 
   elements.flashDetail.innerHTML = `
     <div class="flash-definition-card">
-      <p class="flash-definition-cn">${escapeHtml(current.wordCn)}</p>
+      <p class="flash-definition-cn">${escapeHtml(current.paraphrase)}</p>
       <p class="flash-definition-def">${escapeHtml(current.defCn)}</p>
       <p class="flash-definition-en">${escapeHtml(current.defEn)}</p>
     </div>
@@ -3348,7 +3348,7 @@ function renderFlashPrevHeader() {
   const prevSnapshot = state.flashPast.length ? state.flashPast[state.flashPast.length - 1] : null;
   const prevQuestion = prevSnapshot?.question || null;
   const prevWord = String(prevQuestion?.word || "").trim();
-  const prevWordCn = String(prevQuestion?.wordCn || "").trim();
+  const prevParaphrase = String(prevQuestion?.paraphrase || "").trim();
   const shouldShow = Boolean(prevWord);
   if (elements.flashPrevDivider) {
     elements.flashPrevDivider.classList.toggle("is-hidden", !shouldShow);
@@ -3363,8 +3363,8 @@ function renderFlashPrevHeader() {
     enNode.textContent = prevWord;
   }
   if (cnNode) {
-    cnNode.textContent = prevWordCn;
-    cnNode.classList.toggle("is-hidden", !prevWordCn);
+    cnNode.textContent = prevParaphrase;
+    cnNode.classList.toggle("is-hidden", !prevParaphrase);
   }
 }
 
@@ -4115,11 +4115,11 @@ function renderResults() {
         <h4>${showIndex ? `${index + 1}. ` : ""}${item.word}</h4>
         <span class="result-item-actions">
           ${createInlinePronounceButton(item.word, "result-pronounce-btn")}
-          ${createInlineCollectButton(item.word, item.wordCn, "result-collect-btn")}
+          ${createInlineCollectButton(item.word, item.paraphrase, "result-collect-btn")}
         </span>
       </div>
       ${accentHtml}
-      <p>${item.wordCn}</p>
+      <p>${item.paraphrase}</p>
       <p>${item.defCn}</p>
       <p class="result-def-en">${item.defEn}</p>
       <div class="example-list">${examplesHtml}</div>
@@ -4564,8 +4564,8 @@ function bindEvents() {
     const collectBtn = event.target.closest(".history-collect-btn, .flash-history-collect-btn");
     if (collectBtn) {
       const word = collectBtn.dataset.word || "";
-      const wordCn = collectBtn.dataset.wordCn || "";
-      toggleCollection({ word, wordCn }).then((result) => {
+      const paraphrase = collectBtn.dataset.paraphrase || "";
+      toggleCollection({ word, paraphrase }).then((result) => {
         refreshCollectUi();
         if (result === "added") {
           showToast("已收藏", "success");
@@ -4585,7 +4585,7 @@ function bindEvents() {
       const wordNode = flashHistoryItem.querySelector(".flash-history-word");
       if (wordNode) {
         wordNode.textContent = nextLang === "cn"
-          ? flashHistoryItem.dataset.wordCn || ""
+          ? flashHistoryItem.dataset.paraphrase || ""
           : flashHistoryItem.dataset.wordEn || "";
       }
       return;
@@ -4859,7 +4859,7 @@ function bindEvents() {
       const wordNode = collectionItem.querySelector(".collection-word");
       if (wordNode) {
         wordNode.textContent = nextLang === "cn"
-          ? collectionItem.dataset.wordCn || ""
+          ? collectionItem.dataset.paraphrase || ""
           : collectionItem.dataset.wordEn || "";
       }
     }
@@ -4882,8 +4882,8 @@ function bindEvents() {
     }
 
     const word = collectBtn.dataset.word || "";
-    const wordCn = collectBtn.dataset.wordCn || "";
-    toggleCollection({ word, wordCn }).then((result) => {
+    const paraphrase = collectBtn.dataset.paraphrase || "";
+    toggleCollection({ word, paraphrase }).then((result) => {
       refreshCollectUi();
       if (result === "added") {
         showToast("已收藏", "success");
@@ -5532,11 +5532,8 @@ async function showWordleResultDialog(won) {
     elements.wordleResultParaphrase.classList.remove("is-hidden");
   }
   
-  if (wordInfo && (wordInfo.wordCn || wordInfo.defEn || wordInfo.defCn)) {
+  if (wordInfo && (wordInfo.defEn || wordInfo.defCn)) {
     let defHtml = "";
-    if (wordInfo.wordCn) {
-      defHtml += `<p class="wordle-result-wordcn">${wordInfo.wordCn}</p>`;
-    }
     if (wordInfo.defEn) {
       defHtml += `<p class="wordle-result-defen">${wordInfo.defEn}</p>`;
     }

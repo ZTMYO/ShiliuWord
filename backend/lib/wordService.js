@@ -338,7 +338,7 @@ function startsWithPartOfSpeech(value) {
   return /^(?:（[^）]*）|\([^)]*\))?\s*[a-z]+\.\s*/i.test(String(value || "").trim());
 }
 
-function normalizeWordCnPunctuation(value) {
+function normalizeParaphrasePunctuation(value) {
   const parts = String(value || "")
     .trim()
     .split(/[;；]/)
@@ -380,7 +380,7 @@ function normalizeParaphrase(value) {
     return "";
   }
 
-  return normalizeWordCnPunctuation(
+  return normalizeParaphrasePunctuation(
     source
       .split(/\n+/)
       .map((part) => part.trim())
@@ -450,21 +450,21 @@ function normalizeItems(items) {
   return items
     .map((item) => ({
       word: String(item.word || "").trim().toLowerCase(),
-      wordCn: normalizeWordCnPunctuation(item.wordCn),
+      paraphrase: normalizeParaphrasePunctuation(item.paraphrase),
       defEn: String(item.defEn || "").trim(),
       defCn: String(item.defCn || "").trim()
     }))
     .filter((item) => {
       const defEnLower = item.defEn.toLowerCase();
-      const normalizedWordCn = normalizeCnGloss(item.wordCn);
+      const normalizedParaphrase = normalizeCnGloss(item.paraphrase);
       const normalizedDefCn = normalizeCnGloss(item.defCn);
-      if (!item.word || !item.wordCn || !item.defEn || !item.defCn) {
+      if (!item.word || !item.paraphrase || !item.defEn || !item.defCn) {
         return false;
       }
       if (defEnLower.includes(item.word)) {
         return false;
       }
-      if (normalizedWordCn && normalizedWordCn === normalizedDefCn) {
+      if (normalizedParaphrase && normalizedParaphrase === normalizedDefCn) {
         return false;
       }
       if (seenWords.has(item.word)) {
@@ -566,7 +566,6 @@ async function mergeCacheItems(items, allowWordSet = null) {
     
     if (!cache[item.word]) {
       cache[item.word] = {
-        wordCn: item.wordCn,
         defEn: item.defEn,
         defCn: item.defCn
       };
@@ -579,7 +578,7 @@ async function mergeCacheItems(items, allowWordSet = null) {
     };
     
     if (!currentEntry.paraphrase) {
-      currentEntry.paraphrase = normalizeParaphrase(item.wordCn);
+      currentEntry.paraphrase = normalizeParaphrase(item.paraphrase);
       currentExamples[item.word] = currentEntry;
       examplesChanged = true;
     }
@@ -642,7 +641,7 @@ async function getCachedItems(words, cache, exampleMap = null) {
       return hit
         ? {
             word,
-            wordCn: exampleEntry?.paraphrase || hit.wordCn,
+            paraphrase: exampleEntry?.paraphrase || "",
             defEn: hit.defEn,
             defCn: hit.defCn
           }

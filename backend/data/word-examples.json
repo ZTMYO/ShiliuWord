@@ -26682,7 +26682,16 @@
     "accent": "/kənˈstren/"
   },
   "constraint": {
-    "examples": [],
+    "examples": [
+      {
+        "en": "The main constraint on our project is the limited budget.",
+        "cn": "我们项目的主要约束是预算有限。"
+      },
+      {
+        "en": "Time is a serious constraint for completing this exam.",
+        "cn": "时间是完成这次考试的一个严重限制因素。"
+      }
+    ],
     "paraphrase": "n.强制，限制，约束",
     "accent": "/kənˈstrent/"
   },
@@ -117924,7 +117933,16 @@
     "accent": "/sit/"
   },
   "site": {
-    "examples": [],
+    "examples": [
+      {
+        "en": "The construction site was busy with workers and machinery.",
+        "cn": "建筑工地上工人和机器一片繁忙。"
+      },
+      {
+        "en": "We visited the historic site of the ancient temple.",
+        "cn": "我们参观了那座古庙的历史遗址。"
+      }
+    ],
     "paraphrase": "n. 地点，场所，遗址，网站；v. 设置，为…选址",
     "accent": "/saɪt/"
   },

@@ -76,14 +76,14 @@ Adjust difficulty, senses, and examples to match the typical learner level impli
 If the word book suggests a lower level (e.g., primary school), keep definitions simple and concrete; if higher (e.g., TEM-8), allow more advanced but still common senses.
 
 For each word, generate concise content:
-1. wordCn: dictionary-style Chinese gloss with part of speech. Use comma for multiple meanings under the same part of speech, and use semicolon only when switching to a different part of speech. Example: "adj. 牙齿的，牙科的，齿音的；n. 牙齿音".
+1. paraphrase: dictionary-style Chinese gloss with part of speech. Use comma for multiple meanings under the same part of speech, and use semicolon only when switching to a different part of speech. Example: "adj. 牙齿的，牙科的，齿音的；n. 牙齿音".
 2. defEn: short English definition, DO NOT contain the original word.
 3. defCn: Chinese paraphrase of defEn only, without part of speech.
-4. defCn must NOT copy wordCn, must NOT be identical to the base meaning in wordCn, and should read like a Chinese explanation of defEn.
+4. defCn must NOT copy paraphrase, must NOT be identical to the base meaning in paraphrase, and should read like a Chinese explanation of defEn.
 5. Keep defCn concise but explanatory, suitable for review at this level.
 
 Strictly return pure JSON array:
-[{"word":"","wordCn":"","defEn":"","defCn":""}]
+[{"word":"","paraphrase":"","defEn":"","defCn":""}]
 No extra text, no explanation.
 Words: {{words}}`,
   SYNONYM_PROMPT: `Target word book: {{bookName}}
@@ -102,10 +102,10 @@ Hard constraints:
 8. If you cannot find 5 words sharing ONE UNIFIED MEANING, return [] instead of forcing unrelated words together.
 
 For each word:
-1. wordCn: dictionary-style Chinese gloss with part of speech. All 5 words must translate to the SAME CORE CHINESE CONCEPT. Use comma for multiple meanings under the same part of speech, semicolon only for different parts of speech. Example: "adj. 温和的，轻微的；n. 温和派".
+1. paraphrase: dictionary-style Chinese gloss with part of speech. All 5 words must translate to the SAME CORE CHINESE CONCEPT. Use comma for multiple meanings under the same part of speech, semicolon only for different parts of speech. Example: "adj. 温和的，轻微的；n. 温和派".
 2. defEn: brief English definition centered on the shared core meaning, reflecting the word's nuance, WITHOUT containing the word itself.
 3. defCn: Chinese paraphrase of defEn only, no part of speech.
-4. defCn must NOT copy wordCn, must NOT be identical to wordCn's base meaning.
+4. defCn must NOT copy paraphrase, must NOT be identical to paraphrase's base meaning.
 5. Keep defCn concise but explanatory.
 6. examples: exactly 2 bilingual examples per word, format: [{"en":"","cn":""},{"en":"","cn":""}].
 7. English examples must use the target word naturally in concise, study-appropriate sentences.
@@ -123,7 +123,7 @@ Self-check before output:
 - [PASS] If you cannot find 5 safe near-synonyms forming ONE UNIFIED GROUP, return [].
 
 Only output pure JSON array:
-[{"word":"","wordCn":"","defEn":"","defCn":"","examples":[{"en":"","cn":""},{"en":"","cn":""}]}]
+[{"word":"","paraphrase":"","defEn":"","defCn":"","examples":[{"en":"","cn":""},{"en":"","cn":""}]}]
 No redundant content at all.`,
   SYNONYM_SUPPLEMENT_PROMPT: `Target word book: {{bookName}}
 Use these anchor words as reference points: {{anchors}}.
@@ -140,13 +140,13 @@ Hard constraints:
 5. If safe supplementation is impossible, return [].
 
 For each returned item:
-1. wordCn: dictionary-style Chinese gloss with part of speech. Use comma for multiple meanings under the same part of speech, and use semicolon only when switching to a different part of speech. Example: "v. 减轻，缓和；n. 缓和".
+1. paraphrase: dictionary-style Chinese gloss with part of speech. Use comma for multiple meanings under the same part of speech, and use semicolon only when switching to a different part of speech. Example: "v. 减轻，缓和；n. 缓和".
 2. defEn: brief English definition that does NOT contain the word itself.
 3. defCn: Chinese paraphrase of defEn only, without part of speech.
 4. examples: exactly 2 bilingual examples in the form [{"en":"","cn":""},{"en":"","cn":""}].
 
 Only output pure JSON array:
-[{"word":"","wordCn":"","defEn":"","defCn":"","examples":[{"en":"","cn":""},{"en":"","cn":""}]}]
+[{"word":"","paraphrase":"","defEn":"","defCn":"","examples":[{"en":"","cn":""},{"en":"","cn":""}]}]
 No redundant content at all.`,
   FLASHCARD_PROMPT: `You are generating multiple-choice meaning options for a Chinese learner in a compact vocabulary quiz.
 Target word book: {{bookName}}
@@ -216,7 +216,7 @@ Requirements:
 2. Use as many candidate words as possible, but skip words that would break coherence. Advanced books may use longer sentences; keep simple otherwise.
 3. Each English sentence needs a natural Chinese translation. Try 1 target word per sentence; if multiple, mark each in Chinese with 【】 in order.
 4. CRITICAL: Every target word in English MUST be accurately translated to Chinese and marked with 【】. NEVER leave English words in Chinese sentences.
-5. In Chinese, mark ONLY the exact translation phrase in 【】, consistent with provided wordCn/defCn. Content inside 【】 must be Chinese only (no English/pinyin/numbers).
+5. In Chinese, mark ONLY the exact translation phrase in 【】, consistent with provided paraphrase/defCn. Content inside 【】 must be Chinese only (no English/pinyin/numbers).
 6. selectedWords: lowercase original target words used. realWords: exact forms as they appear in English (same order, e.g., "worked" for "work").
 7. Return pure JSON only.
 
@@ -236,61 +236,61 @@ title: short English title; titleCn: Chinese translation; selectedWords: lowerca
   DEMO_ITEMS: [
     {
       word: "abandon",
-      wordCn: "v. 放弃；遗弃",
+      paraphrase: "v. 放弃；遗弃",
       defEn: "to leave something completely and stop supporting it",
       defCn: "彻底离开某事物并停止支持它"
     },
     {
       word: "brief",
-      wordCn: "adj. 简短的；短暂的",
+      paraphrase: "adj. 简短的；短暂的",
       defEn: "lasting for a very short time or using few words",
       defCn: "持续时间很短或用词很少"
     },
     {
       word: "convert",
-      wordCn: "v. 转化；改变",
+      paraphrase: "v. 转化；改变",
       defEn: "to change something into a different form or purpose",
       defCn: "把某物变成不同的形式或用途"
     },
     {
       word: "decline",
-      wordCn: "v. 下降；拒绝",
+      paraphrase: "v. 下降；拒绝",
       defEn: "to become less in amount or to politely refuse",
       defCn: "数量减少，或礼貌地拒绝"
     },
     {
       word: "retain",
-      wordCn: "v. 保留；保持",
+      paraphrase: "v. 保留；保持",
       defEn: "to continue to keep or hold something",
       defCn: "继续保有某物"
     },
     {
       word: "rigid",
-      wordCn: "adj. 僵硬的；严格的",
+      paraphrase: "adj. 僵硬的；严格的",
       defEn: "stiff and not easy to bend or not willing to change",
       defCn: "坚硬不易弯曲，或不愿改变"
     },
     {
       word: "submit",
-      wordCn: "v. 提交；屈从",
+      paraphrase: "v. 提交；屈从",
       defEn: "to formally present something or accept another authority",
       defCn: "正式提交某物，或接受他人权威"
     },
     {
       word: "sustain",
-      wordCn: "v. 维持；支撑",
+      paraphrase: "v. 维持；支撑",
       defEn: "to keep something going for a period of time",
       defCn: "让某事持续一段时间"
     },
     {
       word: "transmit",
-      wordCn: "v. 传输；传播",
+      paraphrase: "v. 传输；传播",
       defEn: "to send something from one place to another",
       defCn: "把某物从一处传到另一处"
     },
     {
       word: "vivid",
-      wordCn: "adj. 生动的；鲜明的",
+      paraphrase: "adj. 生动的；鲜明的",
       defEn: "producing strong and clear images in the mind",
       defCn: "在脑海中产生强烈清晰印象的"
     }

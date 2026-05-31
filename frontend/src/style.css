@@ -3164,7 +3164,7 @@ button.result-collect-btn:hover {
   display: none;
 }
 
-.wordle-result-wordcn {
+.wordle-result-paraphrase {
   font-size: 16px;
   font-weight: 600;
   color: var(--text-primary);

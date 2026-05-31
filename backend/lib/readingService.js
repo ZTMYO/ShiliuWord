@@ -33,7 +33,7 @@ async function resolveReadingItems(words, auth) {
       .filter(Boolean)
   )].filter(isReadingCandidate);
   const cache = await readWordCache();
-  const cachedItems = getCachedItems(targetWords, cache);
+  const cachedItems = await getCachedItems(targetWords, cache);
   const cachedWordSet = new Set(cachedItems.map((item) => item.word));
   let remainingWords = targetWords.filter((word) => !cachedWordSet.has(word));
   let freshItems = [];
@@ -122,7 +122,7 @@ async function createReadingExercise(auth, customWords = null) {
     titleCn: passage.titleCn || "",
     words: displayItems.map((item) => ({
       word: item.word,
-      wordCn: item.wordCn,
+      paraphrase: item.paraphrase,
       defEn: item.defEn,
       defCn: item.defCn,
       examples: Array.isArray(exampleMap[item.word]?.examples) ? exampleMap[item.word].examples.slice(0, 2) : []

@@ -233,12 +233,12 @@ async function listCollection(userId) {
 
   return rows.map((row) => ({
     word: normalizeText(row.word),
-    wordCn: normalizeText(row.word_cn),
+    paraphrase: normalizeText(row.word_cn),
     collectedAt: normalizeText(row.collected_at)
   }));
 }
 
-async function addCollectionItem(userId, word, wordCn) {
+async function addCollectionItem(userId, word, paraphrase) {
   const normalizedWord = normalizeText(word);
   if (!normalizedWord) {
     throw new Error("单词不能为空");
@@ -253,7 +253,7 @@ async function addCollectionItem(userId, word, wordCn) {
       exists: true,
       item: {
         word: normalizeText(existing.word),
-        wordCn: normalizeText(existing.word_cn),
+        paraphrase: normalizeText(existing.word_cn),
         collectedAt: normalizeText(existing.collected_at)
       }
     };
@@ -262,14 +262,14 @@ async function addCollectionItem(userId, word, wordCn) {
   const collectedAt = new Date().toISOString();
   await run(
     "INSERT INTO collections (user_id, word, word_cn, collected_at) VALUES (?, ?, ?, ?)",
-    [Number(userId), normalizedWord, normalizeText(wordCn), collectedAt]
+    [Number(userId), normalizedWord, normalizeText(paraphrase), collectedAt]
   );
 
   return {
     exists: false,
     item: {
       word: normalizedWord,
-      wordCn: normalizeText(wordCn),
+      paraphrase: normalizeText(paraphrase),
       collectedAt
     }
   };
@@ -385,7 +385,7 @@ async function listFlashHistory(userId) {
   return rows.map((row) => ({
     id: normalizeText(row.id),
     word: normalizeText(row.word),
-    wordCn: normalizeText(row.word_cn),
+    paraphrase: normalizeText(row.word_cn),
     isCorrect: Boolean(Number(row.is_correct)),
     createdAt: normalizeText(row.created_at)
   }));
@@ -405,7 +405,7 @@ async function addFlashHistory(userId, record) {
       normalizeText(record.id),
       Number(userId),
       normalizeText(record.word),
-      normalizeText(record.wordCn),
+      normalizeText(record.paraphrase),
       record.isCorrect ? 1 : 0,
       normalizeText(record.createdAt) || new Date().toISOString()
     ]

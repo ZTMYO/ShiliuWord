@@ -518,7 +518,7 @@ app.post("/api/collection", requireAuth, async (request, response, next) => {
     const result = await addCollectionItem(
       request.auth.user.id,
       request.body?.word,
-      request.body?.wordCn
+      request.body?.paraphrase
     );
     response.json({
       ok: true,
@@ -714,11 +714,10 @@ app.get("/api/word/info/:word", async (request, response, next) => {
 
     const info = {
       word,
-      wordCn: wordData[word]?.wordCn || "",
+      paraphrase: wordExamples[word]?.paraphrase || fiveLetterWordsJson[word]?.paraphrase || "",
       defEn: wordData[word]?.defEn || "",
       defCn: wordData[word]?.defCn || "",
       examples: wordExamples[word]?.examples || [],
-      paraphrase: wordExamples[word]?.paraphrase || fiveLetterWordsJson[word]?.paraphrase || "",
       accent: wordExamples[word]?.accent || fiveLetterWordsJson[word]?.accent || ""
     };
 

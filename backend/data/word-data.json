@@ -7774,5 +7774,65 @@
   "ability": {
     "defEn": "the power or skill to do something",
     "defCn": "做某件事所具备的力量或技巧"
+  },
+  "constraint": {
+    "defEn": "something that limits or controls what you can do",
+    "defCn": "限制你行动或选择的因素或条件"
+  },
+  "butter": {
+    "defEn": "a soft yellow fat made from milk, used in cooking or spreading on bread",
+    "defCn": "从牛奶中提取的黄色软脂肪，常用于烹饪或抹面包"
+  },
+  "reel": {
+    "defEn": "to feel unsteady or dizzy, as if about to fall",
+    "defCn": "感到不稳或头晕，好像要跌倒的样子"
+  },
+  "agriculture": {
+    "defEn": "the practice of growing crops and raising animals for food or other products",
+    "defCn": "种植庄稼和饲养动物以获取食物或其他产品的活动"
+  },
+  "stability": {
+    "defEn": "the state of being steady and not likely to change or fail",
+    "defCn": "保持平稳、不易变化或崩溃的状态"
+  },
+  "frontier": {
+    "defEn": "the edge of a settled or developed area, or a new field of knowledge or activity",
+    "defCn": "指已开发区域的边界，或尚未被充分探索的新领域、新方向"
+  },
+  "rash": {
+    "defEn": "done or acting without careful thought, often leading to risk",
+    "defCn": "指做事或说话前没有仔细考虑，容易带来危险或不良后果"
+  },
+  "sediment": {
+    "defEn": "solid material that settles at the bottom of a liquid",
+    "defCn": "液体中沉到底部的固体颗粒或杂质"
+  },
+  "boycott": {
+    "defEn": "to refuse to buy, use, or take part in something as a way of protesting",
+    "defCn": "作为一种抗议方式，拒绝购买、使用或参与某事物"
+  },
+  "dissatisfaction": {
+    "defEn": "a feeling of not being happy or satisfied with something",
+    "defCn": "对某事感到不高兴或不满足的情绪"
+  },
+  "trick": {
+    "defEn": "a clever or dishonest action intended to deceive someone",
+    "defCn": "一种旨在欺骗他人的巧妙或不诚实的行为"
+  },
+  "broom": {
+    "defEn": "a brush with a long handle used for sweeping floors",
+    "defCn": "一种带有长柄、用于清扫地面的刷子"
+  },
+  "era": {
+    "defEn": "a long period of time marked by particular events or characteristics",
+    "defCn": "一段以特定事件或特征为标志的较长历史时期"
+  },
+  "fungus": {
+    "defEn": "a type of organism that grows in damp places, such as mushrooms or mold",
+    "defCn": "一种生长在潮湿环境中的生物，比如蘑菇或霉斑"
+  },
+  "odd": {
+    "defEn": "different from what is usual or expected; strange",
+    "defCn": "与通常情况或预期不同的，令人感到奇怪的"
   }
 }

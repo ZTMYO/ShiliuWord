@@ -222,7 +222,7 @@ async function supplementSynonyms(anchorWords = [], existingItems = [], missingC
       JSON.stringify(
         normalizeItems(existingItems).map((item) => ({
           word: item.word,
-          wordCn: item.wordCn,
+          paraphrase: item.paraphrase,
           defEn: item.defEn,
           defCn: item.defCn
         })),
@@ -370,7 +370,7 @@ async function generateReadingPassage(items, personalApiKey, options = {}) {
       JSON.stringify(
         (Array.isArray(items) ? items : []).map((item) => ({
           word: item.word,
-          wordCn: item.wordCn,
+          paraphrase: item.paraphrase,
           defEn: item.defEn,
           defCn: item.defCn
         })),
@@ -547,7 +547,7 @@ async function generateFlashcardOptions(items, personalApiKey, options = {}) {
       JSON.stringify(
         (Array.isArray(items) ? items : []).map((item) => ({
           word: item.word,
-          wordCn: item.wordCn,
+          paraphrase: item.paraphrase,
           defEn: item.defEn,
           defCn: item.defCn
         })),
