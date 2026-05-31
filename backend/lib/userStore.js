@@ -1,6 +1,7 @@
 const { all, get, run, withTransaction } = require("./db");
 const { hashPassword, verifyPassword } = require("./security");
 const { containsForbiddenWord } = require("./forbiddenWords");
+const { DEFAULT_BOOK_ID } = require("../config");
 
 const HISTORY_RECORD_LIMIT = 50;
 
@@ -30,7 +31,7 @@ function formatUser(row) {
     username: String(row.username || ""),
     nickname: String(row.nickname || ""),
     passwordHash: String(row.password_hash || ""),
-    bookId: Math.max(1, Number(row.book_id || 2)),
+    bookId: Math.max(1, Number(row.book_id || DEFAULT_BOOK_ID)),
     currentStreak: Math.max(0, Number(row.current_streak || 0)),
     bestStreak: Math.max(0, Number(row.best_streak || 0)),
     createdAt: String(row.created_at || ""),
@@ -47,7 +48,7 @@ function formatSafeUser(user) {
     id: user.id,
     username: user.username,
     nickname: user.nickname || user.username,
-    bookId: Math.max(1, Number(user.bookId || 2)),
+    bookId: Math.max(1, Number(user.bookId || DEFAULT_BOOK_ID)),
     currentStreak: Math.max(0, Number(user.currentStreak || 0)),
     bestStreak: Math.max(0, Number(user.bestStreak || 0))
   };
@@ -144,10 +145,10 @@ async function createUser(username, password, nickname) {
   const now = new Date().toISOString();
   await run(
     `
-      INSERT INTO users (username, nickname, password_hash, created_at, updated_at)
-      VALUES (?, ?, ?, ?, ?)
+      INSERT INTO users (username, nickname, password_hash, book_id, created_at, updated_at)
+      VALUES (?, ?, ?, ?, ?, ?)
     `,
-    [normalizedUsername, normalizedNickname, hashPassword(normalizedPassword), now, now]
+    [normalizedUsername, normalizedNickname, hashPassword(normalizedPassword), DEFAULT_BOOK_ID, now, now]
   );
 
   const createdUser = await findUserByUsername(normalizedUsername);
@@ -163,8 +164,10 @@ async function verifyUserCredentials(username, password) {
 }
 
 async function updateUserBook(userId, bookId) {
-  const normalizedBookId = Math.max(1, Number(bookId || 0));
-  if (!Number.isFinite(normalizedBookId) || normalizedBookId < 1 || normalizedBookId > 9) {
+  const { WORD_BOOKS } = require("../config");
+  const validBookIds = WORD_BOOKS.map(b => b.id);
+  const normalizedBookId = Number(bookId || 0);
+  if (!Number.isFinite(normalizedBookId) || !validBookIds.includes(normalizedBookId)) {
     throw new Error("词书参数不合法");
   }
 

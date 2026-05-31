@@ -52,7 +52,7 @@ function isValidWord(word) {
 }
 
 function getBookFilePath(bookId) {
-  const normalizedBookId = Math.max(1, Number(bookId || DEFAULT_BOOK_ID || 2));
+  const normalizedBookId = Math.max(1, Number(bookId || DEFAULT_BOOK_ID));
   const hit = (Array.isArray(WORD_BOOKS) ? WORD_BOOKS : []).find((book) => Number(book.id) === normalizedBookId);
   const filename = String(hit?.file || `book-${normalizedBookId}.txt`).trim();
   return require("path").join(WORD_BOOK_DIR, filename);
@@ -60,7 +60,7 @@ function getBookFilePath(bookId) {
 
 async function readBookWords(bookId, options = {}) {
   await ensureDataFiles();
-  const normalizedBookId = Math.max(1, Number(bookId || DEFAULT_BOOK_ID || 2));
+  const normalizedBookId = Math.max(1, Number(bookId || DEFAULT_BOOK_ID));
   
   if (!options.forceRefresh && _bookCache.has(normalizedBookId)) {
     return _bookCache.get(normalizedBookId);
