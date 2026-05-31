@@ -555,29 +555,42 @@ async function mergeCacheItems(items, allowWordSet = null) {
   }
 
   const cache = await readWordCache();
-  let changed = false;
-  const syncedParaphrases = {};
+  const currentExamples = await readWordExamples();
+  let cacheChanged = false;
+  let examplesChanged = false;
 
   for (const item of normalized) {
     if (allowWordSet && !allowWordSet.has(item.word)) {
       continue;
     }
+    
     if (!cache[item.word]) {
       cache[item.word] = {
         wordCn: item.wordCn,
         defEn: item.defEn,
         defCn: item.defCn
       };
-      syncedParaphrases[item.word] = {
-        paraphrase: item.wordCn
-      };
-      changed = true;
+      cacheChanged = true;
+    }
+
+    const currentEntry = normalizeExampleEntry(currentExamples[item.word]) || {
+      examples: [],
+      paraphrase: ""
+    };
+    
+    if (!currentEntry.paraphrase) {
+      currentEntry.paraphrase = normalizeParaphrase(item.wordCn);
+      currentExamples[item.word] = currentEntry;
+      examplesChanged = true;
     }
   }
 
-  if (changed) {
+  if (cacheChanged) {
     await writeWordCache(cache);
-    await mergeWordParaphrases(syncedParaphrases, false);
+  }
+  
+  if (examplesChanged) {
+    await writeWordExamples(currentExamples);
   }
 }
 
@@ -618,14 +631,18 @@ async function mergeWordExamples(exampleMap) {
   return currentMap;
 }
 
-function getCachedItems(words, cache) {
+async function getCachedItems(words, cache, exampleMap = null) {
+  if (!exampleMap) {
+    exampleMap = await readWordExamples();
+  }
   return words
     .map((word) => {
       const hit = cache[word];
+      const exampleEntry = normalizeExampleEntry(exampleMap[word]);
       return hit
         ? {
             word,
-            wordCn: hit.wordCn,
+            wordCn: exampleEntry?.paraphrase || hit.wordCn,
             defEn: hit.defEn,
             defCn: hit.defCn
           }
@@ -645,6 +662,7 @@ module.exports = {
   pickShapeWords,
   normalizeItems,
   normalizeExamples,
+  normalizeExampleEntry,
   buildMockItems,
   pickMockSynonymItems,
   mergeCacheItems,

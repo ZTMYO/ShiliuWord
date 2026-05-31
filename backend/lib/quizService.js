@@ -21,6 +21,7 @@ const {
   getWordParaphrase,
   getWordAccent,
   normalizeItems,
+  normalizeExampleEntry,
   shuffle
 } = require("./wordService");
 
@@ -105,8 +106,11 @@ async function attachExamples(items, auth) {
 
 async function resolveItemsForWords(words, auth) {
   const targetWords = [...new Set(words.map((word) => String(word || "").trim().toLowerCase()))].slice(0, 5);
-  const cache = await readWordCache();
-  const cachedItems = getCachedItems(targetWords, cache);
+  const [cache, exampleMap] = await Promise.all([
+    readWordCache(),
+    readWordExamples()
+  ]);
+  const cachedItems = await getCachedItems(targetWords, cache, exampleMap);
   const cachedWordSet = new Set(cachedItems.map((item) => item.word));
   let remainingWords = targetWords.filter((word) => !cachedWordSet.has(word));
 
@@ -138,7 +142,18 @@ async function resolveItemsForWords(words, auth) {
     }
   }
 
-  return attachExamples(shuffle([...cachedItems, ...freshItems]).slice(0, 5), auth);
+  const items = shuffle([...cachedItems, ...freshItems]).slice(0, 5);
+  
+  const updatedExampleMap = await readWordExamples();
+  const itemsWithParaphrase = items.map((item) => {
+    const exampleEntry = normalizeExampleEntry(updatedExampleMap[item.word]);
+    return {
+      ...item,
+      wordCn: exampleEntry?.paraphrase || item.wordCn
+    };
+  });
+
+  return attachExamples(itemsWithParaphrase, auth);
 }
 
 async function createRandomQuiz(auth) {
@@ -356,15 +371,6 @@ function dedupeFlashOptions(options = [], correctOption = null) {
   return kept;
 }
 
-function buildLocalFlashOptionPool(cache = {}) {
-  return Object.entries(cache)
-    .map(([word, item]) => ({
-      word: String(word || "").trim().toLowerCase(),
-      glosses: splitGlossChoices(item?.wordCn)
-    }))
-    .filter((item) => item.word && item.glosses.length);
-}
-
 function buildParaphraseOptionPool(exampleMap = {}) {
   return Object.entries(exampleMap)
     .map(([word, entry]) => ({
@@ -447,16 +453,12 @@ function buildBookAwareOptionPools(optionPool = [], bookWords = []) {
 }
 
 async function buildFlashOptionPools(auth) {
-  const [cache, exampleMap, bookWords] = await Promise.all([
-    readWordCache(),
+  const [exampleMap, bookWords] = await Promise.all([
     readWordExamples(),
     readBookWords(auth?.bookId)
   ]);
 
-  const optionPool = [
-    ...buildLocalFlashOptionPool(cache),
-    ...buildParaphraseOptionPool(exampleMap)
-  ];
+  const optionPool = buildParaphraseOptionPool(exampleMap);
 
   return buildBookAwareOptionPools(optionPool, bookWords);
 }
