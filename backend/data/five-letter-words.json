@@ -7,13 +7,33 @@
     "paraphrase": "vt.使谦卑，使感到羞耻，使降低（地位、身份等）",
     "accent": "/əˈbeɪs/"
   },
+  "abash": {
+    "paraphrase": "vt.使局促不安，使困窘",
+    "accent": "/ə'bæʃ/"
+  },
+  "abask": {
+    "paraphrase": "adv.暖洋洋地",
+    "accent": "/ə'bæsk/"
+  },
   "abate": {
     "paraphrase": "v.（使）减少，（使）减轻，缓和",
     "accent": "/əˈbeɪt/"
   },
+  "abbey": {
+    "paraphrase": "n.修道院；大教堂",
+    "accent": "/'æbi/"
+  },
+  "abbot": {
+    "paraphrase": "n.主持，修道院院长",
+    "accent": "/'æbət/"
+  },
   "abets": {
     "paraphrase": "v. 教唆，怂恿（abet 的第三人称单数）",
     "accent": "/əˈbɛts/"
+  },
+  "abhor": {
+    "paraphrase": "vt.憎恨，厌恶",
+    "accent": "/əb'hɔr/"
   },
   "abide": {
     "paraphrase": "vt.容忍，忍受，等候，遵守；vi.持续，经受住，顶住，居住，逗留",
@@ -79,6 +99,10 @@
     "paraphrase": "n. 英亩（acre 的复数）",
     "accent": "/ˈeɪkərz/"
   },
+  "acrid": {
+    "paraphrase": "adj.辛辣的；苦的；刻薄的",
+    "accent": "/'ækrɪd/"
+  },
   "actor": {
     "paraphrase": "n.演员（尤指男演员），行动者，参与者",
     "accent": "/ˈæktɚ/"
@@ -86,6 +110,10 @@
   "acute": {
     "paraphrase": "adj.敏锐的，剧烈的，急性的",
     "accent": "/əˈkjuːt/"
+  },
+  "adage": {
+    "paraphrase": "n.格言, 谚语",
+    "accent": "/'ædɪdʒ/"
   },
   "adams": {
     "paraphrase": "n. 亚当斯（姓氏/人名）",
@@ -103,17 +131,25 @@
     "paraphrase": "v. 添加（add 的过去式/过去分词）；adj. 额外的",
     "accent": "/ˈædɪd/"
   },
+  "addle": {
+    "paraphrase": "v.使腐坏；使混乱 adj.腐坏的；糊涂的，昏乱的",
+    "accent": "/'ædl/"
+  },
   "adept": {
     "paraphrase": "adj. 熟练的，擅长的",
     "accent": "/əˈdɛpt/"
+  },
+  "adieu": {
+    "paraphrase": "n. 再见，再见",
+    "accent": "/ædˈjuː/"
   },
   "adits": {
     "paraphrase": "n. 入口，平硐（adit 的复数）",
     "accent": "/ˈædɪts/"
   },
-  "adieu": {
-    "paraphrase": "n. 再见，再见",
-    "accent": "/ædˈjuː/"
+  "adman": {
+    "paraphrase": "n.广告撰写人；拉广告者；广告商",
+    "accent": "/'ædmæn/"
   },
   "admin": {
     "paraphrase": "n. 管理；管理员；行政",
@@ -122,6 +158,10 @@
   "admit": {
     "paraphrase": "vt.& vi.许可进入，承认，供认；vt.允许，确认；vi.承认，允许",
     "accent": "/ædˈmɪt/"
+  },
+  "admix": {
+    "paraphrase": "v.使混合",
+    "accent": "/æd'mɪks/"
   },
   "adobe": {
     "paraphrase": "n. 土坯；Adobe（奥多比公司）",
@@ -155,9 +195,17 @@
     "paraphrase": "vt.粘贴，附上；n.词缀",
     "accent": "/əˈfɪks/"
   },
+  "afire": {
+    "paraphrase": "adj.燃烧的；着火的 adv.燃烧着；着火地",
+    "accent": "/ə'faɪr/"
+  },
   "afoot": {
     "paraphrase": "adj./adv.在进行中，在准备中",
     "accent": "/əˈfʊt/"
+  },
+  "afoul": {
+    "paraphrase": "adv.相抵触，有冲突",
+    "accent": "/ə'faʊl/"
   },
   "after": {
     "paraphrase": "prep.…后的，（表示时间）在…以后，（表示位置、顺序）在…后面；conj.在…以后；adv.以后，继后；adj.后来的，以后的",
@@ -166,6 +214,10 @@
   "again": {
     "paraphrase": "adv.再一次，再说，此外，不过",
     "accent": "/əˈɡɛn/"
+  },
+  "agape": {
+    "paraphrase": "adj.张开著；张口惊视的 adv.目瞪口呆 n.(Agape)人名；(罗)阿加佩",
+    "accent": "/ə'ɡep/"
   },
   "agent": {
     "paraphrase": "n.代理人，代理商，特工，药剂",
@@ -210,6 +262,10 @@
   "album": {
     "paraphrase": "n. 相册，唱片集，专辑",
     "accent": "/ˈælbəm/"
+  },
+  "alder": {
+    "paraphrase": "n.[植]桤木",
+    "accent": "/'ɔldɚ/"
   },
   "alert": {
     "paraphrase": "adj.警觉的，警惕的；n.警报，警戒状态；vt.向…报警，使警觉",
@@ -279,6 +335,10 @@
     "paraphrase": "n.合金；v.熔合，铸成合金",
     "accent": "/ˈælɔɪ/"
   },
+  "aloft": {
+    "paraphrase": "adv.在高处, 在上",
+    "accent": "/ə'lɔft/"
+  },
   "alone": {
     "paraphrase": "adj.单独的，独一无二的，独自的；adv.单独地，独自地，孤独地，只，只有",
     "accent": "/əˈloʊn/"
@@ -298,6 +358,10 @@
   "alpha": {
     "paraphrase": "n. 阿尔法；希腊字母首字母；开端",
     "accent": "/ˈælfə/"
+  },
+  "altar": {
+    "paraphrase": "n.祭坛, (基督教教堂内的)圣坛, 祈祷祭拜的地方",
+    "accent": "/'ɔltɚ/"
   },
   "alter": {
     "paraphrase": "v. 改变，更改，修改",
@@ -331,9 +395,17 @@
     "paraphrase": "adj.有毛病的，出差错的；adv.错误地，不恰当地",
     "accent": "/əˈmɪs/"
   },
+  "amity": {
+    "paraphrase": "n.友好；亲善关系；友好关系",
+    "accent": "/'æməti/"
+  },
   "among": {
     "paraphrase": "prep.在…之中，在…之间",
     "accent": "/əˈmʌŋ/"
+  },
+  "amour": {
+    "paraphrase": "n.奸情；恋情",
+    "accent": "/ə'mʊr/"
   },
   "amper": {
     "paraphrase": "n. 安珀河",
@@ -342,6 +414,10 @@
   "ample": {
     "paraphrase": "adj.足够的，充足的，宽敞的",
     "accent": "/ˈæmpəl/"
+  },
+  "amply": {
+    "paraphrase": "adv.充足地，详细地",
+    "accent": "/'æmpli/"
   },
   "amuse": {
     "paraphrase": "vt.逗乐，使消遣，使娱乐",
@@ -362,6 +438,10 @@
   "angry": {
     "paraphrase": "adj.生气的，愤怒的，发怒的，（颜色等）刺目的，（伤口等）发炎的",
     "accent": "/ˈæŋɡri/"
+  },
+  "anile": {
+    "paraphrase": "adj.衰老的, 似老妪的",
+    "accent": "/'einail/"
   },
   "anime": {
     "paraphrase": "n. 日本动漫；动画",
@@ -387,6 +467,26 @@
     "paraphrase": "v.废除，取消，废止",
     "accent": "/əˈnʌl/"
   },
+  "anode": {
+    "paraphrase": "n.[电]阳极, 正极",
+    "accent": "/'ænod/"
+  },
+  "anole": {
+    "paraphrase": "n.变色龙",
+    "accent": ""
+  },
+  "antic": {
+    "paraphrase": "adj.古怪的；滑稽可笑的 n.滑稽动作；丑角 v.扮小丑；做滑稽动作",
+    "accent": ""
+  },
+  "anvil": {
+    "paraphrase": "n.[解]砧骨",
+    "accent": "/'ænvɪl/"
+  },
+  "aorta": {
+    "paraphrase": "n.大动脉",
+    "accent": "/e'ɔrtə/"
+  },
   "apace": {
     "paraphrase": "adv.快速地，急速地",
     "accent": "/əˈpeɪs/"
@@ -394,6 +494,10 @@
   "apart": {
     "paraphrase": "adv.相隔，相距，分散地，分开地，成碎片，分辨；adj.分离的，隔离的",
     "accent": "/əˈpɑːrt/"
+  },
+  "aphid": {
+    "paraphrase": "n.[动]蚜虫",
+    "accent": ""
   },
   "apnic": {
     "paraphrase": "n. 亚太网络信息中心（APNIC，机构缩写）",
@@ -419,6 +523,10 @@
     "paraphrase": "n.围裙，[机]挡板，护坦",
     "accent": "/ˈeɪprən/"
   },
+  "aptly": {
+    "paraphrase": "adv.适当地",
+    "accent": "/'æptli/"
+  },
   "arbor": {
     "paraphrase": "n. 凉亭；树木；心轴",
     "accent": "/ˈɑːrbər/"
@@ -434,6 +542,10 @@
   "arena": {
     "paraphrase": "n.表演场地，竞技场，活动场所",
     "accent": "/əˈriːnə/"
+  },
+  "argon": {
+    "paraphrase": "n.[化学] 氩（18号元素）",
+    "accent": "/'ɑrgɑn/"
   },
   "argue": {
     "paraphrase": "vt.坚决主张，说服，表明；vi.争论，辩论，提出理由",
@@ -479,6 +591,10 @@
     "paraphrase": "n. 美国信息交换标准代码（计算机编码）",
     "accent": "/ˈæski/"
   },
+  "ashen": {
+    "paraphrase": "adj.灰色的，苍白的, especially deadly pale)",
+    "accent": "/'æʃən/"
+  },
   "ashes": {
     "paraphrase": "n. 灰烬（ash 的复数）",
     "accent": "/ˈæʃɪz/"
@@ -494,6 +610,18 @@
   "asked": {
     "paraphrase": "v. 询问；请求（ask 的过去式、过去分词）",
     "accent": "/ɑːskt/"
+  },
+  "askew": {
+    "paraphrase": "adj.歪斜的 adv.歪斜地，斜地 n.(Askew)人名；(英)艾斯丘",
+    "accent": "/ə'skju/"
+  },
+  "aspen": {
+    "paraphrase": "adj.山杨的；类似白杨的；颤抖的 n.山杨",
+    "accent": "/'æspən/"
+  },
+  "assay": {
+    "paraphrase": "n.化验；试验 v.分析；化验；尝试",
+    "accent": "/ə'se/"
   },
   "asses": {
     "paraphrase": "n. 驴；笨蛋（ass 的复数）",
@@ -511,6 +639,10 @@
     "paraphrase": "n. 原子（atom 的复数）",
     "accent": "/ˈætəmz/"
   },
+  "atone": {
+    "paraphrase": "v.赎罪；弥补；偿还",
+    "accent": "/ə'təun/"
+  },
   "attic": {
     "paraphrase": "n.阁楼，顶楼",
     "accent": "/ˈætɪk/"
@@ -522,6 +654,10 @@
   "audit": {
     "paraphrase": "n.审计，查账；vt.审计，查账，旁听",
     "accent": "/ˈɔːdɪt/"
+  },
+  "auger": {
+    "paraphrase": "n.螺丝钻 vt.用钻子钻洞于",
+    "accent": "/'ɔgɚ/"
   },
   "augur": {
     "paraphrase": "n.(古罗马用观察飞鸟行动等方法预卜未来的)占兆官，占卜师，预言者v.占卜，预言",
@@ -539,17 +675,33 @@
     "paraphrase": "n. 光环（aura 的复数）",
     "accent": "/ˈɔːrəz/"
   },
+  "auric": {
+    "paraphrase": "adj.金的, 含金的, 似金的, [化](化合物)正金的, 三价金的",
+    "accent": "/'ɔrɪk/"
+  },
   "autos": {
     "paraphrase": "n. 汽车（auto 的复数）",
     "accent": "/ˈɔːtoʊz/"
+  },
+  "auxin": {
+    "paraphrase": "n.茁长素, 植物激素",
+    "accent": "/'ɔksɪn/"
   },
   "avail": {
     "paraphrase": "n.效用，利益；vt.& vi.有益于，有助于",
     "accent": "/əˈveɪl/"
   },
+  "avant": {
+    "paraphrase": "adj.先锋的,激进的",
+    "accent": "/ə'vɑnt/"
+  },
   "avert": {
     "paraphrase": "vt.避免，防止；转移（目光、注意力等）",
     "accent": "/əˈvɜːrt/"
+  },
+  "avian": {
+    "paraphrase": "adj.鸟类的 n.鸟；",
+    "accent": "/'evɪən/"
   },
   "avoid": {
     "paraphrase": "vt.避开，避免，预防",
@@ -575,6 +727,22 @@
     "paraphrase": "adj.糟糕的，可怕的，非常的；adv.非常，极",
     "accent": "/ˈɔːfəl/"
   },
+  "axial": {
+    "paraphrase": "adj.轴的；轴向的",
+    "accent": "/'æksɪəl/"
+  },
+  "axiom": {
+    "paraphrase": "n.[数] 公理；格言；自明之理",
+    "accent": "/'æksɪəm/"
+  },
+  "azoic": {
+    "paraphrase": "adj.无生命的, 无生命时代的",
+    "accent": "/e'zoɪk/"
+  },
+  "azure": {
+    "paraphrase": "adj.蔚蓝的 n.天蓝色",
+    "accent": "/'æʒɚ/"
+  },
   "babes": {
     "paraphrase": "n. 婴儿；宝贝（babe 的复数）",
     "accent": "/beɪbz/"
@@ -595,6 +763,14 @@
     "paraphrase": "adv. 严重地，非常地，拙劣地，差劲地",
     "accent": "/ˈbædli/"
   },
+  "bagel": {
+    "paraphrase": "n.硬面包圈",
+    "accent": "/'beɡl/"
+  },
+  "baggy": {
+    "paraphrase": "adj.袋状的，膨胀的；宽松而下垂的",
+    "accent": "/'bæɡi/"
+  },
   "bails": {
     "paraphrase": "n. 保释金（bail 的复数）；v. 保释（bail 的第三人称单数）",
     "accent": "/beɪlz/"
@@ -602,6 +778,10 @@
   "baits": {
     "paraphrase": "n. 诱饵（bait 的复数）；v. 引诱（bait 的第三人称单数）",
     "accent": "/beɪts/"
+  },
+  "baked": {
+    "paraphrase": "adj.烘烤制作的",
+    "accent": "/bekt/"
   },
   "baker": {
     "paraphrase": "n. 面包师；烘焙师",
@@ -651,6 +831,10 @@
     "paraphrase": "v. 使裸露（bare 的第三人称单数）",
     "accent": "/berz/"
   },
+  "barge": {
+    "paraphrase": "v.蹒跚；闯入 n.驳船；游艇",
+    "accent": "/bɑrdʒ/"
+  },
   "barks": {
     "paraphrase": "n. 树皮（bark 的复数）；v. 吠叫（bark 的第三人称单数）",
     "accent": "/bɑːrks/"
@@ -691,6 +875,10 @@
     "paraphrase": "v. 晒太阳（bask 的第三人称单数）",
     "accent": "/bæsks/"
   },
+  "baste": {
+    "paraphrase": "v.粗缝, 润以油脂, (在烤肉上)涂油, 狠揍, 大骂",
+    "accent": "/best/"
+  },
   "batch": {
     "paraphrase": "n.一批，一组，一批生产量",
     "accent": "/bætʃ/"
@@ -706,6 +894,10 @@
   "baton": {
     "paraphrase": "n.指挥棒，警棍，接力棒",
     "accent": "/bəˈtɑːn/"
+  },
+  "bawdy": {
+    "paraphrase": "adj.猥亵的；下流的；卖淫的",
+    "accent": "/'bɔdi/"
   },
   "bawls": {
     "paraphrase": "v. 大哭（bawl 的第三人称单数）",
@@ -751,6 +943,10 @@
     "paraphrase": "n. 牛肉（beef 的复数，指多种牛肉或抱怨）；v. 抱怨（beef 的第三人称单数）",
     "accent": "/biːfs/"
   },
+  "beefy": {
+    "paraphrase": "adj.象牛肉的, 健壮的, 结实的",
+    "accent": "/'bifi/"
+  },
   "beeps": {
     "paraphrase": "n. 哔哔声（beep 的复数）；v. 发出哔哔声（beep 的第三人称单数）",
     "accent": "/biːps/"
@@ -763,9 +959,17 @@
     "paraphrase": "vt.适合，适宜于",
     "accent": "/bɪˈfɪt/"
   },
+  "befog": {
+    "paraphrase": "v.罩入雾中；使朦胧；使迷惑",
+    "accent": "/bɪ'fɑɡ/"
+  },
   "began": {
     "paraphrase": "v.begin的过去式",
     "accent": "/bɪˈɡæn/"
+  },
+  "beget": {
+    "paraphrase": "vt.做父亲；为…生父；产生；引起，招致",
+    "accent": "/bɪ'ɡɛt/"
   },
   "begin": {
     "paraphrase": "vt.& vi.开始，着手",
@@ -782,6 +986,14 @@
   "being": {
     "paraphrase": "n.存在；生物；人；本质",
     "accent": "/ˈbiːɪŋ/"
+  },
+  "belay": {
+    "paraphrase": "v.把缆绳拴在系索栓上 n.(Belay)人名；(法)贝莱",
+    "accent": "/'bile/"
+  },
+  "belch": {
+    "paraphrase": "v.打嗝, (火山、炮等)冒烟、喷出",
+    "accent": "/bɛltʃ/"
   },
   "belie": {
     "paraphrase": "v.掩饰；使产生错觉；证明…为虚假",
@@ -823,9 +1035,17 @@
     "paraphrase": "n.浆果；干果仁；卵；vi.采摘浆果；结浆果",
     "accent": "/ˈbɛri/"
   },
+  "berth": {
+    "paraphrase": "v.使停泊 n.停泊处；卧铺",
+    "accent": "/bɝθ/"
+  },
   "beset": {
     "paraphrase": "v.困扰；围困；镶嵌",
     "accent": "/bɪˈsɛt/"
+  },
+  "besot": {
+    "paraphrase": "v.使烂醉, 使迷糊, 使沉醉",
+    "accent": "/bɪ'sɑt/"
   },
   "bests": {
     "paraphrase": "v. 胜过（best 的第三人称单数）",
@@ -843,6 +1063,10 @@
     "paraphrase": "v. 等待（bide 的第三人称单数）",
     "accent": "/baɪdz/"
   },
+  "bight": {
+    "paraphrase": "n.海岸线  的宽缓弯曲；海湾",
+    "accent": "/baɪt/"
+  },
   "bigot": {
     "paraphrase": "n.盲目信仰者，顽固者",
     "accent": "/ˈbɪɡət/"
@@ -854,6 +1078,10 @@
   "biles": {
     "paraphrase": "n. 胆汁（bile 的复数，指多种胆汁）",
     "accent": "/baɪlz/"
+  },
+  "bilge": {
+    "paraphrase": "n.舱底",
+    "accent": "/bɪldʒ/"
   },
   "bills": {
     "paraphrase": "n. 账单；钞票；法案（bill 的复数）",
@@ -879,6 +1107,10 @@
     "paraphrase": "n.生物群系",
     "accent": "/ˈbaɪoʊm/"
   },
+  "biped": {
+    "paraphrase": "adj.有两足的 n.两足动物",
+    "accent": "/'baɪpɛd/"
+  },
   "birch": {
     "paraphrase": "n.桦树；桦木；桦条；v.用桦条抽打",
     "accent": "/bɜːrtʃ/"
@@ -898,6 +1130,10 @@
   "bitch": {
     "paraphrase": "n.母狗；泼妇；牢骚事；vi.埋怨；挖苦；vt.搞糟；抱怨",
     "accent": "/bɪtʃ/"
+  },
+  "biter": {
+    "paraphrase": "n.咬人的动物, 骗子",
+    "accent": "/'baɪtɚ/"
   },
   "black": {
     "paraphrase": "adj.黑色的；黑暗的；黑色人种的；n.黑色；黑人；v.使变黑；抵制",
@@ -931,6 +1167,10 @@
     "paraphrase": "n.号声；v.发出响亮刺耳的声音",
     "accent": "/bler/"
   },
+  "blase": {
+    "paraphrase": "adj.玩厌了的，厌烦于享乐的 n.(Blase)人名；(德)布拉泽；(法)布拉斯",
+    "accent": ""
+  },
   "blast": {
     "paraphrase": "n.爆炸；一阵疾风；响声；v.炸毁；发出刺耳声；严厉批评",
     "accent": "/blæst/"
@@ -942,6 +1182,14 @@
   "bleak": {
     "paraphrase": "adj.荒凉的；暗淡的；寒冷的；没有希望的",
     "accent": "/bliːk/"
+  },
+  "blear": {
+    "paraphrase": "v.使模糊 adj.模糊的",
+    "accent": "/blɪr/"
+  },
+  "bleat": {
+    "paraphrase": "v.咩咩叫；胡扯；抱怨 n.咩咩叫声",
+    "accent": "/blit/"
   },
   "bleed": {
     "paraphrase": "v.流血；使出血；勒索；放气或放水",
@@ -1079,6 +1327,10 @@
     "paraphrase": "n. 骨头；骨骼（bone 的复数）",
     "accent": "/boʊnz/"
   },
+  "bongo": {
+    "paraphrase": "n.非洲产大羚羊, 一种用手指敲的小鼓",
+    "accent": "/'bɔŋɡəu/"
+  },
   "bongs": {
     "paraphrase": "n. 水烟筒（bong 的复数）",
     "accent": "/bɑːŋz/"
@@ -1086,6 +1338,10 @@
   "bonks": {
     "paraphrase": "v. 撞击，敲打（bonk 的第三人称单数）",
     "accent": "/bɑːŋks/"
+  },
+  "bonny": {
+    "paraphrase": "adj.健美的，漂亮的",
+    "accent": "/'bɔnɪ/"
   },
   "bonus": {
     "paraphrase": "n.奖金，红利，额外津贴，额外令人高兴的事",
@@ -1147,6 +1403,10 @@
     "paraphrase": "v. 破坏，搞砸（bork 的第三人称单数）",
     "accent": "/bɔːrks/"
   },
+  "boron": {
+    "paraphrase": "n.[化]硼",
+    "accent": "/'borɑn/"
+  },
   "borts": {
     "paraphrase": "n. 金刚石碎屑（bort 的复数）",
     "accent": "/bɔːrts/"
@@ -1155,6 +1415,10 @@
     "paraphrase": "n.胸部，胸怀，内心；vt.怀抱，珍藏；adj.亲密的，心爱的",
     "accent": "/ˈbʊzəm/"
   },
+  "bossy": {
+    "paraphrase": "adj.专横的；浮雕装饰的；爱指挥他人的 n.母牛；牛犊",
+    "accent": "/'bɔsi/"
+  },
   "botas": {
     "paraphrase": "n. 皮酒囊（bota 的复数）",
     "accent": "/ˈboʊtəz/"
@@ -1162,6 +1426,14 @@
   "botes": {
     "paraphrase": "n. 小船（bote 的复数）",
     "accent": "/boʊts/"
+  },
+  "bough": {
+    "paraphrase": "n.大树枝, 主枝",
+    "accent": "/baʊ/"
+  },
+  "boule": {
+    "paraphrase": "n.人造宝石，议会",
+    "accent": "/bʊl/"
   },
   "bound": {
     "paraphrase": "vi.跳跃，弹跳；vt.给…划界，限制；n.界限，跳跃；adj.有义务的，装订的，必然的",
@@ -1174,6 +1446,10 @@
   "bowel": {
     "paraphrase": "n.肠，内部，深处",
     "accent": "/ˈbaʊəl/"
+  },
+  "bower": {
+    "paraphrase": "n.凉亭",
+    "accent": "/'baʊɚ/"
   },
   "bowls": {
     "paraphrase": "n. 碗（bowl 的复数）",
@@ -1235,6 +1511,10 @@
     "paraphrase": "n. 品牌，商标；v. 给…打上烙印",
     "accent": "/brænd/"
   },
+  "brant": {
+    "paraphrase": "n.黑雁",
+    "accent": "/brænt/"
+  },
   "brash": {
     "paraphrase": "adj.莽撞的，无礼的；n.骤雨，碎片",
     "accent": "/bræʃ/"
@@ -1251,6 +1531,14 @@
     "paraphrase": "adj.勇敢的，无畏的；v.勇敢面对",
     "accent": "/breɪv/"
   },
+  "bravo": {
+    "paraphrase": "n.喝彩；亡命徒 v.喝彩 int.好极了",
+    "accent": "/,brɑ'vo/"
+  },
+  "brawl": {
+    "paraphrase": "v.争吵, 怒骂",
+    "accent": "/brɔl/"
+  },
   "braws": {
     "paraphrase": "n. 争吵（braw 的复数）",
     "accent": "/brɔːz/"
@@ -1258,6 +1546,10 @@
   "brays": {
     "paraphrase": "v. 发出驴叫声（bray 的第三人称单数）",
     "accent": "/breɪz/"
+  },
+  "braze": {
+    "paraphrase": "v.用黄铜制；使成黄铜色 n.铜焊",
+    "accent": ""
   },
   "bread": {
     "paraphrase": "n. 面包，生计",
@@ -1315,6 +1607,10 @@
     "paraphrase": "n.（悬崖等的）边缘，边缘",
     "accent": "/brɪŋk/"
   },
+  "briny": {
+    "paraphrase": "adj.盐水的, 咸的, 海水的",
+    "accent": "/'braɪni/"
+  },
   "brisk": {
     "paraphrase": "adj.轻快的，活泼的，清新的；v.（使）变得轻快",
     "accent": "/brɪsk/"
@@ -1326,6 +1622,10 @@
   "broad": {
     "paraphrase": "adj.宽的，广泛的，概括的",
     "accent": "/brɔːd/"
+  },
+  "broil": {
+    "paraphrase": "v.烤(肉), 酷热",
+    "accent": "/brɔɪl/"
   },
   "broke": {
     "paraphrase": "adj.破产的，一文不名的",
@@ -1354,6 +1654,14 @@
   "bruce": {
     "paraphrase": "n. 布鲁斯（男子名）",
     "accent": "/bruːs/"
+  },
+  "bruit": {
+    "paraphrase": "v.散布",
+    "accent": "/brut/"
+  },
+  "brume": {
+    "paraphrase": "n.雾, 霭",
+    "accent": "/brʊm/"
   },
   "brunt": {
     "paraphrase": "n.冲击，冲势",
@@ -1390,6 +1698,10 @@
   "buggy": {
     "paraphrase": "n.婴儿车，轻便马车；adj.多虫的",
     "accent": "/ˈbʌɡi/"
+  },
+  "bugle": {
+    "paraphrase": "n.喇叭,军号 v.吹号集合",
+    "accent": "/'bjuɡl/"
   },
   "build": {
     "paraphrase": "vt.建造，构筑，建立；vi.建造，营造；n.体格，体形",
@@ -1459,6 +1771,10 @@
     "paraphrase": "n. 城镇（burg 的复数）",
     "accent": "/bɜːrɡz/"
   },
+  "burin": {
+    "paraphrase": "n.冰凿,雕刻刀",
+    "accent": "/'bjʊrɪn/"
+  },
   "burke": {
     "paraphrase": "n. 伯克（姓氏、人名）",
     "accent": "/bɜːrk/"
@@ -1495,6 +1811,10 @@
     "paraphrase": "n. 公共汽车；巴士（bus 的复数）",
     "accent": "/ˈbʌsɪz/"
   },
+  "bushy": {
+    "paraphrase": "adj.浓密的；灌木茂密的；多毛的",
+    "accent": "/bʊʃi/"
+  },
   "busts": {
     "paraphrase": "n. 半身像（bust 的复数）；v. 打破（bust 的第三人称单数）",
     "accent": "/bʌsts/"
@@ -1503,9 +1823,17 @@
     "paraphrase": "n. 丁烷（bute 的复数）",
     "accent": "/bjuːts/"
   },
+  "butte": {
+    "paraphrase": "n.孤山，孤峰",
+    "accent": "/bjut/"
+  },
   "butts": {
     "paraphrase": "n. 烟蒂；屁股；柄端（butt 的复数）",
     "accent": "/bʌts/"
+  },
+  "buxom": {
+    "paraphrase": "adj.体态丰满的",
+    "accent": "/'bʌksəm/"
   },
   "buyer": {
     "paraphrase": "n.买主，顾客；采购员",
@@ -1519,6 +1847,10 @@
     "paraphrase": "n. 蜂箱（byke 的复数）",
     "accent": "/baɪks/"
   },
+  "bylaw": {
+    "paraphrase": "n.次要法规；细则；地方法则；（社团制定的）内部章程",
+    "accent": "/'baɪ,lɔ/"
+  },
   "byres": {
     "paraphrase": "n. 牛棚（byre 的复数）",
     "accent": "/baɪərz/"
@@ -1530,6 +1862,10 @@
   "byway": {
     "paraphrase": "n.旁道，偏僻小路；（研究等的）冷僻领域",
     "accent": "/ˈbaɪweɪ/"
+  },
+  "cabal": {
+    "paraphrase": "n.阴谋（尤指政治上的）；阴谋集团 v.策划阴谋",
+    "accent": "/kə'bæl/"
   },
   "cabas": {
     "paraphrase": "n. 手提包（caba 的复数）",
@@ -1551,9 +1887,21 @@
     "paraphrase": "n. 桶（cade 的复数）",
     "accent": "/keɪdz/"
   },
+  "cadet": {
+    "paraphrase": "n.幼子，次子；实习生；候补军官；陆海军官学校的学员",
+    "accent": "/kə'dɛt/"
+  },
+  "cadge": {
+    "paraphrase": "v.行乞, 乞讨, 贩卖",
+    "accent": "/kædʒ/"
+  },
   "cadis": {
     "paraphrase": "n. 卡迪斯布（cadi 的复数）",
     "accent": "/ˈkɑːdiːz/"
+  },
+  "cadre": {
+    "paraphrase": "n.干部；基础结构；骨骼",
+    "accent": "/'kædri/"
   },
   "cafes": {
     "paraphrase": "n. 咖啡馆（cafe 的复数）",
@@ -1563,6 +1911,10 @@
     "paraphrase": "n. 笼子（cage 的复数）",
     "accent": "/keɪdʒɪz/"
   },
+  "cagey": {
+    "paraphrase": "adj.谨慎小心的, 精明的",
+    "accent": "/'kedʒi/"
+  },
   "caids": {
     "paraphrase": "n. 酋长（caid 的复数）",
     "accent": "/keɪdz/"
@@ -1570,6 +1922,10 @@
   "cains": {
     "paraphrase": "n. 该隐（cain 的复数）",
     "accent": "/keɪnz/"
+  },
+  "cajun": {
+    "paraphrase": "n.移居美国路易斯安纳州的法人后裔",
+    "accent": ""
   },
   "cakes": {
     "paraphrase": "n. 蛋糕（cake 的复数）",
@@ -1591,6 +1947,10 @@
     "paraphrase": "v. 使平静（calm 的第三人称单数）",
     "accent": "/kɑːmz/"
   },
+  "calve": {
+    "paraphrase": "v.生小牛, (使)冰山崩解",
+    "accent": "/kæv/"
+  },
   "camel": {
     "paraphrase": "n.骆驼",
     "accent": "/ˈkæməl/"
@@ -1606,6 +1966,10 @@
   "canal": {
     "paraphrase": "n.运河，沟渠；管道",
     "accent": "/kəˈnæl/"
+  },
+  "cando": {
+    "paraphrase": "n.私人公寓",
+    "accent": ""
   },
   "candy": {
     "paraphrase": "n.糖果",
@@ -1627,9 +1991,17 @@
     "paraphrase": "n.准则，标准；教规；（某作家的）真作",
     "accent": "/ˈkænən/"
   },
+  "canto": {
+    "paraphrase": "n.篇；曲调；长诗的篇章",
+    "accent": "/'kænto/"
+  },
   "cants": {
     "paraphrase": "n. 伪善言辞（cant 的复数）",
     "accent": "/kænts/"
+  },
+  "caper": {
+    "paraphrase": "n.跳跃",
+    "accent": "/'kepɚ/"
   },
   "capes": {
     "paraphrase": "n. 海角（cape 的复数）",
@@ -1638,6 +2010,10 @@
   "capos": {
     "paraphrase": "n. 变调夹（capo 的复数）",
     "accent": "/ˈkɑːpoʊz/"
+  },
+  "caput": {
+    "paraphrase": "n.头, 首",
+    "accent": "/'kepət/"
   },
   "carat": {
     "paraphrase": "n.克拉（宝石重量单位）",
@@ -1654,6 +2030,10 @@
   "cares": {
     "paraphrase": "v. 关心（care 的第三人称单数）",
     "accent": "/kerz/"
+  },
+  "caret": {
+    "paraphrase": "n.脱字符号( ^ 文章中插字使用)",
+    "accent": "/'kærət/"
   },
   "carey": {
     "paraphrase": "n. 凯里（人名、姓氏）",
@@ -1743,6 +2123,10 @@
     "paraphrase": "n.凯茜（女子名）",
     "accent": "/ˈkæθi/"
   },
+  "caulk": {
+    "paraphrase": "v.填塞使不漏水",
+    "accent": "/kɔk/"
+  },
   "cauls": {
     "paraphrase": "n. 胎膜（caul 的复数）",
     "accent": "/kɔːlz/"
@@ -1758,6 +2142,10 @@
   "caves": {
     "paraphrase": "n. 洞穴（cave 的复数）",
     "accent": "/keɪvz/"
+  },
+  "cavil": {
+    "paraphrase": "v.吹毛求疵；挑剔 n.吹毛求疵；苛责；无端的指责",
+    "accent": "/'kævl/"
   },
   "cease": {
     "paraphrase": "v.停止，终止，结束；n.停止",
@@ -1778,6 +2166,10 @@
   "ceils": {
     "paraphrase": "v. 装天花板（ceil 的第三人称单数）",
     "accent": "/siːlz/"
+  },
+  "cello": {
+    "paraphrase": "n.大提琴",
+    "accent": "/'tʃɛlo/"
   },
   "cells": {
     "paraphrase": "n. 细胞；电池；单元格（cell 的复数）",
@@ -1810,6 +2202,14 @@
   "chads": {
     "paraphrase": "n. 查兹（人名）",
     "accent": "/tʃædz/"
+  },
+  "chafe": {
+    "paraphrase": "v.擦破，擦痛；恼怒，焦躁",
+    "accent": "/tʃef/"
+  },
+  "chaff": {
+    "paraphrase": "n.谷壳, 糠, 愚弄",
+    "accent": "/tʃæf/"
   },
   "chain": {
     "paraphrase": "n.链子，链条，一连串，连锁店；vt.用铁链锁住，束缚",
@@ -1855,9 +2255,17 @@
     "paraphrase": "n. 图表，海图；v. 绘制图表，记录，规划",
     "accent": "/tʃɑrt/"
   },
+  "chary": {
+    "paraphrase": "adj.仔细的, 谨慎的, 吝啬的",
+    "accent": "/ˈtʃeri/"
+  },
   "chase": {
     "paraphrase": "v.追逐，追赶；n.追逐，追求",
     "accent": "/tʃeɪs/"
+  },
+  "chasm": {
+    "paraphrase": "n.峡谷；裂口；分歧；深坑",
+    "accent": "/'kæzəm/"
   },
   "chats": {
     "paraphrase": "n. 聊天（chat 的复数）；v. 聊天（chat 的第三人称单数）",
@@ -1882,6 +2290,10 @@
   "cheek": {
     "paraphrase": "n.脸颊，厚颜",
     "accent": "/tʃiːk/"
+  },
+  "cheep": {
+    "paraphrase": "n.吱吱的叫声 v吱吱地叫",
+    "accent": "/tʃip/"
   },
   "cheer": {
     "paraphrase": "v.欢呼，喝彩，使振奋；n.欢呼声，愉快",
@@ -1915,6 +2327,10 @@
     "paraphrase": "n. 时髦（chic 的复数）",
     "accent": "/ʃiːks/"
   },
+  "chide": {
+    "paraphrase": "v.斥责，责骂",
+    "accent": "/tʃaɪd/"
+  },
   "chief": {
     "paraphrase": "adj.主要的，首席的；n.首领，酋长",
     "accent": "/tʃiːf/"
@@ -1942,6 +2358,14 @@
   "china": {
     "paraphrase": "n.瓷器",
     "accent": "/ˈtʃaɪnə/"
+  },
+  "chine": {
+    "paraphrase": "n.脊椎骨, 山脊",
+    "accent": ""
+  },
+  "chink": {
+    "paraphrase": "v.发出叮当声 n.裂缝，裂口；一缕光；叮当声",
+    "accent": ""
   },
   "chino": {
     "paraphrase": "n.丝光斜纹棉布；[复数]斜纹棉布裤",
@@ -1971,9 +2395,17 @@
     "paraphrase": "v.窒息，噎住；阻塞，堵塞",
     "accent": "/tʃoʊk/"
   },
+  "chomp": {
+    "paraphrase": "v.大声地咀嚼, 反复咀嚼",
+    "accent": "/tʃɑmp/"
+  },
   "chops": {
     "paraphrase": "n. 排骨（chop 的复数）；v. 砍（chop 的第三人称单数）",
     "accent": "/tʃɑːps/"
+  },
+  "chord": {
+    "paraphrase": "n.和弦，和音；弦，心弦",
+    "accent": "/kɔrd/"
   },
   "chore": {
     "paraphrase": "n.日常琐事，杂务；令人厌烦的工作",
@@ -2003,6 +2435,10 @@
     "paraphrase": "v. 发出突突声（chug 的第三人称单数）",
     "accent": "/tʃʌɡz/"
   },
+  "chump": {
+    "paraphrase": "n.大木片, 大肉片, 木人",
+    "accent": "/tʃʌmp/"
+  },
   "chums": {
     "paraphrase": "n. 密友（chum 的复数）",
     "accent": "/tʃʌmz/"
@@ -2011,13 +2447,33 @@
     "paraphrase": "n.厚块，大块；相当大的数量",
     "accent": "/tʃʌŋk/"
   },
+  "churl": {
+    "paraphrase": "n.粗鄙之人",
+    "accent": "/tʃɝl/"
+  },
   "churn": {
     "paraphrase": "v.搅拌，搅动；n.搅乳器",
     "accent": "/tʃɜːrn/"
   },
+  "chute": {
+    "paraphrase": "n.瀑布, 斜道",
+    "accent": "/ʃut/"
+  },
+  "cider": {
+    "paraphrase": "n.苹果酒；苹果汁",
+    "accent": "/'saɪdɚ/"
+  },
   "cigar": {
     "paraphrase": "n.雪茄烟",
     "accent": "/sɪˈɡɑːr/"
+  },
+  "cilia": {
+    "paraphrase": "n.纤毛；睫毛",
+    "accent": "/'sɪlɪə/"
+  },
+  "cinch": {
+    "paraphrase": "n.(束马鞍用的)肚带, <俗>紧握, <俚>容易做的, 有把握的事情",
+    "accent": "/sintʃ/"
   },
   "cindy": {
     "paraphrase": "n. 辛迪（女子名）",
@@ -2038,6 +2494,10 @@
   "cites": {
     "paraphrase": "v. 引用（cite 的第三人称单数）",
     "accent": "/saɪts/"
+  },
+  "civet": {
+    "paraphrase": "n.[动物]麝猫",
+    "accent": "/'sɪvɪt/"
   },
   "civic": {
     "paraphrase": "adj. 市民的；市政的；公民的",
@@ -2062,6 +2522,10 @@
   "clams": {
     "paraphrase": "n. 蛤蜊（clam 的复数）；v. 挖蛤蜊（clam 的第三人称单数）",
     "accent": "/klæmz/"
+  },
+  "clang": {
+    "paraphrase": "n.叮当声；铿锵声 v.发铿锵声",
+    "accent": "/klæŋ/"
   },
   "clank": {
     "paraphrase": "n.叮当声；v.（使）发出叮当声",
@@ -2111,9 +2575,17 @@
     "paraphrase": "adj.清楚的，清晰的；明确的；v.清除，清理；使清楚；adv.清晰地，完全地",
     "accent": "/klɪr/"
   },
+  "cleat": {
+    "paraphrase": "n.夹板",
+    "accent": "/klit/"
+  },
   "clefs": {
     "paraphrase": "n. 谱号（clef 的复数，音乐术语）",
     "accent": "/klɛfs/"
+  },
+  "cleft": {
+    "paraphrase": "adj.劈开的 n.裂缝",
+    "accent": "/klɛft/"
   },
   "clerk": {
     "paraphrase": "n.职员，办事员；v.当职员",
@@ -2231,6 +2703,10 @@
     "paraphrase": "n. 玉米棒（cobb 的复数）",
     "accent": "/kɑbz/"
   },
+  "coble": {
+    "paraphrase": "n.平底小渔船(=cobble)",
+    "accent": "/'kobəl/"
+  },
   "cobra": {
     "paraphrase": "n.眼镜蛇(亚洲南部及非洲所产的一种毒蛇，长约四英尺，怒时头颈能胀大如帽状)",
     "accent": "/ˈkoʊbrə/"
@@ -2347,6 +2823,10 @@
     "paraphrase": "n. 梳子（comb 的复数）；v. 梳理（comb 的第三人称单数）",
     "accent": "/koʊmz/"
   },
+  "comer": {
+    "paraphrase": "n.来者, 新来者",
+    "accent": "/'kʌmɚ/"
+  },
   "comes": {
     "paraphrase": "v. 来；到达（come 的第三人称单数）",
     "accent": "/kʌmz/"
@@ -2367,6 +2847,10 @@
     "paraphrase": "n. 通信（comm 的复数）",
     "accent": "/kɑmz/"
   },
+  "compo": {
+    "paraphrase": "n.组合物,混合涂料",
+    "accent": "/'kɑmpo/"
+  },
   "comps": {
     "paraphrase": "n. 竞争；综合考试（comp 的复数）",
     "accent": "/kɑmps/"
@@ -2383,6 +2867,10 @@
     "paraphrase": "n. 会议（conf 的复数）",
     "accent": "/kɑnfs/"
   },
+  "conge": {
+    "paraphrase": "n.<法>撤职, 解任, 告辞",
+    "accent": ""
+  },
   "congo": {
     "paraphrase": "n. 刚果（非洲国家）",
     "accent": "/ˈkɑːŋɡoʊ/"
@@ -2398,6 +2886,10 @@
   "const": {
     "paraphrase": "n. 常量；常数（编程缩写）",
     "accent": "/kɑːnst/"
+  },
+  "conte": {
+    "paraphrase": "n.小故事",
+    "accent": "/kon'te/"
   },
   "cooks": {
     "paraphrase": "v. 烹饪（cook 的第三人称单数）；n. 厨师（cook 的复数）",
@@ -2443,6 +2935,10 @@
     "paraphrase": "n. 玉米（corn 的复数）",
     "accent": "/kɔːrnz/"
   },
+  "corny": {
+    "paraphrase": "adj.谷类的, 乡下味的, 粗野的, 有鸡眼的",
+    "accent": "/'kɔrni/"
+  },
   "corps": {
     "paraphrase": "n.兵团；特种部队；一群人",
     "accent": "/kɔːr/"
@@ -2483,6 +2979,10 @@
     "paraphrase": "n.法院，法庭；球场；庭院；v.追求，招致",
     "accent": "/kɔːrt/"
   },
+  "couth": {
+    "paraphrase": "adj.文雅的, 有礼貌的",
+    "accent": "/kʊθ/"
+  },
   "cover": {
     "paraphrase": "v.遮盖，覆盖；涉及；n.覆盖物，封面，掩护",
     "accent": "/ˈkʌvər/"
@@ -2495,6 +2995,14 @@
     "paraphrase": "v.觊觎，垂涎",
     "accent": "/ˈkʌvɪt/"
   },
+  "covin": {
+    "paraphrase": "n.［古］欺诈",
+    "accent": "/'kovɪŋ/"
+  },
+  "cower": {
+    "paraphrase": "v.退缩；抖缩；蜷缩；弯腰屈膝",
+    "accent": "/'kaʊɚ/"
+  },
   "cowls": {
     "paraphrase": "n. 罩，通风帽（cowl 的复数）",
     "accent": "/kaʊlz/"
@@ -2506,6 +3014,10 @@
   "coxes": {
     "paraphrase": "n. 舵手（cox 的复数）",
     "accent": "/ˈkɑksɪz/"
+  },
+  "cozen": {
+    "paraphrase": "v.欺骗, 瞒",
+    "accent": "/'kʌzən/"
   },
   "crabs": {
     "paraphrase": "n. 螃蟹（crab 的复数）",
@@ -2539,6 +3051,10 @@
     "paraphrase": "n.起重机；鹤；v.伸长（脖子）",
     "accent": "/kreɪn/"
   },
+  "crank": {
+    "paraphrase": "n.曲柄 v.用曲柄转动",
+    "accent": "/kræŋk/"
+  },
   "crans": {
     "paraphrase": "n. 克兰（容量单位）（cran 的复数）",
     "accent": "/krænz/"
@@ -2554,6 +3070,10 @@
   "crass": {
     "paraphrase": "adj. 愚钝的，粗鲁的",
     "accent": "/kræs/"
+  },
+  "crate": {
+    "paraphrase": "n.板条箱；篓 v.将某物装入大木箱或板条箱中",
+    "accent": "/kret/"
   },
   "crave": {
     "paraphrase": "v.渴望，热望",
@@ -2586,6 +3106,10 @@
   "cream": {
     "paraphrase": "n.奶油，乳脂，乳霜，奶油色，精英；vt.把…搅成糊状，彻底打败",
     "accent": "/kriːm/"
+  },
+  "credo": {
+    "paraphrase": "n.信条，教义",
+    "accent": "/'krido/"
   },
   "creds": {
     "paraphrase": "n. 信誉，信用（cred 的复数）",
@@ -2643,6 +3167,10 @@
     "paraphrase": "n.罪行，犯罪，罪恶",
     "accent": "/kraɪm/"
   },
+  "crimp": {
+    "paraphrase": "v.使起皱，使卷曲；抵制，束缚",
+    "accent": "/krɪmp/"
+  },
   "crisp": {
     "paraphrase": "adj.脆的，干冷的，爽快的，清新的；n.（英）炸薯片；vt.使变脆；vi.变脆",
     "accent": "/krɪsp/"
@@ -2654,6 +3182,10 @@
   "crook": {
     "paraphrase": "n.钩子，弯曲处，骗子；vt.使弯曲；vi.弯曲",
     "accent": "/krʊk/"
+  },
+  "croon": {
+    "paraphrase": "v.低声歌唱",
+    "accent": "/krun/"
   },
   "crops": {
     "paraphrase": "n. 庄稼；作物（crop 的复数）",
@@ -2682,6 +3214,10 @@
   "cruel": {
     "paraphrase": "adj.残酷的，残忍的，令人痛苦的",
     "accent": "/ˈkruːəl/"
+  },
+  "crumb": {
+    "paraphrase": "n.面包屑，碎屑；少许 v.弄碎；捏碎",
+    "accent": "/krʌm/"
   },
   "crush": {
     "paraphrase": "vt.压碎，镇压，弄皱；vi.挤，被压碎；n.粉碎，迷恋，拥挤的人群",
@@ -2727,6 +3263,10 @@
     "paraphrase": "n. 疗法（cure 的复数）；v. 治愈（cure 的第三人称单数）",
     "accent": "/kjʊrz/"
   },
+  "curio": {
+    "paraphrase": "n.古董, 古玩",
+    "accent": "/'kjʊrɪo/"
+  },
   "curls": {
     "paraphrase": "n. 卷发（curl 的复数）；v. 卷曲（curl 的第三人称单数）",
     "accent": "/kɜːrlz/"
@@ -2735,6 +3275,10 @@
     "paraphrase": "adj.卷曲的，卷毛的",
     "accent": "/ˈkɜːrli/"
   },
+  "curry": {
+    "paraphrase": "v.用咖喱烧，给…加咖喱粉；梳刷；鞭打 n.咖哩粉，咖喱；咖哩饭菜",
+    "accent": "/'kɝi/"
+  },
   "curse": {
     "paraphrase": "v.诅咒，咒骂；n.咒语，祸根",
     "accent": "/kɜːrs/"
@@ -2742,6 +3286,10 @@
   "curve": {
     "paraphrase": "n.曲线，弯曲；v.（使）弯曲",
     "accent": "/kɜːrv/"
+  },
+  "cushy": {
+    "paraphrase": "adj.容易的, 轻松而容易赚钱的",
+    "accent": "/'kuʃi/"
   },
   "cusps": {
     "paraphrase": "n. 尖点，尖端（cusp 的复数）",
@@ -2798,6 +3346,10 @@
   "daisy": {
     "paraphrase": "n.雏菊",
     "accent": "/ˈdeɪzi/"
+  },
+  "dally": {
+    "paraphrase": "v.玩弄, 戏弄, 延误",
+    "accent": "/'dæli/"
   },
   "dames": {
     "paraphrase": "n. 女士，夫人（dame 的复数）",
@@ -2910,6 +3462,10 @@
     "paraphrase": "n.死亡，逝世，毁灭",
     "accent": "/deθ/"
   },
+  "debar": {
+    "paraphrase": "v.阻止",
+    "accent": "/dɪ'bɑr/"
+  },
   "debit": {
     "paraphrase": "n.借方，借项；vt.记入借方",
     "accent": "/ˈdebɪt/"
@@ -2962,6 +3518,14 @@
     "paraphrase": "vt.推迟，延期；vi.服从，遵从",
     "accent": "/dɪˈfɜːr/"
   },
+  "degas": {
+    "paraphrase": "v.除去瓦斯",
+    "accent": "/di'gæs/"
+  },
+  "deice": {
+    "paraphrase": "v.防止结冰, 装以除冰装置, 除冰",
+    "accent": ""
+  },
   "deify": {
     "paraphrase": "vt.把……神化，奉为神明",
     "accent": "/ˈdeɪɪfaɪ, ˈdiːɪfaɪ/"
@@ -2977,6 +3541,10 @@
   "delay": {
     "paraphrase": "n.延迟，耽搁；vt.推迟，延期；vi.拖延",
     "accent": "/dɪˈleɪ/"
+  },
+  "delft": {
+    "paraphrase": "n.代夫特(荷兰城市)陶器",
+    "accent": ""
   },
   "delhi": {
     "paraphrase": "n. 德里（印度城市）",
@@ -2997,6 +3565,10 @@
   "demos": {
     "paraphrase": "n. 演示（demo 的复数）",
     "accent": "/ˈdɛmoʊz/"
+  },
+  "demur": {
+    "paraphrase": "v.反对；抗辩；提出异议 n.异议；反对",
+    "accent": "/dɪ'mɝ/"
   },
   "denim": {
     "paraphrase": "n.粗斜纹棉布",
@@ -3094,6 +3666,10 @@
     "paraphrase": "n. 一角硬币（dime 的复数）",
     "accent": "/daɪmz/"
   },
+  "dimly": {
+    "paraphrase": "adv.微暗, 朦胧",
+    "accent": "/'dɪmli/"
+  },
   "diner": {
     "paraphrase": "n.用餐者；餐车式饭店",
     "accent": "/ˈdaɪnər/"
@@ -3101,6 +3677,10 @@
   "dines": {
     "paraphrase": "v. 用餐（dine 的第三人称单数）",
     "accent": "/daɪnz/"
+  },
+  "dingy": {
+    "paraphrase": "adj.肮脏的，昏暗的",
+    "accent": "/'dɪndʒi/"
   },
   "dinks": {
     "paraphrase": "n. 双收入无子女夫妇（DINK 的复数）",
@@ -3113,6 +3693,10 @@
   "diode": {
     "paraphrase": "n.二极管",
     "accent": "/ˈdaɪoʊd/"
+  },
+  "dirge": {
+    "paraphrase": "n.挽歌, 哀悼歌",
+    "accent": "/dɝdʒ/"
   },
   "dirts": {
     "paraphrase": "n. 污垢（dirt 的复数）",
@@ -3222,6 +3806,10 @@
     "paraphrase": "n.捐赠者，捐献者；[化]供体",
     "accent": "/ˈdoʊnər/"
   },
+  "donut": {
+    "paraphrase": "n.炸面圈；环状线圈（等于doughnut）",
+    "accent": "/'do,nʌt; 'do,nət/"
+  },
   "dooms": {
     "paraphrase": "n. 厄运（doom 的复数）；v. 注定（doom 的第三人称单数）",
     "accent": "/duːmz/"
@@ -3233,6 +3821,10 @@
   "dopes": {
     "paraphrase": "n. 笨蛋（dope 的复数）；v. 给…服兴奋剂（dope 的第三人称单数）",
     "accent": "/doʊps/"
+  },
+  "dopey": {
+    "paraphrase": "adj.被麻醉的, 笨的, 迟钝的",
+    "accent": ""
   },
   "dorks": {
     "paraphrase": "n. 呆子，傻瓜（dork 的复数）",
@@ -3270,6 +3862,10 @@
     "paraphrase": "n. 鸽子（dove 的复数）",
     "accent": "/dʌvz/"
   },
+  "dowdy": {
+    "paraphrase": "adj.不整洁的，过旧的",
+    "accent": "/'daʊdi/"
+  },
   "downs": {
     "paraphrase": "n. 低地（down 的复数）；v. 击倒（down 的第三人称单数）",
     "accent": "/daʊnz/"
@@ -3302,6 +3898,10 @@
     "paraphrase": "v.排空，流干，耗尽；n.排水管，下水道，消耗",
     "accent": "/dreɪn/"
   },
+  "drake": {
+    "paraphrase": "n.公鸭, 蜉蝣类",
+    "accent": ""
+  },
   "drama": {
     "paraphrase": "n.戏剧，剧本，戏剧性事件",
     "accent": "/ˈdrɑːmə/"
@@ -3317,6 +3917,10 @@
   "drape": {
     "paraphrase": "n.窗帘，褶裥；vt.悬挂，披盖",
     "accent": "/dreɪp/"
+  },
+  "drawl": {
+    "paraphrase": "v.慢吞吞地说 n.慢吞吞拉长调子的说话方式",
+    "accent": "/drɔl/"
   },
   "drawn": {
     "paraphrase": "v. draw的过去分词；adj.疲惫的，拉出的",
@@ -3381,9 +3985,17 @@
     "paraphrase": "n.驱动力，干劲；v.驾驶，开车，驱动",
     "accent": "/draɪv/"
   },
+  "droll": {
+    "paraphrase": "adj.古怪的，好笑的",
+    "accent": "/drol/"
+  },
   "drone": {
     "paraphrase": "n.雄蜂，嗡嗡声，持续低音，无人驾驶飞机；v.嗡嗡叫，嗡嗡响，絮絮叨叨地说",
     "accent": "/droʊn/"
+  },
+  "drool": {
+    "paraphrase": "v.流口水；胡说 n.口水；梦话，胡说",
+    "accent": "/drul/"
   },
   "droop": {
     "paraphrase": "v.低垂，下垂，凋萎，萎靡",
@@ -3437,6 +4049,10 @@
     "paraphrase": "n. 鸭子（duck 的复数）；v. 躲避（duck 的第三人称单数）",
     "accent": "/dʌks/"
   },
+  "ducky": {
+    "paraphrase": "adj.<俚> 极好的, 可喜的, 极为愉快的",
+    "accent": "/'dʌki/"
+  },
   "ducts": {
     "paraphrase": "n. 管道（duct 的复数）",
     "accent": "/dʌkts/"
@@ -3472,6 +4088,10 @@
   "dumps": {
     "paraphrase": "n. 垃圾场（dump 的复数）；v. 倾倒（dump 的第三人称单数）",
     "accent": "/dʌmps/"
+  },
+  "dumpy": {
+    "paraphrase": "adj.矮胖的，粗短的；忧郁的 n.矮沙发；短雨伞",
+    "accent": "/'dʌmpi/"
   },
   "dunce": {
     "paraphrase": "n.傻瓜，劣学生",
@@ -3609,13 +4229,25 @@
     "paraphrase": "n.法令，布告",
     "accent": "/ˈiːdɪkt/"
   },
+  "edify": {
+    "paraphrase": "v.启发",
+    "accent": ""
+  },
   "edits": {
     "paraphrase": "v. 编辑（edit 的第三人称单数）",
     "accent": "/ˈedɪts/"
   },
+  "educe": {
+    "paraphrase": "v.得出, 导出；引出，唤起，使显出",
+    "accent": "/ɪ'djʊs/"
+  },
   "eerie": {
     "paraphrase": "adj.怪诞的，可怕的，令人不安的",
     "accent": "/ˈɪri/"
+  },
+  "egest": {
+    "paraphrase": "v.排泄",
+    "accent": "/i:'dʒest/"
   },
   "egypt": {
     "paraphrase": "n.埃及",
@@ -3629,6 +4261,10 @@
     "paraphrase": "vt.喷出，驱逐，强制离开；vi.弹射出",
     "accent": "/ɪ'dʒekt/"
   },
+  "elate": {
+    "paraphrase": "adj.得意的",
+    "accent": "/i'leit/"
+  },
   "elbow": {
     "paraphrase": "n. 肘部，肘关节；v. 用肘推挤",
     "accent": "/ˈelboʊ/"
@@ -3641,9 +4277,17 @@
     "paraphrase": "vt.选举，挑出，挑选，决定；vi.选择，挑选，进行选举；adj.精选的，选出的，选中的，当选而尚未就职的；n.被选的人",
     "accent": "/ɪˈlɛkt/"
   },
+  "elegy": {
+    "paraphrase": "n.哀歌，挽歌",
+    "accent": "/'ɛlədʒi/"
+  },
   "elias": {
     "paraphrase": "n.伊莱亚斯（希伯来先知）",
     "accent": "/ɪˈlaɪəs/"
+  },
+  "elide": {
+    "paraphrase": "v.取消, 省略, 省略发音, 不予考虑删节",
+    "accent": "/ɪ'laɪd/"
   },
   "elite": {
     "paraphrase": "n.精英，上层集团，掌权人物",
@@ -3709,6 +4353,10 @@
     "paraphrase": "n. 蚂蚁（英国方言，古语）",
     "accent": "/ˈɛmɪt/"
   },
+  "emote": {
+    "paraphrase": "v.<美口>夸张地作为, 表现感情",
+    "accent": "/ɪ'mot/"
+  },
   "empty": {
     "paraphrase": "adj.空的，空虚的，空洞的；v.（使）变空，腾空；n.空容器，空车",
     "accent": "/ˈɛmpti/"
@@ -3729,6 +4377,10 @@
     "paraphrase": "vt.捐赠，资助，赋予，赐予",
     "accent": "/ɛnˈdaʊ/"
   },
+  "endue": {
+    "paraphrase": "v.授予，赋予",
+    "accent": ""
+  },
   "enemy": {
     "paraphrase": "n.敌人，敌军，危害物",
     "accent": "/ˈɛnəmi/"
@@ -3736,6 +4388,10 @@
   "enjoy": {
     "paraphrase": "vt.享受，欣赏，喜爱；享有（权利等）",
     "accent": "/ɪnˈdʒɔɪ/"
+  },
+  "ennui": {
+    "paraphrase": "n.倦怠；",
+    "accent": "/ɑn'wi/"
   },
   "enrol": {
     "paraphrase": "vt.&vi.登记，注册，招收，入学",
@@ -3752,6 +4408,14 @@
   "entry": {
     "paraphrase": "n. 进入，入口，条目，登记",
     "accent": "/ˈɛntri/"
+  },
+  "enure": {
+    "paraphrase": "v.使习惯于 v.变得更有利",
+    "accent": "/ɪn'jʊr/"
+  },
+  "envoy": {
+    "paraphrase": "n.外交使节, 特使",
+    "accent": "/'ɛnvɔɪ/"
   },
   "epics": {
     "paraphrase": "n. 史诗（epic 的复数）",
@@ -3800,6 +4464,10 @@
   "essex": {
     "paraphrase": "n. 埃塞克斯（英国地名）",
     "accent": "/ˈesɪks/"
+  },
+  "ether": {
+    "paraphrase": "n.天空醚, 大气",
+    "accent": "/'iθɚ/"
   },
   "ethic": {
     "paraphrase": "n.伦理，道德准则；（复数）伦理学，道德学",
@@ -3892,6 +4560,10 @@
   "exude": {
     "paraphrase": "v.渗出，流出；散发，显露",
     "accent": "/ɪɡˈzuːd/"
+  },
+  "exult": {
+    "paraphrase": "v.狂喜，欢欣鼓舞；非常高兴",
+    "accent": "/ɪɡ'zʌlt/"
   },
   "fable": {
     "paraphrase": "n.寓言，传说；v.讲寓言，虚构",
@@ -4053,6 +4725,10 @@
     "paraphrase": "v. 砍伐（fell 的第三人称单数）",
     "accent": "/fɛlz/"
   },
+  "felon": {
+    "paraphrase": "n.重罪人, 蛇头, 瘭疽",
+    "accent": "/'fɛlən/"
+  },
   "felts": {
     "paraphrase": "n. 毡制品（felt 的复数）",
     "accent": "/fɛlts/"
@@ -4065,6 +4741,10 @@
     "paraphrase": "v. 抵挡，照料（fend 的第三人称单数）",
     "accent": "/fɛndz/"
   },
+  "feral": {
+    "paraphrase": "adj.野生的，未驯服的；野兽的",
+    "accent": "/'fiərəl/"
+  },
   "ferns": {
     "paraphrase": "n. 蕨类植物（fern 的复数）",
     "accent": "/fɜːrnz/"
@@ -4072,6 +4752,10 @@
   "ferry": {
     "paraphrase": "n. 渡船，渡口；v. 摆渡，运送",
     "accent": "/ˈfɛri/"
+  },
+  "fetal": {
+    "paraphrase": "adj.胎的，胎儿的",
+    "accent": "/'fitl/"
   },
   "fetch": {
     "paraphrase": "vt.（去）拿来，接来，售得；n.拿取，风浪区",
@@ -4133,6 +4817,10 @@
     "paraphrase": "vt.& vi.战斗，斗争，打架，吵架；n.打架，吵架，战斗，斗志",
     "accent": "/faɪt/"
   },
+  "filch": {
+    "paraphrase": "v.偷窃(不贵重的东西), 窃取",
+    "accent": "/fɪltʃ/"
+  },
   "filed": {
     "paraphrase": "v. 归档；提交（file 的过去式、过去分词）",
     "accent": "/faɪld/"
@@ -4141,9 +4829,17 @@
     "paraphrase": "n. 文件；档案（file 的复数）；v. 归档",
     "accent": "/faɪlz/"
   },
+  "filet": {
+    "paraphrase": "n.肉片, 鱼片",
+    "accent": "/fɪ'le; 'fɪl,e/"
+  },
   "fills": {
     "paraphrase": "v. 填充（fill 的第三人称单数）",
     "accent": "/fɪlz/"
+  },
+  "filly": {
+    "paraphrase": "n.小雌马(通常未满四岁), <俚>活泼的小姑娘, <俚>活泼的",
+    "accent": "/'fɪli/"
   },
   "filme": {
     "paraphrase": "n. 电影（非标准拼写，同 film）",
@@ -4153,6 +4849,10 @@
     "paraphrase": "n. 电影；胶片（film 的复数）",
     "accent": "/fɪlmz/"
   },
+  "filmy": {
+    "paraphrase": "adj.薄膜的, 朦胧的",
+    "accent": "/'fɪlmi/"
+  },
   "filth": {
     "paraphrase": "n.污秽，污物，不洁，猥亵",
     "accent": "/fɪlθ/"
@@ -4160,6 +4860,10 @@
   "final": {
     "paraphrase": "adj.最后的，最终的，决定性的，不可更改的；n.结局，决赛，期末考试，〈口〉（报纸的）末版",
     "accent": "/ˈfaɪnəl/"
+  },
+  "finch": {
+    "paraphrase": "n.[动]雀类(如燕雀,金翅雀等)",
+    "accent": "/fɪntʃ/"
   },
   "finds": {
     "paraphrase": "v. 找到；发现（find 的三单）",
@@ -4216,6 +4920,10 @@
   "fixes": {
     "paraphrase": "v. 修理；解决（fix 的三单）；n. 补救措施",
     "accent": "/ˈfɪksɪz/"
+  },
+  "fjord": {
+    "paraphrase": "n.[地理] 峡湾（等于fiord）",
+    "accent": "/'fjɔrd/"
   },
   "flags": {
     "paraphrase": "n. 旗帜；标志（flag 的复数）",
@@ -4308,6 +5016,10 @@
   "fling": {
     "paraphrase": "v. 扔，抛，猛冲；n. 一时的放纵，短暂的风流韵事",
     "accent": "/flɪŋ/"
+  },
+  "flint": {
+    "paraphrase": "n.打火石, 极硬的东西, 燧石",
+    "accent": "/flɪnt/"
   },
   "flips": {
     "paraphrase": "v. 翻转（flip 的第三人称单数）",
@@ -4425,6 +5137,10 @@
     "paraphrase": "n. 人们；家人（folk 的复数）",
     "accent": "/foʊks/"
   },
+  "folly": {
+    "paraphrase": "n.愚蠢；愚蠢的想法或做法",
+    "accent": "/'fɑli/"
+  },
   "fonds": {
     "paraphrase": "adj. 喜爱的（fond 的复数形式）",
     "accent": "/fɒndz/"
@@ -4517,6 +5233,10 @@
     "paraphrase": "n. 狐狸（fox 的复数）",
     "accent": "/ˈfɑːksɪz/"
   },
+  "foyer": {
+    "paraphrase": "n.门厅，休息室；大厅",
+    "accent": "/ˈfɔɪər/"
+  },
   "frail": {
     "paraphrase": "adj.虚弱的，脆弱的，意志薄弱的",
     "accent": "/freɪl/"
@@ -4577,6 +5297,10 @@
     "paraphrase": "n.搜身；vi.欢跃，蹦跳；vt.搜身，轻摇",
     "accent": "/frɪsk/"
   },
+  "frizz": {
+    "paraphrase": "n.卷发, 卷毛, 吱吱响声",
+    "accent": "/frɪz/"
+  },
   "frock": {
     "paraphrase": "n.上衣，外衣，工装，僧袍",
     "accent": "/frɑːk/"
@@ -4584,6 +5308,10 @@
   "frogs": {
     "paraphrase": "n. 青蛙（frog 的复数）",
     "accent": "/frɒɡz/"
+  },
+  "frond": {
+    "paraphrase": "n.叶, 植物体",
+    "accent": "/frɑnd/"
   },
   "front": {
     "paraphrase": "n.前面，正面，前线；adj.前面的，正面的；v.面向，在…前面，领导",
@@ -4605,6 +5333,14 @@
     "paraphrase": "n.水果，果实",
     "accent": "/fruːt/"
   },
+  "frump": {
+    "paraphrase": "n.守旧者, 邋遢的女人",
+    "accent": ""
+  },
+  "fubsy": {
+    "paraphrase": "adj.肥胖的, 矮胖的",
+    "accent": "/'fʌbzi/"
+  },
   "fudge": {
     "paraphrase": "n.软糖，胡话；int.胡说！；vt.粗制滥造，捏造；vi.蒙混，逃避责任",
     "accent": "/fʌdʒ/"
@@ -4612,6 +5348,10 @@
   "fuels": {
     "paraphrase": "n. 燃料（fuel 的复数）",
     "accent": "/ˈfjuːəlz/"
+  },
+  "fugue": {
+    "paraphrase": "n.赋格曲；神游症 vi.作赋格曲 vt.把…编成赋格曲",
+    "accent": "/fjuɡ/"
   },
   "fulls": {
     "paraphrase": "v. 使丰满（full 的第三人称单数）",
@@ -4628,6 +5368,10 @@
   "funds": {
     "paraphrase": "n. 资金；基金（fund 的复数）",
     "accent": "/fʌndz/"
+  },
+  "fungi": {
+    "paraphrase": "n.[fungus的复数]真菌",
+    "accent": "/ˈfʌnˌdʒaɪ; ˈfʌŋˌgaɪ/"
   },
   "fungs": {
     "paraphrase": "n. 真菌（fungus 的复数）",
@@ -4649,9 +5393,17 @@
     "paraphrase": "v. 卷起（furl 的第三人称单数）",
     "accent": "/fɜːrlz/"
   },
+  "furor": {
+    "paraphrase": "n.喧闹，轰动；盛怒",
+    "accent": "/'fjʊrrɔr/"
+  },
   "furry": {
     "paraphrase": "adj.毛皮的，覆盖毛皮的，有舌苔的",
     "accent": "/ˈfɜːri/"
+  },
+  "fused": {
+    "paraphrase": "adj.熔化的",
+    "accent": "/fjʊzd/"
   },
   "fuses": {
     "paraphrase": "n. 保险丝（fuse 的复数）",
@@ -4661,13 +5413,25 @@
     "paraphrase": "adj.爱挑剔的，难取悦的；过分装饰的，繁琐的",
     "accent": "/ˈfʌsi/"
   },
+  "fusty": {
+    "paraphrase": "adj.霉臭的；陈腐的，过时的",
+    "accent": ""
+  },
   "fuzzy": {
     "paraphrase": "adj.有绒毛的，模糊的，失真的",
     "accent": "/ˈfʌzi/"
   },
+  "gabby": {
+    "paraphrase": "adj.饶舌的，多嘴的",
+    "accent": "/'ɡæbi/"
+  },
   "gable": {
     "paraphrase": "n.山形墙，三角墙",
     "accent": "/ˈɡeɪbl/"
+  },
+  "gaffe": {
+    "paraphrase": "n.过失, 出丑, 失态",
+    "accent": "/ɡæf/"
   },
   "gages": {
     "paraphrase": "n. 抵押品（gage 的复数）",
@@ -4689,6 +5453,10 @@
     "paraphrase": "n. 大风（gale 的复数）",
     "accent": "/ɡeɪlz/"
   },
+  "gally": {
+    "paraphrase": "vt.吓唬",
+    "accent": "/'gæli/"
+  },
   "games": {
     "paraphrase": "n. 游戏；比赛（game 的复数）",
     "accent": "/ɡeɪmz/"
@@ -4696,6 +5464,10 @@
   "gamma": {
     "paraphrase": "n. 伽马；希腊字母第三个字母",
     "accent": "/ˈɡæmə/"
+  },
+  "gamut": {
+    "paraphrase": "n.[音乐]全音阶, 长音阶, 全音域",
+    "accent": "/'gæmət/"
   },
   "gangs": {
     "paraphrase": "n. 帮派（gang 的复数）",
@@ -4733,6 +5505,18 @@
     "paraphrase": "adj.憔悴的，骨瘦如柴的",
     "accent": "/ɡɔːnt/"
   },
+  "gauze": {
+    "paraphrase": "n.薄纱, [医]纱布, 薄雾",
+    "accent": "/gɔz/"
+  },
+  "gavel": {
+    "paraphrase": "n.槌，小木槌",
+    "accent": "/'gævl/"
+  },
+  "gawky": {
+    "paraphrase": "adj.迟钝的，笨拙的",
+    "accent": "/'ɡɔ:ki/"
+  },
   "gazes": {
     "paraphrase": "n. 凝视（gaze 的复数）",
     "accent": "/ˈɡeɪzɪz/"
@@ -4741,9 +5525,17 @@
     "paraphrase": "n. 齿轮（gear 的复数）",
     "accent": "/ɡɪrz/"
   },
+  "gecko": {
+    "paraphrase": "n.[脊椎] 壁虎",
+    "accent": "/'gɛko/"
+  },
   "geeks": {
     "paraphrase": "n. 极客（geek 的复数）",
     "accent": "/ɡiːks/"
+  },
+  "geeky": {
+    "paraphrase": "adj.令人讨厌的",
+    "accent": "/'ɡi:ki/"
   },
   "geese": {
     "paraphrase": "n.鹅（goose的复数）",
@@ -4772,6 +5564,10 @@
   "germs": {
     "paraphrase": "n. 细菌（germ 的复数）",
     "accent": "/dʒɜːrmz/"
+  },
+  "gesso": {
+    "paraphrase": "n.(雕刻、绘画用的)石膏, 石膏粉",
+    "accent": "/'dʒesəu/"
   },
   "ghana": {
     "paraphrase": "n.加纳（西非国家）",
@@ -4805,6 +5601,10 @@
     "paraphrase": "n. 镀金材料，金边证券（gilt 的复数）",
     "accent": "/ɡɪlts/"
   },
+  "gipsy": {
+    "paraphrase": "vi.流浪 n.吉普赛人（等于gypsy）；流浪汉",
+    "accent": "/'dʒipsi/"
+  },
   "girds": {
     "paraphrase": "v. 束缚（gird 的第三人称单数）",
     "accent": "/ɡɜːrdz/"
@@ -4828,6 +5628,10 @@
   "gizmo": {
     "paraphrase": "n.小装置，小玩意儿",
     "accent": "/ˈɡɪzmoʊ/"
+  },
+  "glade": {
+    "paraphrase": "n.林间空地, 一片表面有草的沼泽低地",
+    "accent": ""
   },
   "glads": {
     "paraphrase": "n. 剑兰（glad 的复数）",
@@ -4872,6 +5676,10 @@
   "glens": {
     "paraphrase": "n. 峡谷，幽谷（glen 的复数）",
     "accent": "/ɡlɛnz/"
+  },
+  "glial": {
+    "paraphrase": "adj.神经胶质的",
+    "accent": "/'ɡlaɪə/"
   },
   "glibs": {
     "paraphrase": "v. 油嘴滑舌地说（glib 的第三人称单数）",
@@ -4940,6 +5748,10 @@
   "gluts": {
     "paraphrase": "n. 供过于求，过剩（glut 的复数）",
     "accent": "/ɡlʌts/"
+  },
+  "gnash": {
+    "paraphrase": "v.咬牙切齿 n.咬",
+    "accent": "/næʃ/"
   },
   "gnats": {
     "paraphrase": "n. 小昆虫，蚊蚋（gnat 的复数）",
@@ -5017,6 +5829,14 @@
     "paraphrase": "v. 必须；得（口语，=got to）",
     "accent": "/ˈɡɑːtə/"
   },
+  "gouge": {
+    "paraphrase": "v.挖出；敲竹杠 n.半圆凿",
+    "accent": "/ɡaʊdʒ/"
+  },
+  "gourd": {
+    "paraphrase": "n.葫芦",
+    "accent": "/ɡʊrd/"
+  },
   "gowns": {
     "paraphrase": "n. 礼服（gown 的复数）",
     "accent": "/ɡaʊnz/"
@@ -5044,6 +5864,10 @@
   "grain": {
     "paraphrase": "n.谷物，谷粒，颗粒，纹理",
     "accent": "/ɡreɪn/"
+  },
+  "grama": {
+    "paraphrase": "n.美国西部产的一种牧草",
+    "accent": "/'grɑmə/"
   },
   "grams": {
     "paraphrase": "n. 克（重量单位，gram 的复数）",
@@ -5084,6 +5908,10 @@
   "grave": {
     "paraphrase": "n.坟墓；adj.严重的，严肃的；v.雕刻，铭记",
     "accent": "/ɡreɪv/"
+  },
+  "gravy": {
+    "paraphrase": "n.肉汁；肉汤",
+    "accent": "/'ɡrevi/"
   },
   "grays": {
     "paraphrase": "n. 灰色（gray 的复数）",
@@ -5128,6 +5956,14 @@
   "grill": {
     "paraphrase": "n.烤架，烤肉；v.烧烤，盘问",
     "accent": "/ɡrɪl/"
+  },
+  "grime": {
+    "paraphrase": "n.尘垢；污点；煤尘 v.使污秽；使…弄脏",
+    "accent": "/ɡraɪm/"
+  },
+  "grimy": {
+    "paraphrase": "adj.肮脏的",
+    "accent": "/'ɡraɪmi/"
   },
   "grind": {
     "paraphrase": "v.磨碎，磨快，咬牙；n.碾磨，苦差事",
@@ -5209,6 +6045,10 @@
     "paraphrase": "adj.（说话、态度等）粗暴的，生硬的；（声音）粗哑的",
     "accent": "/ɡrʌf/"
   },
+  "grump": {
+    "paraphrase": "vi.发脾气，发牢骚 n.脾气不好的人",
+    "accent": "/ɡrʌmp/"
+  },
   "grunt": {
     "paraphrase": "vi.作呼噜声，（指人）发出类似的哼声；vt.咕哝着说，发哼声，咕哝；n.（猪等的）呼噜声，咕哝，牢骚",
     "accent": "/ɡrʌnt/"
@@ -5241,6 +6081,10 @@
     "paraphrase": "n.行会，协会，同业公会",
     "accent": "/ɡɪld/"
   },
+  "guile": {
+    "paraphrase": "n.欺骗，欺诈；狡猾",
+    "accent": "/ɡaɪl/"
+  },
   "guilt": {
     "paraphrase": "n.有罪，内疚，自责",
     "accent": "/ɡɪlt/"
@@ -5248,6 +6092,10 @@
   "guise": {
     "paraphrase": "n.外观，伪装",
     "accent": "/ɡaɪz/"
+  },
+  "gulch": {
+    "paraphrase": "n.<美>干谷峡谷, 冲沟(尤指产金地的急流峡谷)",
+    "accent": "/ɡʌltʃ/"
   },
   "gules": {
     "paraphrase": "n. 红色（纹章学用语，gule 的复数）",
@@ -5260,6 +6108,10 @@
   "gulls": {
     "paraphrase": "n. 海鸥（gull 的复数）",
     "accent": "/ɡʌlz/"
+  },
+  "gully": {
+    "paraphrase": "n.小峡谷, 排水沟",
+    "accent": "/'ɡʌli/"
   },
   "gulps": {
     "paraphrase": "v. 吞咽（gulp 的第三人称单数）；n. 吞咽（gulp 的复数）",
@@ -5289,6 +6141,10 @@
     "paraphrase": "n. 柄（haft 的复数）",
     "accent": "/hæfts/"
   },
+  "haiku": {
+    "paraphrase": "n.俳句",
+    "accent": ""
+  },
   "hails": {
     "paraphrase": "v. 欢呼（hail 的第三人称单数）",
     "accent": "/heɪlz/"
@@ -5304,6 +6160,10 @@
   "haiti": {
     "paraphrase": "n. 海地（北美洲国家）",
     "accent": "/ˈheɪti/"
+  },
+  "hallo": {
+    "paraphrase": "int.喂，哈罗（等于hello） n.(Hallo)人名；(法)阿洛；(荷)哈洛",
+    "accent": ""
   },
   "halls": {
     "paraphrase": "n. 大厅（hall 的复数）",
@@ -5344,6 +6204,10 @@
   "hardy": {
     "paraphrase": "adj.强壮的，勇敢的，耐寒的；n.强壮的人，耐旱植物",
     "accent": "/ˈhɑːrdi/"
+  },
+  "harem": {
+    "paraphrase": "n.闺房",
+    "accent": "/'hærəm/"
   },
   "hares": {
     "paraphrase": "n. 野兔（hare 的复数）",
@@ -5489,6 +6353,10 @@
     "paraphrase": "n. 继承人（heir 的复数）",
     "accent": "/ɛrz/"
   },
+  "heist": {
+    "paraphrase": "v.抢劫，强夺 n.抢劫；",
+    "accent": "/haist/"
+  },
   "helen": {
     "paraphrase": "n.海伦（女子名）",
     "accent": "/ˈhɛlən/"
@@ -5509,9 +6377,17 @@
     "paraphrase": "n. 舵，领导地位（helm 的复数）",
     "accent": "/hɛlmz/"
   },
+  "helot": {
+    "paraphrase": "n.（古希腊斯巴达的）奴隶",
+    "accent": ""
+  },
   "helps": {
     "paraphrase": "v. 帮助；协助（help 的三单）；n. 援助",
     "accent": "/helps/"
+  },
+  "helve": {
+    "paraphrase": "n.柄",
+    "accent": "/hɛlv/"
   },
   "hemps": {
     "paraphrase": "n. 大麻（hemp 的复数）",
@@ -5777,6 +6653,10 @@
     "paraphrase": "v. 生气（huff 的第三人称单数）",
     "accent": "/hʌfs/"
   },
+  "huffy": {
+    "paraphrase": "adj.愤怒的，恼怒的",
+    "accent": "/'hʌfi/"
+  },
   "hulks": {
     "paraphrase": "n. 笨重的人或物（hulk 的复数）",
     "accent": "/hʌlks/"
@@ -5841,13 +6721,29 @@
     "paraphrase": "n.（养兔等小动物的）笼，箱；vt.把…装箱",
     "accent": "/hʌtʃ/"
   },
+  "hydra": {
+    "paraphrase": "n.[希神]九头怪蛇, 难以根除之祸害, [动]水螅",
+    "accent": ""
+  },
+  "hyena": {
+    "paraphrase": "n.[动]土狼, 鬣狗",
+    "accent": "/haɪ'inə/"
+  },
   "hymns": {
     "paraphrase": "n. 赞美诗，圣歌（hymn 的复数）",
     "accent": "/hɪmz/"
   },
+  "hyper": {
+    "paraphrase": "adj.亢奋的,高度紧张的",
+    "accent": "/'haɪpɚ/"
+  },
   "hypes": {
     "paraphrase": "v. 大肆宣传（hype 的第三人称单数）",
     "accent": "/haɪps/"
+  },
+  "hypha": {
+    "paraphrase": "n.[植]菌丝",
+    "accent": "/'haɪfə/"
   },
   "iambs": {
     "paraphrase": "n. 抑扬格（iamb 的复数）",
@@ -5889,9 +6785,21 @@
     "paraphrase": "n. 偶像（idol 的复数）",
     "accent": "/ˈaɪdəlz/"
   },
+  "idyll": {
+    "paraphrase": "n.田园诗, 牧歌",
+    "accent": ""
+  },
+  "igloo": {
+    "paraphrase": "n.圆顶建筑",
+    "accent": "/'ɪglʊ/"
+  },
   "image": {
     "paraphrase": "n.影像，图像，形象，印象；vt.反映，想象，象征",
     "accent": "/ˈɪmɪdʒ/"
+  },
+  "imago": {
+    "paraphrase": "n.意象, 成虫",
+    "accent": "/ɪ'mego/"
   },
   "imbue": {
     "paraphrase": "vt.使充满，灌输，浸透",
@@ -5904,6 +6812,14 @@
   "imply": {
     "paraphrase": "v. 暗示，意味着",
     "accent": "/ɪmˈplaɪ/"
+  },
+  "inane": {
+    "paraphrase": "adj.无意义的，空洞的；愚蠢的",
+    "accent": "/ɪ'nen/"
+  },
+  "inapt": {
+    "paraphrase": "adj.不适当的，不合适的",
+    "accent": "/ɪn'æpt/"
   },
   "inbox": {
     "paraphrase": "n. 收件箱",
@@ -5937,6 +6853,10 @@
     "paraphrase": "vt.推断，推论；vi.作出推论",
     "accent": "/ɪnˈfɜːr/"
   },
+  "ingot": {
+    "paraphrase": "n.[冶]锭铁, 工业纯铁",
+    "accent": "/'ɪŋgət/"
+  },
   "inlet": {
     "paraphrase": "n.水湾，进口，入口；vt.引进，嵌入",
     "accent": "/ˈɪnlet/"
@@ -5965,9 +6885,17 @@
     "paraphrase": "n. 简介；引言；前奏",
     "accent": "/ˈɪntroʊ/"
   },
+  "inure": {
+    "paraphrase": "v.使习惯于；生效",
+    "accent": "/i'njuə/"
+  },
   "iraqi": {
     "paraphrase": "adj. 伊拉克的；n. 伊拉克人",
     "accent": "/ɪˈrɑːki/"
+  },
+  "irate": {
+    "paraphrase": "adj.生气的，发怒的",
+    "accent": "/aɪ'ret/"
   },
   "irish": {
     "paraphrase": "n.爱尔兰人，爱尔兰语；adj.爱尔兰的，爱尔兰人的",
@@ -5993,6 +6921,10 @@
     "paraphrase": "n. 岛屿（isle 的复数）",
     "accent": "/aɪlz/"
   },
+  "islet": {
+    "paraphrase": "n.小岛",
+    "accent": "/'aɪlət/"
+  },
   "issue": {
     "paraphrase": "n.问题，（报刊的）期，发行物，流出；vt.发行，发布；vi.流出，由…产生",
     "accent": "/ˈɪʃuː/"
@@ -6013,6 +6945,10 @@
     "paraphrase": "n. 象牙，象牙色",
     "accent": "/ˈaɪvəri, ˈaɪvri/"
   },
+  "jacal": {
+    "paraphrase": "n.<法>（墨西哥和美国西部的）小茅屋",
+    "accent": "/hɑ'kɑl/"
+  },
   "jacks": {
     "paraphrase": "n. 千斤顶（jack 的复数）；v. 用千斤顶顶起（jack 的第三人称单数）",
     "accent": "/dʒæks/"
@@ -6020,6 +6956,10 @@
   "jacob": {
     "paraphrase": "n. 雅各布（男子名）",
     "accent": "/ˈdʒeɪkəb/"
+  },
+  "jaded": {
+    "paraphrase": "adj.厌倦的；疲倦不堪的 v.厌倦（jade的过去分词）；变得疲倦；精疲力竭",
+    "accent": "/'dʒedɪd/"
   },
   "jades": {
     "paraphrase": "n. 玉，翡翠（jade 的复数）；v. 使疲倦（jade 的第三人称单数）",
@@ -6060,6 +7000,10 @@
   "jason": {
     "paraphrase": "n. 贾森（男子名）",
     "accent": "/ˈdʒeɪsən/"
+  },
+  "jaunt": {
+    "paraphrase": "v.短途旅游 n.短途旅行",
+    "accent": "/dʒɔ:nt/"
   },
   "jeans": {
     "paraphrase": "n.牛仔裤",
@@ -6193,6 +7137,10 @@
     "paraphrase": "v. 跳跃（jump 的第三人称单数）",
     "accent": "/dʒʌmps/"
   },
+  "jumpy": {
+    "paraphrase": "adj.紧张不安的，心惊肉跳的",
+    "accent": "/'dʒʌmpi/"
+  },
   "junks": {
     "paraphrase": "n. 垃圾（junk 的复数）",
     "accent": "/dʒʌŋks/"
@@ -6205,6 +7153,14 @@
     "paraphrase": "v. 恰好（just 的第三人称单数，古语用法）",
     "accent": "/dʒʌsts/"
   },
+  "kaput": {
+    "paraphrase": "adj.过时的, 故障的, 失败了的",
+    "accent": "/kæ'put/"
+  },
+  "karat": {
+    "paraphrase": "n.开（黄金成色单位）；克拉（宝石的重量单位，等于carat）",
+    "accent": "/'kærət/"
+  },
   "karen": {
     "paraphrase": "n. 卡伦（女子名）",
     "accent": "/ˈkærən/"
@@ -6213,6 +7169,10 @@
     "paraphrase": "n. 因果报应；运势",
     "accent": "/ˈkɑːrmə/"
   },
+  "karst": {
+    "paraphrase": "n.石灰岩地区常见的地形",
+    "accent": "/kɑrst/"
+  },
   "kathy": {
     "paraphrase": "n. 凯西（女子名）",
     "accent": "/ˈkæθi/"
@@ -6220,6 +7180,10 @@
   "katie": {
     "paraphrase": "n. 凯蒂（女子名）",
     "accent": "/ˈkeɪti/"
+  },
+  "kayak": {
+    "paraphrase": "n.爱斯基摩人用的皮船, 皮船",
+    "accent": "/'kaɪæk/"
   },
   "kebab": {
     "paraphrase": "n.烤腌肉串",
@@ -6269,6 +7233,10 @@
     "paraphrase": "n. 凯文（男子名）",
     "accent": "/ˈkevɪn/"
   },
+  "khaki": {
+    "paraphrase": "n.卡其色；卡其布 adj.卡其色的；黄褐色的；卡其布做的",
+    "accent": "/'kɑki/"
+  },
   "kicks": {
     "paraphrase": "v. 踢（kick 的第三人称单数）",
     "accent": "/kɪks/"
@@ -6293,6 +7261,14 @@
     "paraphrase": "n. 国王；君主（king 的复数）",
     "accent": "/kɪŋz/"
   },
+  "kinky": {
+    "paraphrase": "adj.卷曲的, 古怪的",
+    "accent": "/'kɪŋki/"
+  },
+  "kiosk": {
+    "paraphrase": "n.亭子",
+    "accent": "/'kiɑsk/"
+  },
   "kites": {
     "paraphrase": "n. 风筝（kite 的复数）",
     "accent": "/kaɪts/"
@@ -6312,6 +7288,10 @@
   "knack": {
     "paraphrase": "n.诀窍，技巧",
     "accent": "/næk/"
+  },
+  "knave": {
+    "paraphrase": "n.流氓",
+    "accent": "/nev/"
   },
   "knead": {
     "paraphrase": "vt.揉（面团等），捏制，按摩",
@@ -6341,6 +7321,10 @@
     "paraphrase": "n.短促的敲打（声），爆震声，敲击声，敲门（或窗等）声；vi.猛烈敲击，与某物相撞；vt.（心）怦怦跳，把…撞击成（某种状态），批评",
     "accent": "/nɑk/"
   },
+  "knoll": {
+    "paraphrase": "n.小山",
+    "accent": "/nol/"
+  },
   "knots": {
     "paraphrase": "n. 结（knot 的复数）",
     "accent": "/nɑts/"
@@ -6353,6 +7337,10 @@
     "paraphrase": "v. 知道；认识（know 的三单）",
     "accent": "/noʊz/"
   },
+  "knurl": {
+    "paraphrase": "n.硬节",
+    "accent": "/nɝl/"
+  },
   "koala": {
     "paraphrase": "n.树袋熊（澳洲产，树栖无尾动物）",
     "accent": "/koʊˈɑlə/"
@@ -6364,6 +7352,18 @@
   "korea": {
     "paraphrase": "n.韩国，朝鲜",
     "accent": "/kəˈriə/"
+  },
+  "krill": {
+    "paraphrase": "n.[动]磷虾(单复同)",
+    "accent": "/krɪl/"
+  },
+  "krona": {
+    "paraphrase": "n.克朗",
+    "accent": "/'kronə/"
+  },
+  "kudos": {
+    "paraphrase": "n.名望, 荣誉, 声誉",
+    "accent": "/'kudɑs/"
   },
   "label": {
     "paraphrase": "n.标签，标记，符号，[建]门或窗户上面的线脚；vt.贴标签于，把…称为，把…列为，[化]用放射性元素使（元素或原子等）示踪",
@@ -6397,9 +7397,9 @@
     "paraphrase": "n.贮藏啤酒（一种酿造后再贮藏成熟的啤酒）",
     "accent": "/ˈlɑːɡər/"
   },
-  "lapin": {
-    "paraphrase": "n.兔子",
-    "accent": "/ˈlæpɪn/"
+  "laity": {
+    "paraphrase": "n.俗人, 外行",
+    "accent": "/'leəti/"
   },
   "lakes": {
     "paraphrase": "n. 湖泊（lake 的复数）",
@@ -6433,9 +7433,21 @@
     "paraphrase": "n. 兰卡（斯里兰卡简称）",
     "accent": "/ˈlæŋkə/"
   },
+  "lapin": {
+    "paraphrase": "n.兔子",
+    "accent": "/ˈlæpɪn/"
+  },
+  "lapis": {
+    "paraphrase": "n.[化]天青石(常用于化学中的矿物命名)",
+    "accent": "/'lepɪs/"
+  },
   "lapse": {
     "paraphrase": "n.小错，疏忽，行为失检，失足，流逝，[法]（权利等的）失效，消失；vi.退步，陷入，堕入，失效，终止，[法]转归",
     "accent": "/læps/"
+  },
+  "larch": {
+    "paraphrase": "n.落叶松属植物, 其木材",
+    "accent": "/lɑrtʃ/"
   },
   "large": {
     "paraphrase": "adj.大的，大规模的，大型号的，广泛的；adv.大大地，夸大地，详细地，顺风地；v.玩个痛快，（尤指跳舞和饮酒）作乐",
@@ -6452,6 +7464,10 @@
   "laser": {
     "paraphrase": "n.激光，激光器",
     "accent": "/ˈleɪzər/"
+  },
+  "lasso": {
+    "paraphrase": "n.套索",
+    "accent": "/'læso/"
   },
   "lasts": {
     "paraphrase": "v. 持续（last 的第三人称单数）",
@@ -6500,6 +7516,10 @@
   "layer": {
     "paraphrase": "n.层，层次，膜，[植]压条，放置者，计划者；vt.把…分层堆放，借助压条法生根繁殖，将（头发）剪成不同层次；vi.形成或分成层次，[植]通过压条法而生根",
     "accent": "/ˈleɪər/"
+  },
+  "leach": {
+    "paraphrase": "n.过滤；过滤器 v.过滤；萃取",
+    "accent": "/litʃ/"
   },
   "leads": {
     "paraphrase": "v. 领导；引领（lead 的三单）；n. 线索；引线",
@@ -6569,6 +7589,10 @@
     "paraphrase": "v. 斜眼看，送秋波；n. 斜视（leer 的第三人称单数或复数）",
     "accent": "/lɪrz/"
   },
+  "leery": {
+    "paraphrase": "adj.机敏的；狡猾的；猜疑的；送秋波的",
+    "accent": "/'liəri/"
+  },
   "lefts": {
     "paraphrase": "n. 左派；左边（left 的复数）",
     "accent": "/lɛfts/"
@@ -6589,6 +7613,10 @@
     "paraphrase": "n. 利昂（塞拉利昂货币单位；人名）",
     "accent": "/liˈoʊni/"
   },
+  "letup": {
+    "paraphrase": "n.停顿",
+    "accent": "/'letʌp/"
+  },
   "levee": {
     "paraphrase": "n.防洪堤，码头，大堤；vt.筑防洪堤于",
     "accent": "/ˈlevi/"
@@ -6605,6 +7633,10 @@
     "paraphrase": "n. 刘易斯（人名、姓氏）",
     "accent": "/ˈluːɪs/"
   },
+  "lexis": {
+    "paraphrase": "n.词汇；词语",
+    "accent": "/'lɛksɪs/"
+  },
   "lexus": {
     "paraphrase": "n. 雷克萨斯（汽车品牌）",
     "accent": "/ˈleksəs/"
@@ -6612,6 +7644,14 @@
   "liars": {
     "paraphrase": "n. 说谎者（liar 的复数）",
     "accent": "/ˈlaɪərz/"
+  },
+  "libel": {
+    "paraphrase": "v.诽谤，中伤，诬蔑 n.中伤、诽谤",
+    "accent": "/'laɪbl/"
+  },
+  "licit": {
+    "paraphrase": "adj.合法的, 正当的",
+    "accent": "/'lɪsɪt/"
   },
   "licks": {
     "paraphrase": "v. 舔（lick 的第三人称单数）",
@@ -6649,9 +7689,17 @@
     "paraphrase": "n.丁香花，淡紫色；adj.淡紫色的",
     "accent": "/ˈlaɪlək/"
   },
+  "liman": {
+    "paraphrase": "n.[地]漓漫,大河口湾,泻湖",
+    "accent": ""
+  },
   "limas": {
     "paraphrase": "n. 利马豆（lima 的复数）",
     "accent": "/ˈliːməz/"
+  },
+  "limbo": {
+    "paraphrase": "n.不稳定的状态，中间状态",
+    "accent": "/'lɪmbo/"
   },
   "limbs": {
     "paraphrase": "n. 四肢（limb 的复数）",
@@ -6689,6 +7737,10 @@
     "paraphrase": "n. 线条；路线；台词（line 的复数）；v. 排列",
     "accent": "/laɪnz/"
   },
+  "lingo": {
+    "paraphrase": "n.（尤指）方言, 行话, 隐语",
+    "accent": "/'lɪŋgo/"
+  },
   "links": {
     "paraphrase": "n. 链接；联系；环节（link 的复数）；v. 连接",
     "accent": "/lɪŋks/"
@@ -6701,6 +7753,10 @@
     "paraphrase": "n. 狮子（lion 的复数）",
     "accent": "/ˈlaɪənz/"
   },
+  "lipid": {
+    "paraphrase": "n.脂质，类脂",
+    "accent": "/lɪpɪd/"
+  },
   "lists": {
     "paraphrase": "n. 列表；清单（list 的复数）；v. 列举",
     "accent": "/lɪsts/"
@@ -6708,6 +7764,10 @@
   "liter": {
     "paraphrase": "n.升（容量单位）",
     "accent": "/ˈliːtər/"
+  },
+  "lithe": {
+    "paraphrase": "adj.轻盈的（等于lithesome）；柔软的；易弯曲的",
+    "accent": "/laið/"
   },
   "litre": {
     "paraphrase": "n.升（容量单位）",
@@ -6753,6 +7813,10 @@
     "paraphrase": "n. 贷款；借款（loan 的复数）；v. 出借",
     "accent": "/loʊnz/"
   },
+  "loath": {
+    "paraphrase": "adj.不情愿的，勉强的",
+    "accent": "/loθ/"
+  },
   "lobby": {
     "paraphrase": "n.大厅，门廊，游说团体；v.游说",
     "accent": "/ˈlɑːbi/"
@@ -6773,9 +7837,17 @@
     "paraphrase": "n.所在地，场所，核心",
     "accent": "/ˈloʊkəs/"
   },
+  "loder": {
+    "paraphrase": "n.[计]装填器",
+    "accent": ""
+  },
   "lodge": {
     "paraphrase": "n.小屋，传达室；v.存放，暂住，提出（报告、要求等），容纳",
     "accent": "/lɑːdʒ/"
+  },
+  "loess": {
+    "paraphrase": "n.黄土",
+    "accent": "/'loɪs/"
   },
   "lofts": {
     "paraphrase": "n. 阁楼（loft 的复数）",
@@ -6804,6 +7876,10 @@
   "lolls": {
     "paraphrase": "v. 懒散地躺（loll 的第三人称单数）",
     "accent": "/lɑlz/"
+  },
+  "lomas": {
+    "paraphrase": "n.洛马斯(阿根廷东部的一城镇)",
+    "accent": ""
   },
   "loner": {
     "paraphrase": "n.孤独的人，不合群的动物",
@@ -6905,9 +7981,17 @@
     "paraphrase": "adj.运气好的，侥幸的，吉祥的",
     "accent": "/ˈlʌki/"
   },
+  "lucre": {
+    "paraphrase": "n.收益, 钱财",
+    "accent": "/'lukɚ/"
+  },
   "lulls": {
     "paraphrase": "v. 使平静（lull 的第三人称单数）",
     "accent": "/lʌlz/"
+  },
+  "lumen": {
+    "paraphrase": "n.流明",
+    "accent": "/'lumɛn/"
   },
   "lumps": {
     "paraphrase": "n. 肿块（lump 的复数）",
@@ -6937,6 +8021,10 @@
     "paraphrase": "v. 引诱（lure 的第三人称单数）",
     "accent": "/lʊrz/"
   },
+  "lurid": {
+    "paraphrase": "adj.可怕的，耸人听闻的；火烧似的；苍白的；血红的；华丽而庸俗的",
+    "accent": "/'lʊrɪd/"
+  },
   "lurks": {
     "paraphrase": "v. 潜伏（lurk 的第三人称单数）",
     "accent": "/lɜːrks/"
@@ -6945,13 +8033,29 @@
     "paraphrase": "n. 欲望（lust 的复数）",
     "accent": "/lʌsts/"
   },
+  "lusty": {
+    "paraphrase": "adj.健壮的, 精力充沛的",
+    "accent": "/'lʌsti/"
+  },
+  "lvory": {
+    "paraphrase": "n.象牙",
+    "accent": ""
+  },
   "lycos": {
     "paraphrase": "n. 莱科斯（老牌搜索引擎）",
     "accent": "/ˈlaɪkɒs/"
   },
+  "lycra": {
+    "paraphrase": "n.合成弹力纤维",
+    "accent": "/'laɪkrə/"
+  },
   "lying": {
     "paraphrase": "v. 躺；说谎（lie 的现在分词）；adj. 说谎的",
     "accent": "/ˈlaɪɪŋ/"
+  },
+  "lymph": {
+    "paraphrase": "n.淋巴",
+    "accent": "/lɪmf/"
   },
   "lynch": {
     "paraphrase": "vt.以私刑处死（被认为有罪的人）；n.私刑",
@@ -6960,6 +8064,14 @@
   "lyric": {
     "paraphrase": "adj.抒情的；n.抒情诗，歌词",
     "accent": "/ˈlɪrɪk/"
+  },
+  "lysis": {
+    "paraphrase": "n.分解",
+    "accent": "/'laɪsɪs/"
+  },
+  "macho": {
+    "paraphrase": "adj.大男子气概的 n.强壮男子；大丈夫",
+    "accent": "/'mɑtʃo/"
   },
   "macro": {
     "paraphrase": "n. 宏；微距；adj. 宏观的",
@@ -6976,6 +8088,10 @@
   "magic": {
     "paraphrase": "n. 魔法，魔术；adj. 有魔力的，神奇的",
     "accent": "/ˈmædʒɪk/"
+  },
+  "magma": {
+    "paraphrase": "n.岩浆, 糊剂",
+    "accent": "/'mæɡmə/"
   },
   "magus": {
     "paraphrase": "n. 魔法师；占星家",
@@ -7129,6 +8245,10 @@
     "paraphrase": "n. 市场（mart 的复数）",
     "accent": "/mɑːrts/"
   },
+  "maser": {
+    "paraphrase": "n.微波激射器",
+    "accent": "/'meizər/"
+  },
   "masks": {
     "paraphrase": "n. 面具（mask 的复数）",
     "accent": "/mæsks/"
@@ -7149,9 +8269,17 @@
     "paraphrase": "n. 伙伴（mate 的复数）",
     "accent": "/meɪts/"
   },
+  "matey": {
+    "paraphrase": "adj.平易近人的, 友好的",
+    "accent": "/'meti/"
+  },
   "maths": {
     "paraphrase": "n.数学（=mathematics）",
     "accent": "/mæθs/"
+  },
+  "matte": {
+    "paraphrase": "adj.无光泽的",
+    "accent": "/mæt/"
   },
   "mauls": {
     "paraphrase": "v. 殴打（maul 的第三人称单数）",
@@ -7213,6 +8341,10 @@
     "paraphrase": "adj. 肉的；多肉的；似肉的",
     "accent": "/ˈmiti/"
   },
+  "mecca": {
+    "paraphrase": "n.麦加（沙特阿拉伯一座城市）；众人渴望去的地方",
+    "accent": "/'mekə/"
+  },
   "medal": {
     "paraphrase": "n.奖章，奖牌，勋章，纪念章，证章；vi.获奖：赢得一枚奖章；vt.授予…奖章",
     "accent": "/ˈmɛdl/"
@@ -7224,6 +8356,10 @@
   "meets": {
     "paraphrase": "v. 遇见；会面（meet 的第三人称单数）",
     "accent": "/miːts/"
+  },
+  "melee": {
+    "paraphrase": "n.混战，搏斗，格斗",
+    "accent": "/'mele/"
   },
   "melon": {
     "paraphrase": "n.甜瓜；圆鼓鼓像瓜似的东西",
@@ -7369,6 +8505,10 @@
     "paraphrase": "n. 矿山；地雷（mine 的复数）；v. 采矿",
     "accent": "/maɪnz/"
   },
+  "mingy": {
+    "paraphrase": "adj.卑鄙的, 吝啬的",
+    "accent": "/'mindʒi/"
+  },
   "minis": {
     "paraphrase": "n. 迷你裙（mini 的复数）",
     "accent": "/ˈmɪniz/"
@@ -7445,6 +8585,10 @@
     "paraphrase": "adj.&n.<美俚><贬>犹太佬(的)",
     "accent": "/ˈmɒki/"
   },
+  "modal": {
+    "paraphrase": "adj.模态的, 形态上的",
+    "accent": "/'modl/"
+  },
   "model": {
     "paraphrase": "n.模型，模特，模范；v.模仿，建模",
     "accent": "/ˈmɑːdl/"
@@ -7457,13 +8601,29 @@
     "paraphrase": "n. 模式；方式（mode 的复数）",
     "accent": "/moʊdz/"
   },
+  "modus": {
+    "paraphrase": "n.方法, 形式",
+    "accent": ""
+  },
+  "mogul": {
+    "paraphrase": "n.巨头，泰斗，大人物，巨擘",
+    "accent": ""
+  },
   "moist": {
     "paraphrase": "adj.潮湿的，微湿的；多雨的",
     "accent": "/mɔɪst/"
   },
+  "molar": {
+    "paraphrase": "adj.磨碎的, 臼齿的, 质量的, [化][物]摩尔的",
+    "accent": "/'molɚ/"
+  },
   "molds": {
     "paraphrase": "n. 模具（mold 的复数）",
     "accent": "/moʊldz/"
+  },
+  "moldy": {
+    "paraphrase": "adj.发霉的",
+    "accent": "/'moldi/"
   },
   "moles": {
     "paraphrase": "n. 鼹鼠（mole 的复数）；v. 打洞（mole 的第三人称单数）",
@@ -7488,6 +8648,10 @@
   "month": {
     "paraphrase": "n.月，月份",
     "accent": "/mʌnθ/"
+  },
+  "mooch": {
+    "paraphrase": "v.流浪, 缓行",
+    "accent": "/mutʃ/"
   },
   "moods": {
     "paraphrase": "n. 情绪（mood 的复数）",
@@ -7521,6 +8685,10 @@
     "paraphrase": "n. 讨论会（moot 的复数）",
     "accent": "/muːts/"
   },
+  "moped": {
+    "paraphrase": "n.机动脚踏车",
+    "accent": "/'mopɛd/"
+  },
   "mopes": {
     "paraphrase": "v. 闷闷不乐（mope 的第三人称单数）",
     "accent": "/moʊps/"
@@ -7533,6 +8701,10 @@
     "paraphrase": "n.风俗，习惯；道德观念，社会传统",
     "accent": "/ˈmɔːreɪz/"
   },
+  "moron": {
+    "paraphrase": "n.<口>低能者, 笨人, [医]痴愚者(指智商在50-70之间的成年人), [心]性(欲)倒错者, 性反常者",
+    "accent": "/'mɔrɑn/"
+  },
   "moses": {
     "paraphrase": "n. 摩西（男子名）",
     "accent": "/ˈmoʊzɪz/"
@@ -7544,6 +8716,10 @@
   "motel": {
     "paraphrase": "n.汽车旅馆",
     "accent": "/moʊˈtel/"
+  },
+  "motet": {
+    "paraphrase": "n.赞美诗, 圣歌, 赞歌",
+    "accent": "/mo'tɛt/"
   },
   "moths": {
     "paraphrase": "n. 飞蛾（moth 的复数）",
@@ -7564,6 +8740,10 @@
   "mould": {
     "paraphrase": "n.模具，模型；霉，霉菌；性格，气质；vt.用模子制作，塑造；影响，形成（性格等）",
     "accent": "/moʊld/"
+  },
+  "moult": {
+    "paraphrase": "n.换毛, 脱毛",
+    "accent": "/molt/"
   },
   "mound": {
     "paraphrase": "n.土堆，土丘，堆，[考古学] 坟墩，[棒球] 投球区土墩",
@@ -7601,6 +8781,10 @@
     "paraphrase": "n.电影，电影院，电影业",
     "accent": "/ˈmuvi/"
   },
+  "moxie": {
+    "paraphrase": "n.精力, 勇气, 胆量",
+    "accent": "/'mɑksi/"
+  },
   "mpegs": {
     "paraphrase": "n. 动态图像专家组；MPEG格式文件（复数）",
     "accent": "/ˈempeɡz/"
@@ -7624,6 +8808,10 @@
   "muffs": {
     "paraphrase": "n. 暖手筒（muff 的复数）；v. 弄糟（muff 的第三人称单数）",
     "accent": "/mʌfs/"
+  },
+  "muggy": {
+    "paraphrase": "adj.闷热而潮湿的",
+    "accent": "/'mʌɡi/"
   },
   "mules": {
     "paraphrase": "n. 骡子（mule 的复数）",
@@ -7649,9 +8837,17 @@
     "paraphrase": "adj.墙壁上的；n.壁画，壁饰",
     "accent": "/ˈmjʊrəl/"
   },
+  "murky": {
+    "paraphrase": "adj.浑浊的；黑暗的；朦胧的；隐晦的",
+    "accent": "/'mɝki/"
+  },
   "muses": {
     "paraphrase": "n. 缪斯（muse 的复数）",
     "accent": "/mjuːzɪz/"
+  },
+  "mushy": {
+    "paraphrase": "adj.糊状的；感伤的，多情的",
+    "accent": "/'mʌʃi/"
   },
   "music": {
     "paraphrase": "n.音乐，乐曲；乐谱",
@@ -7669,6 +8865,10 @@
     "paraphrase": "adj.发霉的，有霉味的；陈腐的，过时的",
     "accent": "/ˈmʌsti/"
   },
+  "muted": {
+    "paraphrase": "adj.减弱的，变得轻柔的",
+    "accent": "/'mju:tid/"
+  },
   "mutes": {
     "paraphrase": "n. 哑巴（mute 的复数）",
     "accent": "/mjuːts/"
@@ -7676,6 +8876,10 @@
   "mutts": {
     "paraphrase": "n. 杂种狗（mutt 的复数）",
     "accent": "/mʌts/"
+  },
+  "muzzy": {
+    "paraphrase": "adj.头脑发昏的, 无精神的, 酩酊的",
+    "accent": "/'mʌzi/"
   },
   "myers": {
     "paraphrase": "n. 迈尔斯（姓氏）",
@@ -7688,6 +8892,10 @@
   "myths": {
     "paraphrase": "n. 神话（myth 的复数）",
     "accent": "/mɪθs/"
+  },
+  "nadir": {
+    "paraphrase": "n.天底；最低点；深渊",
+    "accent": "/'nedɪr/"
   },
   "nails": {
     "paraphrase": "n. 钉子；指甲（nail 的复数）；v. 钉住",
@@ -7717,6 +8925,14 @@
     "paraphrase": "n. 后颈（nape 的复数）",
     "accent": "/neɪps/"
   },
+  "nappy": {
+    "paraphrase": "n.尿布 adj.起毛的",
+    "accent": "/'næpi/"
+  },
+  "narky": {
+    "paraphrase": "adj.脾气坏的, 易生气的",
+    "accent": ""
+  },
   "nasal": {
     "paraphrase": "adj.鼻的，鼻音的；n.鼻音，鼻音字母",
     "accent": "/ˈneɪzəl/"
@@ -7724,6 +8940,14 @@
   "nasty": {
     "paraphrase": "adj.肮脏的，下流的；令人讨厌的；恶劣的，严重的；n.令人不愉快的事物",
     "accent": "/ˈnæsti/"
+  },
+  "natal": {
+    "paraphrase": "adj.出生的；诞生的；分娩的；出生地的 n.(Natal)人名；(英、法、西、葡)纳塔尔",
+    "accent": "/'netl/"
+  },
+  "natty": {
+    "paraphrase": "adj.整洁的；敏捷的，灵巧的",
+    "accent": "/'næti/"
   },
   "naval": {
     "paraphrase": "adj.海军的；军舰的；船的",
@@ -7773,6 +8997,10 @@
     "paraphrase": "n.神经；勇气，胆量",
     "accent": "/nɜːrv/"
   },
+  "nervy": {
+    "paraphrase": "adj.肌肉发达的, 有勇气的, 冷静的",
+    "accent": "/'nɝvi/"
+  },
   "nests": {
     "paraphrase": "n. 巢（nest 的复数）",
     "accent": "/nɛsts/"
@@ -7780,6 +9008,10 @@
   "never": {
     "paraphrase": "adv.从不；决不；未曾",
     "accent": "/ˈnevər/"
+  },
+  "nevus": {
+    "paraphrase": "n.[医]痣",
+    "accent": "/'ni:vəs/"
   },
   "newer": {
     "paraphrase": "adj. 更新的；较新的（new 的比较级）",
@@ -7793,13 +9025,25 @@
     "paraphrase": "n. 下一个（next 的复数）",
     "accent": "/nɛksts/"
   },
+  "nexus": {
+    "paraphrase": "n.连结",
+    "accent": "/'nɛksəs/"
+  },
   "niche": {
     "paraphrase": "n.壁龛；合适的位置（或工作）；商机",
     "accent": "/niːʃ/"
   },
+  "nidus": {
+    "paraphrase": "n.巢, 孵卵所",
+    "accent": "/'naɪdəs/"
+  },
   "niece": {
     "paraphrase": "n.侄女；外甥女",
     "accent": "/niːs/"
+  },
+  "nifty": {
+    "paraphrase": "adj.极好的，极妙的",
+    "accent": "/'nɪfti/"
   },
   "niger": {
     "paraphrase": "n. 尼日尔（非洲国家）",
@@ -7821,6 +9065,14 @@
     "paraphrase": "num.第九；n.九分之一",
     "accent": "/naɪnθ/"
   },
+  "nippy": {
+    "paraphrase": "adj.刺骨的, 凛冽的",
+    "accent": "/'nɪpi/"
+  },
+  "nisus": {
+    "paraphrase": "n.努力, 为达成目标的冲劲",
+    "accent": "/'naisəs/"
+  },
   "noble": {
     "paraphrase": "adj.高尚的；贵族的；宏伟的；n.贵族",
     "accent": "/ˈnoʊbəl/"
@@ -7828,6 +9080,10 @@
   "nodes": {
     "paraphrase": "n. 节点；结点（node 的复数，编程/网络术语）",
     "accent": "/noʊdz/"
+  },
+  "nodus": {
+    "paraphrase": "n.节, 结节, 难点",
+    "accent": "/'nodəs/"
   },
   "noise": {
     "paraphrase": "n.噪音，喧闹声；声音，声响；vt.谣传；vi.发出声音",
@@ -7857,6 +9113,10 @@
     "paraphrase": "n. 中午（noon 的复数）",
     "accent": "/nuːnz/"
   },
+  "noose": {
+    "paraphrase": "n.套索, 束缚, 陷阱, (the noose)绞刑",
+    "accent": "/nus/"
+  },
   "norms": {
     "paraphrase": "n. 规范（norm 的复数）",
     "accent": "/nɔːrmz/"
@@ -7868,6 +9128,10 @@
   "noses": {
     "paraphrase": "n. 鼻子（nose 的复数）",
     "accent": "/noʊzɪz/"
+  },
+  "notch": {
+    "paraphrase": "n.V字形切口，刻痕；等级，档次",
+    "accent": "/nɑtʃ/"
   },
   "noted": {
     "paraphrase": "adj.著名的，闻名的；v.注意，记下（note的过去式）",
@@ -7900,6 +9164,10 @@
   "nudge": {
     "paraphrase": "v. 轻推，推动；n. 轻推",
     "accent": "/nʌdʒ/"
+  },
+  "nugae": {
+    "paraphrase": "n.<拉>  无价值的事,无聊事,琐事",
+    "accent": "/'nju:dʒi:/"
   },
   "numbs": {
     "paraphrase": "v. 使麻木（numb 的第三人称单数）",
@@ -7945,6 +9213,14 @@
     "paraphrase": "n.洋，海洋，大海，（地球上划分出的）洋",
     "accent": "/ˈoʊʃn/"
   },
+  "ocher": {
+    "paraphrase": "n.黄土, 赭土",
+    "accent": "/'okɚ/"
+  },
+  "odium": {
+    "paraphrase": "n.憎恶, 讨厌",
+    "accent": "/'odɪəm/"
+  },
   "odors": {
     "paraphrase": "n. 气味（odor 的复数）",
     "accent": "/ˈoʊdərz/"
@@ -7952,6 +9228,10 @@
   "odour": {
     "paraphrase": "n.气味；臭气；名声",
     "accent": "/ˈoʊdər/"
+  },
+  "offal": {
+    "paraphrase": "n.碎屑, 残渣, 废弃物, 垃圾, (猪、牛、羊等屠宰后的)头, 尾, 下水",
+    "accent": "/'ɔfl/"
   },
   "offer": {
     "paraphrase": "v.提供，给予，提出，提议，出价；n.提议，出价，开价",
@@ -8017,6 +9297,14 @@
     "paraphrase": "n.开始，发作，攻击",
     "accent": "/ˈɒnset/"
   },
+  "ontic": {
+    "paraphrase": "adj.本体的, 实体的",
+    "accent": "/'ɑntɪk/"
+  },
+  "oomph": {
+    "paraphrase": "n.性感, 性的魅力, 精神, 精力",
+    "accent": "/ʊmf/"
+  },
   "oozes": {
     "paraphrase": "v. 渗出（ooze 的第三人称单数）",
     "accent": "/uːzɪz/"
@@ -8036,6 +9324,18 @@
   "opera": {
     "paraphrase": "n.歌剧，歌剧艺术",
     "accent": "/ˈɒpərə/"
+  },
+  "opine": {
+    "paraphrase": "v.想，以为",
+    "accent": "/o'paɪn/"
+  },
+  "opium": {
+    "paraphrase": "n.鸦片；麻醉剂 adj.鸦片的",
+    "accent": "/'opɪəm/"
+  },
+  "optic": {
+    "paraphrase": "adj.光学的；视觉的；眼睛的 n.眼睛；镜片",
+    "accent": "/'ɑptɪk/"
   },
   "orals": {
     "paraphrase": "n. 口试（oral 的复数）",
@@ -8081,9 +9381,17 @@
     "paraphrase": "v. 驱逐（oust 的第三人称单数）",
     "accent": "/aʊsts/"
   },
+  "outdo": {
+    "paraphrase": "vt.超越，胜过",
+    "accent": "/,aʊt'du/"
+  },
   "outer": {
     "paraphrase": "adj.外面的，外部的",
     "accent": "/ˈaʊtə(r)/"
+  },
+  "outre": {
+    "paraphrase": "adj.越出常轨的, 过度的",
+    "accent": ""
   },
   "ovals": {
     "paraphrase": "n. 椭圆形（oval 的复数）",
@@ -8153,9 +9461,17 @@
     "paraphrase": "n. 帕迪（pad 的复数，一种测量单位）",
     "accent": "/ˈpɑːdiz/"
   },
+  "paean": {
+    "paraphrase": "n.欢乐歌, 赞美歌",
+    "accent": "/'piən/"
+  },
   "pagan": {
     "paraphrase": "n.异教徒；adj.异教的",
     "accent": "/ˈpeɪɡən/"
+  },
+  "pager": {
+    "paraphrase": "n.寻呼机，呼机",
+    "accent": "/'pedʒɚ/"
   },
   "pages": {
     "paraphrase": "n. 页面；页码（page 的复数）；v. 翻页",
@@ -8245,6 +9561,10 @@
     "paraphrase": "n. 副伞（para 的复数）",
     "accent": "/ˈpærəz/"
   },
+  "parch": {
+    "paraphrase": "v.烤干，焦干",
+    "accent": "/pɑrtʃ/"
+  },
   "pards": {
     "paraphrase": "n. 豹（pard 的复数）",
     "accent": "/pɑːrdz/"
@@ -8261,6 +9581,14 @@
     "paraphrase": "n. 公园（park 的复数）；v. 停放车辆",
     "accent": "/pɑːrks/"
   },
+  "parky": {
+    "paraphrase": "adj.寒冷的",
+    "accent": "/'pɑrki/"
+  },
+  "parol": {
+    "paraphrase": "n.口头言词",
+    "accent": "/pə'rol/"
+  },
   "parrs": {
     "paraphrase": "n. 幼鲑（parr 的复数）",
     "accent": "/pɑːrz/"
@@ -8268,6 +9596,10 @@
   "parry": {
     "paraphrase": "n.躲避，挡开；v.挡开，回避",
     "accent": "/ˈpæri/"
+  },
+  "parse": {
+    "paraphrase": "v.解析",
+    "accent": "/pɑrs/"
   },
   "parts": {
     "paraphrase": "n. 部分；零件（part 的复数）；v. 分开",
@@ -8281,6 +9613,10 @@
     "paraphrase": "n. 帕塞（pase 的复数，一种舞蹈动作）",
     "accent": "/ˈpɑːseɪz/"
   },
+  "passe": {
+    "paraphrase": "adj.已过盛年的；过时的",
+    "accent": ""
+  },
   "pasta": {
     "paraphrase": "n.意大利面食",
     "accent": "/ˈpɑːstə/"
@@ -8292,6 +9628,10 @@
   "pasts": {
     "paraphrase": "n. 过去（past 的复数）",
     "accent": "/pæsts/"
+  },
+  "pasty": {
+    "paraphrase": "adj.面糊似的, 浆状的, 苍白的",
+    "accent": "/'pæsti/"
   },
   "patch": {
     "paraphrase": "n.补丁，眼罩，斑点，小块；vt.修补，拼凑，平息",
@@ -8309,6 +9649,14 @@
     "paraphrase": "n.露台，庭院",
     "accent": "/ˈpætioʊ/"
   },
+  "patsy": {
+    "paraphrase": "n.容易受骗的人, 懦夫",
+    "accent": "/'pætsi/"
+  },
+  "patty": {
+    "paraphrase": "n.小馅饼,",
+    "accent": "/'pæti/"
+  },
   "pause": {
     "paraphrase": "n.暂停，停顿，犹豫，延长号；vi.暂停，中止，犹豫",
     "accent": "/pɔːz/"
@@ -8316,6 +9664,10 @@
   "paves": {
     "paraphrase": "v. 铺设（pave 的第三人称单数）",
     "accent": "/peɪvz/"
+  },
+  "pavid": {
+    "paraphrase": "adj.害怕的, 胆小的",
+    "accent": "/'pævɪd/"
   },
   "pavis": {
     "paraphrase": "n. 大盾（pavis 的复数）",
@@ -8345,6 +9697,10 @@
     "paraphrase": "n. 山峰（peak 的复数）",
     "accent": "/piːks/"
   },
+  "peaky": {
+    "paraphrase": "adj.消瘦的，虚弱的",
+    "accent": "/'piki/"
+  },
   "peals": {
     "paraphrase": "v. 鸣响，发出响亮的声音（peal 的第三人称单数）；n. 响亮的声音，钟声（peal 的复数）",
     "accent": "/piːlz/"
@@ -8361,9 +9717,17 @@
     "paraphrase": "n. 梨（pear 的复数）",
     "accent": "/pɛrz/"
   },
+  "peart": {
+    "paraphrase": "adj.有精神的, 快活的, 聪明的",
+    "accent": "/piət/"
+  },
   "peats": {
     "paraphrase": "n. 泥炭（peat 的复数）",
     "accent": "/piːts/"
+  },
+  "pecan": {
+    "paraphrase": "n.山核桃",
+    "accent": "/pɪ'kɑn/"
   },
   "pecks": {
     "paraphrase": "v. 啄（peck 的第三人称单数）",
@@ -8397,6 +9761,18 @@
     "paraphrase": "n. 同龄人；同行（peer 的复数）；v. 凝视",
     "accent": "/pɪrz/"
   },
+  "peery": {
+    "paraphrase": "adj.窥视的；好奇的；怀疑的",
+    "accent": ""
+  },
+  "peeve": {
+    "paraphrase": "v.(使)气恼, (使)焦躁, (使)忿怒",
+    "accent": "/piv/"
+  },
+  "pella": {
+    "paraphrase": "n.斗篷",
+    "accent": ""
+  },
   "pells": {
     "paraphrase": "n. 皮肤，毛皮（pell 的复数）",
     "accent": "/pɛlz/"
@@ -8404,6 +9780,10 @@
   "pelts": {
     "paraphrase": "v. 投掷，连续攻击（pelt 的第三人称单数）；n. 毛皮（pelt 的复数）",
     "accent": "/pɛlts/"
+  },
+  "penal": {
+    "paraphrase": "adj.惩罚的，刑罚的",
+    "accent": "/'pinl/"
   },
   "pends": {
     "paraphrase": "v. 悬而未决（pend 的第三人称单数）",
@@ -8425,6 +9805,10 @@
     "paraphrase": "n. 苦工，劳工（peon 的复数）",
     "accent": "/ˈpiːɒnz/"
   },
+  "peony": {
+    "paraphrase": "n.牡丹；芍药",
+    "accent": "/'piəni/"
+  },
   "perch": {
     "paraphrase": "n.栖木，高位，杆，河鲈；v.(使)栖息，就位，位于",
     "accent": "/pɜːrtʃ/"
@@ -8445,6 +9829,10 @@
     "paraphrase": "n. 津贴（perk 的复数）",
     "accent": "/pɜːrks/"
   },
+  "perky": {
+    "paraphrase": "adj.得意洋洋的；活泼的",
+    "accent": "/'pɝki/"
+  },
   "perms": {
     "paraphrase": "n. 烫发（perm 的复数）",
     "accent": "/pɜːrmz/"
@@ -8456,6 +9844,10 @@
   "perth": {
     "paraphrase": "n. 珀斯（澳大利亚城市）",
     "accent": "/pɜːrθ/"
+  },
+  "pesky": {
+    "paraphrase": "adj.讨厌的，烦人的",
+    "accent": "/'pɛski/"
   },
   "pesos": {
     "paraphrase": "n. 比索（货币单位，peso 的复数）",
@@ -8481,6 +9873,10 @@
     "paraphrase": "n.阶段，相位，方面；vt.分阶段实行，调整相位",
     "accent": "/feɪz/"
   },
+  "phial": {
+    "paraphrase": "n.小玻璃瓶, 药瓶",
+    "accent": "/'faɪəl/"
+  },
   "phone": {
     "paraphrase": "n.电话，听筒；vt.& vi.打电话",
     "accent": "/foʊn/"
@@ -8488,6 +9884,10 @@
   "phons": {
     "paraphrase": "n. 方（响度单位，phon 的复数）",
     "accent": "/fɒnz/"
+  },
+  "phony": {
+    "paraphrase": "adj.假的，欺骗的",
+    "accent": "/'foni/"
   },
   "photo": {
     "paraphrase": "n.照片，相片",
@@ -8565,6 +9965,10 @@
     "paraphrase": "n. 粉红色（pink 的复数）",
     "accent": "/pɪŋks/"
   },
+  "pinon": {
+    "paraphrase": "n.矮松, 矮松果",
+    "accent": ""
+  },
   "pints": {
     "paraphrase": "n. 品脱（pint 的复数）",
     "accent": "/paɪnts/"
@@ -8577,9 +9981,17 @@
     "paraphrase": "n. 管道；烟斗（pipe 的复数）；v. 输送",
     "accent": "/paɪps/"
   },
+  "pique": {
+    "paraphrase": "v.刺激；伤害…自尊心；激怒 n.生气；愠怒；呕气",
+    "accent": "/pik/"
+  },
   "pitch": {
     "paraphrase": "n.场地，最高点，音高，说教；vt.用沥青涂，扔，投，树起，搭起，定位于；vi.抛，扔，[棒球]当投手，搭帐篷，向前跌或冲",
     "accent": "/pɪtʃ/"
+  },
+  "pithy": {
+    "paraphrase": "adj.有髓的，多髓的；精练的；简洁有力的",
+    "accent": "/'pɪθi/"
   },
   "pivot": {
     "paraphrase": "n.枢轴，支点，(讨论的)中心点，重点adj.枢轴的vi.在枢轴上转动vt.装枢轴于",
@@ -8604,6 +10016,10 @@
   "plain": {
     "paraphrase": "n.平原，平地；adj.平的，素的，清晰的，相貌平平的；adv.清楚地，完全地",
     "accent": "/pleɪn/"
+  },
+  "plait": {
+    "paraphrase": "v.编成辫 n.发辫",
+    "accent": "/plet, plæt/"
   },
   "plane": {
     "paraphrase": "n.平面，水平，飞机，刨子；adj.平的，平坦的；vt.刨平；vi.滑翔",
@@ -8689,6 +10105,10 @@
     "paraphrase": "n.长毛绒adj.长毛绒做的，豪华的，舒服的",
     "accent": "/plʌʃ/"
   },
+  "pluto": {
+    "paraphrase": "n.冥王星, 阴间之神",
+    "accent": ""
+  },
   "poach": {
     "paraphrase": "v.水煮，偷猎，窃取",
     "accent": "/poʊtʃ/"
@@ -8696,6 +10116,10 @@
   "pocks": {
     "paraphrase": "n. 痘痕，痘疱（pock 的复数）",
     "accent": "/pɑːks/"
+  },
+  "podgy": {
+    "paraphrase": "adj.矮胖的, 短粗的",
+    "accent": "/'pɑdʒi/"
   },
   "poems": {
     "paraphrase": "n. 诗歌；诗作（poem 的复数）",
@@ -8728,6 +10152,10 @@
   "poles": {
     "paraphrase": "n. 杆，极（pole 的复数）",
     "accent": "/poʊlz/"
+  },
+  "polio": {
+    "paraphrase": "n.小儿麻痹症（等于poliomyelitis）；脊髓灰质炎",
+    "accent": "/'polɪo/"
   },
   "polls": {
     "paraphrase": "n. 民意调查；投票（poll 的复数）；v. 投票",
@@ -8781,9 +10209,21 @@
     "paraphrase": "n. 港口；端口（port 的复数）",
     "accent": "/pɔːrts/"
   },
+  "poser": {
+    "paraphrase": "n.装腔作势者, 难题",
+    "accent": "/'pozɚ/"
+  },
   "poses": {
     "paraphrase": "v. 摆姿势，造成（pose 的第三人称单数）；n. 姿势（pose 的复数）",
     "accent": "/ˈpoʊzɪz/"
+  },
+  "posit": {
+    "paraphrase": "v.安置；假定 n.假设；设想",
+    "accent": "/'pɑzɪt/"
+  },
+  "posse": {
+    "paraphrase": "n.一队；民防团；地方武装团队",
+    "accent": "/'pɑsi/"
   },
   "posts": {
     "paraphrase": "n. 帖子；岗位（post 的复数）；v. 发布",
@@ -8813,9 +10253,29 @@
     "paraphrase": "n. 婴儿车（pram 的复数）",
     "accent": "/præmz/"
   },
+  "prank": {
+    "paraphrase": "n.恶作剧，开玩笑；戏谑 v.装饰；打扮",
+    "accent": "/præŋk/"
+  },
+  "prate": {
+    "paraphrase": "v.空谈",
+    "accent": "/pret/"
+  },
+  "prawn": {
+    "paraphrase": "n.对虾，明虾 v.捕虾",
+    "accent": "/prɔn/"
+  },
   "prays": {
     "paraphrase": "v. 祈祷（pray 的第三人称单数）",
     "accent": "/preɪz/"
+  },
+  "preem": {
+    "paraphrase": "n.初演日, 首映",
+    "accent": ""
+  },
+  "preen": {
+    "paraphrase": "v.整理羽毛 to clean or smooth its feathers )；(人)打扮修饰(to dress up；primp)",
+    "accent": "/prin/"
   },
   "preps": {
     "paraphrase": "n. 预备学校（prep 的复数）；v. 预备（prep 的第三人称单数）",
@@ -8845,6 +10305,10 @@
     "paraphrase": "n.自豪，骄傲，自尊；vt.以…而自豪",
     "accent": "/praɪd/"
   },
+  "prier": {
+    "paraphrase": "n.刺探者,窥探者",
+    "accent": "/'praiə/"
+  },
   "pries": {
     "paraphrase": "v. 窥探，打听；撬动（pry 的第三人称单数）",
     "accent": "/praɪz/"
@@ -8852,6 +10316,14 @@
   "prime": {
     "paraphrase": "adj.首要的，最好的，基本的；n.全盛时期，精华；vt.使准备好，事先指导",
     "accent": "/praɪm/"
+  },
+  "primp": {
+    "paraphrase": "v.细心打扮，过分装饰",
+    "accent": "/prɪmp/"
+  },
+  "prink": {
+    "paraphrase": "v.化妆, 打扮",
+    "accent": "/priŋk/"
   },
   "print": {
     "paraphrase": "v. 印刷，打印；n. 印刷品，印记",
@@ -8864,6 +10336,10 @@
   "prism": {
     "paraphrase": "n.[物]棱镜，[数]棱柱",
     "accent": "/ˈprɪzəm/"
+  },
+  "privy": {
+    "paraphrase": "adj.私人的；不公开的；秘密参与的 n.有利害关系的人；厕所",
+    "accent": "/'prɪvi/"
   },
   "prize": {
     "paraphrase": "n.奖赏，战利品，值得努力争取的东西；vt.珍视，珍惜，估价；adj.获奖的，有望获奖的，理应获奖的",
@@ -8889,6 +10365,10 @@
     "paraphrase": "adj.易于…的，俯卧的，有…倾向的，倾斜的，坡陡的",
     "accent": "/proʊn/"
   },
+  "prong": {
+    "paraphrase": "v.刺，贯穿 n.叉子，尖齿；齿状物",
+    "accent": "/prɔŋ/"
+  },
   "proof": {
     "paraphrase": "n.证据，证明，校样；adj.防…的，抗…的；vt.给…做防护处理",
     "accent": "/pruːf/"
@@ -8913,9 +10393,25 @@
     "paraphrase": "v.证明，证实，结果是",
     "accent": "/pruːv/"
   },
+  "prowl": {
+    "paraphrase": "v.潜行，悄悄踱步 n.四处觅食，徘徊",
+    "accent": "/praʊl/"
+  },
   "proxy": {
     "paraphrase": "n.代理人，代表权，委托书",
     "accent": "/ˈprɑːksi/"
+  },
+  "prude": {
+    "paraphrase": "n.装成规矩的女人, (尤指在性问题上)故做正经的女人",
+    "accent": "/prud/"
+  },
+  "prune": {
+    "paraphrase": "v.删除；减少 n.深紫红色；傻瓜；李子干",
+    "accent": "/prun/"
+  },
+  "psalm": {
+    "paraphrase": "n.圣歌",
+    "accent": "/sɑm/"
   },
   "pucks": {
     "paraphrase": "n. 冰球（puck 的复数）",
@@ -8969,6 +10465,10 @@
     "paraphrase": "n.钱包，钱袋，财力，财源，和包或钱袋相似的东西，女用小提包；vt.使皱起，噘起",
     "accent": "/pɜrs/"
   },
+  "pursy": {
+    "paraphrase": "adj.肥胖的, 皱起的",
+    "accent": "/'pə:si/"
+  },
   "pushy": {
     "paraphrase": "adj.爱出风头的，固执己见的",
     "accent": "/ˈpʊʃi/"
@@ -8976,6 +10476,22 @@
   "putts": {
     "paraphrase": "n. 轻击（高尔夫）（putt 的复数）；v. 轻击（putt 的第三人称单数）",
     "accent": "/pʌts/"
+  },
+  "putty": {
+    "paraphrase": "n.油灰；氧化锡 v.用油灰填塞",
+    "accent": "/'pʌti/"
+  },
+  "pygmy": {
+    "paraphrase": "n.俾格米人(属一种矮小人种,身长不足5英尺), 矮人, 侏儒, 小妖精",
+    "accent": ""
+  },
+  "pylon": {
+    "paraphrase": "n.塔门, 路标塔",
+    "accent": "/'paɪlən/"
+  },
+  "pyxis": {
+    "paraphrase": "n.有盖瓶, 小瓶",
+    "accent": "/'pɪksɪs/"
   },
   "qatar": {
     "paraphrase": "n. 卡塔尔（西亚国家）",
@@ -8988,6 +10504,10 @@
   "quads": {
     "paraphrase": "n. 四边形；四胞胎（quad 的复数）",
     "accent": "/kwɑdz/"
+  },
+  "quaff": {
+    "paraphrase": "v.痛饮，畅饮",
+    "accent": "/kwæf/"
   },
   "quail": {
     "paraphrase": "n.鹌鹑；v.畏惧，发抖",
@@ -9049,6 +10569,10 @@
     "paraphrase": "n.被子，棉被，被状物；v.缝（被），用垫料填塞后缝拢，东拼西凑地做，用摘抄等方法编辑；vt.东拼西凑地编，加软衬料后缝制；vi.缝被子",
     "accent": "/kwɪlt/"
   },
+  "quina": {
+    "paraphrase": "n.[植]金鸡纳树皮, 奎宁",
+    "accent": "/'kwaɪnɚ/"
+  },
   "quips": {
     "paraphrase": "n. 俏皮话（quip 的复数）；v. 说俏皮话（quip 的第三人称单数）",
     "accent": "/kwɪps/"
@@ -9100,6 +10624,10 @@
   "radio": {
     "paraphrase": "n.无线电，收音机，无线电广播；vt.& vi.用无线电发送（讯息）",
     "accent": "/ˈreɪdioʊ/"
+  },
+  "radix": {
+    "paraphrase": "n.根, 基数",
+    "accent": "/'redɪks/"
   },
   "raffs": {
     "paraphrase": "n. 大量；废物（raff 的复数）",
@@ -9189,9 +10717,17 @@
     "paraphrase": "adj.快速的，迅速的；n.（常用复数）急流，湍流",
     "accent": "/ˈræpɪd/"
   },
+  "rarer": {
+    "paraphrase": "adj.稀罕的,  珍贵的",
+    "accent": ""
+  },
   "rasps": {
     "paraphrase": "n. 锉刀（rasp 的复数）；v. 锉（rasp 的第三人称单数）",
     "accent": "/ræsps/"
+  },
+  "raspy": {
+    "paraphrase": "adj.刺耳的；易怒的",
+    "accent": "/'ræspi/"
   },
   "rated": {
     "paraphrase": "v. 评级；认为（rate 的过去式、过去分词）；adj. 额定的",
@@ -9204,6 +10740,18 @@
   "ratio": {
     "paraphrase": "n.比，比率，比例",
     "accent": "/ˈreɪʃioʊ/"
+  },
+  "ravel": {
+    "paraphrase": "v.使纠缠，纠结；拆开，拆散",
+    "accent": "/'rævl/"
+  },
+  "raven": {
+    "paraphrase": "n.掠夺，劫掠；大乌鸦 adj.乌黑的 v.掠夺；狼吞虎咽",
+    "accent": "/'revən/"
+  },
+  "rayon": {
+    "paraphrase": "n.人造丝, 人造纤维",
+    "accent": "/'reɑn/"
   },
   "razes": {
     "paraphrase": "v. 夷平（raze 的第三人称单数）",
@@ -9241,9 +10789,21 @@
     "paraphrase": "v. 抚养，饲养（rear 的第三人称单数）；n. 后部（rear 的复数）",
     "accent": "/rɪrz/"
   },
+  "reave": {
+    "paraphrase": "v.剥夺, 抢走",
+    "accent": "/ri:v/"
+  },
   "rebel": {
     "paraphrase": "v.反叛，反抗；n.反叛者，叛逆者",
     "accent": "/ˈrɛbəl/"
+  },
+  "rebus": {
+    "paraphrase": "n.(猜字的)画谜",
+    "accent": "/'ribəs/"
+  },
+  "rebut": {
+    "paraphrase": "v.反驳；揭露；拒绝 n.驳回；提出反证",
+    "accent": "/ri'bʌt/"
   },
   "recks": {
     "paraphrase": "v. 顾虑，介意（reck 的第三人称单数）",
@@ -9268,6 +10828,10 @@
   "reeks": {
     "paraphrase": "v. 散发臭气，充满（reek 的第三人称单数）；n. 臭气（reek 的复数）",
     "accent": "/riːks/"
+  },
+  "reeky": {
+    "paraphrase": "adj.烟雾弥漫的",
+    "accent": ""
   },
   "reels": {
     "paraphrase": "n. 播放带，磁带，磁带机（reel 的复数）",
@@ -9316,6 +10880,10 @@
     "paraphrase": "n. 混音版；改编版本；v. 重新混音",
     "accent": "/ˌriːˈmɪks/"
   },
+  "renal": {
+    "paraphrase": "n.肾脏的，肾的",
+    "accent": "/'rinl/"
+  },
   "rends": {
     "paraphrase": "v. 撕裂（rend 的第三人称单数）",
     "accent": "/rɛndz/"
@@ -9347,6 +10915,10 @@
   "resin": {
     "paraphrase": "n. 树脂；合成树脂；vt. 用树脂处理",
     "accent": "/ˈrezɪn/"
+  },
+  "resit": {
+    "paraphrase": "v&n.重修，补考",
+    "accent": "/ˈriːsɪt/"
   },
   "rests": {
     "paraphrase": "n. 休息（rest 的复数）；v. 休息（rest 的第三人称单数）",
@@ -9471,9 +11043,17 @@
     "paraphrase": "n. 仪式（rite 的复数）",
     "accent": "/raɪts/"
   },
+  "ritzy": {
+    "paraphrase": "adj.高雅的；势利的",
+    "accent": "/'rɪtsi/"
+  },
   "rival": {
     "paraphrase": "n.竞争对手，匹敌者；vt.与…竞争，比得上；vi.竞争；adj.竞争的",
     "accent": "/ˈraɪvəl/"
+  },
+  "riven": {
+    "paraphrase": "adj.撕开的，分裂的",
+    "accent": "/'rivən/"
   },
   "river": {
     "paraphrase": "n.河，江",
@@ -9559,6 +11139,10 @@
     "paraphrase": "n. 房间；空间（room 的复数）",
     "accent": "/ruːmz/"
   },
+  "roomy": {
+    "paraphrase": "adj.宽敞的",
+    "accent": "/'rumi/"
+  },
   "roost": {
     "paraphrase": "n.栖木，栖息处；vi.栖息；vt.使栖息",
     "accent": "/ruːst/"
@@ -9615,6 +11199,10 @@
     "paraphrase": "n.粗暴而又好争吵的人，吵嚷者，小流氓adj.吵闹的，粗暴的",
     "accent": "/ˈraʊdi/"
   },
+  "rower": {
+    "paraphrase": "n.桨手",
+    "accent": "/'roɚ/"
+  },
   "royal": {
     "paraphrase": "adj.王室的，皇家的；盛大的；n.王室成员",
     "accent": "/ˈrɔɪəl/"
@@ -9647,9 +11235,17 @@
     "paraphrase": "n. 规则；条例（rule 的复数）；v. 管理",
     "accent": "/ruːlz/"
   },
+  "rumen": {
+    "paraphrase": "n.瘤胃(反刍动物的第一胃)",
+    "accent": ""
+  },
   "rumor": {
     "paraphrase": "n.谣言，传闻；vt.谣传",
     "accent": "/ˈruːmər/"
+  },
+  "runic": {
+    "paraphrase": "adj.古北欧文字的；神秘的",
+    "accent": "/'rʊnɪk/"
   },
   "rural": {
     "paraphrase": "adj.农村的，乡村的",
@@ -9662,6 +11258,10 @@
   "rusty": {
     "paraphrase": "adj.生锈的；荒疏的；铁锈色的",
     "accent": "/ˈrʌsti/"
+  },
+  "sable": {
+    "paraphrase": "n.[动]紫貂, 黑貂, 黑貂皮, 丧服",
+    "accent": "/'sebl/"
   },
   "sabre": {
     "paraphrase": "n.军刀，马刀",
@@ -9719,6 +11319,10 @@
     "paraphrase": "n.色拉",
     "accent": "/ˈsæləd/"
   },
+  "salal": {
+    "paraphrase": "n.[植](产于北美洲太平洋沿岸的)沙龙白珠树",
+    "accent": ""
+  },
   "salem": {
     "paraphrase": "n. 塞勒姆（地名、人名）",
     "accent": "/ˈseɪləm/"
@@ -9742,6 +11346,10 @@
   "salty": {
     "paraphrase": "adj.咸的，含盐的",
     "accent": "/ˈsɔːlti/"
+  },
+  "salve": {
+    "paraphrase": "v.减轻，缓和 n.药膏",
+    "accent": "/sæv/"
   },
   "salvo": {
     "paraphrase": "n.（礼炮）齐鸣；（火炮）齐射；保留条款",
@@ -9783,6 +11391,10 @@
     "paraphrase": "n. 三洋（电器品牌）",
     "accent": "/ˈsɑːnjoʊ/"
   },
+  "sapid": {
+    "paraphrase": "adj.有滋味的；有趣的",
+    "accent": "/'sæpɪd/"
+  },
   "sarah": {
     "paraphrase": "n.萨拉（女子名）",
     "accent": "/ˈsɛrə/"
@@ -9798,6 +11410,10 @@
   "sauce": {
     "paraphrase": "n.酱汁，调味汁；vt.给…调味，加酱汁于",
     "accent": "/sɔːs/"
+  },
+  "saucy": {
+    "paraphrase": "adj.粗鲁的；俏皮的；漂亮的",
+    "accent": "/'sɔsi/"
   },
   "saudi": {
     "paraphrase": "adj. 沙特的；n. 沙特人",
@@ -9823,6 +11439,10 @@
     "paraphrase": "n.滋味，风味，趣味；vt.品尝，欣赏；vi.有…的滋味",
     "accent": "/ˈseɪvər/"
   },
+  "savvy": {
+    "paraphrase": "adj.有见识的，精明的",
+    "accent": "/'sævi/"
+  },
   "saxon": {
     "paraphrase": "n.撒克逊人（6世纪征服英国部分地区的西日耳曼人）",
     "accent": "/ˈsæksən/"
@@ -9835,6 +11455,10 @@
     "paraphrase": "n. 痂（scab 的复数）",
     "accent": "/skæbz/"
   },
+  "scads": {
+    "paraphrase": "n.许多，巨额",
+    "accent": ""
+  },
   "scald": {
     "paraphrase": "v.烫伤，烫洗；n.烫伤",
     "accent": "/skɔːld/"
@@ -9842,6 +11466,14 @@
   "scale": {
     "paraphrase": "n.规模，比例，刻度，鱼鳞；vt.攀登，刮去鳞片；vi.攀登，剥落",
     "accent": "/skeɪl/"
+  },
+  "scalp": {
+    "paraphrase": "v.剥头皮",
+    "accent": "/skælp/"
+  },
+  "scamp": {
+    "paraphrase": "n.流氓",
+    "accent": "/skæmp/"
   },
   "scams": {
     "paraphrase": "n. 骗局，欺诈（scam 的复数）",
@@ -9851,6 +11483,10 @@
     "paraphrase": "v. 扫描（scan 的第三人称单数）",
     "accent": "/skænz/"
   },
+  "scant": {
+    "paraphrase": "adj.不足的；缺乏的；勉强够的 v.减少；节省；限制",
+    "accent": "/skænt/"
+  },
   "scare": {
     "paraphrase": "v.使惊恐，惊吓，害怕；n.惊恐，恐慌",
     "accent": "/sker/"
@@ -9858,6 +11494,10 @@
   "scarf": {
     "paraphrase": "n.围巾，领巾；v.围（围巾），披（披巾）",
     "accent": "/skɑːrf/"
+  },
+  "scarp": {
+    "paraphrase": "n.悬崖",
+    "accent": "/skɑrp/"
   },
   "scars": {
     "paraphrase": "n. 伤疤（scar 的复数）",
@@ -9874,6 +11514,10 @@
   "scent": {
     "paraphrase": "n.气味，香味，踪迹；vt.闻到，察觉；vi.发出气味",
     "accent": "/sent/"
+  },
+  "scion": {
+    "paraphrase": "n.幼芽, 子孙",
+    "accent": "/'saɪən/"
   },
   "scoff": {
     "paraphrase": "v.嘲笑，嘲弄；n.嘲笑，笑柄",
@@ -9919,9 +11563,17 @@
     "paraphrase": "n.怒容，愁容；vi.皱眉，怒视",
     "accent": "/skaʊl/"
   },
+  "scram": {
+    "paraphrase": "n.紧急刹车",
+    "accent": "/skræm/"
+  },
   "scrap": {
     "paraphrase": "n.碎片，废料，少量；v.废弃，抛弃",
     "accent": "/skræp/"
+  },
+  "scree": {
+    "paraphrase": "n.碎石, 卵石, 满布石块的山, 遍地小石的山的斜坡",
+    "accent": "/skri/"
   },
   "screw": {
     "paraphrase": "n.螺丝钉，螺旋；vt.用螺丝拧紧，拧；vi.拧紧",
@@ -9939,6 +11591,10 @@
     "paraphrase": "n. 水中呼吸器，水肺",
     "accent": "/ˈskuːbə/"
   },
+  "scuff": {
+    "paraphrase": "v.拖着脚走",
+    "accent": "/skʌf/"
+  },
   "scums": {
     "paraphrase": "n. 浮渣（scum 的复数）",
     "accent": "/skʌmz/"
@@ -9955,6 +11611,10 @@
     "paraphrase": "n. 接缝（seam 的复数）",
     "accent": "/siːmz/"
   },
+  "seamy": {
+    "paraphrase": "adj.露出线缝的, 丑恶的",
+    "accent": "/'simi/"
+  },
   "sears": {
     "paraphrase": "v. 烧灼（sear 的第三人称单数）",
     "accent": "/sɪrz/"
@@ -9966,6 +11626,10 @@
   "sedan": {
     "paraphrase": "n.私家轿车，轿子",
     "accent": "/sɪˈdæn/"
+  },
+  "sedge": {
+    "paraphrase": "n.[植]莎草",
+    "accent": "/sɛdʒ/"
   },
   "seeds": {
     "paraphrase": "n. 种子；籽（seed 的复数）；v. 播种",
@@ -9990,6 +11654,10 @@
   "segoe": {
     "paraphrase": "n. (Segoe)人名；(日)濑越(姓)",
     "accent": "/ˈsiːɡoʊ/"
+  },
+  "seine": {
+    "paraphrase": "n.(捕鱼用的)拖拉大围网",
+    "accent": "/sen/"
   },
   "seize": {
     "paraphrase": "v. 抓住，逮捕；夺取，占领，没收",
@@ -10019,6 +11687,10 @@
     "paraphrase": "n. 汉城，首尔（韩国首都）",
     "accent": "/sol/"
   },
+  "sepal": {
+    "paraphrase": "n.萼片",
+    "accent": "/'sɛpl/"
+  },
   "serfs": {
     "paraphrase": "n. 农奴（serf 的复数）",
     "accent": "/sɜːrfs/"
@@ -10042,6 +11714,10 @@
   "sever": {
     "paraphrase": "v. 切断，割断；断绝",
     "accent": "/ˈsevər/"
+  },
+  "sewer": {
+    "paraphrase": "n.下水道；阴沟；裁缝师 vt.为…铺设污水管道；用下水道排除…的污水 vi.清洗污水管",
+    "accent": "/'suɚ/"
   },
   "sexes": {
     "paraphrase": "n. 性别，性（sex 的复数）",
@@ -10071,6 +11747,14 @@
     "paraphrase": "v. 摇动，抖动；使发抖，使心绪不宁；握手；n. 摇动，震动；混合饮料",
     "accent": "/ʃeɪk/"
   },
+  "shaky": {
+    "paraphrase": "adj.虚弱的，颤抖的；不安的，不可靠的；摇晃的，动摇的",
+    "accent": "/'ʃeki/"
+  },
+  "shale": {
+    "paraphrase": "n.[地]页岩, 泥板岩",
+    "accent": "/ʃel/"
+  },
   "shall": {
     "paraphrase": "modal v. 将要，必须，可以，应该",
     "accent": "/ʃæl/"
@@ -10086,6 +11770,10 @@
   "shape": {
     "paraphrase": "n. 形状，模型；状态，身材；v. 塑造，使成形；形成",
     "accent": "/ʃeɪp/"
+  },
+  "shard": {
+    "paraphrase": "n.[瓷]碎片破片",
+    "accent": "/ʃɑrd/"
   },
   "share": {
     "paraphrase": "n. 股份；一份，份额；v. 共有，共用；分配，分担；分享(in)",
@@ -10243,6 +11931,10 @@
     "paraphrase": "vt.耸肩（以表示冷淡，怀疑等）；vi.耸肩，提高肩膀；n.耸肩，女式短茄克衫或前开襟毛线衫",
     "accent": "/ʃrʌɡ/"
   },
+  "shuck": {
+    "paraphrase": "n.壳",
+    "accent": "/ʃʌk/"
+  },
   "shuns": {
     "paraphrase": "v. 回避（shun 的第三人称单数）",
     "accent": "/ʃʌnz/"
@@ -10254,6 +11946,10 @@
   "shuts": {
     "paraphrase": "v. 关闭（shut 的第三人称单数）",
     "accent": "/ʃʌts/"
+  },
+  "sibyl": {
+    "paraphrase": "n.女预言家，女先知",
+    "accent": "/'sɪbl/"
   },
   "sicks": {
     "paraphrase": "n. 呕吐物（sick 的复数，罕见用法）",
@@ -10270,6 +11966,10 @@
   "siege": {
     "paraphrase": "n.围攻，围困，围城（期间）",
     "accent": "/siːdʒ/"
+  },
+  "sieve": {
+    "paraphrase": "n.筛子；漏勺 vt.筛，滤",
+    "accent": "/sɪv/"
   },
   "sifts": {
     "paraphrase": "v. 筛选（sift 的第三人称单数）",
@@ -10295,6 +11995,10 @@
     "paraphrase": "n. 丝绸（silk 的复数）",
     "accent": "/sɪlks/"
   },
+  "silky": {
+    "paraphrase": "adj.丝的；柔滑的；温和的；丝绸一样的",
+    "accent": "/'sɪlki/"
+  },
   "silly": {
     "paraphrase": "adj. 愚蠢的，傻的，可笑的",
     "accent": "/ˈsɪli/"
@@ -10306,6 +12010,10 @@
   "silts": {
     "paraphrase": "n. 淤泥（silt 的复数）",
     "accent": "/sɪlts/"
+  },
+  "silva": {
+    "paraphrase": "n.森林里的树木, 森林, 森林志",
+    "accent": ""
   },
   "simon": {
     "paraphrase": "n. 西蒙（男子名）",
@@ -10338,6 +12046,10 @@
   "sinks": {
     "paraphrase": "n. 水槽（sink 的复数）；v. 下沉（sink 的第三人称单数）",
     "accent": "/sɪŋks/"
+  },
+  "sinus": {
+    "paraphrase": "n.[生物] 窦；静脉窦；下陷或凹下去的地方",
+    "accent": "/'saɪnəs/"
   },
   "siren": {
     "paraphrase": "n.汽笛，妖冶而危险的女人，危险的诱惑，塞壬（古希腊传说中半人半鸟的女海妖，惯以美妙的歌声引诱水手，使他们的船只或触礁或驶入危险水域）",
@@ -10375,6 +12087,10 @@
     "paraphrase": "n.溜冰鞋；v.滑冰，溜冰",
     "accent": "/skeɪt/"
   },
+  "skein": {
+    "paraphrase": "n.(一)束, (一)群, 一团糟",
+    "accent": "/sken/"
+  },
   "skids": {
     "paraphrase": "n. 滑道，垫木（skid 的复数）；v. 打滑（skid 的第三人称单数）",
     "accent": "/skɪdz/"
@@ -10387,9 +12103,17 @@
     "paraphrase": "n. 天空（sky 的复数）",
     "accent": "/skaɪz/"
   },
+  "skiff": {
+    "paraphrase": "n.小船",
+    "accent": "/skɪf/"
+  },
   "skill": {
     "paraphrase": "n.技能，技巧",
     "accent": "/skɪl/"
+  },
+  "skimp": {
+    "paraphrase": "v.节省花费",
+    "accent": "/skɪmp/"
   },
   "skims": {
     "paraphrase": "v. 撇去，略读（skim 的第三人称单数）",
@@ -10414,6 +12138,10 @@
   "skits": {
     "paraphrase": "n. 滑稽短剧，小品（skit 的复数）",
     "accent": "/skɪts/"
+  },
+  "skulk": {
+    "paraphrase": "v.偷偷隐躲, 偷懒",
+    "accent": "/skʌlk/"
   },
   "skull": {
     "paraphrase": "n.颅骨，头骨",
@@ -10442,6 +12170,10 @@
   "slags": {
     "paraphrase": "n. 矿渣，熔渣（slag 的复数）",
     "accent": "/slæɡz/"
+  },
+  "slake": {
+    "paraphrase": "v.消除",
+    "accent": "/slek/"
   },
   "slams": {
     "paraphrase": "v. 砰地关上，猛烈抨击（slam 的第三人称单数）；n. 猛关（slam 的复数）",
@@ -10491,6 +12223,10 @@
     "paraphrase": "v.睡，睡觉；n.睡眠",
     "accent": "/sliːp/"
   },
+  "sleet": {
+    "paraphrase": "v.下雨夹雪；下冰雹 n.雨夹雪；雨淞",
+    "accent": "/slit/"
+  },
   "slept": {
     "paraphrase": "v.sleep的过去式和过去分词",
     "accent": "/slept/"
@@ -10535,6 +12271,10 @@
     "paraphrase": "n. 狭缝，裂缝（slit 的复数）；v. 切开（slit 的第三人称单数）",
     "accent": "/slɪts/"
   },
+  "sloop": {
+    "paraphrase": "n.单桅帆船",
+    "accent": "/slup/"
+  },
   "slope": {
     "paraphrase": "n.斜坡，斜面，倾斜，斜率；vi.倾斜，有斜度，悄悄地走，潜行；vt.使倾斜",
     "accent": "/sloʊp/"
@@ -10542,6 +12282,10 @@
   "slops": {
     "paraphrase": "n. 污水，剩饭（slop 的复数）；v. 溅出（slop 的第三人称单数）",
     "accent": "/slɑps/"
+  },
+  "slosh": {
+    "paraphrase": "v.溅，泼 n.泥泞",
+    "accent": "/slɑʃ/"
   },
   "sloth": {
     "paraphrase": "n.懒惰；树懒",
@@ -10567,9 +12311,21 @@
     "paraphrase": "n. 贫民窟（slum 的复数）",
     "accent": "/slʌmz/"
   },
+  "slurp": {
+    "paraphrase": "v.出声地吃或喝 n.啜食，啜食声",
+    "accent": "/slɝp/"
+  },
   "slurs": {
     "paraphrase": "n. 诽谤，污点（slur 的复数）；v. 含糊地说（slur 的第三人称单数）",
     "accent": "/slɜrz/"
+  },
+  "slush": {
+    "paraphrase": "n.烂泥 v溅湿",
+    "accent": "/slʌʃ/"
+  },
+  "smack": {
+    "paraphrase": "adv.直接地，准确地，恰好地；猛烈地，急剧地 vi.含有…意味，带有…迹象 vt.拍，打，掴；出声地咂嘴 n.掌掴，拍，打；掌掴声，拍击声；出声地吻，响吻",
+    "accent": "/smæk/"
   },
   "small": {
     "paraphrase": "adj.小的；n.腰部",
@@ -10591,9 +12347,21 @@
     "paraphrase": "n.嗅觉，气味，臭味；vt.嗅，闻到，察觉；vi.闻起来，有气味；link-v.闻起来",
     "accent": "/smɛl/"
   },
+  "smelt": {
+    "paraphrase": "v.熔炼，冶炼；精炼 n.香鱼；胡瓜鱼",
+    "accent": "/smɛlt/"
+  },
   "smile": {
     "paraphrase": "n.微笑，笑容；vt.以微笑表示，以微笑完成；vi.微笑，赞许，不在乎",
     "accent": "/smaɪl/"
+  },
+  "smirk": {
+    "paraphrase": "vi.假笑，得意地笑",
+    "accent": "/smɝk/"
+  },
+  "smite": {
+    "paraphrase": "v.重击，猛打",
+    "accent": "/smaɪt/"
   },
   "smith": {
     "paraphrase": "n.铁匠，金属品工匠",
@@ -10635,6 +12403,10 @@
     "paraphrase": "n.蛇，阴险的人；vt.沿…曲折前进；vi.曲折前进，蛇行",
     "accent": "/sneɪk/"
   },
+  "snaky": {
+    "paraphrase": "adj.蛇一般的, 弯弯曲曲的, 阴险的, 多蛇的",
+    "accent": "/'sneki/"
+  },
   "snaps": {
     "paraphrase": "v. 折断，拍照（snap 的第三人称单数）；n. 啪嗒声（snap 的复数）",
     "accent": "/snæps/"
@@ -10655,6 +12427,10 @@
     "paraphrase": "vi.讥笑，冷笑；n.嘲笑，冷笑，讥笑的表情（言语）",
     "accent": "/snɪr/"
   },
+  "snide": {
+    "paraphrase": "adj.伪造的；不诚实的；讽刺的，挖苦的，含沙射影的",
+    "accent": "/snaɪd/"
+  },
   "sniff": {
     "paraphrase": "vt.嗅，闻，嗤之以鼻；vi.嗅，闻，吸气；n.吸气（声），一股气味",
     "accent": "/snɪf/"
@@ -10670,6 +12446,10 @@
   "snobs": {
     "paraphrase": "n. 势利小人（snob 的复数）",
     "accent": "/snɑbz/"
+  },
+  "snoop": {
+    "paraphrase": "v.探听, 调查, 偷窃",
+    "accent": "/snu:p/"
   },
   "snore": {
     "paraphrase": "v.打鼾；n.鼾声",
@@ -10706,6 +12486,10 @@
   "soaps": {
     "paraphrase": "n. 肥皂（soap 的复数）；v. 用肥皂擦洗（soap 的第三人称单数）",
     "accent": "/soʊps/"
+  },
+  "soapy": {
+    "paraphrase": "adj.涂着肥皂的；含有肥皂的；似肥皂的；圆滑的",
+    "accent": "/'sopi/"
   },
   "soars": {
     "paraphrase": "v. 高飞，猛增（soar 的第三人称单数）",
@@ -10799,6 +12583,10 @@
     "paraphrase": "v. 变酸，使不愉快（sour 的第三人称单数）",
     "accent": "/saʊərz/"
   },
+  "souse": {
+    "paraphrase": "n.盐汁, 腌制的食品, 腌制食品用的盐水",
+    "accent": "/saʊs/"
+  },
   "south": {
     "paraphrase": "n.南方，南部，美国南方各州，（南半球的）发展中国家；adj.南的，（风）来自南方的，南风的，南方吹来的；adv.向南方，在南方",
     "accent": "/saʊθ/"
@@ -10814,6 +12602,10 @@
   "spain": {
     "paraphrase": "n.西班牙（欧洲南部国家）",
     "accent": "/speɪn/"
+  },
+  "spall": {
+    "paraphrase": "n.碎片",
+    "accent": "/spɔl/"
   },
   "spank": {
     "paraphrase": "v. 拍打；打屁股；n. 一巴掌",
@@ -10863,6 +12655,10 @@
     "paraphrase": "n.矛，枪，嫩枝，标枪；vt.用矛刺，用鱼叉捉；adj.父系的，右边的",
     "accent": "/spɪr/"
   },
+  "speck": {
+    "paraphrase": "n.灰尘；污点；小颗粒 v.使有斑点",
+    "accent": "/spɛk/"
+  },
   "specs": {
     "paraphrase": "n. 规格；参数；眼镜（spec 的复数缩写）",
     "accent": "/speks/"
@@ -10911,6 +12707,10 @@
     "paraphrase": "n.穗，长钉，钉鞋，女高跟鞋，道钉；v.用大钉钉，用长而尖之物刺，阻止",
     "accent": "/spaɪk/"
   },
+  "spiky": {
+    "paraphrase": "adj.大钉似的, 尖刻的",
+    "accent": "/'spaɪki/"
+  },
   "spill": {
     "paraphrase": "vt.& vi.溢出，泼出，涌出；vt.使跌落，泄露机密；n.洒出（量），泼出（量），溢出（量）",
     "accent": "/spɪl/"
@@ -10922,6 +12722,10 @@
   "spins": {
     "paraphrase": "v. 旋转，纺纱（spin 的第三人称单数）；n. 旋转（spin 的复数）",
     "accent": "/spɪnz/"
+  },
+  "spiny": {
+    "paraphrase": "adj.长满刺的，多刺的，带刺的；棘手的",
+    "accent": "/'spaɪni/"
   },
   "spire": {
     "paraphrase": "n.尖顶",
@@ -10947,13 +12751,25 @@
     "paraphrase": "n.轮辐，扶梯棍；v.装辐于（speak的过去式）",
     "accent": "/spoʊk/"
   },
+  "spoof": {
+    "paraphrase": "v.哄骗",
+    "accent": "/spʊf/"
+  },
   "spook": {
     "paraphrase": "n.鬼，幽灵；vt.惊吓；vi.逃窜",
     "accent": "/spuːk/"
   },
+  "spool": {
+    "paraphrase": "n.线轴, 所绕的数量, 缠线用的框",
+    "accent": "/spʊl/"
+  },
   "spoon": {
     "paraphrase": "n.匙，调羹，一匙的量，匙状物；vt.用汤匙舀取；vi.轻轻向上击，痴爱",
     "accent": "/spuːn/"
+  },
+  "spoor": {
+    "paraphrase": "n.痕迹, 足迹",
+    "accent": "/spʊr/"
   },
   "spore": {
     "paraphrase": "n.孢子；v.长孢子",
@@ -10979,9 +12795,25 @@
     "paraphrase": "n. 狂欢，无节制的狂热行为",
     "accent": "/spriː/"
   },
+  "sprig": {
+    "paraphrase": "n.小枝, 小枝状饰物, 子孙, 年青人, 图钉",
+    "accent": "/sprɪg/"
+  },
+  "spunk": {
+    "paraphrase": "n.精神, 勇气, 胆量, 火星, 引火木柴",
+    "accent": "/spʌŋk/"
+  },
+  "spurn": {
+    "paraphrase": "vt&n.拒绝；摈弃",
+    "accent": "/spə:n/"
+  },
   "spurs": {
     "paraphrase": "n. 马刺，刺激（spur 的复数）；v. 激励（spur 的第三人称单数）",
     "accent": "/spɜrz/"
+  },
+  "spurt": {
+    "paraphrase": "n.喷出，迸发",
+    "accent": "/spɝt/"
   },
   "squad": {
     "paraphrase": "n. 班，小队，小组",
@@ -11014,6 +12846,10 @@
   "stags": {
     "paraphrase": "n. 成年雄鹿（stag 的复数）",
     "accent": "/stæɡz/"
+  },
+  "stagy": {
+    "paraphrase": "adj.不自然的，做作的",
+    "accent": "/'steidʒi/"
   },
   "staid": {
     "paraphrase": "adj. 古板的，稳重的，沉静的",
@@ -11067,6 +12903,10 @@
     "paraphrase": "v. 开始，出发；创办；n. 开始，开端；起点",
     "accent": "/stɑːrt/"
   },
+  "stash": {
+    "paraphrase": "vt.隐藏，藏匿 n.贮藏物",
+    "accent": "/stæʃ/"
+  },
   "state": {
     "paraphrase": "n. 状态，状况；国家，州；vt. 陈述，说明",
     "accent": "/steɪt/"
@@ -11074,6 +12914,10 @@
   "stats": {
     "paraphrase": "n. 统计数据；统计学（statistics 缩写）",
     "accent": "/stæts/"
+  },
+  "stave": {
+    "paraphrase": "n.狭板；梯级；诗句；五线谱表 v.延缓；击穿；凿孔于；压扁",
+    "accent": "/stev/"
   },
   "stays": {
     "paraphrase": "v. 停留；保持（stay 的第三人称单数）；n. 逗留",
@@ -11110,6 +12954,10 @@
   "steer": {
     "paraphrase": "v. 驾驶，操纵，引导；n. 阉公牛",
     "accent": "/stɪr/"
+  },
+  "stele": {
+    "paraphrase": "n.石碑,  匾额",
+    "accent": "/stil/"
   },
   "stems": {
     "paraphrase": "n. 茎，干（stem 的复数）；v. 起源于（stem 的第三人称单数）",
@@ -11151,9 +12999,17 @@
     "paraphrase": "adv. 仍然，还；adj. 静止的，不动的",
     "accent": "/stɪl/"
   },
+  "stilt": {
+    "paraphrase": "n.高跷",
+    "accent": "/stɪlt/"
+  },
   "sting": {
     "paraphrase": "vt.& vi.刺，叮，刺痛；vt.刺激；n.螫伤处，毒刺，剧痛，圈套",
     "accent": "/stɪŋ/"
+  },
+  "stink": {
+    "paraphrase": "n.臭味；讨厌的人 v.发出臭味；招人讨厌",
+    "accent": "/stɪŋk/"
   },
   "stint": {
     "paraphrase": "v.节省，吝惜；n.定额工作，任期",
@@ -11247,6 +13103,10 @@
     "paraphrase": "v.剥去，除去，剥夺；n.长条，带状地带，运动服",
     "accent": "/strɪp/"
   },
+  "strum": {
+    "paraphrase": "n.乱弹的声音",
+    "accent": "/strʌm/"
+  },
   "strut": {
     "paraphrase": "v.趾高气扬地走；n.支柱，趾高气扬的步态",
     "accent": "/strʌt/"
@@ -11267,6 +13127,10 @@
     "paraphrase": "n.材料，原料，东西；vt.塞满，填塞；vi.吃得过多",
     "accent": "/stʌf/"
   },
+  "stump": {
+    "paraphrase": "vi.脚步沉重地走 n.树桩；残根，残余部分 vt.把…难住，使为难；在…做巡回演说",
+    "accent": "/stʌmp/"
+  },
   "stuns": {
     "paraphrase": "v. 使震惊；使昏迷（stun 的第三人称单数）",
     "accent": "/stʌnz/"
@@ -11279,6 +13143,10 @@
     "paraphrase": "n.风格，样式，方式；v.设计，称呼",
     "accent": "/staɪl/"
   },
+  "suave": {
+    "paraphrase": "adj.温和的",
+    "accent": "/swɑv/"
+  },
   "sucks": {
     "paraphrase": "v. 吸吮；抽吸（suck 的第三人称单数）",
     "accent": "/sʌks/"
@@ -11286,6 +13154,10 @@
   "sudan": {
     "paraphrase": "n.苏丹",
     "accent": "/suːˈdæn/"
+  },
+  "suede": {
+    "paraphrase": "n.小山羊皮",
+    "accent": "/swed/"
   },
   "sugar": {
     "paraphrase": "n.食糖，一匙糖；vt.在…中加糖；vi.形成糖；int.（表示懊恼）哎呀",
@@ -11302,6 +13174,10 @@
   "sulks": {
     "paraphrase": "v. 生闷气（sulk 的第三人称单数）",
     "accent": "/sʌlks/"
+  },
+  "sulky": {
+    "paraphrase": "adj.生气的, 阴沉的",
+    "accent": "/'sʌlki/"
   },
   "sully": {
     "paraphrase": "v.玷污",
@@ -11335,6 +13211,10 @@
     "paraphrase": "n. 苏珊（女子名）",
     "accent": "/ˈsuːzn/"
   },
+  "sushi": {
+    "paraphrase": "寿司",
+    "accent": "/'sʊʃi/"
+  },
   "sutra": {
     "paraphrase": "n.佛经，箴言",
     "accent": "/ˈsuːtrə/"
@@ -11351,6 +13231,10 @@
     "paraphrase": "n.沼泽；vt.淹没，使不堪承受",
     "accent": "/swɑːmp/"
   },
+  "swank": {
+    "paraphrase": "v.夸耀，炫耀",
+    "accent": "/swæŋk/"
+  },
   "swans": {
     "paraphrase": "n. 天鹅（swan 的复数）",
     "accent": "/swɑːnz/"
@@ -11362,6 +13246,10 @@
   "swarm": {
     "paraphrase": "n.一大群（昆虫等）；v.蜂拥，挤满",
     "accent": "/swɔːrm/"
+  },
+  "swart": {
+    "paraphrase": "adj.黑黝黝的,有毒的,有害的,恶性的",
+    "accent": "/swɔ:t/"
   },
   "sways": {
     "paraphrase": "v. 摇摆；影响（sway 的第三人称单数）",
@@ -11395,6 +13283,10 @@
     "paraphrase": "v. 痛饮，大口喝（swig 的第三人称单数）；n. 痛饮（swig 的复数）",
     "accent": "/swɪɡz/"
   },
+  "swill": {
+    "paraphrase": "v.涮, 冲洗, 痛饮, 倒出",
+    "accent": "/swɪl/"
+  },
   "swims": {
     "paraphrase": "v. 游泳（swim 的第三人称单数）",
     "accent": "/swɪmz/"
@@ -11419,6 +13311,10 @@
     "paraphrase": "adj.瑞士的；n.瑞士人",
     "accent": "/swɪs/"
   },
+  "swoon": {
+    "paraphrase": "vi&n.昏厥，昏倒；痴迷",
+    "accent": ""
+  },
   "swoop": {
     "paraphrase": "v.俯冲，猛扑；n.俯冲，猛扑",
     "accent": "/swuːp/"
@@ -11430,6 +13326,10 @@
   "swung": {
     "paraphrase": "v.swing的过去式和过去分词",
     "accent": "/swʌŋ/"
+  },
+  "synch": {
+    "paraphrase": "v.同时发生，同步",
+    "accent": "/siŋk/"
   },
   "syncs": {
     "paraphrase": "v. 同步（sync 的第三人称单数）",
@@ -11454,6 +13354,10 @@
   "taboo": {
     "paraphrase": "n.禁忌，忌讳；adj.禁忌的；vt.禁止",
     "accent": "/təˈbuː/"
+  },
+  "tache": {
+    "paraphrase": "n.[画]色彩, 斑点, 搭扣, 钩扣, 纽带, 环节",
+    "accent": ""
   },
   "tacit": {
     "paraphrase": "adj.默示的，心照不宣的",
@@ -11503,6 +13407,10 @@
     "paraphrase": "n.计数器，标签，记账；vt.测量，计数，通过做记号记录，加标签于，使符合，使吻合；vi.符合，吻合，记录，计分",
     "accent": "/ˈtæli/"
   },
+  "talon": {
+    "paraphrase": "n.爪, 魔爪",
+    "accent": "/'tælən/"
+  },
   "tamer": {
     "paraphrase": "n.驯服者，驯兽师",
     "accent": "/ˈteɪmər/"
@@ -11527,6 +13435,10 @@
     "paraphrase": "n. 强烈的味道或气味（tang 的复数）",
     "accent": "/tæŋz/"
   },
+  "tangy": {
+    "paraphrase": "adj.气味刺激的，扑鼻的",
+    "accent": "/'tæŋi/"
+  },
   "tanks": {
     "paraphrase": "n. 坦克；储罐（tank 的复数）",
     "accent": "/tæŋks/"
@@ -11538,6 +13450,10 @@
   "tapes": {
     "paraphrase": "n. 磁带；胶带（tape 的复数）；v. 录音",
     "accent": "/teɪps/"
+  },
+  "tapir": {
+    "paraphrase": "n.[动]貘",
+    "accent": ""
   },
   "tardy": {
     "paraphrase": "adj.迟的，晚的；行动缓慢的",
@@ -11562,6 +13478,10 @@
   "tasty": {
     "paraphrase": "adj.美味的，可口的",
     "accent": "/ˈteɪsti/"
+  },
+  "tatty": {
+    "paraphrase": "adj.破旧的, 褴褛的, 不值钱的",
+    "accent": "/'tæti/"
   },
   "taunt": {
     "paraphrase": "n.嘲弄，奚落；vt.嘲弄，奚落",
@@ -11619,6 +13539,10 @@
     "paraphrase": "n.牙齿（tooth的复数）",
     "accent": "/tiːθ/"
   },
+  "telex": {
+    "paraphrase": "n.电传；电传机；用户直通电报 v.用电传拍发；用直通电报拍发",
+    "accent": "/'tɛlɛks/"
+  },
   "tells": {
     "paraphrase": "v. 告诉；讲述；分辨（tell 的第三人称单数）",
     "accent": "/telz/"
@@ -11643,6 +13567,10 @@
     "paraphrase": "n.信条，原则",
     "accent": "/ˈtenɪt/"
   },
+  "tenon": {
+    "paraphrase": "n.[木工]榫 vt.接榫, 造榫",
+    "accent": ""
+  },
   "tenor": {
     "paraphrase": "n.男高音；要旨，大意；adj.男高音的",
     "accent": "/ˈtenər/"
@@ -11658,6 +13586,10 @@
   "tents": {
     "paraphrase": "n. 帐篷（tent 的复数）",
     "accent": "/tɛnts/"
+  },
+  "tepee": {
+    "paraphrase": "n.美国印第安人的圆锥形帐篷",
+    "accent": "/'tipi/"
   },
   "tepid": {
     "paraphrase": "adj.微温的，温热的，不太热烈的，不热情的",
@@ -11678,6 +13610,10 @@
   "tests": {
     "paraphrase": "n. 测试；测验（test 的复数）；v. 检验",
     "accent": "/tests/"
+  },
+  "testy": {
+    "paraphrase": "adj.易怒的, 暴躁的",
+    "accent": "/'tɛsti/"
   },
   "texas": {
     "paraphrase": "n.得克萨斯州（美国州名）",
@@ -11775,6 +13711,10 @@
     "paraphrase": "v.悸动，抽动，颤动，跳动着作痛；n.悸动，脉搏",
     "accent": "/θrɑːb/"
   },
+  "throe": {
+    "paraphrase": "n.剧痛；",
+    "accent": "/θrəu/"
+  },
   "throw": {
     "paraphrase": "v.投，掷，抛，猛动（头、臂、腿）；n.投掷，投掷的距离",
     "accent": "/θroʊ/"
@@ -11847,6 +13787,10 @@
     "paraphrase": "adj. 胆小的，羞怯的",
     "accent": "/ˈtɪmɪd/"
   },
+  "tined": {
+    "paraphrase": "adj.尖端的",
+    "accent": ""
+  },
   "tinge": {
     "paraphrase": "n.一丝痕迹，色调；vt.着色，使…带上色彩，轻微影响",
     "accent": "/tɪndʒ/"
@@ -11867,6 +13811,14 @@
     "paraphrase": "n. 名词后缀 -tion 的复数形式",
     "accent": "/ʃənz/"
   },
+  "tippy": {
+    "paraphrase": "adj.容易倾斜的, 不安定的, <英>头等的, 漂亮的, (毛织品)多绒尖的",
+    "accent": "/'tipi/"
+  },
+  "tipsy": {
+    "paraphrase": "adj.喝醉的；歪曲的；不稳的",
+    "accent": "/'tɪpsi/"
+  },
   "tired": {
     "paraphrase": "adj.疲倦的，困倦的，陈旧的，厌倦的",
     "accent": "/ˈtaɪərd/"
@@ -11886,6 +13838,10 @@
   "toads": {
     "paraphrase": "n. 蟾蜍（toad 的复数）",
     "accent": "/toʊdz/"
+  },
+  "toady": {
+    "paraphrase": "vi.谄媚，奉承 n.谄媚者，马屁精",
+    "accent": "/'todi/"
   },
   "toast": {
     "paraphrase": "n.烤面包，干杯，受敬酒的人；v.烘烤，向…祝酒，为…干杯",
@@ -12059,6 +14015,10 @@
     "paraphrase": "n.垃圾，废物，断枝，碎块，废话，社会渣滓；vt.废弃，拆毁，搞垮，贬低，从…上除去细枝或枝条",
     "accent": "/træʃ/"
   },
+  "trawl": {
+    "paraphrase": "n.拖网；排钩 v.用拖网捕鱼",
+    "accent": "/trɔl/"
+  },
   "trays": {
     "paraphrase": "n. 托盘（tray 的复数）",
     "accent": "/treɪz/"
@@ -12091,6 +14051,10 @@
     "paraphrase": "n.部落，部族；（贬）一帮，一伙；（口）大群",
     "accent": "/traɪb/"
   },
+  "trice": {
+    "paraphrase": "n.一刹那",
+    "accent": "/traɪs/"
+  },
   "trick": {
     "paraphrase": "n.戏法，把戏，计谋，诀窍，骗局，恶作剧；vt.哄骗，欺骗；adj.弄虚作假的，有诀窍的",
     "accent": "/trɪk/"
@@ -12115,6 +14079,14 @@
     "paraphrase": "n. 旅行；出行（trip 的复数）；v. 绊倒",
     "accent": "/trɪps/"
   },
+  "trite": {
+    "paraphrase": "adj.陈腐的；平庸的；老一套的",
+    "accent": "/traɪt/"
+  },
+  "troll": {
+    "paraphrase": "v.用曳绳钓；拖钓；兴高采烈地唱",
+    "accent": "/trol/"
+  },
   "troop": {
     "paraphrase": "n.军队，一群；[军]骑兵连；vi.成群结队地走，群集",
     "accent": "/truːp/"
@@ -12126,6 +14098,10 @@
   "trout": {
     "paraphrase": "n. 鳟鱼",
     "accent": "/traʊt/"
+  },
+  "trove": {
+    "paraphrase": "n.被发现的东西, 收藏的东西",
+    "accent": "/trov/"
   },
   "truce": {
     "paraphrase": "n.休战，休战协定",
@@ -12163,6 +14139,10 @@
     "paraphrase": "n. 大号（tuba 的复数）",
     "accent": "/ˈtuːbəz/"
   },
+  "tuber": {
+    "paraphrase": "n.[植]块茎, 突起, [解]结节",
+    "accent": "/'tʊbɚ/"
+  },
   "tubes": {
     "paraphrase": "n. 管子；管道（tube 的复数）",
     "accent": "/tuːbz/"
@@ -12182,6 +14162,10 @@
   "tulsa": {
     "paraphrase": "n. 塔尔萨（美国城市）",
     "accent": "/ˈtʌlsə/"
+  },
+  "tumid": {
+    "paraphrase": "adj.肿胀的, 肿大的",
+    "accent": "/'tju:mid/"
   },
   "tummy": {
     "paraphrase": "n. 肚子，胃",
@@ -12223,6 +14207,14 @@
     "paraphrase": "n.家庭教师，导师；（大专院校的）助教；vt.& vi.当家庭教师，辅导",
     "accent": "/ˈtjuːtə(r)/"
   },
+  "twain": {
+    "paraphrase": "n.两, 双, 二",
+    "accent": "/twein/"
+  },
+  "tweak": {
+    "paraphrase": "v.扭，拧，揪；调节，微调",
+    "accent": "/twik/"
+  },
   "tweed": {
     "paraphrase": "n.斜纹软呢",
     "accent": "/twiːd/"
@@ -12242,6 +14234,10 @@
   "twiki": {
     "paraphrase": "n. 一款开源维基系统",
     "accent": "/ˈtwɪki/"
+  },
+  "twine": {
+    "paraphrase": "v.缠绕，盘绕，围绕 n.细绳",
+    "accent": "/twaɪn/"
   },
   "twins": {
     "paraphrase": "n.双胞胎，孪生儿",
@@ -12335,6 +14331,10 @@
     "paraphrase": "vi.拉开拉链vt.拉开",
     "accent": "/ˌʌn'zɪp/"
   },
+  "upend": {
+    "paraphrase": "v.颠倒, 倒放",
+    "accent": "/ʌp'ɛnd/"
+  },
   "upper": {
     "paraphrase": "adj.地位较高的，上面的，内地的，地表层的；n.鞋帮，靴面，兴奋剂，令人兴奋的经历",
     "accent": "/ˈʌpɚ/"
@@ -12350,6 +14350,10 @@
   "urges": {
     "paraphrase": "v. 催促；强烈要求（urge 的第三人称单数）",
     "accent": "/ˈɜːrdʒɪz/"
+  },
+  "urine": {
+    "paraphrase": "n.尿",
+    "accent": "/'jʊrən/"
   },
   "usage": {
     "paraphrase": "n.使用，用法，习惯，惯例",
@@ -12374,6 +14378,10 @@
   "usurp": {
     "paraphrase": "v.篡夺，篡位，侵占",
     "accent": "/juˈzɜrp/"
+  },
+  "usury": {
+    "paraphrase": "n.高利；高利贷；利益",
+    "accent": "/'juʒəri/"
   },
   "utils": {
     "paraphrase": "n. 工具类；实用程序（utilities 缩写，编程用语）",
@@ -12403,6 +14411,10 @@
     "paraphrase": "n.英勇，勇猛",
     "accent": "/ˈvælɚ/"
   },
+  "valse": {
+    "paraphrase": "v.轻轻地走 n.华尔兹",
+    "accent": ""
+  },
   "value": {
     "paraphrase": "n. 价值，重要性；vt. 重视，评价",
     "accent": "/ˈvælju/"
@@ -12411,9 +14423,17 @@
     "paraphrase": "n.阀，真空管，（管乐器的）活栓，（心脏的）瓣膜；vt.装阀于，以活门调节",
     "accent": "/vælv/"
   },
+  "vapid": {
+    "paraphrase": "adj.无趣味的；无生气的；索然乏味的",
+    "accent": "/'væpɪd/"
+  },
   "vapor": {
     "paraphrase": "n.蒸汽，水汽",
     "accent": "/ˈveɪpər/"
+  },
+  "varve": {
+    "paraphrase": "n.[地质]纹泥",
+    "accent": "/vɑrv/"
   },
   "vases": {
     "paraphrase": "n. 花瓶（vase 的复数）",
@@ -12450,6 +14470,10 @@
   "veins": {
     "paraphrase": "n. 静脉；叶脉（vein 的复数）",
     "accent": "/veɪnz/"
+  },
+  "venal": {
+    "paraphrase": "adj.贪污的；用金钱买得的；贿赂的；贪赃枉法的 n.(Venal)人名；(英)维纳尔",
+    "accent": "/'vinl/"
   },
   "vends": {
     "paraphrase": "v. 出售；贩卖（vend 的第三人称单数）",
@@ -12498,6 +14522,10 @@
     "paraphrase": "n. 小瓶（vial 的复数）",
     "accent": "/ˈvaɪəlz/"
   },
+  "vicar": {
+    "paraphrase": "n.教区牧师",
+    "accent": "/'vɪkɚ/"
+  },
   "vices": {
     "paraphrase": "n. 恶习； vice 的复数",
     "accent": "/ˈvaɪsɪz/"
@@ -12538,6 +14566,10 @@
     "paraphrase": "adj.病毒的，病毒引起的；病毒性的",
     "accent": "/ˈvaɪrəl/"
   },
+  "virgo": {
+    "paraphrase": "n.室女宫,室女(星)座",
+    "accent": ""
+  },
   "virtu": {
     "paraphrase": "n.艺术品爱好；古董",
     "accent": "/vɜːrˈtuː/"
@@ -12565,6 +14597,10 @@
   "vivid": {
     "paraphrase": "adj. 生动的，鲜明的，逼真的",
     "accent": "/ˈvɪvɪd/"
+  },
+  "vixen": {
+    "paraphrase": "n.雌狐, 唠叨的女人, 坏心眼的女人, 刁妇, 泼妇",
+    "accent": "/'vɪksn/"
   },
   "vocal": {
     "paraphrase": "adj.嗓音的，发声的；直言不讳的；n.[音乐]声乐作品",
@@ -12602,9 +14638,17 @@
     "paraphrase": "v. 投票；表决（vote 的过去式、过去分词）",
     "accent": "/ˈvoʊtɪd/"
   },
+  "voter": {
+    "paraphrase": "n.选举人，投票人；有投票权者",
+    "accent": "/'votɚ/"
+  },
   "votes": {
     "paraphrase": "n. 选票；投票（vote 的复数）；v. 表决",
     "accent": "/voʊts/"
+  },
+  "vouch": {
+    "paraphrase": "v.担保，保证",
+    "accent": "/vaʊtʃ/"
   },
   "vowel": {
     "paraphrase": "n.元音；adj.元音的",
@@ -12614,6 +14658,14 @@
     "paraphrase": "n. 虚拟服务器网络（网络术语）",
     "accent": "/ˌviː es net/"
   },
+  "vying": {
+    "paraphrase": "adj.竞争的",
+    "accent": "/'vaɪɪŋ/"
+  },
+  "wacky": {
+    "paraphrase": "adj.<美俚>古怪的, 乖僻的, 疯疯癫癫的",
+    "accent": "/'wæki/"
+  },
   "wades": {
     "paraphrase": "v. 涉水（wade 的第三人称单数）",
     "accent": "/weɪdz/"
@@ -12621,6 +14673,10 @@
   "wafer": {
     "paraphrase": "n.薄脆饼；[电子]晶片；[宗]圣饼",
     "accent": "/ˈweɪfər/"
+  },
+  "wager": {
+    "paraphrase": "n.赌注 v.押注，打赌",
+    "accent": "/'weidʒə/"
   },
   "wages": {
     "paraphrase": "n. 工资；薪水（wage 的复数）",
@@ -12730,6 +14786,10 @@
     "paraphrase": "n. 波浪；海浪（wave 的复数）；v. 挥手",
     "accent": "/weɪvz/"
   },
+  "waxes": {
+    "paraphrase": "n.蜡，蜂蜡 vt给…上蜡",
+    "accent": ""
+  },
   "wayne": {
     "paraphrase": "n. 韦恩（男子名、姓氏）",
     "accent": "/weɪn/"
@@ -12757,6 +14817,10 @@
   "weeds": {
     "paraphrase": "n. 杂草（weed 的复数）",
     "accent": "/wiːdz/"
+  },
+  "weedy": {
+    "paraphrase": "adj.杂草多的",
+    "accent": "/'widi/"
   },
   "weeks": {
     "paraphrase": "n. 星期；周（week 的复数）",
@@ -12838,6 +14902,10 @@
     "paraphrase": "n.轮子，方向盘；v.推动，旋转，转动",
     "accent": "/wiːl/"
   },
+  "whelm": {
+    "paraphrase": "v.淹没",
+    "accent": "/wɛlm/"
+  },
   "whens": {
     "paraphrase": "n. 时间（when 的复数）",
     "accent": "/wɛnz/"
@@ -12873,6 +14941,10 @@
   "whims": {
     "paraphrase": "n. 奇想，怪念头（whim 的复数）",
     "accent": "/wɪmz/"
+  },
+  "whine": {
+    "paraphrase": "v.发牢骚；哭诉；嘎嘎响；发呜呜声 n.抱怨；牢骚；哀鸣",
+    "accent": "/waɪn/"
   },
   "whips": {
     "paraphrase": "n. 鞭子（whip 的复数）",
@@ -13018,6 +15090,10 @@
     "paraphrase": "n. 小束（wisp 的复数）",
     "accent": "/wɪsps/"
   },
+  "wispy": {
+    "paraphrase": "adj.纤细的, 脆弱的",
+    "accent": ""
+  },
   "witch": {
     "paraphrase": "n.女巫，巫婆",
     "accent": "/wɪtʃ/"
@@ -13033,6 +15109,10 @@
   "wives": {
     "paraphrase": "n. 妻子；太太（wife 的复数）",
     "accent": "/waɪvz/"
+  },
+  "wizen": {
+    "paraphrase": "vi.枯萎；凋谢；干瘪 vt.使凋谢；使枯萎；使干瘪 adj.凋谢的；枯萎的",
+    "accent": "/'wizən/"
   },
   "wolfs": {
     "paraphrase": "v. 狼吞虎咽（wolf 的第三人称单数）",
@@ -13062,6 +15142,10 @@
     "paraphrase": "n.森林，树林",
     "accent": "/wʊdz/"
   },
+  "woody": {
+    "paraphrase": "adj.多树木的,木质的",
+    "accent": "/'wʊdi/"
+  },
   "woofs": {
     "paraphrase": "n. 犬吠声（woof 的复数）",
     "accent": "/wʊfs/"
@@ -13069,6 +15153,10 @@
   "wools": {
     "paraphrase": "n. 羊毛（wool 的复数）",
     "accent": "/wʊlz/"
+  },
+  "woozy": {
+    "paraphrase": "adj.糊涂的, 虚弱的",
+    "accent": "/'wuzi/"
   },
   "words": {
     "paraphrase": "n. 单词；话语（word 的复数）",
@@ -13146,6 +15234,10 @@
     "paraphrase": "vt.夺取，扭夺；歪曲，曲解",
     "accent": "/rɛst/"
   },
+  "wrick": {
+    "paraphrase": "v.扭伤",
+    "accent": "/rɪk/"
+  },
   "wring": {
     "paraphrase": "v.拧，绞；榨取，强求；n.拧，绞，扭",
     "accent": "/rɪŋ/"
@@ -13170,9 +15262,17 @@
     "paraphrase": "vbl.write的过去式",
     "accent": "/rot/"
   },
+  "wroth": {
+    "paraphrase": "adj.暴怒的，非常愤怒的",
+    "accent": "/rəuθ, rɔθ, rɔ:θ/"
+  },
   "xanax": {
     "paraphrase": "n. 阿普唑仑（镇静类药物）",
     "accent": "/ˈzænæks/"
+  },
+  "xenon": {
+    "paraphrase": "n.氙(惰性气体的一种,元素符号Xe)",
+    "accent": "/'zinɑn/"
   },
   "xerox": {
     "paraphrase": "n. 施乐（品牌）；复印件；v. 复印",
@@ -13270,6 +15370,10 @@
     "paraphrase": "n. 瑜伽修行者（yogi 的复数）",
     "accent": "/ˈjoʊɡiz/"
   },
+  "yokel": {
+    "paraphrase": "n.庄稼汉, 乡下人",
+    "accent": "/'jəukəl/"
+  },
   "yokes": {
     "paraphrase": "n. 轭，束缚（yoke 的复数）；v. 给……上轭（yoke 的第三人称单数）",
     "accent": "/joʊks/"
@@ -13334,6 +15438,14 @@
     "paraphrase": "n. 热情（zest 的复数）",
     "accent": "/zɛsts/"
   },
+  "zesty": {
+    "paraphrase": "adj.兴致很高的，热望的",
+    "accent": ""
+  },
+  "zilch": {
+    "paraphrase": "n.微不足道的事物（或人）, 小人物, 无, 零, 无价值之物",
+    "accent": "/ziltʃ/"
+  },
   "zincs": {
     "paraphrase": "n. 锌（zinc 的复数）",
     "accent": "/zɪŋks/"
@@ -13341,6 +15453,10 @@
   "zings": {
     "paraphrase": "v. 发出尖啸声（zing 的第三人称单数）；n. 尖啸声（zing 的复数）",
     "accent": "/zɪŋz/"
+  },
+  "zippy": {
+    "paraphrase": "adj.敏捷的, 活泼的",
+    "accent": "/'zɪpi/"
   },
   "zones": {
     "paraphrase": "n. 区域；地带（zone 的复数）；v. 划分区域",

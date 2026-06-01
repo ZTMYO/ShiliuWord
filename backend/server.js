@@ -694,6 +694,27 @@ app.get("/api/wordle/words", async (request, response, next) => {
   }
 });
 
+app.get("/api/dictionary", async (request, response, next) => {
+  try {
+    const fs = require("fs/promises");
+    const path = require("path");
+    
+    const dictContent = await fs.readFile(
+      path.join(DATA_DIR, "all-word-dict.json"),
+      "utf8"
+    );
+    
+    const dictData = JSON.parse(dictContent);
+    
+    response.json({
+      ok: true,
+      data: dictData
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
 app.get("/api/word/info/:word", async (request, response, next) => {
   try {
     const word = String(request.params.word || "").trim().toLowerCase();
@@ -736,6 +757,7 @@ app.use("/api/synonym", requireAuth, synonymRouter);
 app.use("/api/flash", requireAuth, flashRouter);
 app.use("/api/reading", requireAuth, readingRouter);
 
+app.use("/data", express.static(DATA_DIR));
 app.use(express.static(DIST_DIR));
 
 app.get("*", (request, response, next) => {

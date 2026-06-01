@@ -7834,5 +7834,69 @@
   "odd": {
     "defEn": "different from what is usual or expected; strange",
     "defCn": "与通常情况或预期不同的，令人感到奇怪的"
+  },
+  "encounter": {
+    "defEn": "to meet or experience something, especially something unexpected or difficult",
+    "defCn": "指偶然碰到或经历某事，通常带有意外或挑战性"
+  },
+  "convenience": {
+    "defEn": "the quality of being easy to use or suitable for a particular purpose",
+    "defCn": "指某事物使用起来省时省力、符合需求的特点"
+  },
+  "recede": {
+    "defEn": "to move back or away from a previous position, or to become less strong or intense",
+    "defCn": "指位置上的后退或远离，也指程度、强度上的逐渐减弱"
+  },
+  "accord": {
+    "defEn": "a formal agreement between two or more parties, or a state of harmony",
+    "defCn": "指双方或多方达成的正式共识，或彼此协调一致的状态"
+  },
+  "tank": {
+    "defEn": "a large container for holding liquid or gas",
+    "defCn": "用来储存液体或气体的大型容器，比如水箱或油罐"
+  },
+  "goodbye": {
+    "defEn": "a word said when leaving or ending a conversation",
+    "defCn": "离开或结束对话时说的告别用语"
+  },
+  "pleasant": {
+    "defEn": "giving a feeling of enjoyment or satisfaction",
+    "defCn": "让人感到开心或满足的，比如愉快的经历或舒适的环境"
+  },
+  "build": {
+    "defEn": "to make something by putting parts together",
+    "defCn": "通过组合材料或部件来创造出某物，比如盖房子或搭建模型"
+  },
+  "emphasize": {
+    "defEn": "to give special importance or attention to something",
+    "defCn": "特别指出某事物的重要性，使其更受关注"
+  },
+  "conversion": {
+    "defEn": "the act or process of changing from one form, use, or system to another",
+    "defCn": "从一种形式、用途或系统变为另一种的过程或行为"
+  },
+  "implication": {
+    "defEn": "a possible future effect or result of a situation or action",
+    "defCn": "某个情况或行动可能在未来产生的影响或后果"
+  },
+  "wet": {
+    "defEn": "covered or soaked with water or another liquid",
+    "defCn": "表面或内部被水或其他液体覆盖或浸透的状态"
+  },
+  "alienate": {
+    "defEn": "to cause someone to feel isolated or estranged from a group or person",
+    "defCn": "让某人感到被孤立或与原本亲近的人或群体关系变冷淡"
+  },
+  "comparison": {
+    "defEn": "the act of examining two or more things to see how they are similar or different",
+    "defCn": "把两个或多个事物放在一起看它们有哪些相同点和不同点的行为"
+  },
+  "equality": {
+    "defEn": "the state of having the same rights, status, or opportunities as others",
+    "defCn": "每个人在权利、地位或机会上都处于相同水平的状态"
+  },
+  "rain": {
+    "defEn": "water that falls from clouds in the sky in drops",
+    "defCn": "从天空的云中落下来的水滴"
   }
 }
