@@ -694,22 +694,78 @@ app.get("/api/wordle/words", async (request, response, next) => {
   }
 });
 
+let _dictCache = null;
+let _dictLoadPromise = null;
+
+async function loadDictWithExamples() {
+  const fs = require("fs/promises");
+  const path = require("path");
+
+  const [dictContent, examplesContent] = await Promise.all([
+    fs.readFile(path.join(DATA_DIR, "all-word-dict.json"), "utf8"),
+    fs.readFile(path.join(DATA_DIR, "word-examples.json"), "utf8")
+  ]);
+
+  const dictData = JSON.parse(dictContent);
+  const examplesData = JSON.parse(examplesContent);
+
+  for (const [word, info] of Object.entries(examplesData)) {
+    const extraExamples = Array.isArray(info.examples) ? info.examples : [];
+
+    if (dictData[word]) {
+      // 合并例句去重
+      if (extraExamples.length) {
+        const existing = Array.isArray(dictData[word].examples) ? dictData[word].examples : [];
+        const seenEn = new Set(existing.map(e => e.en));
+        for (const ex of extraExamples) {
+          if (ex.en && !seenEn.has(ex.en)) {
+            seenEn.add(ex.en);
+            existing.push(ex);
+          }
+        }
+        dictData[word].examples = existing;
+      }
+      // 补充缺失的音标
+      if (!dictData[word].accent && info.accent) {
+        dictData[word].accent = info.accent;
+      }
+    } else {
+      dictData[word] = {
+        examples: extraExamples,
+        paraphrase: info.paraphrase || "",
+        accent: info.accent || ""
+      };
+    }
+  }
+
+  _dictCache = dictData;
+  return dictData;
+}
+
+async function getDictCache() {
+  if (_dictCache) {
+    return _dictCache;
+  }
+  if (!_dictLoadPromise) {
+    _dictLoadPromise = loadDictWithExamples().finally(() => {
+      _dictLoadPromise = null;
+    });
+  }
+  return _dictLoadPromise;
+}
+
+// 每半小时后台刷新缓存
+setInterval(() => {
+  loadDictWithExamples().catch(err => {
+    console.error("定时刷新词典缓存失败:", err);
+  });
+}, 30 * 60 * 1000);
+
 app.get("/api/dictionary", async (request, response, next) => {
   try {
-    const fs = require("fs/promises");
-    const path = require("path");
-    
-    const dictContent = await fs.readFile(
-      path.join(DATA_DIR, "all-word-dict.json"),
-      "utf8"
-    );
-    
-    const dictData = JSON.parse(dictContent);
-    
-    response.json({
-      ok: true,
-      data: dictData
-    });
+    const dictData = await getDictCache();
+    response.setHeader("Cache-Control", "public, max-age=1800");
+    response.json({ ok: true, data: dictData });
   } catch (err) {
     next(err);
   }

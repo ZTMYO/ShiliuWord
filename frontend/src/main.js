@@ -46,6 +46,7 @@ const QUIZ_DRAFT_STORAGE_PREFIX = "shiliu-word-drafts-v2";
 const LEGACY_QUIZ_DRAFT_STORAGE_PREFIX = "english-ai-word-drafts-v2";
 const FLASH_CACHE_STORAGE_PREFIX = "shiliu-word-flash-cache-v1";
 const READING_CACHE_STORAGE_PREFIX = "shiliu-word-reading-cache-v1";
+const DICTIONARY_SEARCH_STORAGE_KEY = "shiliu-word-dictionary-search";
 const LEGACY_HISTORY_STORAGE_KEY = "english-ai-word-history";
 const LEGACY_FLASH_HISTORY_STORAGE_KEY = "english-ai-flash-history";
 const LEGACY_QUIZ_DRAFT_STORAGE_KEY = "english-ai-word-drafts";
@@ -175,6 +176,17 @@ const state = {
   collection: [],
   collectionPendingWords: new Set(),
   collectionWordSet: new Set(),
+  dictionaryHistory: [],
+  dictionaryCurrentWord: null,
+  fromFlashToDictionary: false,
+  fromWordleToDictionary: false,
+  fromHistoryToDictionary: false,
+  fromCollectionToDictionary: false,
+  fromResultToDictionary: false,
+  wordleWordForDictionary: null,
+  lastViewBeforeDictionary: null,
+  savedResultDialogPayload: null,
+  savedScrollPositions: {},
   historyVisibleCount: 0,
   collectionVisibleCount: 0,
   historyWrongOnly: false,
@@ -347,6 +359,7 @@ const elements = {
   wordlePreviewAccent: document.querySelector("#wordle-preview-accent"),
   wordlePreviewParaphrase: document.querySelector("#wordle-preview-paraphrase"),
   wordleSurrenderConfirmDialog: document.querySelector("#wordle-surrender-confirm-dialog"),
+  dictionaryBackPrevBtn: document.querySelector("#dictionary-back-prev-btn"),
   dictionaryBackHomeBtn: document.querySelector("#dictionary-back-home-btn"),
   dictionaryThemeToggleBtn: document.querySelector("#dictionary-theme-toggle-btn"),
   dictionarySearchInput: document.querySelector("#dictionary-search-input"),
@@ -372,7 +385,9 @@ const elements = {
   dictionaryRelWordSection: document.querySelector("#dictionary-rel-word-section"),
   dictionaryRelWordList: document.querySelector("#dictionary-rel-word-list"),
   wordleSurrenderCancelBtn: document.querySelector("#wordle-surrender-cancel-btn"),
-  wordleSurrenderConfirmBtn: document.querySelector("#wordle-surrender-confirm-btn")
+  wordleSurrenderConfirmBtn: document.querySelector("#wordle-surrender-confirm-btn"),
+  flashGoDictionaryBtn: document.querySelector("#flash-go-dictionary-btn"),
+  wordleGoDictionaryBtn: document.querySelector("#wordle-go-dictionary-btn")
 };
 
 function syncToastHost() {
@@ -2208,6 +2223,7 @@ function renderHistory() {
         <span class="flash-history-side">
           <span class="flash-history-time">${formatHistoryTime(record.createdAt)}</span>
           ${createInlinePronounceButton(record.word, "flash-history-pronounce-btn")}
+          ${createInlineGoDictionaryButton(record.word, "flash-history-go-dictionary-btn")}
           ${createInlineCollectButton(record.word, record.paraphrase, "flash-history-collect-btn")}
         </span>
       `;
@@ -2296,9 +2312,10 @@ function renderHistory() {
                   <p class="history-answer">${item.word}</p>
                 </div>
                 <span class="history-question-side">
-                  ${createInlinePronounceButton(item.word, "history-pronounce-btn")}
-                  ${createInlineCollectButton(item.word, item.paraphrase, "history-collect-btn")}
-                </span>
+          ${createInlinePronounceButton(item.word, "history-pronounce-btn")}
+          ${createInlineGoDictionaryButton(item.word, "history-go-dictionary-btn")}
+          ${createInlineCollectButton(item.word, item.paraphrase, "history-collect-btn")}
+        </span>
               </div>
             `;
           })
@@ -2631,6 +2648,34 @@ function createInlinePronounceButton(word, extraClass = "") {
   `;
 }
 
+function createInlineGoDictionaryButton(word, extraClass = "") {
+  if (!word) {
+    return "";
+  }
+
+  const buttonClassName = ["icon-btn", "go-dictionary-btn", extraClass]
+    .filter(Boolean)
+    .join(" ");
+
+  return `
+    <button
+      type="button"
+      class="${buttonClassName}"
+      data-word="${escapeHtmlAttribute(word || "")}"
+      aria-label="去词典"
+      title="去词典"
+    >
+      <svg class="go-dictionary-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="none">
+        <path d="M160 96v736a32 32 0 1 0 64 0V128h576v608a32 32 0 1 0 64 0V96a32 32 0 0 0-32-32H192a32 32 0 0 0-32 32z" fill="currentColor"></path>
+        <path d="M288 704h544v64H288q-26.496 0-45.248 18.752T224 832q0 26.496 18.752 45.248T288 896h544v64H288q-53.024 0-90.496-37.504Q160 885.024 160 832q0-53.024 37.504-90.496Q234.976 704 288 704z" fill="currentColor"></path>
+        <path d="M832 768a32 32 0 0 0 0-64h-0.032q-52.992 0-90.464 37.504Q704 778.976 704 832q0 53.024 37.504 90.496Q778.976 960 832 960a32 32 0 0 0 0-64q-26.496 0-45.248-18.752T768 832q0-26.496 18.752-45.248T832 768z" fill="currentColor"></path>
+        <path d="M384 544V288h64v256h-64z m64 0q0 3.136-0.64 6.24-0.576 3.104-1.792 6.016-1.216 2.88-2.976 5.536-1.728 2.592-3.968 4.832-2.24 2.24-4.832 3.968-2.624 1.76-5.536 2.976-2.912 1.216-6.016 1.824Q419.136 576 416 576t-6.24-0.64q-3.104-0.576-6.016-1.792-2.88-1.216-5.536-2.976-2.592-1.728-4.832-3.968-2.24-2.24-3.968-4.832-1.76-2.624-2.976-5.536-1.216-2.912-1.824-6.016Q384 547.136 384 544t0.64-6.24q0.576-3.104 1.792-6.016 1.216-2.88 2.976-5.536 1.728-2.592 3.968-4.832 2.24-2.24 4.832-3.968 2.624-1.76 5.536-2.976 2.912-1.216 6.016-1.824Q412.864 512 416 512t6.24 0.64q3.104 0.576 6.016 1.792 2.88 1.216 5.536 2.976 2.592 1.728 4.832 3.968 2.24 2.24 3.968 4.832 1.76 2.624 2.976 5.536 1.216 2.912 1.824 6.016Q448 284.864 448 288z" fill="currentColor"></path>
+        <path d="M416 256h64q66.272 0 113.152 46.848Q640 349.76 640 416q0 66.272-46.848 113.152Q546.24 576 480 576h-64v-64h64q39.776 0 67.872-28.128Q576 455.776 576 416q0-39.776-28.128-67.872Q519.776 320 480 320h-64V256z" fill="currentColor"></path>
+      </svg>
+    </button>
+  `;
+}
+
 async function toggleCollection(wordItem) {
   const normalizedWord = normalizeCollectionWord(wordItem.word);
   if (!normalizedWord) {
@@ -2714,6 +2759,7 @@ function renderCollection() {
       <span class="collection-side">
         <span class="collection-time">${formatHistoryTime(item.collectedAt)}</span>
         ${createInlinePronounceButton(item.word, "collection-pronounce-btn")}
+        ${createInlineGoDictionaryButton(item.word, "collection-go-dictionary-btn")}
         <button
           type="button"
           class="icon-btn collection-remove-btn"
@@ -3154,6 +3200,12 @@ function renderFlashNavButtons() {
   const hasNextCandidate = state.flashFuture.length > 0 || state.flashQueue.length > 0 || Boolean(state.flashCurrent);
   elements.flashNextBtn.disabled = !state.flashCurrent || !state.flashEvaluation || !hasNextCandidate;
   elements.flashHintBtn.disabled = !state.flashCurrent;
+  
+  if (state.flashCurrent && state.flashEvaluation) {
+    elements.flashGoDictionaryBtn.classList.remove("is-hidden");
+  } else {
+    elements.flashGoDictionaryBtn.classList.add("is-hidden");
+  }
 }
 
 function warmFlashBatchForCurrentState() {
@@ -3938,6 +3990,9 @@ function renderHomeModes() {
         return;
       }
       if (type === "dictionary") {
+        if (!requireAuthFromHomeEntry()) {
+          return;
+        }
         loadDictionary();
         return;
       }
@@ -4146,6 +4201,7 @@ function renderResults() {
         <h4>${showIndex ? `${index + 1}. ` : ""}${item.word}</h4>
         <span class="result-item-actions">
           ${createInlinePronounceButton(item.word, "result-pronounce-btn")}
+          ${createInlineGoDictionaryButton(item.word, "result-go-dictionary-btn")}
           ${createInlineCollectButton(item.word, item.paraphrase, "result-collect-btn")}
         </span>
       </div>
@@ -4609,6 +4665,15 @@ function bindEvents() {
       return;
     }
 
+    const goDictionaryBtn = event.target.closest(".go-dictionary-btn");
+    if (goDictionaryBtn) {
+      const word = goDictionaryBtn.dataset.word;
+      if (word) {
+        goToDictionaryFromOther(word, "history");
+      }
+      return;
+    }
+
     const flashHistoryItem = event.target.closest(".flash-history-item");
     if (flashHistoryItem) {
       const nextLang = flashHistoryItem.dataset.lang === "cn" ? "en" : "cn";
@@ -4862,6 +4927,16 @@ function bindEvents() {
   elements.flashCollectBtn.addEventListener("click", () => {
     toggleCollect();
   });
+  
+  elements.flashGoDictionaryBtn.addEventListener("click", () => {
+    goToDictionaryFromFlash();
+  });
+  
+  elements.wordleGoDictionaryBtn.addEventListener("click", () => {
+    elements.wordleResultDialog.close();
+    goToDictionaryFromWordle();
+  });
+
   elements.collectionList.addEventListener("click", (event) => {
     const pronounceBtn = event.target.closest(".collection-pronounce-btn");
     if (pronounceBtn) {
@@ -4883,6 +4958,15 @@ function bindEvents() {
       return;
     }
 
+    const goDictionaryBtn = event.target.closest(".go-dictionary-btn");
+    if (goDictionaryBtn) {
+      const word = goDictionaryBtn.dataset.word;
+      if (word) {
+        goToDictionaryFromOther(word, "collection");
+      }
+      return;
+    }
+
     const collectionItem = event.target.closest(".collection-item");
     if (collectionItem) {
       const nextLang = collectionItem.dataset.lang === "cn" ? "en" : "cn";
@@ -4895,12 +4979,14 @@ function bindEvents() {
       }
     }
   });
+
   elements.resultList.addEventListener("click", (event) => {
     const exampleBtn = event.target.closest(".example-tts-btn");
     if (exampleBtn) {
       speakEnglishText(exampleBtn.dataset.ttsText || "", exampleBtn);
       return;
     }
+
     const pronounceBtn = event.target.closest(".result-pronounce-btn");
     if (pronounceBtn) {
       playWordPronunciation(pronounceBtn.dataset.word || "", pronounceBtn);
@@ -4908,22 +4994,34 @@ function bindEvents() {
     }
 
     const collectBtn = event.target.closest(".result-collect-btn");
-    if (!collectBtn) {
+    if (collectBtn) {
+      const word = collectBtn.dataset.word || "";
+      const paraphrase = collectBtn.dataset.paraphrase || "";
+      toggleCollection({ word, paraphrase }).then((result) => {
+        refreshCollectUi();
+        if (result === "added") {
+          showToast("已收藏", "success");
+        } else if (result === "removed") {
+          showToast("已取消收藏", "success");
+        } else {
+          showToast("收藏操作失败", "error");
+        }
+      });
       return;
     }
 
-    const word = collectBtn.dataset.word || "";
-    const paraphrase = collectBtn.dataset.paraphrase || "";
-    toggleCollection({ word, paraphrase }).then((result) => {
-      refreshCollectUi();
-      if (result === "added") {
-        showToast("已收藏", "success");
-      } else if (result === "removed") {
-        showToast("已取消收藏", "success");
-      } else {
-        showToast("收藏操作失败", "error");
+    const goDictionaryBtn = event.target.closest(".go-dictionary-btn");
+    if (goDictionaryBtn) {
+      const word = goDictionaryBtn.dataset.word;
+      if (word) {
+        // 关闭结果对话框
+        if (elements.dialog && elements.dialog.open) {
+          elements.dialog.close();
+        }
+        goToDictionaryFromOther(word, "result");
       }
-    });
+      return;
+    }
   });
   elements.wordleBackHomeBtn.addEventListener("click", () => {
     setView("home");
@@ -5502,6 +5600,7 @@ function submitWordleGuess() {
 
 async function showWordleResultDialog(won) {
   const word = wordleState.targetWord;
+  state.wordleWordForDictionary = word;
   
   elements.wordleResultTitle.textContent = won ? "恭喜答对！" : "再接再厉";
   elements.wordleResultWord.textContent = word.toUpperCase();
@@ -5583,7 +5682,7 @@ async function showWordleResultDialog(won) {
           <div class="wordle-result-example">
             <button
               type="button"
-              class="wordle-result-example-tts-btn example-tts-btn"
+              class="wordle-result-example-tts-btn example-tts-btn pronounce-btn"
               data-tts-text="${escapeHtmlAttribute(example.en)}"
               aria-label="朗读例句"
               title="朗读"
@@ -5680,18 +5779,36 @@ initWordleGame();
 
 let dictionaryData = {};
 let dictionaryWordList = [];
-let currentSearchResults = [];
-let displayedResultsCount = 0;
-const RESULTS_PER_PAGE = 30;
 
 function isWordExist(word) {
   if (!word) return false;
   return dictionaryWordList.includes(word.toLowerCase().trim());
 }
 
+let currentSearchResults = [];
+let currentSearchInput = "";
+let displayedResultsCount = 0;
+const RESULTS_PER_PAGE = 30;
+
+function isNormalDictBrowse() {
+  return !state.fromFlashToDictionary && !state.fromWordleToDictionary && !state.fromHistoryToDictionary && !state.fromCollectionToDictionary && !state.fromResultToDictionary;
+}
+
 function displayDictionaryWord(word) {
   const data = dictionaryData[word];
   if (!data) return;
+
+  // 保存当前单词到历史（单词间切换时）
+  if (isNormalDictBrowse() && state.dictionaryCurrentWord && state.dictionaryCurrentWord !== word) {
+    state.dictionaryHistory.push({
+      input: state.dictionaryCurrentWord,
+      searchResults: null
+    });
+  }
+  state.dictionaryCurrentWord = word;
+
+  // 更新返回按钮状态
+  updateDictionaryBackBtn();
 
   elements.dictionaryWordTitle.textContent = word;
   elements.dictionaryPronounceBtn.innerHTML = PRONOUNCE_ICON;
@@ -5712,15 +5829,22 @@ function displayDictionaryWord(word) {
       </li>
     `).join('');
     elements.dictionaryTransSection.classList.remove("is-hidden");
+  } else if (data.paraphrase) {
+    elements.dictionaryTransList.innerHTML = `
+      <li class="dictionary-item">
+        <span class="dictionary-text">${escapeHtml(data.paraphrase)}</span>
+      </li>
+    `;
+    elements.dictionaryTransSection.classList.remove("is-hidden");
   } else {
     elements.dictionaryTransSection.classList.add("is-hidden");
   }
 
-  if (data.examples && data.examples.length > 0) {
-    elements.dictionarySentenceList.innerHTML = data.examples.map((s, idx) => `
+  if (Array.isArray(data.examples) && data.examples.length > 0) {
+    elements.dictionarySentenceList.innerHTML = data.examples.map((s) => `
       <li class="dictionary-item">
         <div class="dictionary-text">
-          <button class="example-tts-btn" type="button" data-example-text="${escapeHtmlAttribute(s.en)}" aria-label="朗读例句">
+          <button class="example-tts-btn pronounce-btn" type="button" data-example-text="${escapeHtmlAttribute(s.en)}" aria-label="朗读例句">
             ${PRONOUNCE_ICON}
           </button>
           ${s.en || ''}
@@ -5804,6 +5928,242 @@ function displayDictionaryWord(word) {
   elements.dictionaryResult.classList.remove("is-hidden");
 }
 
+function updateDictionaryBackBtn() {
+  if (state.fromFlashToDictionary || state.fromWordleToDictionary || state.fromHistoryToDictionary || state.fromCollectionToDictionary || state.fromResultToDictionary) {
+    elements.dictionaryBackPrevBtn.removeAttribute("disabled");
+  } else if (state.dictionaryHistory.length > 0) {
+    elements.dictionaryBackPrevBtn.removeAttribute("disabled");
+  } else {
+    elements.dictionaryBackPrevBtn.setAttribute("disabled", "true");
+  }
+}
+
+function goBackToPrevWord() {
+  if (state.fromFlashToDictionary) {
+    state.fromFlashToDictionary = false;
+    state.dictionaryHistory = [];
+    state.dictionaryCurrentWord = null;
+    updateDictionaryBackBtn();
+    setView("flash");
+    return;
+  }
+
+  if (state.fromWordleToDictionary) {
+    state.fromWordleToDictionary = false;
+    state.wordleWordForDictionary = null;
+    state.dictionaryHistory = [];
+    state.dictionaryCurrentWord = null;
+    updateDictionaryBackBtn();
+    setView("wordle");
+    return;
+  }
+
+  if (state.fromHistoryToDictionary || state.fromCollectionToDictionary || state.fromResultToDictionary) {
+    const needToReopenDialog = state.fromResultToDictionary && state.savedResultDialogPayload;
+    const savedPayload = state.savedResultDialogPayload;
+    const savedScrollTop = state.savedScrollPositions[state.lastViewBeforeDictionary] || 0;
+    state.fromHistoryToDictionary = false;
+    state.fromCollectionToDictionary = false;
+    state.fromResultToDictionary = false;
+    state.savedResultDialogPayload = null;
+    state.dictionaryHistory = [];
+    state.dictionaryCurrentWord = null;
+    updateDictionaryBackBtn();
+    if (state.lastViewBeforeDictionary) {
+      setView(state.lastViewBeforeDictionary);
+    } else {
+      setView("home");
+    }
+    state.lastViewBeforeDictionary = null;
+    
+    // 恢复滚动位置
+    if (savedScrollTop > 0) {
+      requestAnimationFrame(() => {
+        window.scrollTo(0, savedScrollTop);
+      });
+    }
+    
+    // 如果有保存的对话框内容，重新打开对话框
+    if (needToReopenDialog && savedPayload) {
+      setTimeout(() => {
+        openResultDialog(savedPayload);
+      }, 0);
+    }
+    return;
+  }
+
+  if (state.dictionaryHistory.length === 0) {
+    return;
+  }
+  const entry = state.dictionaryHistory.pop();
+  const restoreInput = entry && typeof entry === "object" ? (entry.searchResults ? entry.searchInput : entry.input) : entry;
+  elements.dictionarySearchInput.value = restoreInput || "";
+  state.dictionaryCurrentWord = null;
+  updateDictionaryBackBtn();
+  
+  if (entry && typeof entry === "object" && entry.searchResults) {
+    currentSearchResults = entry.searchResults;
+    currentSearchInput = entry.searchInput || restoreInput;
+    elements.dictionaryLoading.classList.add("is-hidden");
+    elements.dictionarySuggestions.innerHTML = '';
+    elements.dictionaryResult.classList.add("is-hidden");
+    elements.dictionaryNoResult.classList.remove("is-hidden");
+    // 重新从 0 开始渲染搜索结果
+    displayedResultsCount = 0;
+    renderSearchResults(restoreInput);
+  } else {
+    currentSearchResults = [];
+    currentSearchInput = "";
+    searchDictionaryWord(restoreInput || "");
+  }
+}
+
+async function goToDictionaryFromFlash() {
+  if (!state.flashCurrent) {
+    return;
+  }
+  
+  state.fromFlashToDictionary = true;
+  state.fromWordleToDictionary = false;
+  state.wordleWordForDictionary = null;
+  state.dictionaryHistory = [];
+  state.dictionaryCurrentWord = null;
+  currentSearchResults = [];
+  currentSearchInput = "";
+  
+  if (!state.isAuthenticated) {
+    openAuthDialog();
+    return;
+  }
+  
+  setView("dictionary");
+  
+  if (Object.keys(dictionaryData).length === 0) {
+    try {
+      const response = await fetch("/api/dictionary");
+      const result = await response.json();
+      if (result.ok) {
+        dictionaryData = result.data;
+        dictionaryWordList = Object.keys(dictionaryData);
+      } else {
+        throw new Error("Failed to load dictionary");
+      }
+    } catch (error) {
+      console.error("Failed to load dictionary:", error);
+    }
+  }
+  
+  const word = state.flashCurrent.word;
+  elements.dictionarySearchInput.value = word;
+  searchDictionaryWord(word);
+  
+  updateDictionaryBackBtn();
+}
+
+async function goToDictionaryFromWordle() {
+  if (!state.wordleWordForDictionary) {
+    return;
+  }
+  
+  state.fromWordleToDictionary = true;
+  state.fromFlashToDictionary = false;
+  state.dictionaryHistory = [];
+  state.dictionaryCurrentWord = null;
+  
+  if (!state.isAuthenticated) {
+    openAuthDialog();
+    return;
+  }
+  
+  setView("dictionary");
+  
+  if (Object.keys(dictionaryData).length === 0) {
+    try {
+      const response = await fetch("/api/dictionary");
+      const result = await response.json();
+      if (result.ok) {
+        dictionaryData = result.data;
+        dictionaryWordList = Object.keys(dictionaryData);
+      } else {
+        throw new Error("Failed to load dictionary");
+      }
+    } catch (error) {
+      console.error("Failed to load dictionary:", error);
+    }
+  }
+  
+  const word = state.wordleWordForDictionary;
+  elements.dictionarySearchInput.value = word;
+  searchDictionaryWord(word);
+
+  updateDictionaryBackBtn();
+}
+
+async function goToDictionaryFromOther(word, fromType) {
+  if (!word) {
+    return;
+  }
+
+  state.fromFlashToDictionary = false;
+  state.fromWordleToDictionary = false;
+  state.fromHistoryToDictionary = fromType === "history";
+  state.fromCollectionToDictionary = fromType === "collection";
+  state.fromResultToDictionary = fromType === "result";
+  state.wordleWordForDictionary = null;
+  state.lastViewBeforeDictionary = state.view;
+  state.dictionaryHistory = [];
+  state.dictionaryCurrentWord = null;
+  
+  // 保存结果对话框的状态，以便返回时重新打开
+  if (fromType === "result") {
+    if (state.resultDialogPayload) {
+      state.savedResultDialogPayload = JSON.parse(JSON.stringify(state.resultDialogPayload));
+    } else if (Array.isArray(state.quiz?.items) && state.quiz.items.length > 0) {
+      state.savedResultDialogPayload = {
+        title: "答案解析",
+        items: JSON.parse(JSON.stringify(state.quiz.items)),
+        showIndex: true
+      };
+    } else {
+      state.savedResultDialogPayload = null;
+    }
+  } else {
+    state.savedResultDialogPayload = null;
+  }
+
+  if (!state.isAuthenticated) {
+    openAuthDialog();
+    return;
+  }
+
+  // 保存历史记录/收藏本页面的滚动位置
+  if (fromType === "history" || fromType === "collection") {
+    state.savedScrollPositions[state.view] = window.scrollY;
+  }
+
+  setView("dictionary");
+
+  if (Object.keys(dictionaryData).length === 0) {
+    try {
+      const response = await fetch("/api/dictionary");
+      const result = await response.json();
+      if (result.ok) {
+        dictionaryData = result.data;
+        dictionaryWordList = Object.keys(dictionaryData);
+      } else {
+        throw new Error("Failed to load dictionary");
+      }
+    } catch (error) {
+      console.error("Failed to load dictionary:", error);
+    }
+  }
+
+  elements.dictionarySearchInput.value = word;
+  searchDictionaryWord(word);
+
+  updateDictionaryBackBtn();
+}
+
 function calculateLevenshteinDistance(a, b) {
   const matrix = [];
   const aLength = a.length;
@@ -5831,6 +6191,10 @@ function calculateLevenshteinDistance(a, b) {
           matrix[i - 1][j] + 1
         );
       }
+      // Damerau-Levenshtein: 检查相邻字符交换
+      if (i > 1 && j > 1 && b.charAt(i - 1) === a.charAt(j - 2) && b.charAt(i - 2) === a.charAt(j - 1)) {
+        matrix[i][j] = Math.min(matrix[i][j], matrix[i - 2][j - 2] + 1);
+      }
     }
   }
 
@@ -5838,18 +6202,30 @@ function calculateLevenshteinDistance(a, b) {
 }
 
 function showDictionarySuggestions(word) {
+  currentSearchInput = "";
   const lowerWord = word.toLowerCase();
   
   const wordWithScores = dictionaryWordList.map(w => {
     const lowerW = w.toLowerCase();
     const distance = calculateLevenshteinDistance(lowerWord, lowerW);
-    return { word: w, distance: distance, includes: lowerW.includes(lowerWord) || lowerWord.includes(lowerW) };
+    const includes = lowerW.includes(lowerWord) || lowerWord.includes(lowerW);
+    const lengthDiff = Math.abs(w.length - word.length);
+    return { word: w, distance: distance, includes: includes, lengthDiff: lengthDiff };
   });
   
   const sortedWords = wordWithScores.sort((a, b) => {
+    // 首先按编辑距离排序
+    if (a.distance !== b.distance) {
+      return a.distance - b.distance;
+    }
+    // 编辑距离相同的话，按长度差异排序
+    if (a.lengthDiff !== b.lengthDiff) {
+      return a.lengthDiff - b.lengthDiff;
+    }
+    // 最后按包含关系排序
     if (a.includes && !b.includes) return -1;
     if (!a.includes && b.includes) return 1;
-    return a.distance - b.distance;
+    return 0;
   });
   
   const maxDistance = Math.max(3, Math.floor(word.length * 0.5));
@@ -5882,6 +6258,9 @@ function toggleDictionaryClearBtn(value) {
 function searchDictionaryWord(word) {
   word = word.trim();
   toggleDictionaryClearBtn(word);
+  try {
+    window.localStorage.setItem(DICTIONARY_SEARCH_STORAGE_KEY, word);
+  } catch (_) {}
 
   if (!word) {
     elements.dictionaryResult.classList.add("is-hidden");
@@ -5893,6 +6272,15 @@ function searchDictionaryWord(word) {
   const foundWord = dictionaryWordList.find(w => w.toLowerCase() === lowerWord);
 
   if (foundWord) {
+    if (isNormalDictBrowse() && currentSearchResults.length > 0) {
+      state.dictionaryHistory.push({
+        searchInput: currentSearchInput,
+        searchResults: [...currentSearchResults],
+        displayedCount: displayedResultsCount
+      });
+      currentSearchResults = [];
+      currentSearchInput = "";
+    }
     displayDictionaryWord(foundWord);
   } else {
     const isPureEnglish = /^[a-zA-Z0-9\s\-']+$/.test(word);
@@ -5979,7 +6367,14 @@ function highlightSearchWord(text, searchWord) {
 }
 
 function showChineseSearchResults(searchWord, matches) {
+  if (isNormalDictBrowse() && state.dictionaryCurrentWord) {
+    state.dictionaryHistory.push({
+      input: state.dictionaryCurrentWord,
+      searchResults: null
+    });
+  }
   currentSearchResults = matches;
+  currentSearchInput = searchWord;
   displayedResultsCount = 0;
   elements.dictionaryLoading.classList.add("is-hidden");
   elements.dictionarySuggestions.innerHTML = '';
@@ -6061,7 +6456,22 @@ async function preloadDictionary() {
 }
 
 async function loadDictionary() {
+  if (!state.isAuthenticated) {
+    openAuthDialog();
+    return;
+  }
   setView("dictionary");
+  // 重置历史记录
+  state.dictionaryHistory = [];
+  state.dictionaryCurrentWord = null;
+  state.fromFlashToDictionary = false;
+  state.fromWordleToDictionary = false;
+  state.fromHistoryToDictionary = false;
+  state.fromCollectionToDictionary = false;
+  state.fromResultToDictionary = false;
+  state.wordleWordForDictionary = null;
+  state.lastViewBeforeDictionary = null;
+  updateDictionaryBackBtn();
   elements.dictionaryLoading.classList.remove("is-hidden");
   elements.dictionaryNoResult.classList.add("is-hidden");
   elements.dictionaryResult.classList.add("is-hidden");
@@ -6083,16 +6493,35 @@ async function loadDictionary() {
     }
   }
 
+  currentSearchResults = [];
+  currentSearchInput = "";
   elements.dictionaryLoading.classList.add("is-hidden");
-  const cachedSearchText = elements.dictionarySearchInput.value.trim();
-  if (cachedSearchText) {
-    searchDictionaryWord(cachedSearchText);
-  }
+  // 恢复上次搜索内容，但不产生可返回的历史记录
+  try {
+    const saved = window.localStorage.getItem(DICTIONARY_SEARCH_STORAGE_KEY);
+    if (saved) {
+      elements.dictionarySearchInput.value = saved;
+      toggleDictionaryClearBtn(saved);
+      // 执行搜索展示结果，但搜索结束后清除搜索结果缓存，使点击单词不会产生历史记录
+      searchDictionaryWord(saved);
+      currentSearchResults = [];
+      currentSearchInput = "";
+    }
+  } catch (_) {}
 }
 
 function bindDictionaryEvents() {
+  if (elements.dictionaryBackPrevBtn) {
+    elements.dictionaryBackPrevBtn.addEventListener("click", () => {
+      goBackToPrevWord();
+    });
+  }
+
   if (elements.dictionaryBackHomeBtn) {
     elements.dictionaryBackHomeBtn.addEventListener("click", () => {
+      state.dictionaryHistory = [];
+      state.dictionaryCurrentWord = null;
+      updateDictionaryBackBtn();
       setView("home");
     });
   }
@@ -6120,6 +6549,9 @@ function bindDictionaryEvents() {
       elements.dictionarySearchInput.value = "";
       elements.dictionarySearchInput.focus();
       toggleDictionaryClearBtn("");
+      try {
+        window.localStorage.removeItem(DICTIONARY_SEARCH_STORAGE_KEY);
+      } catch (_) {}
     });
   }
 
@@ -6127,7 +6559,7 @@ function bindDictionaryEvents() {
     elements.dictionaryPronounceBtn.addEventListener("click", () => {
       const word = elements.dictionaryWordTitle.textContent;
       if (word) {
-        speakEnglishText(word, elements.dictionaryPronounceBtn);
+        playWordPronunciation(word, elements.dictionaryPronounceBtn);
       }
     });
   }
@@ -6143,7 +6575,7 @@ function bindDictionaryEvents() {
 
       const ttsBtn = e.target.closest(".example-tts-btn");
       if (ttsBtn && ttsBtn.dataset.exampleText) {
-        speakEnglishText(ttsBtn.dataset.exampleText, ttsBtn);
+        playWordPronunciation(ttsBtn.dataset.exampleText, ttsBtn);
       }
     });
   }

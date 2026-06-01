@@ -1367,8 +1367,10 @@ summary {
 
 .history-collect-btn,
 .history-pronounce-btn,
+.history-go-dictionary-btn,
 .flash-history-pronounce-btn,
-.flash-history-collect-btn {
+.flash-history-collect-btn,
+.flash-history-go-dictionary-btn {
   width: 30px;
   height: 30px;
   border-radius: 10px;
@@ -1440,7 +1442,9 @@ summary {
 .history-collect-btn svg,
 .flash-history-collect-btn svg,
 .history-pronounce-btn svg,
-.flash-history-pronounce-btn svg {
+.flash-history-pronounce-btn svg,
+.history-go-dictionary-btn svg,
+.flash-history-go-dictionary-btn svg {
   width: 17px;
   height: 17px;
 }
@@ -1963,7 +1967,8 @@ summary {
 }
 
 button.result-pronounce-btn,
-button.result-collect-btn {
+button.result-collect-btn,
+button.result-go-dictionary-btn {
   width: 32px;
   height: 32px;
   border-radius: 10px;
@@ -1972,7 +1977,8 @@ button.result-collect-btn {
 }
 
 button.result-pronounce-btn:hover,
-button.result-collect-btn:hover {
+button.result-collect-btn:hover,
+button.result-go-dictionary-btn:hover {
   color: var(--text-secondary);
 }
 
@@ -2098,6 +2104,12 @@ button.result-collect-btn:hover {
 
 .pronounce-btn svg,
 .pronounce-btn svg path {
+  fill: currentColor;
+  stroke: none;
+}
+
+.go-dictionary-btn svg,
+.go-dictionary-btn svg path {
   fill: currentColor;
   stroke: none;
 }
@@ -2694,10 +2706,13 @@ button.result-collect-btn:hover {
 
 .collection-pronounce-btn,
 .collection-remove-btn,
+.collection-go-dictionary-btn,
 .history-question-side .history-collect-btn,
 .history-question-side .history-pronounce-btn,
+.history-question-side .history-go-dictionary-btn,
 .flash-history-side .flash-history-collect-btn,
-.flash-history-side .flash-history-pronounce-btn {
+.flash-history-side .flash-history-pronounce-btn,
+.flash-history-side .flash-history-go-dictionary-btn {
   width: 30px;
   height: 30px;
   border-radius: 10px;
@@ -3008,10 +3023,13 @@ button.result-collect-btn:hover {
 
 .collection-pronounce-btn:hover,
 .collection-remove-btn:hover,
+.collection-go-dictionary-btn:hover,
 .history-question-side .history-collect-btn:hover,
 .history-question-side .history-pronounce-btn:hover,
+.history-question-side .history-go-dictionary-btn:hover,
 .flash-history-side .flash-history-collect-btn:hover,
-.flash-history-side .flash-history-pronounce-btn:hover {
+.flash-history-side .flash-history-pronounce-btn:hover,
+.flash-history-side .flash-history-go-dictionary-btn:hover {
   color: var(--muted);
   background: var(--bg-soft);
 }
@@ -3728,6 +3746,7 @@ button {
   border-radius: 8px;
   color: var(--text-primary);
   transition: border-color 0.15s ease;
+  background: transparent;
 }
 
 .dictionary-search-input:focus {
@@ -3854,10 +3873,6 @@ button {
   font-family: 'Lucida Sans Unicode', 'Arial Unicode MS', sans-serif;
 }
 
-.dictionary-section {
-  margin-bottom: 24px;
-}
-
 .dictionary-section-title {
   font-size: 16px;
   font-weight: 700;
@@ -3867,6 +3882,7 @@ button {
 
 .dictionary-list {
   list-style: none;
+  padding: 0;
 }
 
 .dictionary-item {
@@ -4017,6 +4033,25 @@ button {
     gap: 10px;
   }
 
+  .dictionary-header .page-header-inner {
+    gap: 8px;
+  }
+
+  .dictionary-header-left {
+    display: none;
+  }
+
+  .dictionary-search-box {
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  .dictionary-search-input {
+    font-size: 14px;
+    padding: 5px 36px 5px 12px;
+    height: 34px;
+  }
+
   .page-header-actions {
     justify-content: flex-end;
     gap: 8px;
@@ -4033,7 +4068,9 @@ button {
   .page-flash .flash-title-divider {
     display: none !important;
   }
-
+  .collection-side{
+    gap:4px;
+  }
   .auth-card {
     width: min(420px, 100%);
     margin: 0 auto;
@@ -4343,7 +4380,10 @@ button {
   }
   
   .dictionary-section {
-    padding: 14px;
+    padding: 0 12px;
+  }
+  .dictionary-no-result {
+    padding:0;
   }
 }
 
