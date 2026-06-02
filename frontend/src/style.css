@@ -2494,6 +2494,13 @@ button.result-go-dictionary-btn:hover {
   line-height: 1.5;
 }
 
+.site-info-cached-at {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
 .site-info-metrics {
   margin: 0 0 14px;
 }
@@ -3799,6 +3806,58 @@ button {
 .dictionary-search-icon-btn:hover {
   color: var(--text-primary);
 }
+
+.dictionary-suggest-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: var(--bg-page);
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.dictionary-suggest-dropdown.is-hidden {
+  display: none;
+}
+
+.suggest-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+
+.suggest-item:hover {
+  background: var(--bg-soft);
+}
+
+.suggest-item + .suggest-item {
+  border-top: 1px solid var(--line);
+}
+
+.suggest-word {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.suggest-trans {
+  font-size: 13px;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: right;
+  min-width: 0;
+}
+
 .dictionary-loading,
 .dictionary-no-result {
   text-align: center;
@@ -4050,6 +4109,13 @@ button {
     font-size: 14px;
     padding: 5px 36px 5px 12px;
     height: 34px;
+  }
+
+  .dictionary-suggest-dropdown {
+    position: fixed;
+    top: 50px;
+    left: 12px;
+    right: 12px;
   }
 
   .page-header-actions {

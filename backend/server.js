@@ -42,8 +42,7 @@ const DIST_DIR = path.join(__dirname, "..", "frontend", "dist");
 const SESSION_TTL_MS = SESSION_TTL_HOURS * 60 * 60 * 1000;
 
 let _statsCache = null;
-let _statsCacheTime = 0;
-const STATS_CACHE_TTL = 2 * 60 * 1000;
+const STATS_REFRESH_INTERVAL = 30 * 60 * 1000;
 
 const RATE_LIMIT_WINDOW_MS = 2 * 60 * 1000;
 const RATE_LIMIT_MAX_REQUESTS = 1;
@@ -374,50 +373,6 @@ app.post("/api/user/api-key/validate", requireAuth, async (request, response, ne
 
 app.get("/api/stats", async (request, response, next) => {
   try {
-    if (_statsCache && Date.now() - _statsCacheTime < STATS_CACHE_TTL) {
-      response.json(_statsCache);
-      return;
-    }
-
-    const [books, exampleMap, wordCache, userCountRow] = await Promise.all([
-      listWordBooks(),
-      readWordExamples({ forceRefresh: true }),
-      readWordCache({ forceRefresh: true }),
-      get("SELECT COUNT(1) AS count FROM users")
-    ]);
-
-    const uniqueWordsInBooks = (await readAllBookWords({ forceRefresh: true })).length;
-
-    let examplePairCount = 0;
-    let accentedCount = 0;
-    for (const entry of Object.values(exampleMap || {})) {
-      const normalizedEntry = Array.isArray(entry) ? { examples: entry, paraphrase: "" } : entry;
-      const examples = Array.isArray(normalizedEntry?.examples) ? normalizedEntry.examples : [];
-      if (examples.length) {
-        examplePairCount += examples.length;
-      }
-      if (normalizedEntry?.accent) {
-        accentedCount += 1;
-      }
-    }
-
-    _statsCache = {
-      ok: true,
-      words: {
-        uniqueWordsInBooks,
-        bookCount: Array.isArray(books) ? books.length : 0,
-        cachedDefinitionCount: Object.keys(wordCache || {}).length
-      },
-      examples: {
-        examplePairCount,
-        accentedEntryCount: accentedCount
-      },
-      users: {
-        registeredUsers: Number(userCountRow?.count || 0)
-      }
-    };
-    _statsCacheTime = Date.now();
-
     response.json(_statsCache);
   } catch (error) {
     next(error);
@@ -625,7 +580,7 @@ app.delete("/api/history", requireAuth, async (request, response, next) => {
 
 app.get("/api/wordle/leaderboard", requireAuth, async (request, response, next) => {
   try {
-    const limit = Math.max(1, Math.min(100, Number(request.query.limit || 20)));
+    const limit = Math.max(1, Math.min(100, Number(request.query.limit || 10)));
     const result = await getWordleLeaderboard(request.auth.user.id, limit);
     response.json({
       ok: true,
@@ -755,11 +710,238 @@ async function getDictCache() {
 }
 
 // 每半小时后台刷新缓存
+async function buildStatsCache() {
+  try {
+    const [books, exampleMap, wordCache, userCountRow] = await Promise.all([
+      listWordBooks(),
+      readWordExamples({ forceRefresh: true }),
+      readWordCache({ forceRefresh: true }),
+      get("SELECT COUNT(1) AS count FROM users")
+    ]);
+
+    const uniqueWordsInBooks = (await readAllBookWords({ forceRefresh: true })).length;
+
+    let examplePairCount = 0;
+    let accentedCount = 0;
+    for (const entry of Object.values(exampleMap || {})) {
+      const normalizedEntry = Array.isArray(entry) ? { examples: entry, paraphrase: "" } : entry;
+      const examples = Array.isArray(normalizedEntry?.examples) ? normalizedEntry.examples : [];
+      if (examples.length) {
+        examplePairCount += examples.length;
+      }
+      if (normalizedEntry?.accent) {
+        accentedCount += 1;
+      }
+    }
+
+    _statsCache = {
+      ok: true,
+      cachedAt: new Date().toISOString(),
+      words: {
+        uniqueWordsInBooks,
+        bookCount: Array.isArray(books) ? books.length : 0,
+        cachedDefinitionCount: Object.keys(wordCache || {}).length
+      },
+      examples: {
+        examplePairCount,
+        accentedEntryCount: accentedCount
+      },
+      users: {
+        registeredUsers: Number(userCountRow?.count || 0)
+      }
+    };
+  } catch (error) {
+    console.error("刷新统计缓存失败:", error);
+  }
+}
+
 setInterval(() => {
   loadDictWithExamples().catch(err => {
     console.error("定时刷新词典缓存失败:", err);
   });
-}, 30 * 60 * 1000);
+  buildStatsCache();
+}, STATS_REFRESH_INTERVAL);
+
+app.get("/api/dictionary/suggest", async (request, response, next) => {
+  try {
+    const q = String(request.query.q || "").trim().toLowerCase();
+    if (!q || !/^[a-zA-Z]/.test(q)) {
+      return response.json({ ok: true, suggests: [] });
+    }
+
+    const dictData = await getDictCache();
+    const results = [];
+    for (const key of Object.keys(dictData)) {
+      if (key.startsWith(q)) {
+        const entry = dictData[key];
+        let translation = "";
+        if (entry.trans && entry.trans.length > 0) {
+          translation = entry.trans.map(t => {
+            const parts = [];
+            if (t.pos) parts.push(t.pos);
+            if (t.cn) parts.push(t.cn);
+            return parts.join(". ");
+          }).join("; ");
+        } else if (entry.paraphrase) {
+          translation = entry.paraphrase;
+        }
+        results.push({ word: key, translation });
+        if (results.length >= 10) break;
+      }
+    }
+
+    response.json({ ok: true, suggests: results });
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.get("/api/dictionary/search", async (request, response, next) => {
+  try {
+    const q = String(request.query.q || "").trim().toLowerCase();
+    if (!q) {
+      return response.json({ ok: true, type: "empty", word: null, data: null, results: [], suggestions: [] });
+    }
+
+    const dictData = await getDictCache();
+    const keys = Object.keys(dictData);
+
+    // 1. 精确匹配
+    if (dictData[q]) {
+      return response.json({
+        ok: true,
+        type: "exact",
+        word: q,
+        data: dictData[q],
+        results: [],
+        suggestions: []
+      });
+    }
+
+    const isPureEnglish = /^[a-zA-Z0-9\s\-']+$/.test(q);
+
+    if (!isPureEnglish) {
+      // 2. 中文搜索：在 trans 和 phrases 中搜索
+      const exactMatches = [];
+      const fuzzyMatches = [];
+      const usedWords = new Set();
+
+      for (const [w, entry] of Object.entries(dictData)) {
+        if (usedWords.has(w)) continue;
+        let matchType = null;
+        let matchTranslation = "";
+
+        if (entry.trans) {
+          for (const t of entry.trans) {
+            if (t.cn) {
+              const parts = t.cn.split(/[；;]/).map(s => s.trim());
+              for (const p of parts) {
+                if (p === q) { matchType = "exact"; matchTranslation = t.cn; break; }
+                if (matchType !== "exact" && p.includes(q)) { matchType = "fuzzy"; matchTranslation = t.cn; }
+              }
+              if (matchType === "exact") break;
+            }
+          }
+        }
+
+        if (matchType !== "exact" && entry.phrases) {
+          for (const p of entry.phrases) {
+            if (p.cn) {
+              const parts = p.cn.split(/[；;]/).map(s => s.trim());
+              for (const pt of parts) {
+                if (pt === q) { matchType = "exact"; matchTranslation = `${p.en}: ${p.cn}`; break; }
+                if (matchType !== "exact" && pt.includes(q)) { matchType = "fuzzy"; matchTranslation = `${p.en}: ${p.cn}`; }
+              }
+              if (matchType === "exact") break;
+            }
+          }
+        }
+
+        if (matchType === "exact") {
+          exactMatches.push({ word: w, translation: matchTranslation });
+          usedWords.add(w);
+        } else if (matchType === "fuzzy") {
+          fuzzyMatches.push({ word: w, translation: matchTranslation });
+          usedWords.add(w);
+        }
+      }
+
+      const results = [...exactMatches, ...fuzzyMatches];
+      return response.json({
+        ok: true,
+        type: results.length ? "chinese" : "no_result",
+        word: null,
+        data: null,
+        results: results.slice(0, 200),
+        suggestions: []
+      });
+    }
+
+    // 3. 英文模糊搜索：前缀匹配 → 包含匹配 → Levenshtein
+    const scored = [];
+    for (const w of keys) {
+      const lower = w.toLowerCase();
+      if (lower === q) continue;
+
+      let score = 0;
+      let matched = false;
+
+      if (lower.startsWith(q)) {
+        score = 1;
+        matched = true;
+      } else if (lower.includes(q)) {
+        score = 2;
+        matched = true;
+      } else {
+        const dist = calculateLevenshtein(lower, q);
+        const maxDist = Math.max(3, Math.floor(q.length * 0.5));
+        if (dist <= maxDist) {
+          score = 3 + dist;
+          matched = true;
+        }
+      }
+
+      if (matched) {
+        scored.push({ word: w, score });
+      }
+    }
+
+    scored.sort((a, b) => a.score - b.score);
+    const suggestions = scored.slice(0, 10).map(item => item.word);
+
+    return response.json({
+      ok: true,
+      type: suggestions.length ? "suggestions" : "no_result",
+      word: null,
+      data: null,
+      results: [],
+      suggestions
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
+function calculateLevenshtein(a, b) {
+  const m = a.length, n = b.length;
+  const dp = [];
+  for (let i = 0; i <= m; i++) {
+    dp[i] = [i];
+  }
+  for (let j = 0; j <= n; j++) {
+    dp[0][j] = j;
+  }
+  for (let i = 1; i <= m; i++) {
+    for (let j = 1; j <= n; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      dp[i][j] = Math.min(dp[i - 1][j] + 1, dp[i][j - 1] + 1, dp[i - 1][j - 1] + cost);
+      if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) {
+        dp[i][j] = Math.min(dp[i][j], dp[i - 2][j - 2] + cost);
+      }
+    }
+  }
+  return dp[m][n];
+}
 
 app.get("/api/dictionary", async (request, response, next) => {
   try {
@@ -835,6 +1017,7 @@ app.use((error, request, response, next) => {
 Promise.all([ensureDataFiles(), getDatabase()])
   .then(() => {
     loadForbiddenWords();
+    buildStatsCache();
     app.listen(PORT, () => {
       console.log(`Backend running at http://localhost:${PORT}`);
     });

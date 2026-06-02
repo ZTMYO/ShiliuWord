@@ -165,6 +165,8 @@ Hard constraints:
 1. Keep each option short and suitable for a compact button, preferably in the style of "n. xxx", "v. xxx", "adj. xxx", "adv. xxx".
 2. The correct option must match the intended sense implied by the word book (exam-relevant if the book suggests an exam track).
 3. Distractors must be plausible but clearly incorrect for that word.
+   - IMPORTANT: NEVER use another meaning, part of speech, or paraphrase of the target word as a distractor.
+   - Distractors must represent completely different concepts; they must be meanings that the target word CANNOT EVER have.
 4. Avoid long dictionary strings, long explanations, multiple semicolon senses, or full-sentence definitions.
 5. The 4 options for each word must be distinct.
 6. Keep the part of speech on the correct option when natural.
@@ -173,11 +175,11 @@ Hard constraints:
 9. Each distractor must include both "word" and "text".
 10. Distractor words should be common standalone English words, not phrases, and should match their own gloss naturally.
 11. Every distractor "word" must be non-empty and must NOT equal the target word.
-12. Do NOT use another meaning, part of speech, or paraphrase of the target word as a distractor.
-13. Do NOT return two options with the same part of speech and the same Chinese meaning.
-14. Do NOT return one option whose Chinese gloss is just a substring , such as "v. 拒绝" vs "v. 拒绝，排斥".
-15. Do NOT label any distractor as "拼写错误" or mention spelling in the Chinese gloss. The Chinese text should be a normal, legitimate meaning of some English word.
-16. The hint example must match the correct option's meaning and use the target word naturally.
+12. Do NOT return two options with the same part of speech and the same Chinese meaning.
+13. Do NOT return one option whose Chinese gloss is just a substring , such as "v. 拒绝" vs "v. 拒绝，排斥".
+14. Do NOT label any distractor as "拼写错误" or mention spelling in the Chinese gloss. The Chinese text should be a normal, legitimate meaning of some English word.
+15. The hint example must match the correct option's meaning and use the target word naturally.
+16. SELF-CHECK BEFORE OUTPUT: For each distractor, ask: "Could this gloss EVER be a correct meaning of the target word?" If YES, replace it with a different distractor.
 
 Return pure JSON array only:
 [{"word":"","correctOption":"","correctOptionWord":"","distractors":[{"word":"","text":""},{"word":"","text":""},{"word":"","text":""}],"hintExample":{"en":"","cn":""}}]

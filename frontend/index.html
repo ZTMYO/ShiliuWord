@@ -546,6 +546,7 @@
                 <path d="M644.096 251.904a277.312 277.312 0 1 0-392.192 392.192 277.312 277.312 0 0 0 392.192-392.192z m-452.544-60.352a362.688 362.688 0 0 1 541.312 480.96l228.032 228.032-60.352 60.352-228.032-228.032a362.752 362.752 0 0 1-480.96-541.312z" fill="currentColor"></path>
               </svg>
             </button>
+            <div class="dictionary-suggest-dropdown is-hidden" id="dictionary-suggest-dropdown"></div>
           </div>
           <div class="dictionary-header-right">
             <button id="dictionary-back-prev-btn" class="icon-btn" type="button" aria-label="返回上一个单词" title="返回上一个单词" disabled>
@@ -628,6 +629,7 @@
     </div>
     <div class="site-info-body">
       <p class="site-info-intro">石榴刷词是一个支持多词书、可离线刷题、可选 AI 增强的刷词网站。</p>
+      <p class="site-info-cached-at">以下数据统计自 <span id="site-stat-cached-at"></span></p>
       <div id="site-info-metrics" class="site-info-metrics is-hidden" aria-label="网站数据统计">
         <div class="site-info-metrics-group">
           <p class="site-info-metrics-item">

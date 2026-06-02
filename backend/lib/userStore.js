@@ -54,9 +54,9 @@ function formatSafeUser(user) {
   };
 }
 
-async function getWordleLeaderboard(userId, limit = 20) {
+async function getWordleLeaderboard(userId, limit = 10) {
   const normalizedUserId = Number(userId);
-  const normalizedLimit = Math.max(1, Math.min(100, Number(limit || 20)));
+  const normalizedLimit = Math.max(1, Math.min(100, Number(limit || 10)));
   const leaderboardRows = await all(
     `
       SELECT id, username, nickname, best_streak
@@ -85,9 +85,8 @@ async function getWordleLeaderboard(userId, limit = 20) {
         SELECT COUNT(1) AS count
         FROM users
         WHERE best_streak > ?
-           OR (best_streak = ? AND id < ?)
       `,
-      [normalizedBestStreak, normalizedBestStreak, normalizedUserId]
+      [normalizedBestStreak]
     );
 
     self = {
@@ -99,15 +98,24 @@ async function getWordleLeaderboard(userId, limit = 20) {
     };
   }
 
-  return {
-    leaderboard: leaderboardRows.map((row) => ({
+  let prevStreak = null;
+  let position = 0;
+  const leaderboard = leaderboardRows.map((row, index) => {
+    const bestStreak = Math.max(0, Number(row.best_streak || 0));
+    if (bestStreak !== prevStreak) {
+      position = index + 1;
+      prevStreak = bestStreak;
+    }
+    return {
+      rank: position,
       id: Number(row.id),
       username: normalizeUsername(row.username),
       nickname: String(row.nickname || "") || normalizeUsername(row.username),
-      bestStreak: Math.max(0, Number(row.best_streak || 0))
-    })),
-    self
-  };
+      bestStreak
+    };
+  });
+
+  return { leaderboard, self };
 }
 
 async function findUserById(userId) {
