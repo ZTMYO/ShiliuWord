@@ -268,16 +268,22 @@ async function addCollectionItem(userId, word, paraphrase) {
   }
 
   const collectedAt = new Date().toISOString();
+  const normalizedParaphrase = normalizeText(paraphrase);
   await run(
     "INSERT INTO collections (user_id, word, word_cn, collected_at) VALUES (?, ?, ?, ?)",
-    [Number(userId), normalizedWord, normalizeText(paraphrase), collectedAt]
+    [Number(userId), normalizedWord, normalizedParaphrase, collectedAt]
   );
+
+  // 异步同步词典数据（包括更新数据库中的释义），不阻塞收藏操作
+  const { syncWordFromDict } = require("./wordService");
+  syncWordFromDict(normalizedWord).catch(() => {
+  });
 
   return {
     exists: false,
     item: {
       word: normalizedWord,
-      paraphrase: normalizeText(paraphrase),
+      paraphrase: normalizedParaphrase,
       collectedAt
     }
   };

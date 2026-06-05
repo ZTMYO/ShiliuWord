@@ -960,24 +960,27 @@ app.get("/api/word/info/:word", async (request, response, next) => {
       return response.json({ ok: false, error: "Missing word" });
     }
 
-    const fs = require("fs/promises");
-    const path = require("path");
+    const dictData = await getDictCache();
+    const entry = dictData[word] || {};
 
-    const [wordData, wordExamples, fiveLetterWords] = await Promise.all([
-      readWordCache(),
-      readWordExamples(),
-      fs.readFile(path.join(DATA_DIR, "five-letter-words.json"), "utf8")
-    ]);
-
-    const fiveLetterWordsJson = JSON.parse(fiveLetterWords);
+    // 从 trans 数组生成 paraphrase
+    let paraphrase = entry.paraphrase || "";
+    if (!paraphrase && Array.isArray(entry.trans)) {
+      paraphrase = entry.trans.map(t => {
+        const parts = [];
+        if (t.pos) parts.push(t.pos);
+        if (t.cn) parts.push(t.cn);
+        return parts.join(". ");
+      }).join("; ");
+    }
 
     const info = {
       word,
-      paraphrase: wordExamples[word]?.paraphrase || fiveLetterWordsJson[word]?.paraphrase || "",
-      defEn: wordData[word]?.defEn || "",
-      defCn: wordData[word]?.defCn || "",
-      examples: wordExamples[word]?.examples || [],
-      accent: wordExamples[word]?.accent || fiveLetterWordsJson[word]?.accent || ""
+      paraphrase,
+      defEn: entry.defEn || "",
+      defCn: entry.defCn || "",
+      examples: Array.isArray(entry.examples) ? entry.examples : [],
+      accent: entry.accent || ""
     };
 
     response.json({

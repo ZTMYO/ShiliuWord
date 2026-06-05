@@ -372,6 +372,7 @@ const elements = {
   dictionarySuggestions: document.querySelector("#dictionary-suggestions"),
   dictionaryResult: document.querySelector("#dictionary-result"),
   dictionaryWordTitle: document.querySelector("#dictionary-word-title"),
+  dictionaryCollectBtn: document.querySelector("#dictionary-collect-btn"),
   dictionaryPronounceBtn: document.querySelector("#dictionary-pronounce-btn"),
   dictionaryPhonetic: document.querySelector("#dictionary-phonetic"),
   dictionaryTransSection: document.querySelector("#dictionary-trans-section"),
@@ -2584,6 +2585,12 @@ function syncHistoryCollectButtons() {
   });
 }
 
+function syncDictionaryCollectButton() {
+  if (elements.dictionaryCollectBtn && !elements.dictionaryCollectBtn.classList.contains("is-hidden")) {
+    syncCollectButtonVisual(elements.dictionaryCollectBtn, elements.dictionaryCollectBtn.dataset.word || "");
+  }
+}
+
 function renderCollectButton() {
   if (!state.isAuthenticated || state.flashLoading || !state.flashCurrent) {
     elements.flashCollectBtn.classList.add("is-hidden");
@@ -2714,6 +2721,7 @@ function refreshCollectUi() {
   renderCollectButton();
   syncResultCollectButtons();
   syncHistoryCollectButtons();
+  syncDictionaryCollectButton();
   if (state.view === "history") {
     state.historyOpenIds = new Set(
       Array.from(elements.historyList.querySelectorAll(".history-item[open]"))
@@ -5149,6 +5157,56 @@ function bindEvents() {
     }
   });
   
+  document.addEventListener("keydown", (event) => {
+    if (elements.dialog.open) {
+      return;
+    }
+    
+    if (elements.authDialog.open) {
+      return;
+    }
+    
+    if (elements.captchaDialog?.open) {
+      return;
+    }
+    
+    if (elements.wordleHelpDialog?.open) {
+      return;
+    }
+    
+    if (elements.wordleResultDialog?.open) {
+      return;
+    }
+    
+    if (elements.wordleSurrenderConfirmDialog?.open) {
+      return;
+    }
+    
+    if (elements.wordleLeaderboardDialog?.open) {
+      return;
+    }
+    
+    if (state.view === "flash" && state.flashCurrent) {
+      if (!state.flashEvaluation) {
+        if (["1", "2", "3", "4"].includes(event.key)) {
+          event.preventDefault();
+          const index = parseInt(event.key) - 1;
+          const options = elements.flashOptionList.querySelectorAll(".flash-option-btn");
+          if (options[index]) {
+            options[index].click();
+          }
+        }
+      } else {
+        if (event.key === " " || event.key === "Enter") {
+          event.preventDefault();
+          if (!elements.flashNextBtn.disabled) {
+            elements.flashNextBtn.click();
+          }
+        }
+      }
+    }
+  });
+  
   if (elements.wordleLeaderboardBtn) {
     elements.wordleLeaderboardBtn.addEventListener("click", async () => {
       await showWordleLeaderboardDialog();
@@ -5824,6 +5882,39 @@ function displayDictionaryWord(word) {
   elements.dictionaryWordTitle.textContent = word;
   elements.dictionaryPronounceBtn.innerHTML = PRONOUNCE_ICON;
   
+  // 显示/隐藏收藏按钮
+  if (state.isAuthenticated) {
+    elements.dictionaryCollectBtn.classList.remove("is-hidden");
+    elements.dictionaryCollectBtn.dataset.word = word;
+    let paraphrase = data.paraphrase || "";
+    if (!paraphrase && data.trans && data.trans.length > 0) {
+      const posGroups = {};
+      for (const t of data.trans) {
+        const pos = t.pos || "";
+        const cn = t.cn || "";
+        if (!cn) continue;
+        if (!posGroups[pos]) {
+          posGroups[pos] = [];
+        }
+        posGroups[pos].push(cn);
+      }
+      // 生成释义
+      const parts = [];
+      for (const [pos, cns] of Object.entries(posGroups)) {
+        if (pos) {
+          parts.push(`${pos}.${cns.join("，")}`);
+        } else {
+          parts.push(cns.join("，"));
+        }
+      }
+      paraphrase = parts.join("；");
+    }
+    elements.dictionaryCollectBtn.dataset.wordCn = paraphrase;
+    syncCollectButtonVisual(elements.dictionaryCollectBtn, word);
+  } else {
+    elements.dictionaryCollectBtn.classList.add("is-hidden");
+  }
+  
   if (data.accent) {
     elements.dictionaryPhonetic.textContent = data.accent;
     elements.dictionaryPhonetic.classList.remove("is-hidden");
@@ -6435,6 +6526,25 @@ function bindDictionaryEvents() {
       if (word) {
         playWordPronunciation(word, elements.dictionaryPronounceBtn);
       }
+    });
+  }
+
+  if (elements.dictionaryCollectBtn) {
+    elements.dictionaryCollectBtn.addEventListener("click", () => {
+      const word = elements.dictionaryCollectBtn.dataset.word || "";
+      const paraphrase = elements.dictionaryCollectBtn.dataset.wordCn || "";
+      if (!word) return;
+      
+      toggleCollection({ word, paraphrase }).then((result) => {
+        refreshCollectUi();
+        if (result === "added") {
+          showToast("已收藏", "success");
+        } else if (result === "removed") {
+          showToast("已取消收藏", "success");
+        } else {
+          showToast("收藏操作失败", "error");
+        }
+      });
     });
   }
 

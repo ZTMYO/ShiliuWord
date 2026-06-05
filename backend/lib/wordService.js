@@ -617,6 +617,11 @@ async function mergeWordExamples(exampleMap) {
       entryChanged = true;
     }
 
+    if (!currentEntry.accent && entry.accent) {
+      currentEntry.accent = entry.accent;
+      entryChanged = true;
+    }
+
     if (entryChanged) {
       currentMap[word] = currentEntry;
       changed = true;
@@ -628,6 +633,98 @@ async function mergeWordExamples(exampleMap) {
   }
 
   return currentMap;
+}
+
+function buildParaphraseFromTrans(transArray) {
+  if (!Array.isArray(transArray) || transArray.length === 0) {
+    return "";
+  }
+
+  // 按词性分组
+  const posGroups = {};
+  for (const t of transArray) {
+    const pos = t.pos || "";
+    const cn = t.cn || "";
+    if (!cn) continue;
+
+    if (!posGroups[pos]) {
+      posGroups[pos] = [];
+    }
+    posGroups[pos].push(cn);
+  }
+
+  // 生成释义
+  const parts = [];
+  for (const [pos, cns] of Object.entries(posGroups)) {
+    if (pos) {
+      parts.push(`${pos}.${cns.join("，")}`);
+    } else {
+      parts.push(cns.join("，"));
+    }
+  }
+
+  return parts.join("；");
+}
+
+async function syncWordFromDict(word) {
+  const fs = require("fs/promises");
+  const path = require("path");
+  const config = require("../config");
+  const { run, normalizeText } = require("./userStore");
+
+  const normalizedWord = String(word || "").trim().toLowerCase();
+  if (!normalizedWord) {
+    return false;
+  }
+
+  // 读取 all-word-dict.json
+  let dictData;
+  try {
+    const dictContent = await fs.readFile(path.join(config.DATA_DIR, "all-word-dict.json"), "utf8");
+    dictData = JSON.parse(dictContent);
+  } catch {
+    return false;
+  }
+
+  const wordEntry = dictData[normalizedWord];
+  if (!wordEntry) {
+    return false;
+  }
+
+  // 转换格式
+  const paraphrase = buildParaphraseFromTrans(wordEntry.trans);
+  const examples = normalizeExampleItems(wordEntry.examples).slice(0, 2);
+  const accent = normalizeAccent(wordEntry.accent);
+
+  if (!paraphrase && !examples.length && !accent) {
+    return false;
+  }
+
+  // 构建要同步的数据
+  const toSync = {
+    [normalizedWord]: {
+      paraphrase,
+      examples,
+      ...(accent ? { accent } : {})
+    }
+  };
+
+  // 同步到 word-examples.json（仅在数据不存在时更新）
+  await mergeWordExamples(toSync);
+
+  // 更新数据库中所有收藏了这个单词的用户的释义
+  if (paraphrase) {
+    try {
+      await run(
+        "UPDATE collections SET word_cn = ? WHERE word = ?",
+        [normalizeText(paraphrase), normalizedWord]
+      );
+    } catch {
+      // 忽略更新错误
+    }
+  }
+
+  return true;
 }
 
 async function getCachedItems(words, cache, exampleMap = null) {
@@ -673,5 +770,7 @@ module.exports = {
   getWordAccent,
   readWordExamples,
   writeWordExamples,
-  shuffle
+  shuffle,
+  buildParaphraseFromTrans,
+  syncWordFromDict
 };
