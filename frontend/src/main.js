@@ -4676,7 +4676,7 @@ function bindEvents() {
     const collectBtn = event.target.closest(".history-collect-btn, .flash-history-collect-btn");
     if (collectBtn) {
       const word = collectBtn.dataset.word || "";
-      const paraphrase = collectBtn.dataset.paraphrase || "";
+      const paraphrase = collectBtn.dataset.wordCn || "";
       toggleCollection({ word, paraphrase }).then((result) => {
         refreshCollectUi();
         if (result === "added") {
@@ -5021,7 +5021,7 @@ function bindEvents() {
     const collectBtn = event.target.closest(".result-collect-btn");
     if (collectBtn) {
       const word = collectBtn.dataset.word || "";
-      const paraphrase = collectBtn.dataset.paraphrase || "";
+      const paraphrase = collectBtn.dataset.wordCn || "";
       toggleCollection({ word, paraphrase }).then((result) => {
         refreshCollectUi();
         if (result === "added") {
