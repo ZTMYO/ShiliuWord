@@ -1636,20 +1636,39 @@ function clearFlashCache(preset = state.flashPreset) {
   saveFlashCacheMap(cacheMap);
 }
 
-function getReadingCache() {
+function loadReadingCacheMap() {
   try {
     const raw = window.localStorage.getItem(getReadingCacheStorageKey());
-    const parsed = raw ? JSON.parse(raw) : null;
-    if (!parsed || typeof parsed !== "object") {
+    const parsed = raw ? JSON.parse(raw) : {};
+    return parsed && typeof parsed === "object" ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
+function saveReadingCacheMap(cacheMap) {
+  try {
+    window.localStorage.setItem(getReadingCacheStorageKey(), JSON.stringify(cacheMap));
+  } catch {
+    // ignore local cache failures
+  }
+}
+
+function getReadingCache(preset) {
+  try {
+    const normalizedPreset = String(preset || "default").trim().toLowerCase() || "default";
+    const cacheMap = loadReadingCacheMap();
+    const snapshot = cacheMap[normalizedPreset];
+    if (!snapshot || typeof snapshot !== "object") {
       return null;
     }
-    if (!parsed.exercise || !Array.isArray(parsed.exercise.sentences) || !parsed.exercise.sentences.length) {
+    if (!snapshot.exercise || !Array.isArray(snapshot.exercise.sentences) || !snapshot.exercise.sentences.length) {
       return null;
     }
-    if (parsed.preset && typeof parsed.preset !== "string") {
+    if (snapshot.preset && typeof snapshot.preset !== "string") {
       return null;
     }
-    return parsed;
+    return snapshot;
   } catch {
     return null;
   }
@@ -1657,19 +1676,28 @@ function getReadingCache() {
 
 function saveReadingCache(snapshot = null) {
   try {
+    const cacheMap = loadReadingCacheMap();
     const nextSnapshot = snapshot || createReadingSnapshot();
     if (!nextSnapshot?.exercise) {
       return;
     }
-    window.localStorage.setItem(getReadingCacheStorageKey(), JSON.stringify(nextSnapshot));
+    const normalizedPreset = String(nextSnapshot?.preset || state.readingPreset || "default").trim().toLowerCase() || "default";
+    cacheMap[normalizedPreset] = nextSnapshot;
+    saveReadingCacheMap(cacheMap);
   } catch {
     // ignore local cache failures
   }
 }
 
-function clearReadingCache() {
+function clearReadingCache(preset) {
   try {
-    window.localStorage.removeItem(getReadingCacheStorageKey());
+    const normalizedPreset = String(preset || state.readingPreset || "default").trim().toLowerCase() || "default";
+    const cacheMap = loadReadingCacheMap();
+    if (!(normalizedPreset in cacheMap)) {
+      return;
+    }
+    delete cacheMap[normalizedPreset];
+    saveReadingCacheMap(cacheMap);
   } catch {
     // ignore local cache failures
   }
@@ -2818,7 +2846,7 @@ function startCollectionFlashTraining() {
     return;
   }
   setFlashPreset("collection");
-  loadFlashQuestion({ forceNew: true });
+  loadFlashQuestion({ fromHome: true });
 }
 
 function startCollectionReadingTraining() {
@@ -2826,7 +2854,7 @@ function startCollectionReadingTraining() {
     showToast("收藏夹单词需超过 5 个后才能开始阅读训练", "error");
     return;
   }
-  loadReadingExercise({ forceNew: true, preset: "collection" });
+  loadReadingExercise({ preset: "collection" });
 }
 
 function renderAccountFeatures() {
@@ -3147,6 +3175,11 @@ function persistLearningProgress() {
     saveCurrentFlashCache();
   } else {
     clearFlashCache();
+  }
+  if (state.readingExercise) {
+    saveReadingCache();
+  } else {
+    clearReadingCache();
   }
 }
 
@@ -3622,7 +3655,7 @@ async function loadReadingExercise(options = {}) {
     return;
   }
 
-  if (!forceNew && state.readingExercise) {
+  if (!forceNew && state.readingExercise && state.readingPreset === normalizedPreset) {
     state.readingPreset = normalizedPreset;
     setView("reading");
     renderReadingLoadingState();
@@ -3630,8 +3663,8 @@ async function loadReadingExercise(options = {}) {
     return;
   }
 
-  if (!forceNew && !state.readingExercise) {
-    const cachedSnapshot = getReadingCache();
+  if (!forceNew) {
+    const cachedSnapshot = getReadingCache(normalizedPreset);
     if (cachedSnapshot?.exercise) {
       restoreReadingSnapshot(cachedSnapshot);
       state.readingPast = [];
