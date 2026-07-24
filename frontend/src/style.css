@@ -1946,6 +1946,67 @@ summary {
   border: 0;
 }
 
+.reading-word-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.reading-word-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 18px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  list-style: none;
+}
+
+.reading-word-summary::-webkit-details-marker {
+  display: none;
+}
+
+.reading-word-card[open] .reading-word-summary {
+  border-bottom: 1px solid var(--line);
+}
+
+.reading-word-headword {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text-primary);
+}
+
+.reading-word-summary-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+}
+
+.reading-word-body {
+  padding: 12px 18px 16px;
+}
+
+.reading-word-body .reading-word-phonetic {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.reading-word-body p {
+  margin: 0;
+}
+
+.reading-word-body p + p {
+  margin-top: 8px;
+}
+
+.reading-word-paraphrase {
+  font-weight: 600;
+}
+
 .result-item-header {
   display: flex;
   align-items: center;

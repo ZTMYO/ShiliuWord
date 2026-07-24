@@ -3629,17 +3629,68 @@ function renderReadingExercise() {
 }
 
 function openReadingWordListDialog() {
-  const items = Array.isArray(state.readingExercise?.words) ? state.readingExercise.words : [];
-  if (!items.length) {
+  const words = Array.isArray(state.readingExercise?.words) ? state.readingExercise.words : [];
+  if (!words.length) {
     showToast("当前还没有可查看的重点单词", "error");
     return;
   }
 
-  openResultDialog({
-    title: "重点单词",
-    items,
-    showIndex: false
+  elements.resultDialogTitle.textContent = "重点单词";
+  elements.resultList.innerHTML = "";
+
+  words.forEach((item) => {
+    const card = document.createElement("details");
+    card.className = "result-item reading-word-card";
+
+    const examplesHtml = Array.isArray(item.examples) && item.examples.length
+      ? item.examples
+          .map(
+            (example, exampleIndex) => `
+              <div class="example-item">
+                <p>
+                  <button
+                    type="button"
+                    class="example-tts-btn pronounce-btn"
+                    data-tts-text="${escapeHtmlAttribute(example.en)}"
+                    aria-label="朗读例句 ${exampleIndex + 1}"
+                    title="朗读"
+                  >
+                    ${PRONOUNCE_ICON}
+                  </button>
+                  ${highlightExampleWord(example.en, item.word)}
+                </p>
+                <p>${escapeHtml(example.cn)}</p>
+              </div>
+            `
+          )
+          .join("")
+      : '<div class="example-item"><p>当前暂无本地例句。</p></div>';
+
+    const accentText = String(item.accent || "").trim();
+    const accentHtml = accentText ? `<p class="reading-word-phonetic">${escapeHtml(accentText)}</p>` : "";
+
+    card.innerHTML = `
+      <summary class="reading-word-summary">
+        <span class="reading-word-headword">${item.word}</span>
+        <span class="reading-word-summary-actions">
+          ${createInlinePronounceButton(item.word, "result-pronounce-btn")}
+          ${createInlineGoDictionaryButton(item.word, "result-go-dictionary-btn")}
+          ${createInlineCollectButton(item.word, item.paraphrase, "result-collect-btn")}
+        </span>
+      </summary>
+      <div class="reading-word-body">
+        ${accentHtml}
+        <p class="reading-word-paraphrase">${item.paraphrase}</p>
+        <p class="reading-word-def-cn">${item.defCn}</p>
+        <p class="reading-word-def-en">${item.defEn}</p>
+        <div class="example-list">${examplesHtml}</div>
+      </div>
+    `;
+
+    elements.resultList.appendChild(card);
   });
+
+  elements.dialog.showModal();
 }
 
 async function loadReadingExercise(options = {}) {
