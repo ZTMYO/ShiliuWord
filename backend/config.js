@@ -68,7 +68,7 @@ module.exports = {
   SESSION_TTL_HOURS: Math.max(1, Number(process.env.SESSION_TTL_HOURS || 24 * 30)),
   DEEPSEEK_API_URL:
     process.env.DEEPSEEK_API_URL || "https://api.deepseek.com/chat/completions",
-  DEEPSEEK_MODEL: process.env.DEEPSEEK_MODEL || "deepseek-chat",
+  DEEPSEEK_MODEL: process.env.DEEPSEEK_MODEL || "deepseek-v4-flash",
   USE_MOCK_DATA: String(process.env.USE_MOCK_DATA || "false") === "true",
   RANDOM_OR_SHAPE_PROMPT: `You are generating concise vocabulary-learning content for Chinese learners.
 Target word book: {{bookName}}

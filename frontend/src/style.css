@@ -1181,7 +1181,9 @@ summary {
 .reading-card-summary {
   list-style: none;
   cursor: pointer;
-  display: block;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
   padding: 18px 20px;
 }
 
@@ -1197,7 +1199,21 @@ summary {
 }
 
 .reading-card-en {
+  flex: 1;
   font-size: 17px;
+}
+
+.reading-card-tts-btn {
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+.reading-card-tts-btn:hover {
+  color: var(--text-secondary);
 }
 
 .reading-card-body {

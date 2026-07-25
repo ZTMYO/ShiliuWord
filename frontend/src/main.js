@@ -3605,14 +3605,35 @@ function renderReadingExercise() {
     const details = document.createElement("details");
     details.className = "reading-card";
     details.open = state.readingOpenSentenceIndexes.has(index);
-    details.innerHTML = `
-      <summary class="reading-card-summary">
-        <p class="reading-card-en">${highlightReadingWords(sentence.en, highlightWords)}</p>
-      </summary>
-      <div class="reading-card-body">
-        <p class="reading-card-cn">${highlightReadingChinese(sentence.cn)}</p>
-      </div>
-    `;
+
+    const summary = document.createElement("summary");
+    summary.className = "reading-card-summary";
+
+    const enPara = document.createElement("p");
+    enPara.className = "reading-card-en";
+    enPara.innerHTML = highlightReadingWords(sentence.en, highlightWords);
+
+    const ttsBtn = document.createElement("button");
+    ttsBtn.type = "button";
+    ttsBtn.className = "icon-btn pronounce-btn reading-card-tts-btn";
+    ttsBtn.setAttribute("aria-label", "朗读句子");
+    ttsBtn.title = "朗读";
+    ttsBtn.dataset.ttsText = sentence.en;
+    ttsBtn.innerHTML = PRONOUNCE_ICON;
+    ttsBtn.addEventListener("click", (event) => {
+      event.preventDefault();
+      speakEnglishText(sentence.en, ttsBtn);
+    });
+
+    summary.appendChild(enPara);
+    summary.appendChild(ttsBtn);
+    details.appendChild(summary);
+
+    const body = document.createElement("div");
+    body.className = "reading-card-body";
+    body.innerHTML = `<p class="reading-card-cn">${highlightReadingChinese(sentence.cn)}</p>`;
+    details.appendChild(body);
+
     details.addEventListener("toggle", () => {
       if (details.open) {
         state.readingOpenSentenceIndexes.add(index);
