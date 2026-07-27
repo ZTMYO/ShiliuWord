@@ -208,33 +208,20 @@ Hard constraints:
 3. Return plain Chinese text only.
 
 Title: {{title}}`,
-  READING_PROMPT: `Write a short bilingual English reading exercise for Chinese learners, difficulty matching {{bookName}}.
+  READING_PROMPT: `Write a bilingual English reading passage for Chinese learners (book: {{bookName}}).
 
 Candidate words:
 {{items}}
 
-Requirements:
-1. Write 5-8 sentence pairs forming a coherent narrative with logical flow (beginning → development → conclusion). Each sentence must naturally follow the previous one; no abrupt topic switches.
-2. Use as many candidate words as possible, but skip words that would break coherence. Advanced books may use longer sentences; keep simple otherwise.
-3. Each English sentence needs a natural Chinese translation. Try 1 target word per sentence; if multiple, mark each in Chinese with 【】 in order.
-4. CRITICAL: Every target word in English MUST be accurately translated to Chinese and marked with 【】. NEVER leave English words in Chinese sentences.
-5. In Chinese, mark ONLY the exact translation phrase in 【】, consistent with provided paraphrase/defCn. Content inside 【】 must be Chinese only (no English/pinyin/numbers).
-6. selectedWords: lowercase original target words used. realWords: exact forms as they appear in English (same order, e.g., "worked" for "work").
-7. Return pure JSON only.
+Rules:
+1. Write a coherent narrative about one person/situation. Sentence complexity, length (number of sentences), and word count should match the difficulty implied by the book name. Write at least 6 sentences.
+2. Pick candidate words that naturally fit. Skip words that don't belong. You may add extra sentences without any candidate words for narrative flow — they still need Chinese translation but no 【】.
+3. Each English sentence has a Chinese translation. Wrap the translated word directly inside the Chinese sentence with 【】. Do NOT add the word and then repeat it outside 【】.
+4. 【】 must contain only Chinese characters, never English.
 
-Verify BEFORE output:
-- Sentences flow logically with consistent subject/setting
-- No English words remain in Chinese translations
-- Each target word in English has exactly one 【】 marker in Chinese
-- 【】 contains only Chinese text matching the target word
-
-Example:
-{"en":"Public trust may erode when institutions ignore obvious risks.","cn":"当机构忽视明显风险时，公众【信任】可能会被削弱。"}
-
-Return JSON:
+Output JSON:
 {"title":"","titleCn":"","selectedWords":[""],"realWords":[""],"sentences":[{"en":"","cn":""}]}
-
-title: short English title; titleCn: Chinese translation; selectedWords: lowercase originals; realWords: exact forms in sentences`,
+title: short English title; titleCn: Chinese translation; selectedWords: lowercase originals used; realWords: exact forms as they appear in English (same order).`,
   DEMO_ITEMS: [
     {
       word: "abandon",

@@ -3600,7 +3600,8 @@ function renderReadingExercise() {
   syncReadingTitleCardState();
 
   elements.readingSentenceList.innerHTML = "";
-  const highlightWords = words.map((item) => item.word);
+  const realWords = Array.isArray(state.readingExercise.realWords) ? state.readingExercise.realWords : [];
+  const highlightWords = realWords.length ? realWords : words.map((item) => item.word);
   (Array.isArray(state.readingExercise.sentences) ? state.readingExercise.sentences : []).forEach((sentence, index) => {
     const details = document.createElement("details");
     details.className = "reading-card";

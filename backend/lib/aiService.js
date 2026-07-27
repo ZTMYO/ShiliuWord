@@ -31,12 +31,18 @@ function resolveApiKey(personalApiKey = "") {
   throw new Error("请先在账号设置中填写个人 API Key");
 }
 
-async function requestDeepSeekRaw(prompt, personalApiKey) {
+async function requestDeepSeekRaw(prompt, personalApiKey, systemPrompt = null) {
   if (USE_MOCK_DATA) {
     return "";
   }
 
   const apiKey = resolveApiKey(personalApiKey);
+
+  const messages = [];
+  if (systemPrompt) {
+    messages.push({ role: "system", content: systemPrompt });
+  }
+  messages.push({ role: "user", content: prompt });
 
   const response = await fetch(DEEPSEEK_API_URL, {
     method: "POST",
@@ -47,12 +53,9 @@ async function requestDeepSeekRaw(prompt, personalApiKey) {
     body: JSON.stringify({
       model: DEEPSEEK_MODEL,
       temperature: 0.2,
-      messages: [
-        {
-          role: "user",
-          content: prompt
-        }
-      ]
+      thinking: { type: "disabled" },
+      response_format: { type: "json_object" },
+      messages
     })
   });
 

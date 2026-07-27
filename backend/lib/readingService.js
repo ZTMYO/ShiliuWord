@@ -101,6 +101,13 @@ async function createReadingExercise(auth, customWords = null) {
     ? items.filter((item) => selectedWordSet.has(item.word))
     : items;
 
+  const realWords = [];
+  if (selectedWordSet.size && Array.isArray(passage.realWords) && Array.isArray(passage.selectedWords)) {
+    const realWordBySelected = {};
+    passage.selectedWords.forEach((word, i) => { realWordBySelected[word] = passage.realWords[i] || word; });
+    displayItems.forEach((item) => { realWords.push(realWordBySelected[item.word] || item.word); });
+  }
+
   const missingExampleWords = displayItems
     .map((item) => String(item.word || "").trim().toLowerCase())
     .filter(Boolean)
@@ -127,6 +134,7 @@ async function createReadingExercise(auth, customWords = null) {
       defCn: item.defCn,
       examples: Array.isArray(exampleMap[item.word]?.examples) ? exampleMap[item.word].examples.slice(0, 2) : []
     })),
+    realWords,
     sentences: passage.sentences
   };
 }
